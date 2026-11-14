@@ -2,7 +2,7 @@
 
 The OpenPrint source, original UI, SVG illustrations, documentation, and parametric generator are MIT-licensed. See [LICENSE](LICENSE).
 
-Client dependencies retain their notices in [public/third-party-licenses.txt](public/third-party-licenses.txt), also served by the application. Regenerate this file with `node scripts/licenses.mjs` after a dependency update. It includes React, React DOM, React Router, Three.js, Leaflet, Lucide, Zod, and Express. Server dependencies also include their original license files in `node_modules`.
+Client dependencies retain their notices in [public/third-party-licenses.txt](public/third-party-licenses.txt), also served by the application. Regenerate this file with `node scripts/licenses.mjs` after a dependency update. It includes React, React DOM, Scheduler, React Router, Cookie, Set-Cookie Parser, Three.js, Leaflet, Lucide, Zod, and Express. Server dependencies also include their original license files in `node_modules`.
 
 The built-in SQLite implementation is provided by Node.js. Its upstream license and third-party notices are part of the Node.js distribution; SQLite itself is public-domain software. Development tools retain their respective upstream licenses and are not part of the application license grant.
 

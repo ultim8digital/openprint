@@ -1,6 +1,6 @@
 # Validation record — 0.1.0
 
-Recorded on 2026-11-13. See [OpenPrint CI](https://github.com/ultim8digital/openprint/actions/workflows/ci.yml) for verification tied to repository commits. This is evidence for the checked scenarios, not a certification of the whole service.
+Recorded on 2026-11-14. See [OpenPrint CI](https://github.com/ultim8digital/openprint/actions/workflows/ci.yml) for verification tied to repository commits. This is evidence for the checked scenarios, not a certification of the whole service.
 
 ## Observed locally
 

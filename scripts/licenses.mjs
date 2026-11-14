@@ -3,8 +3,11 @@ import { join } from 'node:path';
 const packages = [
   'react',
   'react-dom',
+  'scheduler',
   'react-router',
   'react-router-dom',
+  'cookie',
+  'set-cookie-parser',
   'three',
   'leaflet',
   'lucide-react',
