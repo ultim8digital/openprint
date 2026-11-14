@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Neofab Studio preview
+
+- Private versioned manufacturing briefs, components/BOM, operations, open questions, assumptions and acceptance criteria for broad CAD/CAM projects.
+- Russian/English Studio UI, manual workflow without keys, confirmation of exact revisions, maker matching and idempotent request publication.
+- Deterministic single-part FDM template STL and a confirmed packet with geometry manifest; general CAD/CAM requests remain design briefs.
+- Optional server-side Responses API with separate clarification/review models, explicit text-sharing consent, strict output validation, bounded calls and tokens, persistent usage and request deduplication.
+- Expanded technology/material vocabulary, SQLite schema v2 migration, private Studio data export and account cleanup.
+- Universal Neofab architecture, business hypotheses and operator setup guide. Live AI calls, CAD worker integration, machine code, payments and physical production remain unvalidated or unimplemented as documented.
+
 ## 0.1.0 — 2026-11-13
 
 First public implementation of OpenPrint, an independent self-hosted 3D printing and engineering community.

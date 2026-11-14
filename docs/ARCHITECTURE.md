@@ -9,6 +9,9 @@ flowchart LR
     API --> Auth[Session + permission checks]
     Auth --> DB[(SQLite / WAL)]
     API --> Files[Private local uploads]
+    API --> Studio[Versioned Studio briefs + confirmation + publication]
+    Studio --> DB
+    Studio -. Explicit consent, optional server key .-> AI[OpenAI Responses API]
     UI --> Tools[Browser-only STL / OBJ tools]
     UI -. Explicit map action .-> OSM[OpenStreetMap tiles]
     Operator[Operator CLI] --> Admin[One-use setup / recovery token]
@@ -18,21 +21,24 @@ flowchart LR
 
 ## Code map
 
-| Location                                  | Responsibility                                                      |
-| ----------------------------------------- | ------------------------------------------------------------------- |
-| `src/App.tsx`, `src/core.tsx`             | Navigation, state, localization, cancelled requests, notifications  |
-| `src/Browse.tsx`                          | Overview, directory, profiles, project board                        |
-| `src/NewProject.tsx`, `src/Project.tsx`   | Briefs, offers, acceptance, delivery, conversations                 |
-| `src/Workspace.tsx`                       | Dashboard, provider profile, export, password, removal              |
-| `src/Models.tsx`, `src/Tools.tsx`         | Licensed model sharing and browser-only tools                       |
-| `server/app.ts`                           | Routes, validation, permissions and error responses                 |
-| `server/domain.ts`                        | Brief access, offer revisions, atomic acceptance, thread membership |
-| `server/database.ts`                      | Schema v1, transactions, indexes, immutable-agreement triggers      |
-| `server/security.ts`                      | Password hashing, sessions, bounded throttles, permission guards    |
-| `server/files.ts`                         | Headers, names, quotas, ownership, reads and cleanup                |
-| `server/demo.ts`                          | Opt-in fictional local demo, isolated from real data                |
-| `shared/validation.ts`, `shared/parts.ts` | Schemas, exact minor-unit amounts, deterministic meshes             |
-| `scripts/`, `tests/`                      | Operator tools, backup, API/state/security and browser tests        |
+| Location                                  | Responsibility                                                         |
+| ----------------------------------------- | ---------------------------------------------------------------------- |
+| `src/App.tsx`, `src/core.tsx`             | Navigation, state, localization, cancelled requests, notifications     |
+| `src/Browse.tsx`                          | Overview, directory, profiles, project board                           |
+| `src/NewProject.tsx`, `src/Project.tsx`   | Briefs, offers, acceptance, delivery, conversations                    |
+| `src/Workspace.tsx`                       | Dashboard, provider profile, export, password, removal                 |
+| `src/Models.tsx`, `src/Tools.tsx`         | Licensed model sharing and browser-only tools                          |
+| `server/app.ts`                           | Routes, validation, permissions and error responses                    |
+| `server/domain.ts`                        | Brief access, offer revisions, atomic acceptance, thread membership    |
+| `server/database.ts`                      | Schemas v1/v2, transactions, indexes, immutable snapshot triggers      |
+| `src/Studio.tsx`, `shared/studio.ts`      | Private CAD/CAM brief editor, components, confirmation and handoff     |
+| `server/studio.ts`, `server/studio-ai.ts` | Ownership/version gates, durable AI call ledger, bounded Responses API |
+| `server/studio-geometry.ts`               | Deterministic FDM template checks, STL and packet manifests            |
+| `server/security.ts`                      | Password hashing, sessions, bounded throttles, permission guards       |
+| `server/files.ts`                         | Headers, names, quotas, ownership, reads and cleanup                   |
+| `server/demo.ts`                          | Opt-in fictional local demo, isolated from real data                   |
+| `shared/validation.ts`, `shared/parts.ts` | Schemas, exact minor-unit amounts, deterministic meshes                |
+| `scripts/`, `tests/`                      | Operator tools, backup, API/state/security and browser tests           |
 
 ## Data and access
 
@@ -71,8 +77,16 @@ STL/OBJ preview and parametric construction run locally in the browser. Coordina
 
 Unreferenced uploads older than 24 hours are removed hourly while the app runs, or by `npm run cleanup`. Referenced files do not expire. Filesystem and database operations are not a distributed transaction; cleanup or operator recovery may be needed after storage failure.
 
+## Neofab Studio preview
+
+Studio keeps private projects and revisions in SQLite schema v2. The owner edits a brief and confirms an exact version and content hash for discussion/quotation. Open questions, assumptions and unknown component quantities remain explicit in the handoff; confirmation does not release production. Request intent chooses design/consultation or manufacturing quotation independently of geometry support. Publication freezes that version into one job and a downloadable packet; retries return the existing job. Template geometry is restricted to an explicitly selected single FDM block, plate or tube. Assemblies and other technologies remain structured briefs. See [setup and limits](NEOFAB_SETUP.md).
+
+Optional AI assistance calls one fixed provider endpoint with the idea, saved brief and user instruction after explicit consent. The server holds the key, validates structured output and records attempted calls before network I/O. Stale AI results cannot overwrite a newer revision. Project, user and instance limits survive process restart; user deletion removes private project content while preserving the minimal usage ledger for the anonymized account. These are attempt/token limits, not monetary reservations. The user confirms the result before any publication.
+
+The current flat component list and textual operations are the first step toward the [universal CAD/CAM architecture](NEOFAB_BLUEPRINT.md), not a functioning multi-provider manufacturing graph.
+
 ## Runtime boundaries
 
 One process, local disk, exact public HTTPS origin, explicit proxy configuration and a private data directory. No cloud secret is required. No runtime secret is embedded into the frontend. The map and 3D modules load separately from the initial overview.
 
-No end-to-end encryption, automatic email verification, team memberships, horizontal scaling, SSR, payments, SMTP outbox, AI service or federation is included. No production import from the original service is supplied. Backups require the app to be stopped: see [SELF_HOSTING.md](SELF_HOSTING.md).
+No end-to-end encryption, automatic email verification, team memberships, horizontal scaling, SSR, payments, SMTP outbox or federation is included. The optional AI path is described above; no CAD worker or CAM service is connected. No production import from the original service is supplied. Backups require the app to be stopped: see [SELF_HOSTING.md](SELF_HOSTING.md).

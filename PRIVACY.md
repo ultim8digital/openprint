@@ -6,6 +6,10 @@ This document describes the application’s behavior. Each instance operator mus
 
 The community’s local database stores account names, self-asserted email addresses, password hashes, sessions/recovery-token digests, provider profiles, project briefs, offers/accepted terms, messages, notifications, model metadata, reports, blocks and operational decision events. Uploads are private files outside the web root, with owner, size and SHA-256 metadata.
 
+Neofab Studio stores private ideas, structured requirements, component lists, operations, acceptance criteria, revisions and confirmation hashes. Its AI usage ledger stores model names, attempt status, token counts, request hashes and timestamps. API keys stay in the server environment; they are never stored in project records or sent to the browser.
+
+When an operator configures OpenAI and a participant explicitly enables and requests AI assistance, that project's idea, current structured brief and the participant's instruction are sent to the OpenAI API. Account email, session secrets, other participants' projects and uploaded CAD files are not included. Requests use `store: false`; this does not promise that the provider has no other retention or abuse-monitoring obligations. Consult [OpenAI's current data controls](https://developers.openai.com/api/docs/guides/your-data) and the operator's terms. The manual Studio workflow sends no data to an AI provider.
+
 No advertising analytics, cross-site cookies or external font services are bundled. Rate limiting uses hashed IP keys in bounded process memory, not an advertising profile. Reverse proxies and hosts may retain their own access logs according to the operator’s configuration.
 
 ## Visibility
@@ -26,6 +30,8 @@ An HttpOnly cookie holds a random seven-day session token. The interface stores 
 ## Export, changes and removal
 
 Settings provides a JSON export of the signed-in user’s account/profile, own briefs, own offers, own messages, own models and file metadata. Download files separately using your existing permissions. The export does not include password hashes, session tokens or recovery secrets.
+
+The export also includes owned Studio projects, their revisions/confirmations and AI usage metadata. Closing an account removes the private Studio projects and revisions. Minimal AI attempt/token metadata remains against the anonymized account to preserve instance rate-limit accounting; it contains no raw prompt or response text. A brief already published to a manufacturing job follows that job's visibility and retained-agreement rules.
 
 Password changes require the current password and revoke other sessions and outstanding recovery links. An operator can verify an identity request and issue a private single-use recovery link; no automatic recovery email is sent.
 

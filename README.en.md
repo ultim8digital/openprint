@@ -32,6 +32,14 @@ Open **http://localhost:5173**. Switch between fictional customers, workshops, a
 
 The interface supports Russian and English. User-generated content stays in its original language. The optional OpenStreetMap map loads only on request; core workflows require no third-party API calls.
 
+## Neofab Studio preview
+
+Neofab expands the project toward a digital factory for functional parts, repairs, spares, furniture, engineered assemblies and small batches. This branch adds a private workspace: idea → editable brief, components and operations → confirmed revision → maker selection → immutable request.
+
+The manual path needs no API key. Optional server-side OpenAI Responses assistance prepares a draft, with separate configurable models for clarification and detailed review, attempt limits and token usage records. Live paid API calls have not been validated for this build. Geometry currently covers three single-part FDM templates; other technologies produce a design/manufacturing brief. Full CAD, multi-workshop execution and CAM integrations are future work.
+
+See the [setup guide](docs/NEOFAB_SETUP.md), [CAD/CAM architecture](docs/NEOFAB_BLUEPRINT.md) and [business hypotheses](docs/NEOFAB_BUSINESS.md) (Russian).
+
 ## Run a real community
 
 ```sh

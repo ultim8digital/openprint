@@ -16,6 +16,9 @@ Use GitHub’s **Security → Report a vulnerability** for this repository when 
 - Immutable offer revisions, a single accepted offer and transactionally recorded agreement terms.
 - No server unpacking of uploaded archives, no inline rendering of uploaded SVG/HTML, attachment disposition and `nosniff`.
 - CSP, denied embedding, reduced permissions and HTTPS HSTS when configured.
+- Neofab Studio checks project ownership on every operation, uses optimistic version checks and records a hash of the confirmed brief. Published snapshots are frozen.
+- Optional OpenAI requests use a fixed server-side endpoint, bounded inputs/outputs, persistent attempt reservations, per-project/user/instance limits and idempotency keys. No model-generated program is executed. Schema-valid output remains an unconfirmed proposal.
+- AI assistance cannot publish a brief, accept an offer or command equipment. These transitions require explicit application actions and server checks. Matching uses declared maker capabilities; it does not certify a machine or a material.
 
 ## Operator responsibilities and limits
 

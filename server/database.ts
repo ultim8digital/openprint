@@ -40,11 +40,12 @@ export class Store {
     const version = Number(
       this.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0,
     );
-    if (version > 1)
+    if (version > 2)
       throw new Error('Database is newer than this OpenPrint version. Upgrade the application.');
-    if (version === 1) return;
-    this.transaction(() =>
-      this.db.exec(`
+    if (version === 2) return;
+    if (version === 0)
+      this.transaction(() =>
+        this.db.exec(`
       CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL) STRICT;
       CREATE TABLE users (
         id TEXT PRIMARY KEY, email TEXT NOT NULL UNIQUE COLLATE NOCASE, name TEXT NOT NULL,
@@ -160,6 +161,59 @@ export class Store {
       ) STRICT;
       CREATE INDEX events_actor ON events(actor_id);
       PRAGMA user_version=1;
+    `),
+      );
+    this.transaction(() =>
+      this.db.exec(`
+      CREATE TABLE studio_projects (
+        id TEXT PRIMARY KEY, owner_id TEXT NOT NULL REFERENCES users(id), idea TEXT NOT NULL,
+        language TEXT NOT NULL CHECK(language IN ('ru','en')),
+        brief TEXT NOT NULL CHECK(json_valid(brief)), version INTEGER NOT NULL CHECK(version>0),
+        confirmed_version INTEGER, confirmed_hash TEXT,
+        source TEXT NOT NULL CHECK(source IN ('manual','openai')),
+        job_id TEXT UNIQUE REFERENCES jobs(id), packet TEXT CHECK(packet IS NULL OR json_valid(packet)), model_stl BLOB,
+        file_id TEXT REFERENCES files(id), created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL,
+        CHECK((confirmed_version IS NULL AND confirmed_hash IS NULL) OR (confirmed_version=version AND confirmed_hash IS NOT NULL))
+      ) STRICT;
+      CREATE INDEX studio_projects_owner ON studio_projects(owner_id, updated_at DESC);
+      CREATE INDEX studio_projects_file ON studio_projects(file_id);
+      CREATE TABLE studio_revisions (
+        project_id TEXT NOT NULL REFERENCES studio_projects(id) ON DELETE CASCADE,
+        version INTEGER NOT NULL CHECK(version>0), brief TEXT NOT NULL CHECK(json_valid(brief)),
+        source TEXT NOT NULL CHECK(source IN ('manual','openai')), created_at INTEGER NOT NULL,
+        PRIMARY KEY(project_id,version)
+      ) STRICT;
+      CREATE TRIGGER studio_revision_immutable BEFORE UPDATE ON studio_revisions
+        BEGIN SELECT RAISE(ABORT, 'Studio revisions are immutable'); END;
+      CREATE TABLE studio_confirmations (
+        project_id TEXT NOT NULL, version INTEGER NOT NULL,
+        brief_hash TEXT NOT NULL, confirmed_at INTEGER NOT NULL,
+        PRIMARY KEY(project_id,version),
+        FOREIGN KEY(project_id,version) REFERENCES studio_revisions(project_id,version) ON DELETE CASCADE
+      ) STRICT;
+      CREATE TRIGGER studio_confirmation_immutable BEFORE UPDATE ON studio_confirmations
+        BEGIN SELECT RAISE(ABORT, 'Studio confirmations are immutable'); END;
+      CREATE TABLE studio_ai_runs (
+        id TEXT PRIMARY KEY, owner_id TEXT NOT NULL REFERENCES users(id),
+        project_id TEXT REFERENCES studio_projects(id) ON DELETE SET NULL,
+        request_id TEXT NOT NULL, request_hash TEXT NOT NULL, input_version INTEGER NOT NULL,
+        model TEXT NOT NULL, quality TEXT NOT NULL CHECK(quality IN ('standard','review')),
+        status TEXT NOT NULL CHECK(status IN ('running','complete','failed','stale')),
+        input_tokens INTEGER NOT NULL DEFAULT 0 CHECK(input_tokens>=0),
+        output_tokens INTEGER NOT NULL DEFAULT 0 CHECK(output_tokens>=0),
+        result_version INTEGER, error_code TEXT, created_at INTEGER NOT NULL, finished_at INTEGER,
+        UNIQUE(owner_id,project_id,request_id)
+      ) STRICT;
+      CREATE INDEX studio_ai_owner_time ON studio_ai_runs(owner_id,created_at DESC);
+      CREATE INDEX studio_ai_project ON studio_ai_runs(project_id);
+      CREATE INDEX studio_ai_status_time ON studio_ai_runs(status,created_at);
+      CREATE TRIGGER studio_ai_request_immutable BEFORE UPDATE OF owner_id,request_id,request_hash,input_version,model,quality,created_at ON studio_ai_runs
+        BEGIN SELECT RAISE(ABORT, 'AI request identity is immutable'); END;
+      CREATE TRIGGER studio_ai_project_immutable BEFORE UPDATE OF project_id ON studio_ai_runs WHEN NEW.project_id IS NOT NULL
+        BEGIN SELECT RAISE(ABORT, 'AI requests cannot be reassigned'); END;
+      CREATE TRIGGER studio_published_immutable BEFORE UPDATE OF brief,version,confirmed_version,confirmed_hash,packet,model_stl,job_id,file_id ON studio_projects WHEN OLD.job_id IS NOT NULL
+        BEGIN SELECT RAISE(ABORT, 'Published studio projects are immutable'); END;
+      PRAGMA user_version=2;
     `),
     );
   }

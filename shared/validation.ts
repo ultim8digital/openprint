@@ -16,8 +16,8 @@ export const profileInput = z
     kind: z.enum(['studio', 'engineer', 'both']),
     city: text(2, 80),
     description: text(30, 3000),
-    technologies: z.array(z.enum(technologies)).min(1).max(5),
-    materials: z.array(z.enum(materials)).min(1).max(9),
+    technologies: z.array(z.enum(technologies)).min(1).max(technologies.length),
+    materials: z.array(z.enum(materials)).min(1).max(materials.length),
     website: z
       .string()
       .trim()
