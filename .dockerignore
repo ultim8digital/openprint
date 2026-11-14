@@ -1,0 +1,10 @@
+.git
+node_modules
+dist
+build
+.local
+.env*
+.private-audit
+test-results
+playwright-report
+docs/images

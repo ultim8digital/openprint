@@ -1,0 +1,52 @@
+name: OpenPrint CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run format:check
+      - run: npm run check
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm audit --omit=dev --audit-level=high
+      - name: Build container and verify empty-instance isolation
+        run: |
+          docker build -t openprint:test .
+          docker run -d --name openprint-check -p 127.0.0.1:3100:3000 -e APP_URL=http://127.0.0.1:3100 openprint:test
+          node --input-type=module <<'JS'
+          import {setTimeout} from 'node:timers/promises';
+          let ready=false;
+          for(let n=0;n<30;n++){
+            try{const r=await fetch('http://127.0.0.1:3100/api/health');if(r.ok){ready=true;break;}}catch{}
+            await setTimeout(1000);
+          }
+          if(!ready)throw new Error('Container did not become healthy');
+          const state=await(await fetch('http://127.0.0.1:3100/api/bootstrap')).json();
+          if(state.demo || state.demoUsers.length || state.user || state.stats.profiles)throw new Error('Production must start empty');
+          console.log('Container healthy; demo accounts absent');
+          JS
+          docker stop openprint-check
+          docker start openprint-check
+          sleep 2
+          curl --fail http://127.0.0.1:3100/api/health
+          docker rm -f openprint-check
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: browser-test-evidence
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

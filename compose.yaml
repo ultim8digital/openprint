@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    init: true
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      INSTANCE_NAME: ${INSTANCE_NAME:-OpenPrint}
+      OPERATOR_CONTACT: ${OPERATOR_CONTACT:-}
+      USER_STORAGE_MB: ${USER_STORAGE_MB:-200}
+      MAX_STORAGE_MB: ${MAX_STORAGE_MB:-1024}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+    volumes:
+      - community-data:/app/data
+      - community-backups:/app/backups
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stop_grace_period: 15s
+volumes:
+  community-data:
+  community-backups:
