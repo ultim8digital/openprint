@@ -18,6 +18,7 @@ import {
   BookOpen,
   X,
   ShieldCheck,
+  Sparkles,
 } from 'lucide-react';
 import {
   useApp,
@@ -40,6 +41,7 @@ const Models = lazy(() => import('./Models'));
 const Tools = lazy(() => import('./Tools'));
 const Admin = lazy(() => import('./Admin'));
 const About = lazy(() => import('./About'));
+const Studio = lazy(() => import('./Studio'));
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, loading } = useApp();
@@ -65,6 +67,7 @@ const names: Record<string, [string, string]> = {
   '/admin': ['Модерация', 'Moderation'],
   '/login': ['Добро пожаловать', 'Welcome'],
   '/recover': ['Восстановить доступ', 'Account recovery'],
+  '/studio': ['Neofab Studio', 'Neofab Studio'],
 };
 function Notifications({ close }: { close: () => void }) {
   const { t, lang, refresh } = useApp(),
@@ -166,6 +169,7 @@ export default function App() {
     { to: '/projects', icon: BriefcaseBusiness, label: t('Проекты', 'Projects') },
     { to: '/models', icon: Box, label: t('Модели', 'Models') },
     { to: '/tools', icon: Layers3, label: t('3D-инструменты', '3D tools') },
+    { to: '/studio', icon: Sparkles, label: 'Neofab Studio' },
   ];
   return (
     <>
@@ -278,7 +282,7 @@ export default function App() {
                   <Link
                     to="/workspace"
                     className="user-avatar"
-                    aria-label={t('Мой кабинет', 'My workspace')}
+                    aria-label={`${initials(user.name)} · ${t('Мой кабинет', 'My workspace')}`}
                   >
                     {initials(user.name)}
                   </Link>
@@ -328,6 +332,22 @@ export default function App() {
           <main id="main" tabIndex={-1}>
             <Suspense fallback={<Loading />}>
               <Routes>
+                <Route
+                  path="/studio"
+                  element={
+                    <RequireAuth>
+                      <Studio key={user?.id} />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/studio/:id"
+                  element={
+                    <RequireAuth>
+                      <Studio key={user?.id} />
+                    </RequireAuth>
+                  }
+                />
                 <Route path="/" element={<Home />} />
                 <Route path="/studios" element={<Directory />} />
                 <Route path="/studios/:id" element={<ProfilePage />} />

@@ -24,7 +24,14 @@ import {
   formatDate,
 } from './core';
 import { PageTitle, JobCard } from './Browse';
-import { technologies, materials, type Job, type Profile, type Offer } from '../shared/types';
+import {
+  technologies,
+  technologyName,
+  materials,
+  type Job,
+  type Profile,
+  type Offer,
+} from '../shared/types';
 type Dashboard = {
   projects: Job[];
   offers: (Offer & { job_title: string; job_status: string; currency: string })[];
@@ -147,7 +154,7 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
                 checked={tech.includes(value)}
                 onChange={() => toggle(tech, value, setTech)}
               />
-              {value}
+              {t(technologyName(value, 'ru'), technologyName(value, 'en'))}
             </label>
           ))}
         </div>

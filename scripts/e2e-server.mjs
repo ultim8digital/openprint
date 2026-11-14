@@ -14,6 +14,8 @@ const child = spawn(process.execPath, ['build/server/index.js'], {
     PORT: '3012',
     APP_URL: 'http://127.0.0.1:3012',
     TRUST_PROXY: '0',
+    // Browser tests must never spend an operator's API balance.
+    OPENAI_API_KEY: '',
   },
 });
 let stopping = false;

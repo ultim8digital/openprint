@@ -22,6 +22,8 @@ An empty community is not presented as an established network of suppliers. All 
 
 ## Deliberate limits of v0.1
 
+The Neofab Studio preview extends this baseline with private versioned briefs, a flat component list, optional AI drafting and a confirmed handoff. It preserves the key-free path. See [setup](NEOFAB_SETUP.md) and the broader [CAD/CAM architecture](NEOFAB_BLUEPRINT.md); the limits below describe the original 0.1 community release.
+
 - One user manages one provider profile. Shared workshop staff and granular permissions are future work.
 - No payments, commission accounting, escrow, tax calculation, shipping integration or automatic dispute arbitration. Participants handle these directly.
 - No automatic identity/email verification, public ratings or invented reputation scores.

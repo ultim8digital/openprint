@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Paperclip, ShieldCheck, Upload, X } from 'lucide-react';
 import { useApp, useRemote, post, upload, ErrorBox, errorText, formatMoney } from './core';
 import { PageTitle } from './Browse';
-import { technologies, materials, currencies, type Profile } from '../shared/types';
+import { technologies, technologyName, materials, currencies, type Profile } from '../shared/types';
 import { minorUnits, jobInput } from '../shared/validation';
 type Draft = {
   title: string;
@@ -129,7 +129,7 @@ export default function NewProject() {
       ? t('Проектирование', 'Design')
       : draft.kind === 'repair'
         ? t('Ремонт детали', 'Repair')
-        : t('3D-печать', '3D printing');
+        : t('Изготовление', 'Manufacturing');
   return (
     <div className="page narrow">
       <PageTitle
@@ -171,7 +171,7 @@ export default function NewProject() {
               <label>
                 {t('Тип проекта', 'Project type')}
                 <select value={draft.kind} onChange={(e) => set('kind', e.target.value)}>
-                  <option value="print">{t('Напечатать деталь', 'Print a part')}</option>
+                  <option value="print">{t('Изготовить изделие', 'Manufacture a product')}</option>
                   <option value="design">{t('Спроектировать модель', 'Design a model')}</option>
                   <option value="repair">{t('Восстановить деталь', 'Repair a part')}</option>
                 </select>
@@ -224,7 +224,9 @@ export default function NewProject() {
                 >
                   <option value="Any">{t('Помогите выбрать', 'Help me choose')}</option>
                   {technologies.map((s) => (
-                    <option key={s}>{s}</option>
+                    <option key={s} value={s}>
+                      {technologyName(s, lang)}
+                    </option>
                   ))}
                 </select>
               </label>

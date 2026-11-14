@@ -362,7 +362,7 @@ a svg {
   box-shadow: 0 0 0 1px #dfe5d8;
   border-radius: 50%;
   background: #e1e9d5;
-  color: #687654;
+  color: #425436;
   font-size: 10px;
   font-weight: 600;
 }
@@ -3010,4 +3010,32 @@ label small,
 }
 .text-button.map-toggle.selected {
   color: #315e36;
+}
+.neofab-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid #e0e7d8;
+  margin-bottom: 22px;
+}
+.neofab-entry strong {
+  font-size: 15px;
+}
+.neofab-entry p {
+  color: #506248;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 6px 0 0;
+  max-width: 650px;
+}
+.neofab-entry > a {
+  flex-shrink: 0;
+}
+@media (max-width: 650px) {
+  .neofab-entry {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

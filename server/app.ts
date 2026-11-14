@@ -46,6 +46,8 @@ import {
 } from './domain.js';
 import { saveUpload, uploadDirectory, canReadFile, type FileRow } from './files.js';
 import type { Offer, User } from '../shared/types.js';
+import { createStudioRouter } from './studio.js';
+import type { StudioAIConfig } from './studio-ai.js';
 
 type Options = {
   store: Store;
@@ -57,6 +59,7 @@ type Options = {
   userLimit?: number;
   totalLimit?: number;
   staticDir?: string;
+  studioAI?: StudioAIConfig;
 };
 const id = (req: Request, key = 'id') => z.string().uuid().parse(req.params[key]);
 const textQuery = (value: unknown) => (typeof value === 'string' ? value.trim().slice(0, 100) : '');
@@ -113,6 +116,16 @@ export function createApp(options: Options) {
   });
   app.use('/api', throttle('api', 240));
   app.use(express.json({ limit: '96kb' }));
+  app.use(
+    '/api/studio',
+    createStudioRouter({
+      store,
+      dataDir,
+      ai: options.studioAI,
+      userLimit: options.userLimit,
+      totalLimit: options.totalLimit,
+    }),
+  );
 
   app.get('/api/health', (_req, res) => {
     store.get('SELECT 1');
@@ -874,6 +887,22 @@ export function createApp(options: Options) {
       offers: store.all('SELECT * FROM offers WHERE provider_id=?', user.id),
       messages: store.all('SELECT * FROM messages WHERE author_id=?', user.id),
       models: store.all('SELECT * FROM models WHERE owner_id=?', user.id),
+      studio_projects: store.all(
+        'SELECT id,idea,language,brief,version,confirmed_version,confirmed_hash,source,job_id,packet,file_id,created_at,updated_at FROM studio_projects WHERE owner_id=?',
+        user.id,
+      ),
+      studio_revisions: store.all(
+        'SELECT r.* FROM studio_revisions r JOIN studio_projects p ON p.id=r.project_id WHERE p.owner_id=?',
+        user.id,
+      ),
+      studio_confirmations: store.all(
+        'SELECT c.* FROM studio_confirmations c JOIN studio_projects p ON p.id=c.project_id WHERE p.owner_id=?',
+        user.id,
+      ),
+      studio_ai_usage: store.all(
+        'SELECT id,project_id,model,quality,status,input_tokens,output_tokens,error_code,created_at,finished_at FROM studio_ai_runs WHERE owner_id=?',
+        user.id,
+      ),
       files: store.all(
         'SELECT id,name,size,sha256,created_at FROM files WHERE owner_id=?',
         user.id,
@@ -968,6 +997,7 @@ export function createApp(options: Options) {
         user.id,
       );
       store.run('DELETE FROM models WHERE owner_id=?', user.id);
+      store.run('DELETE FROM studio_projects WHERE owner_id=?', user.id);
       store.run('DELETE FROM sessions WHERE user_id=?', user.id);
       store.run('DELETE FROM reset_tokens WHERE user_id=?', user.id);
       store.run('DELETE FROM notifications WHERE user_id=?', user.id);

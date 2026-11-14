@@ -32,7 +32,7 @@ import {
   errorText,
 } from './core';
 import { HeroArt } from './art';
-import type { Profile, Job } from '../shared/types';
+import { technologies, technologyName, type Profile, type Job } from '../shared/types';
 const CommunityMap = lazy(() => import('./CommunityMap'));
 export function ProfileCard({ profile }: { profile: Profile }) {
   const { t } = useApp();
@@ -59,8 +59,8 @@ export function ProfileCard({ profile }: { profile: Profile }) {
           {profile.kind === 'engineer'
             ? t('ИНЖЕНЕР', 'ENGINEER')
             : profile.kind === 'both'
-              ? t('ПЕЧАТЬ И ПРОЕКТИРОВАНИЕ', 'PRINT & DESIGN')
-              : t('3D-МАСТЕРСКАЯ', '3D WORKSHOP')}
+              ? t('ПРОИЗВОДСТВО И ПРОЕКТИРОВАНИЕ', 'MANUFACTURING & DESIGN')
+              : t('МАСТЕРСКАЯ', 'WORKSHOP')}
         </span>
         <h3>
           <Link to={`/studios/${profile.id}`}>{profile.name}</Link>
@@ -79,7 +79,7 @@ export function ProfileCard({ profile }: { profile: Profile }) {
       <p className="card-description">{profile.description}</p>
       <div className="tags">
         {profile.technologies.slice(0, 4).map((s) => (
-          <span key={s}>{s}</span>
+          <span key={s}>{t(technologyName(s, 'ru'), technologyName(s, 'en'))}</span>
         ))}
         {profile.materials
           .filter((m) => m !== 'Any')
@@ -115,7 +115,7 @@ export function JobCard({ job, compact = false }: { job: Job; compact?: boolean 
               ? t('ПРОЕКТИРОВАНИЕ', 'DESIGN')
               : job.kind === 'repair'
                 ? t('РЕМОНТ ДЕТАЛИ', 'REPAIR')
-                : t('3D-ПЕЧАТЬ', '3D PRINTING')}
+                : t('ИЗГОТОВЛЕНИЕ', 'MANUFACTURING')}
           </span>
           <span className="micro muted">{formatDate(job.created_at, lang)}</span>
         </div>
@@ -212,8 +212,8 @@ export function Home() {
             )}
           </p>
           <div className="hero-actions">
-            <Link className="button" to="/projects/new">
-              {t('Создать проект', 'Start a project')}
+            <Link className="button" to="/studio">
+              {t('Создать с Neofab', 'Create with Neofab')}
               <Plus size={17} />
             </Link>
             <Link className="text-button" to="/studios">
@@ -244,6 +244,20 @@ export function Home() {
           </div>
         </div>
       </section>
+      <div className="neofab-entry">
+        <div>
+          <strong>Neofab Studio</strong>
+          <p>
+            {t(
+              'От отдельной детали до мебели и сборки: назначение, размеры, состав изделия и маршрут изготовления в одном проекте.',
+              'From a part to furniture and assemblies: purpose, dimensions, components and a manufacturing route in one project.',
+            )}
+          </p>
+        </div>
+        <Link className="text-button" to="/projects/new">
+          {t('У меня уже есть ТЗ', 'I already have a brief')} <ArrowUpRight size={16} />
+        </Link>
+      </div>
       <section
         className="stats-strip"
         aria-label={t('Сообщество в цифрах', 'Community in numbers')}
@@ -473,8 +487,10 @@ export function Directory() {
             onChange={(e) => filter('technology', e.target.value)}
           >
             <option value="">{t('Все технологии', 'All technologies')}</option>
-            {['FDM', 'SLA', 'SLS', 'CNC', 'CAD'].map((s) => (
-              <option key={s}>{s}</option>
+            {technologies.map((s) => (
+              <option key={s} value={s}>
+                {t(technologyName(s, 'ru'), technologyName(s, 'en'))}
+              </option>
             ))}
           </select>
           <label className="check-label">
@@ -740,7 +756,7 @@ export function Projects() {
           <div className="pills">
             {[
               ['', t('Все проекты', 'All projects')],
-              ['print', t('3D-печать', '3D printing')],
+              ['print', t('Изготовление', 'Manufacturing')],
               ['design', t('Проектирование', 'Design')],
               ['repair', t('Ремонт деталей', 'Repair')],
             ].map(([value, label]) => (

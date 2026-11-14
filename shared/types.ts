@@ -1,4 +1,35 @@
-export const technologies = ['FDM', 'SLA', 'SLS', 'CNC', 'CAD'] as const;
+export const technologies = [
+  'FDM',
+  'SLA',
+  'SLS',
+  'MJF',
+  'DMLS',
+  'LASER',
+  'CNC',
+  'CNC_TURNING',
+  'WOOD_CNC',
+  'WATERJET',
+  'PLASMA',
+  'SHEET_METAL',
+  'CAD',
+] as const;
+export const technologyNames: Record<string, [string, string]> = {
+  FDM: ['FDM-печать', 'FDM printing'],
+  SLA: ['SLA-печать', 'SLA printing'],
+  SLS: ['SLS-печать', 'SLS printing'],
+  MJF: ['MJF-печать', 'MJF printing'],
+  DMLS: ['Печать металлом', 'Metal printing'],
+  LASER: ['Лазерная резка', 'Laser cutting'],
+  CNC: ['Фрезеровка ЧПУ', 'CNC milling'],
+  CNC_TURNING: ['Токарная обработка ЧПУ', 'CNC turning'],
+  WOOD_CNC: ['ЧПУ по дереву', 'CNC woodworking'],
+  WATERJET: ['Гидроабразивная резка', 'Waterjet cutting'],
+  PLASMA: ['Плазменная резка', 'Plasma cutting'],
+  SHEET_METAL: ['Листовой металл и гибка', 'Sheet metal & bending'],
+  CAD: ['Проектирование CAD', 'CAD engineering'],
+};
+export const technologyName = (value: string, lang: 'ru' | 'en') =>
+  technologyNames[value]?.[lang === 'ru' ? 0 : 1] || value;
 export const materials = [
   'PLA',
   'PETG',
@@ -8,6 +39,11 @@ export const materials = [
   'Nylon',
   'Resin',
   'Metal',
+  'Wood',
+  'Plywood',
+  'Acrylic',
+  'Aluminum',
+  'Steel',
   'Any',
 ] as const;
 export const currencies = ['RUB', 'USD', 'EUR', 'THB'] as const;
