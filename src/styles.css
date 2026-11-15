@@ -1869,6 +1869,77 @@ label small {
   border-radius: 11px;
   z-index: 1;
 }
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  font-size: 12px;
+  margin: 12px 0 8px;
+}
+.map-legend > span {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+}
+.map-key {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.map-key.member {
+  background: #277759;
+}
+.map-key.catalog {
+  background: #9c6227;
+}
+.directory-map-count {
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  min-height: 21px;
+}
+.directory-heading {
+  margin: 0;
+  font: inherit;
+}
+.catalog-label {
+  border: 1px solid #d3bd9f;
+  background: #f8f0e4;
+  color: #785022;
+  border-radius: 5px;
+  padding: 4px 7px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.catalog-source {
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+.catalog-provenance {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.catalog-detail h2 {
+  font-size: 17px;
+}
+.catalog-detail .detail-actions {
+  flex-wrap: wrap;
+}
+.catalog-detail p,
+.catalog-detail h1,
+.catalog-detail a {
+  overflow-wrap: anywhere;
+}
+.catalog-detail .text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.catalog-page .back-link {
+  color: var(--green);
+}
 .report-form {
   margin-top: 20px;
   padding-top: 20px;

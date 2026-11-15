@@ -32,6 +32,8 @@ Open **http://localhost:5173**. Switch between fictional customers, workshops, a
 
 The interface supports Russian and English. User-generated content stays in its original language. The optional OpenStreetMap map loads only on request; core workflows require no third-party API calls.
 
+Operators can connect an existing studio catalogue through [JSON import](docs/CATALOG_IMPORT.md). Search combines source-attributed catalogue records and registered makers; the map includes all matching coordinates independently of list pagination. Catalogue records do not acquire user accounts, review badges or the ability to accept platform orders. Specific datasets are stored locally and are not bundled in the public repository.
+
 ## Neofab Studio and local CAD
 
 Neofab expands the project toward a digital factory for functional parts, repairs, spares, furniture, engineered assemblies and small batches. Studio connects a private idea, editable requirements, components, a CAD revision, a confirmed package and an immutable request to a maker.
@@ -60,7 +62,7 @@ The default Docker image needs no Python. To include the optional CAD runtime, u
 
 ## Deliberate limits
 
-OpenPrint 0.3 is intended for small communities. It does not provide payments, escrow, identity verification, manufacturing-safety certification, antivirus scanning, or dispute arbitration. Makers and customers arrange payments and delivery directly. CAD geometry checks cover the declared model; they do not establish strength, process suitability or physical performance. Physical manufacturing has not been validated.
+OpenPrint 0.4 is intended for small communities. It does not provide payments, escrow, identity verification, manufacturing-safety certification, antivirus scanning, or dispute arbitration. Makers and customers arrange payments and delivery directly. CAD geometry checks cover the declared model; they do not establish strength, process suitability or physical performance. Physical manufacturing has not been validated.
 
 The declarative CAD scope is limited to 24 physical components and 300 operations. Arbitrary STEP import into editable feature history, CAM, G-code and FEA are outside this release. Use one application process with local storage. Team memberships, horizontal scaling, SMTP, autonomous multi-agent delegation, SSR/SEO, automatic translation of member content, and Supabase account migration are not included. The operator can access server data; this is not end-to-end encryption. See [product scope](docs/PRODUCT.md), [privacy](PRIVACY.md), and [security](SECURITY.md).
 
@@ -84,4 +86,4 @@ Code, UI, original SVG illustrations, and documentation are [MIT](LICENSE). Memb
 
 The optional CAD compiler adapts an MIT-licensed geometry module; attribution and the extraction boundary are recorded in [cad-worker/NOTICE.md](cad-worker/NOTICE.md). Provider integrations, private history, user data and credentials are excluded.
 
-Inspired by [3d-online.app](https://3d-online.app), implemented separately. No production database, scraped company directory, private Git history, user files, or credentials were copied. Contributions welcome: [CONTRIBUTING.md](CONTRIBUTING.md).
+Inspired by [3d-online.app](https://3d-online.app), implemented separately. Production accounts, private Git history, user files and credentials were not copied. Existing studio catalogues can be imported separately into an operator's installation; the public repository contains the importer and synthetic fixtures. Contributions welcome: [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -18,15 +18,15 @@ Visitors can discover providers, inspect STL/OBJ, construct/download simple part
 6. Receive the result and confirm completion.
 7. Share original designs with attribution and explicit licensing.
 
-An empty community is not presented as an established network of suppliers. All demo data is prominently fictional; real installations start empty.
+An empty community is not presented as an established network of suppliers. Seeded demo accounts and projects are fictional; real installations start empty. An operator can import an existing studio catalogue into either installation. Those records are labelled as catalogue entries, contactable through their public website/phone, and are separate from registered makers who can receive platform orders. The map covers all matching coordinates independently of list pagination. See [catalogue import](CATALOG_IMPORT.md).
 
-## Neofab Studio in v0.3
+## Neofab Studio in v0.4
 
 Neofab Studio adds private versioned briefs, components and operations, optional AI drafting, local declarative CAD and a confirmed handoff. CAD supports bounded parts and assemblies, STEP/STL and BOM exports, a geometry report, component preview, version history and named-provider quotation access. Functional parts, repairs, furniture and small batches can share this workflow; each manufacturing process still needs its own engineering preparation. See [setup](NEOFAB_SETUP.md), [CAD scope](CAD_ENGINE.md) and the broader [CAD/CAM architecture](NEOFAB_BLUEPRINT.md).
 
 The complete manual path has no required AI key. Installing the optional CAD runtime enables geometry without an AI service; leaving it disabled preserves briefs, collaboration and simple browser templates.
 
-## Deliberate limits of v0.3
+## Deliberate limits of v0.4
 
 - One user manages one provider profile. Shared workshop staff and granular permissions are future work.
 - No payments, commission accounting, escrow, tax calculation, shipping integration or automatic dispute arbitration. Participants handle these directly.

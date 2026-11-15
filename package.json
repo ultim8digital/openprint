@@ -1,6 +1,6 @@
 {
   "name": "openprint-community",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "An open workshop for 3D printing, engineering, and local maker communities. Self-hosted, no cloud account required.",
   "license": "MIT",
@@ -22,7 +22,8 @@
     "cleanup": "node --import tsx scripts/cleanup.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "ai:eval": "node --import tsx scripts/ai-eval.ts"
+    "ai:eval": "node --import tsx scripts/ai-eval.ts",
+    "catalog:import": "node --import tsx scripts/catalog-import.ts"
   },
   "dependencies": {
     "express": "5.3.0",

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
   ArrowUpRight,
@@ -30,10 +30,18 @@ import {
   Status,
   post,
   errorText,
+  api,
 } from './core';
 import { HeroArt } from './art';
 import { technologies, technologyName, type Profile, type Job } from '../shared/types';
+import type {
+  CatalogStudio,
+  DirectoryResponse,
+  DirectoryMapPoint,
+  DirectoryMapResponse,
+} from '../shared/directory';
 const CommunityMap = lazy(() => import('./CommunityMap'));
+const emptyMapPoints: DirectoryMapPoint[] = [];
 export function ProfileCard({ profile }: { profile: Profile }) {
   const { t } = useApp();
   return (
@@ -431,20 +439,129 @@ export function Home() {
     </div>
   );
 }
+function safeCatalogLink(value: string) {
+  try {
+    const url = new URL(value);
+    return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password
+      ? url.href
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+function catalogLocation(studio: CatalogStudio) {
+  return [...new Set([studio.city, studio.region, studio.country].filter(Boolean))].join(', ');
+}
+
+function CatalogCard({ studio }: { studio: CatalogStudio }) {
+  const { t } = useApp();
+  return (
+    <article className="profile-card catalog-card">
+      <div className="between">
+        <span className={`studio-avatar color-${studio.name.length % 4}`}>
+          {initials(studio.name)}
+        </span>
+        <span className="catalog-label">{t('Справочная запись', 'Directory listing')}</span>
+      </div>
+      <div>
+        <span className="eyebrow">{t('КАТАЛОГ СТУДИЙ', 'STUDIO DIRECTORY')}</span>
+        <h3>
+          <Link to={`/catalog/${studio.id}`}>{studio.name}</Link>
+        </h3>
+        <p className="location">
+          <MapPin size={13} />
+          {catalogLocation(studio) || t('Город не указан', 'City not specified')}
+        </p>
+      </div>
+      <p className="card-description">
+        {studio.description ||
+          t(
+            'Сведения об организации из каталога. Контакты и возможности уточняйте у студии.',
+            'An organization listed in the directory. Confirm contacts and capabilities with the studio.',
+          )}
+      </p>
+      <div className="tags">
+        {studio.technologies.slice(0, 4).map((technology) => (
+          <span key={technology}>
+            {t(technologyName(technology, 'ru'), technologyName(technology, 'en'))}
+          </span>
+        ))}
+        {studio.lat === null || studio.lng === null ? (
+          <span>{t('Без точки на карте', 'No map location')}</span>
+        ) : null}
+      </div>
+      <p className="micro muted catalog-source">
+        {t('Источник', 'Source')}: {studio.source_name}
+      </p>
+      <Link className="card-link" to={`/catalog/${studio.id}`}>
+        {t('Контакты студии', 'Studio contacts')}
+        <ArrowUpRight size={17} />
+      </Link>
+    </article>
+  );
+}
+
+// Tag results with their request path so a changed filter never displays stale labels or points.
+function useDirectoryRemote<T>(path: string | null) {
+  const [revision, setRevision] = useState(0);
+  const [state, setState] = useState<{
+    path: string;
+    data: T | null;
+    error: string;
+    loading: boolean;
+  } | null>(null);
+  const reload = useCallback(() => setRevision((value) => value + 1), []);
+  useEffect(() => {
+    if (!path) return;
+    const controller = new AbortController();
+    setState({ path, data: null, error: '', loading: true });
+    void api<T>(path, { signal: controller.signal }).then(
+      (data) => {
+        if (!controller.signal.aborted) setState({ path, data, error: '', loading: false });
+      },
+      (error) => {
+        if (!controller.signal.aborted)
+          setState({ path, data: null, error: errorText(error), loading: false });
+      },
+    );
+    return () => controller.abort();
+  }, [path, revision]);
+  return {
+    data: state?.path === path ? state.data : null,
+    error: state?.path === path ? state.error : '',
+    loading: !!path && (state?.path !== path || state.loading),
+    reload,
+  };
+}
+
 export function Directory() {
   const { t } = useApp(),
-    [params, setParams] = useSearchParams(),
-    [map, setMap] = useState(false),
-    [offset, setOffset] = useState(0);
-  const query = new URLSearchParams(params);
+    [params, setParams] = useSearchParams();
+  const map = params.get('view') === 'map';
+  const offset = Math.max(0, Number.parseInt(params.get('offset') || '0', 10) || 0);
+  const filters = new URLSearchParams();
+  for (const key of ['source', 'q', 'city', 'technology', 'kind', 'verified']) {
+    const value = params.get(key);
+    if (value) filters.set(key, value);
+  }
+  const query = new URLSearchParams(filters);
   query.set('limit', '12');
   query.set('offset', String(offset));
-  const remote = useRemote<{ profiles: Profile[]; has_more: boolean }>('/profiles?' + query);
+  const remote = useDirectoryRemote<DirectoryResponse>('/directory?' + query);
+  const mapRemote = useDirectoryRemote<DirectoryMapResponse>(
+    map ? '/directory/map?' + filters : null,
+  );
   function filter(key: string, value: string) {
     const next = new URLSearchParams(params);
     value ? next.set(key, value) : next.delete(key);
+    next.delete('offset');
     setParams(next);
-    setOffset(0);
+  }
+  function page(nextOffset: number) {
+    const next = new URLSearchParams(params);
+    nextOffset ? next.set('offset', String(nextOffset)) : next.delete('offset');
+    setParams(next);
   }
   return (
     <div className="page">
@@ -452,8 +569,8 @@ export function Directory() {
         eyebrow={t('ЛЮДИ И ВОЗМОЖНОСТИ', 'PEOPLE & POSSIBILITIES')}
         title={t('Найдите свою мастерскую.', 'Find your kind of maker.')}
         description={t(
-          'От небольшой детали до сложной задумки — рядом есть тот, кто поможет.',
-          'From a tiny replacement part to an ambitious idea, find someone who can help.',
+          'Участники сообщества и каталог студий печати. Найдите возможности рядом с вами или в другом городе.',
+          'Community makers and a directory of print studios. Find capabilities near you or in another city.',
         )}
       >
         <Link className="button" to="/workspace?tab=profile">
@@ -466,6 +583,7 @@ export function Directory() {
           <Search size={18} />
           <input
             aria-label={t('Поиск мастерских', 'Search workshops')}
+            maxLength={100}
             placeholder={t('Название, город или специализация', 'Name, city, or specialty')}
             value={params.get('q') || ''}
             onChange={(e) => filter('q', e.target.value)}
@@ -473,11 +591,20 @@ export function Directory() {
         </div>
         <div className="filter-row">
           <select
+            aria-label={t('Источник записей', 'Listing source')}
+            value={params.get('source') || 'all'}
+            onChange={(event) => filter('source', event.target.value)}
+          >
+            <option value="all">{t('Участники и каталог', 'Members and directory')}</option>
+            <option value="member">{t('Участники OpenPrint', 'OpenPrint members')}</option>
+            <option value="catalog">{t('Каталог студий', 'Studio directory')}</option>
+          </select>
+          <select
             aria-label={t('Тип участника', 'Maker type')}
             value={params.get('kind') || ''}
             onChange={(e) => filter('kind', e.target.value)}
           >
-            <option value="">{t('Все участники', 'All makers')}</option>
+            <option value="">{t('Все специализации', 'All specialties')}</option>
             <option value="studio">{t('Мастерские', 'Workshops')}</option>
             <option value="engineer">{t('Инженеры', 'Engineers')}</option>
           </select>
@@ -492,6 +619,11 @@ export function Directory() {
                 {t(technologyName(s, 'ru'), technologyName(s, 'en'))}
               </option>
             ))}
+            {['PolyJet', 'Binder Jetting'].map((technology) => (
+              <option key={technology} value={technology}>
+                {technology}
+              </option>
+            ))}
           </select>
           <label className="check-label">
             <input
@@ -504,7 +636,12 @@ export function Directory() {
           </label>
           <button
             className={'text-button map-toggle' + (map ? ' selected' : '')}
-            onClick={() => setMap((v) => !v)}
+            aria-pressed={map}
+            onClick={() => {
+              const next = new URLSearchParams(params);
+              map ? next.delete('view') : next.set('view', 'map');
+              setParams(next);
+            }}
           >
             <MapPin size={16} />
             {map ? t('Скрыть карту', 'Hide map') : t('Показать карту', 'Show map')}
@@ -512,35 +649,98 @@ export function Directory() {
         </div>
       </div>
       {map && (
-        <div className="map-section">
+        <section className="map-section" aria-label={t('Студии на карте', 'Studios on the map')}>
           <p className="micro muted">
             {t(
-              'Карта текущей страницы результатов. Тайлы OpenStreetMap загружаются только при открытии карты.',
-              'Map of this results page. OpenStreetMap tiles load only when you open the map.',
+              'Точки всех результатов выбранных фильтров, независимо от страницы списка. Фон OpenStreetMap загружается при открытии карты.',
+              'All locations matching your filters, across every list page. OpenStreetMap tiles load when you open the map.',
             )}
           </p>
+          <div className="map-legend" aria-label={t('Обозначения карты', 'Map legend')}>
+            <span>
+              <i className="map-key member" />
+              {t('Участники OpenPrint', 'OpenPrint members')}
+            </span>
+            <span>
+              <i className="map-key catalog" />
+              {t('Справочные записи', 'Directory listings')}
+            </span>
+          </div>
+          <div
+            role="status"
+            className="directory-map-count"
+            aria-label={t('Результаты карты', 'Map results')}
+          >
+            {mapRemote.loading ? (
+              t('Загружаем точки…', 'Loading locations…')
+            ) : mapRemote.data ? (
+              <>
+                {t('Точек на карте', 'Map locations')}: {mapRemote.data.points.length} ·{' '}
+                {t('Всего результатов', 'Total results')}: {mapRemote.data.total} ·{' '}
+                {t('Без координат', 'Without coordinates')}: {mapRemote.data.unmapped}
+              </>
+            ) : null}
+          </div>
+          <ErrorBox error={mapRemote.error} retry={mapRemote.reload} />
+          {mapRemote.data?.truncated && (
+            <p className="info-box">
+              {t(
+                'Показана часть точек. Уточните город, название или технологию, чтобы увидеть остальные.',
+                'Only some locations are shown. Narrow the city, name, or technology to see the rest.',
+              )}
+            </p>
+          )}
           <Suspense fallback={<Loading />}>
-            <CommunityMap profiles={remote.data?.profiles || []} />
+            <CommunityMap
+              points={mapRemote.data?.points || emptyMapPoints}
+              datasetKey={filters.toString()}
+              loading={mapRemote.loading || !!mapRemote.error}
+            />
           </Suspense>
-        </div>
+          {mapRemote.data && !mapRemote.data.mappable && (
+            <p className="micro muted">
+              {t(
+                'У этих записей пока нет координат. Контакты доступны в списке.',
+                'These listings have no coordinates yet. Contact details remain available in the list.',
+              )}
+            </p>
+          )}
+        </section>
       )}
       <div className="results-bar">
-        <span>{t('Мастерские и независимые инженеры', 'Workshops and independent engineers')}</span>
+        <h2 className="directory-heading">
+          <span role="status">
+            {remote.data ? (
+              <>
+                {t('Найдено', 'Found')}: {remote.data.total} · {t('Участников', 'Members')}:{' '}
+                {remote.data.members} · {t('Из каталога', 'Directory')}: {remote.data.catalog}
+              </>
+            ) : (
+              t('Мастерские и независимые инженеры', 'Workshops and independent engineers')
+            )}
+          </span>
+        </h2>
         <span className="micro">
-          <span className="online-dot" />
-          {t('Профили ведут сами участники', 'Profiles maintained by makers')}
+          {t(
+            'Справочная запись не означает регистрацию в OpenPrint',
+            'A directory listing does not imply OpenPrint membership',
+          )}
         </span>
       </div>
       <ErrorBox error={remote.error} retry={remote.reload} />
       {remote.loading ? (
         <Loading />
-      ) : remote.data?.profiles.length ? (
+      ) : remote.data?.entries.length ? (
         <div className="profile-grid">
-          {remote.data.profiles.map((p) => (
-            <ProfileCard key={p.id} profile={p} />
-          ))}
+          {remote.data.entries.map((entry) =>
+            entry.source === 'member' ? (
+              <ProfileCard key={'member:' + entry.profile.id} profile={entry.profile} />
+            ) : (
+              <CatalogCard key={'catalog:' + entry.studio.id} studio={entry.studio} />
+            ),
+          )}
         </div>
-      ) : (
+      ) : remote.error ? null : (
         <Empty
           title={t('Пока не нашли совпадений', 'No makers found yet')}
           description={t(
@@ -555,15 +755,12 @@ export function Directory() {
       )}
       <div className="pagination">
         {offset > 0 && (
-          <button
-            className="button secondary"
-            onClick={() => setOffset((v) => Math.max(0, v - 12))}
-          >
+          <button className="button secondary" onClick={() => page(Math.max(0, offset - 12))}>
             {t('Назад', 'Previous')}
           </button>
         )}
         {remote.data?.has_more && (
-          <button className="button secondary" onClick={() => setOffset((v) => v + 12)}>
+          <button className="button secondary" onClick={() => page(offset + 12)}>
             {t('Следующая страница', 'Next page')}
             <ArrowRight size={16} />
           </button>
@@ -572,6 +769,133 @@ export function Directory() {
     </div>
   );
 }
+export function CatalogPage() {
+  const { id } = useParams();
+  const { t, lang } = useApp();
+  const remote = useRemote<{ studio: CatalogStudio }>('/directory/catalog/' + id);
+  if (remote.loading) return <Loading />;
+  if (remote.error)
+    return (
+      <div className="page narrow">
+        <ErrorBox error={remote.error} retry={remote.reload} />
+      </div>
+    );
+  const studio = remote.data!.studio;
+  const website = safeCatalogLink(studio.website);
+  const source = safeCatalogLink(studio.source_url);
+  const telephone = studio.phone.replace(/[\s().-]/g, '');
+  const canCall = /^\+?\d{6,18}$/.test(telephone);
+  const hasLocation =
+    typeof studio.lat === 'number' &&
+    typeof studio.lng === 'number' &&
+    Number.isFinite(studio.lat) &&
+    Number.isFinite(studio.lng);
+  return (
+    <div className="page narrow catalog-page">
+      <Link className="back-link" to="/studios?source=catalog">
+        ← {t('Каталог студий', 'Studio directory')}
+      </Link>
+      <section className="panel profile-detail catalog-detail">
+        <span className="catalog-label">{t('Справочная запись', 'Directory listing')}</span>
+        <h1>{studio.name}</h1>
+        <p className="location">
+          <MapPin size={15} />
+          {catalogLocation(studio) || t('Город не указан', 'City not specified')}
+        </p>
+        {studio.address && <p className="prose">{studio.address}</p>}
+        <div className="info-box">
+          {t(
+            'Организация добавлена из каталога. Эта запись не является аккаунтом исполнителя в OpenPrint. Контакты, наличие оборудования и условия работы уточняйте непосредственно у студии.',
+            'This organization was imported from a directory. This listing is not an OpenPrint provider account. Confirm contact details, available equipment, and terms directly with the studio.',
+          )}
+        </div>
+        {studio.description && <p className="prose">{studio.description}</p>}
+        {!!(studio.technologies.length || studio.materials.length) && (
+          <>
+            <h2>{t('Технологии и материалы', 'Technologies and materials')}</h2>
+            <div className="tags">
+              {[...studio.technologies, ...studio.materials].map((value, index) => (
+                <span key={value + index}>
+                  {t(technologyName(value, 'ru'), technologyName(value, 'en'))}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
+        <h2>{t('Контакты организации', 'Organization contacts')}</h2>
+        <div className="detail-actions">
+          {website && (
+            <a className="button secondary" href={website} target="_blank" rel="noreferrer">
+              {t('Сайт студии', 'Studio website')}
+              <ExternalLink size={15} />
+            </a>
+          )}
+          {canCall && (
+            <a className="button secondary" href={'tel:' + telephone}>
+              {studio.phone}
+            </a>
+          )}
+          {hasLocation && (
+            <a
+              className="text-button"
+              href={`https://www.openstreetmap.org/?mlat=${studio.lat}&mlon=${studio.lng}#map=14/${studio.lat}/${studio.lng}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MapPin size={15} />
+              {t('На OpenStreetMap', 'View on OpenStreetMap')}
+            </a>
+          )}
+        </div>
+        {studio.phone && !canCall && (
+          <p>
+            {t('Телефон', 'Phone')}: {studio.phone}
+          </p>
+        )}
+        {!website && !studio.phone && (
+          <p className="muted">
+            {t(
+              'Прямые контакты не указаны. Проверьте исходную запись.',
+              'Direct contact details are not listed. Check the original source.',
+            )}
+          </p>
+        )}
+        {!hasLocation && (
+          <p className="micro muted">
+            {t(
+              'Координаты не указаны: запись доступна в списке, но не отмечена на карте.',
+              'Coordinates are not provided: this listing is available in the list but has no map marker.',
+            )}
+          </p>
+        )}
+        <div className="catalog-provenance">
+          <p>
+            <strong>{t('Источник', 'Source')}: </strong>
+            {studio.source_name}
+          </p>
+          {source && (
+            <a className="text-button" href={source} target="_blank" rel="noreferrer">
+              {t('Открыть источник', 'Open source listing')}
+              <ExternalLink size={14} />
+            </a>
+          )}
+          <p className="micro muted">
+            {t('Импортировано', 'Imported')}:{' '}
+            {new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', { dateStyle: 'medium' })
+              .format(studio.imported_at)
+              .replace(/\.$/, '')}
+            .{' '}
+            {t(
+              'Это дата переноса записи. Она не подтверждает актуальность сведений об организации.',
+              'This is the import date. It does not confirm that the organization’s details are current.',
+            )}
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 export function ProfilePage() {
   const { id } = useParams(),
     { t, user, toast } = useApp(),

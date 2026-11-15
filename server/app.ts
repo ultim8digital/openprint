@@ -51,6 +51,7 @@ import type { StudioAIConfig } from './studio-ai.js';
 import { CadService, type CadOptions } from './cad-runner.js';
 import { createCadRouter } from './cad.js';
 import { createCadAIRouter } from './cad-ai.js';
+import { createDirectoryRouter } from './directory.js';
 
 type Options = {
   store: Store;
@@ -120,6 +121,7 @@ export function createApp(options: Options) {
   });
   app.use('/api', throttle('api', 240));
   app.use(express.json({ limit: '96kb' }));
+  app.use('/api', createDirectoryRouter(store));
   const cad = new CadService(store, dataDir, options.cad);
   app.locals.cad = cad;
   app.use('/api', createCadRouter(cad));
@@ -137,7 +139,7 @@ export function createApp(options: Options) {
 
   app.get('/api/health', (_req, res) => {
     store.get('SELECT 1');
-    res.json({ status: 'ok', version: '0.3.0' });
+    res.json({ status: 'ok', version: '0.4.0' });
   });
   app.get('/api/bootstrap', (req, res) => {
     const user = readUser(store, req);

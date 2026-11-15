@@ -4,6 +4,8 @@ This document describes the application’s behavior. Each instance operator mus
 
 ## Stored data
 
+An operator can import a separate studio catalogue containing organisation names, public descriptions, cities/regions/countries, coordinates, technologies/materials, websites, public business phones/addresses, source attribution and import dates. Import excludes email, opening hours, ratings/reviews and other unlisted fields. Catalogue entries are public directory records, not participant accounts, reviewed providers or order recipients. Operators update/remove them by replacing the corresponding source snapshot. These records are included in the local database backup; source files are not bundled in the public code repository.
+
 The community’s local database stores account names, self-asserted email addresses, password hashes, sessions/recovery-token digests, provider profiles, project briefs, offers/accepted terms, messages, notifications, model metadata, reports, blocks and operational decision events. Uploads are private files outside the web root, with owner, size and SHA-256 metadata.
 
 Neofab Studio stores private ideas, structured requirements, component lists, operations, acceptance criteria, revisions and confirmation hashes. Its AI usage ledger stores model names, attempt status, token counts, request hashes and timestamps. API keys stay in the server environment; they are never stored in project records or sent to the browser.

@@ -40,9 +40,9 @@ export class Store {
     const version = Number(
       this.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0,
     );
-    if (version > 4)
+    if (version > 5)
       throw new Error('Database is newer than this OpenPrint version. Upgrade the application.');
-    if (version === 4) return;
+    if (version === 5) return;
     if (version === 0)
       this.transaction(() =>
         this.db.exec(`
@@ -270,8 +270,9 @@ export class Store {
       PRAGMA user_version=3;
     `),
       );
-    this.transaction(() =>
-      this.db.exec(`
+    if (version < 4)
+      this.transaction(() =>
+        this.db.exec(`
       ALTER TABLE studio_ai_runs ADD COLUMN task TEXT NOT NULL DEFAULT 'brief' CHECK(task IN ('brief','cad'));
       CREATE TRIGGER studio_ai_task_immutable BEFORE UPDATE OF task ON studio_ai_runs
         BEGIN SELECT RAISE(ABORT, 'AI task identity is immutable'); END;
@@ -297,6 +298,24 @@ export class Store {
         ON studio_cad_proposals WHEN OLD.applied_version IS NOT NULL
         BEGIN SELECT RAISE(ABORT, 'CAD proposal application is immutable'); END;
       PRAGMA user_version=4;
+    `),
+      );
+    this.transaction(() =>
+      this.db.exec(`
+      CREATE TABLE catalog_studios (
+        id TEXT PRIMARY KEY, source_key TEXT NOT NULL, source_id TEXT NOT NULL,
+        name TEXT NOT NULL CHECK(length(name) BETWEEN 1 AND 200), city TEXT NOT NULL,
+        region TEXT NOT NULL, country TEXT NOT NULL, description TEXT NOT NULL,
+        technologies TEXT NOT NULL CHECK(json_valid(technologies)),
+        materials TEXT NOT NULL CHECK(json_valid(materials)), website TEXT NOT NULL,
+        phone TEXT NOT NULL, address TEXT NOT NULL, lat REAL, lng REAL,
+        source_name TEXT NOT NULL, source_url TEXT NOT NULL, imported_at INTEGER NOT NULL,
+        UNIQUE(source_key,source_id),
+        CHECK((lat IS NULL AND lng IS NULL) OR
+          (lat IS NOT NULL AND lng IS NOT NULL AND lat BETWEEN -90 AND 90 AND lng BETWEEN -180 AND 180))
+      ) STRICT;
+      CREATE INDEX catalog_studios_city ON catalog_studios(city);
+      PRAGMA user_version=5;
     `),
     );
   }
