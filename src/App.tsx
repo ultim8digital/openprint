@@ -230,7 +230,7 @@ export default function App() {
             <div className="sidebar-foot">
               <span className="online-dot" />
               {t('Открыто для каждого', 'Open to everyone')}
-              <span>v0.1</span>
+              <span>v0.2</span>
             </div>
           </div>
         </aside>

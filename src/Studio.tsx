@@ -31,6 +31,7 @@ import {
 import './studio.css';
 
 const PartPreview = lazy(() => import('./studio-preview'));
+const CadStudio = lazy(() => import('./CadStudio'));
 type Detail = { project: StudioProject; usage: StudioUsage; matches: StudioMatch[] };
 type LineField = 'requirements' | 'questions' | 'assumptions' | 'operations' | 'acceptance';
 type Draft = Omit<StudioBrief, LineField> & Record<LineField, string>;
@@ -321,6 +322,7 @@ function StudioEditor({
     navigate = useNavigate();
   const [detail, setDetail] = useState<Detail | null>(null),
     [draft, setDraft] = useState<Draft | null>(null);
+  const [cadDirty, setCadDirty] = useState(false);
   const [loading, setLoading] = useState(true),
     [error, setError] = useState(''),
     [busy, setBusy] = useState('');
@@ -411,7 +413,7 @@ function StudioEditor({
   }
   async function assist(event: FormEvent) {
     event.preventDefault();
-    if (!detail || dirty || !consent) return;
+    if (!detail || dirty || cadDirty || !consent) return;
     const key = JSON.stringify([detail.project.version, aiMessage, quality]);
     if (pendingAssist.current?.key !== key)
       pendingAssist.current = { key, requestId: crypto.randomUUID() };
@@ -472,11 +474,12 @@ function StudioEditor({
   const canConfirm =
     !busy &&
     !dirty &&
+    !cadDirty &&
     !published &&
     !required.length &&
     !!project.brief.city &&
     project.brief.quantity !== null;
-  const canPublish = confirmed && !dirty && !busy && !published && publishConsent;
+  const canPublish = confirmed && !dirty && !cadDirty && !busy && !published && publishConsent;
   const remaining = capabilities
     ? Math.max(0, capabilities.ai.maxCallsPerProject - detail.usage.projectCalls)
     : 0;
@@ -1003,6 +1006,17 @@ function StudioEditor({
               </div>
             )}
           </form>
+          <Suspense fallback={<Loading />}>
+            <CadStudio
+              project={project}
+              blocked={dirty || !!busy}
+              onDirtyChange={setCadDirty}
+              onProjectChanged={(next) => {
+                setDetail((current) => (current ? { ...current, project: next } : current));
+                setPublishConsent(false);
+              }}
+            />
+          </Suspense>
           <section
             className="panel studio-section"
             id="studio-makers"
@@ -1131,13 +1145,13 @@ function StudioEditor({
                       type="checkbox"
                       checked={publishConsent}
                       onChange={(e) => setPublishConsent(e.target.checked)}
-                      disabled={!confirmed || dirty || !!busy}
+                      disabled={!confirmed || dirty || cadDirty || !!busy}
                     />
                     <span>
                       {target
                         ? t(
-                            'Подтверждаю отправку этой версии ТЗ выбранному исполнителю. Цена и сроки будут согласованы в заявке.',
-                            'I confirm sending this brief revision to the selected maker. Price and delivery will be agreed in the request.',
+                            'Подтверждаю отправку этой версии ТЗ и прикреплённых CAD-файлов выбранному исполнителю. Цена и сроки будут согласованы в заявке.',
+                            'I confirm sending this brief revision and attached CAD files to the selected maker. Price and delivery will be agreed in the request.',
                           )
                         : t(
                             'Подтверждаю публикацию этой версии ТЗ для всех посетителей. В ней нет сведений, которые должны остаться приватными.',
@@ -1145,7 +1159,7 @@ function StudioEditor({
                           )}
                     </span>
                   </label>
-                  {(!confirmed || dirty) && (
+                  {(!confirmed || dirty || cadDirty) && (
                     <p className="studio-help">
                       {t(
                         'Сначала сохраните и подтвердите актуальную версию ТЗ в блоке проверки.',
@@ -1269,7 +1283,7 @@ function StudioEditor({
                       '. Shared daily limits also apply.',
                     )}
                   </p>
-                  {dirty && (
+                  {(dirty || cadDirty) && (
                     <p className="studio-action-note">
                       {t(
                         'Сохраните изменения перед обращением к ИИ.',
@@ -1279,7 +1293,13 @@ function StudioEditor({
                   )}
                   <button
                     className="button"
-                    disabled={!!busy || dirty || !consent || (remaining === 0 && !retryingAssist)}
+                    disabled={
+                      !!busy ||
+                      dirty ||
+                      cadDirty ||
+                      !consent ||
+                      (remaining === 0 && !retryingAssist)
+                    }
                   >
                     {busy === 'assist' ? (
                       <LoaderCircle size={16} className="studio-spin" />
@@ -1303,7 +1323,7 @@ function StudioEditor({
                       <button
                         className="text-button"
                         type="button"
-                        disabled={remaining === 0 || dirty}
+                        disabled={remaining === 0 || dirty || cadDirty}
                         onClick={() => {
                           pendingAssist.current = null;
                           setConsent(false);

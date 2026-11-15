@@ -50,3 +50,58 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 7
+  cad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            cad-worker/requirements.txt
+            cad-worker/requirements-test.txt
+      - name: Install native CAD runtime and test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libgl1 libglu1-mesa libglib2.0-0 libxrender1 libxext6 libsm6
+          python -m pip install -r cad-worker/requirements-test.txt
+          python -c 'import os, sys; open(os.environ["GITHUB_ENV"], "a").write("CAD_PYTHON=" + sys.executable + "\n")'
+      - run: python cad-worker/worker.py --check
+      - run: python -m pytest cad-worker/tests -q
+      - run: npm ci --ignore-scripts
+      - run: npm run build
+      - run: node scripts/cad-check.mjs
+      - run: npx playwright install --with-deps chromium
+      - name: Exercise CAD assembly and immutable handoff in Chromium
+        run: npx playwright test tests/e2e/cad.spec.ts
+      - name: Build optional CAD container and compile a real part
+        run: |
+          docker build --target cad -t openprint:cad-test .
+          docker run --rm --network=none --read-only --cap-drop=ALL --security-opt=no-new-privileges \
+            --pids-limit=256 --memory=4g --cpus=2 --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --entrypoint /opt/cad/bin/python openprint:cad-test /app/cad-worker/worker.py --check
+          docker run --rm --network=none --read-only --cap-drop=ALL --security-opt=no-new-privileges \
+            --pids-limit=256 --memory=4g --cpus=2 --tmpfs /tmp:rw,nosuid,nodev,size=256m \
+            --entrypoint /opt/cad/bin/python openprint:cad-test -c '
+          import json, math, pathlib, subprocess, sys
+          subprocess.run([sys.executable, "/app/cad-worker/worker.py", "--input", "/app/cad-worker/examples/plate.json", "--output", "/tmp/plate"], check=True, timeout=120)
+          report = json.loads(pathlib.Path("/tmp/plate/report.json").read_text())
+          assert report["passed"] and report["solids"] == 1
+          assert abs(report["volume_mm3"] - (60 * 40 * 6 - math.pi * 4**2 * 6)) < 0.0001
+          assert pathlib.Path("/tmp/plate/model.step").stat().st_size > 0
+          print("Optional container: real CAD compile and numerical volume check passed")
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: cad-browser-test-evidence
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

@@ -1,0 +1,12 @@
+# Optional local CAD engine. Use together with compose.yaml.
+services:
+  app:
+    build:
+      context: .
+      target: cad
+    environment:
+      CAD_PYTHON: /opt/cad/bin/python
+    init: true
+    mem_limit: 4g
+    cpus: 2
+    pids_limit: 256

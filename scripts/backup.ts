@@ -43,13 +43,32 @@ export function backupCommunity(dataDir: string, destination: string) {
         throw new Error(`Missing or corrupted upload: ${file.id}`);
       copyFileSync(source, join(destination, 'uploads', file.storage_name));
     }
+    const cadArtifacts = snapshot.all<{
+      build_id: string;
+      name: string;
+      size: number;
+      sha256: string;
+    }>('SELECT build_id,name,size,sha256 FROM studio_cad_artifacts ORDER BY build_id,name');
+    for (const artifact of cadArtifacts) {
+      const row = snapshot.get<{ content: Uint8Array }>(
+        'SELECT content FROM studio_cad_artifacts WHERE build_id=? AND name=?',
+        artifact.build_id,
+        artifact.name,
+      )!;
+      if (
+        row.content.length !== artifact.size ||
+        digest(Buffer.from(row.content)) !== artifact.sha256
+      )
+        throw new Error(`Corrupted CAD artifact: ${artifact.build_id}/${artifact.name}`);
+    }
     writeFileSync(
       join(destination, 'manifest.json'),
       JSON.stringify(
         {
-          version: 1,
+          version: 2,
           created_at: new Date().toISOString(),
           files: files.map((f) => ({ name: f.storage_name, size: f.size, sha256: f.sha256 })),
+          cad_artifacts: cadArtifacts,
         },
         null,
         2,
