@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — 2026-11-15
+
+- Imported studio catalogues now appear alongside registered makers in directory search and on the map, with explicit source labels and separate contact paths.
+- The map loads every matching coordinate independently of the 12-card list page, with member/catalogue colours, coordinate counts and an explicit 50,000-point limit.
+- Optional operator CLI validates an allowlisted JSON snapshot before atomic per-source replacement. Stable studio IDs survive reimport; accounts, orders and other sources are preserved.
+- SQLite schema 5 stores catalogue records separately from user profiles. Imported records do not acquire accounts, moderator review or the ability to receive platform orders.
+- Real catalogue datasets remain outside Git and container images. Empty installations stay empty until an operator imports a source.
+
 ## 0.3.0 — 2026-11-15
 
 - Optional AI CAD proposals with summary, questions, a bounded declarative specification and separate reviewed application to the original project revision. Applying a proposal does not compile, confirm or publish it.

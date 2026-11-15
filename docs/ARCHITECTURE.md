@@ -2,6 +2,8 @@
 
 OpenPrint is a single self-hosted application: React, Express, local SQLite and private filesystem storage. Primary community workflows do not call a cloud provider.
 
+`server/directory.ts` combines public member profiles with a separate local studio catalogue for discovery. `/api/directory` paginates cards, while `/api/directory/map` returns the matching coordinates independently, with total/mappable/unmapped counts and an explicit 50,000-point cap. Each response reads counts and records within one SQLite snapshot, including during an external import. Imported catalogue records do not participate in account, verification or order authorization. `scripts/catalog-import.ts` validates an allowlisted snapshot before atomic replacement of one source; stable source IDs preserve public card IDs. Source datasets stay outside Git. See [catalogue setup](CATALOG_IMPORT.md).
+
 ```mermaid
 flowchart LR
     Member[Visitor / member] --> UI[React interface]
@@ -34,7 +36,7 @@ flowchart LR
 | `src/Models.tsx`, `src/Tools.tsx`                                                    | Licensed model sharing and browser-only tools                                                |
 | `server/app.ts`                                                                      | Routes, validation, permissions and error responses                                          |
 | `server/domain.ts`                                                                   | Brief access, offer revisions, atomic acceptance, thread membership                          |
-| `server/database.ts`                                                                 | Schemas v1–v4, transactions, indexes, immutable snapshot triggers                            |
+| `server/database.ts`                                                                 | Schemas v1–v5, transactions, indexes, immutable snapshot triggers                            |
 | `src/Studio.tsx`, `shared/studio.ts`                                                 | Private CAD/CAM brief editor, components, confirmation and handoff                           |
 | `server/studio.ts`, `server/studio-ai.ts`, `server/ai-ledger.ts`, `server/cad-ai.ts` | Ownership/version gates, shared AI call ledger, private CAD proposals, bounded Responses API |
 | `server/studio-geometry.ts`                                                          | Deterministic FDM template checks, STL and packet manifests                                  |
@@ -43,7 +45,7 @@ flowchart LR
 | `src/CadStudio.tsx`, `src/cad-preview.tsx`, `src/JobCad.tsx`                         | CAD editing, assembly preview and quotation-file access                                      |
 | `server/security.ts`                                                                 | Password hashing, sessions, bounded throttles, permission guards                             |
 | `server/files.ts`                                                                    | Headers, names, quotas, ownership, reads and cleanup                                         |
-| `server/demo.ts`                                                                     | Opt-in fictional local demo, isolated from real data                                         |
+| `server/demo.ts`                                                                     | Opt-in fictional accounts and projects; operator catalogues import separately                |
 | `shared/validation.ts`, `shared/parts.ts`                                            | Schemas, exact minor-unit amounts, deterministic meshes                                      |
 | `scripts/`, `tests/`                                                                 | Operator tools, backup, API/state/security and browser tests                                 |
 
@@ -86,7 +88,7 @@ Unreferenced uploads older than 24 hours are removed hourly while the app runs, 
 
 ## Neofab Studio and CAD
 
-Studio keeps private projects and revisions in SQLite schema v4. The owner edits a brief and confirms an exact version and content hash for discussion/quotation. Open questions, assumptions and unknown component quantities remain explicit in the handoff; confirmation does not release production. Request intent chooses design/consultation or manufacturing quotation independently of geometry support. Publication freezes that version into one job and a downloadable packet; retries return the existing job. A project may use an explicitly selected FDM template or an optional declarative CAD design. See [setup and limits](NEOFAB_SETUP.md).
+Studio keeps private projects and revisions in SQLite schema v5. The owner edits a brief and confirms an exact version and content hash for discussion/quotation. Open questions, assumptions and unknown component quantities remain explicit in the handoff; confirmation does not release production. Request intent chooses design/consultation or manufacturing quotation independently of geometry support. Publication freezes that version into one job and a downloadable packet; retries return the existing job. A project may use an explicitly selected FDM template or an optional declarative CAD design. See [setup and limits](NEOFAB_SETUP.md).
 
 CAD specification edits and removal advance the Studio version and clear confirmation. `studio_cad_revisions` preserves each specification and hash; `studio_cad_builds` binds a request ID to the owner, revision and brief version. A single local worker executes queued jobs. Successful results remain immutable; an older build finishing after an edit remains historical and cannot satisfy confirmation of the current version. After restart, interrupted running jobs fail explicitly and eligible queued jobs resume. Cancellation and account deletion cannot restore removed project data through a late result.
 

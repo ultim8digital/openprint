@@ -1,6 +1,6 @@
 # Running your community / Запуск своего сообщества
 
-OpenPrint 0.2 supports **one application process on one computer with local disk storage**. There is no required Vercel, Supabase, SMTP, AI, or map API key. The optional local CAD process needs Python/CadQuery but no cloud account. A public repository can exist without any running deployment. A shared live community needs a running server and appropriate administration.
+OpenPrint 0.4 supports **one application process on one computer with local disk storage**. There is no required Vercel, Supabase, SMTP, AI, or map API key. The optional local CAD process needs Python/CadQuery but no cloud account. A public repository can exist without any running deployment. A shared live community needs a running server and appropriate administration.
 
 ## 1. Local demo
 
@@ -25,7 +25,7 @@ npm start
 
 Open http://localhost:3000. The admin command prepares the account and prints a **single-use setup link, valid for 30 minutes**. Administrator privileges take effect when that link is redeemed. Open it privately and choose a password of at least 12 characters. Keep terminal output out of public logs. No email is sent. The first public registration is an ordinary member; it never acquires administrator rights.
 
-`npm run dev` runs Vite and the API with a clean `.local/data` database. `npm run demo` explicitly uses its own `.local/demo` directory. An instance refuses to mix demo and real data.
+`npm run dev` runs Vite and the API with a clean `.local/data` database. `npm run demo` explicitly uses its own `.local/demo` directory. A real instance refuses to use a database containing demo accounts. Either installation can use an operator-imported studio catalogue; those public records remain separate from accounts and orders. See [catalogue import and map](CATALOG_IMPORT.md).
 
 ### Configuration
 
@@ -135,6 +135,6 @@ The backup is in the private `community-backups` volume. Export it to your own p
 
 ## 7. Updates
 
-Read the release notes, stop the old process, and take/verify a backup **using the old version before installing the update**. Then install the chosen release with `npm ci`, run `npm run check`, and start it. Database schema version is recorded with `PRAGMA user_version`. Version 0.3 migrates schemas 1–3 additively to schema 4, including CAD revisions/builds/artifacts/handoffs/grants, private AI proposals and task metadata while retaining existing projects and agreements. The app refuses databases with a newer schema than it understands. To roll back to an older application, restore its compatible pre-upgrade backup into a fresh data directory; do not edit `PRAGMA user_version` or reopen schema 4 with old code.
+Read the release notes, stop the old process, and take/verify a backup **using the old version before installing the update**. Then install the chosen release with `npm ci`, run `npm run check`, and start it. Database schema version is recorded with `PRAGMA user_version`. Version 0.4 migrates schemas 1–4 additively to schema 5, retaining existing projects, agreements, CAD and AI history and adding a separate studio catalogue. The app refuses databases with a newer schema than it understands. To roll back to an older application, restore its compatible pre-upgrade backup into a fresh data directory; do not edit `PRAGMA user_version` or reopen schema 5 with old code. Catalogue records are included in SQLite backups; no external catalogue service is needed after import.
 
-No migration of existing Supabase accounts, password hashes, collected directory records, or historical orders is supplied. Plan and test such a migration separately rather than copying production data into the public repository.
+Existing Supabase accounts, password hashes and historical orders require a separate migration. Public studio directory records can be connected through the [operator catalogue importer](CATALOG_IMPORT.md), which stores only its allowlisted fields. Keep source data and database snapshots outside the public repository.

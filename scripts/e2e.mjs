@@ -84,7 +84,10 @@ for (const spec of selected) {
       '--reporter=list,blob',
       `--output=${join(resultsDir, group)}`,
     ],
-    { PLAYWRIGHT_BLOB_OUTPUT_FILE: blobFile },
+    {
+      PLAYWRIGHT_BLOB_OUTPUT_FILE: blobFile,
+      E2E_DIRECTORY_FIXTURE: spec === 'directory.spec.ts' ? '1' : '0',
+    },
   );
   outcomes.push({ spec, code: code || (existsSync(blobFile) ? 0 : 1) });
 }

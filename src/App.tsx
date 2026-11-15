@@ -32,7 +32,7 @@ import {
   type Lang,
 } from './core';
 import type { Notification } from '../shared/types';
-import { Home, Directory, ProfilePage, Projects } from './Browse';
+import { Home, Directory, CatalogPage, ProfilePage, Projects } from './Browse';
 const Auth = lazy(() => import('./Auth'));
 const NewProject = lazy(() => import('./NewProject'));
 const Project = lazy(() => import('./Project'));
@@ -159,10 +159,16 @@ export default function App() {
     navigate = useNavigate();
   const [search, setSearch] = useState(''),
     [notifications, setNotifications] = useState(false);
+  const pageTitle = t(
+    ...(names[location.pathname] ||
+      (location.pathname.startsWith('/catalog/')
+        ? ['Карточка студии', 'Studio listing']
+        : ['Проект', 'Project'])),
+  );
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-    document.title = `${t(...(names[location.pathname] || ['Проект', 'Project']))} · OpenPrint`;
-  }, [location.pathname, lang]);
+    document.title = `${pageTitle} · OpenPrint`;
+  }, [location.pathname, pageTitle]);
   const nav = [
     { to: '/', icon: LayoutGrid, label: t('Обзор', 'Overview') },
     { to: '/studios', icon: Store, label: t('Мастерские', 'Workshops') },
@@ -230,7 +236,7 @@ export default function App() {
             <div className="sidebar-foot">
               <span className="online-dot" />
               {t('Открыто для каждого', 'Open to everyone')}
-              <span>v0.3</span>
+              <span>v0.4</span>
             </div>
           </div>
         </aside>
@@ -239,7 +245,7 @@ export default function App() {
             <div className="breadcrumbs">
               <span>OpenPrint</span>
               <span>/</span>
-              <strong>{t(...(names[location.pathname] || ['Проект', 'Project']))}</strong>
+              <strong>{pageTitle}</strong>
             </div>
             <div className="top-actions">
               <form
@@ -299,8 +305,8 @@ export default function App() {
               <span>
                 <span className="demo-dot" />
                 {t(
-                  'Локальное демо · все участники и проекты вымышлены',
-                  'Local demo · all people and projects are fictional',
+                  'Демо-аккаунты и проекты вымышлены. Каталог может содержать реальные организации.',
+                  'Demo accounts and projects are fictional. The directory may include real organizations.',
                 )}
               </span>
               <label>
@@ -351,6 +357,7 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/studios" element={<Directory />} />
                 <Route path="/studios/:id" element={<ProfilePage />} />
+                <Route path="/catalog/:id" element={<CatalogPage />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route
                   path="/projects/new"

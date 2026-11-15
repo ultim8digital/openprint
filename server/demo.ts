@@ -4,7 +4,7 @@ import { hashPassword } from './security.js';
 import { sendOffer } from './domain.js';
 import type { User } from '../shared/types.js';
 
-/** Entirely fictional, explicit opt-in; never import production directory data. */
+/** Fictional accounts and projects, explicit opt-in; operator catalogues are imported separately. */
 export async function seedDemo(store: Store) {
   if (store.get("SELECT 1 FROM meta WHERE key='demo'")) return;
   if (store.get('SELECT 1 FROM users LIMIT 1'))
