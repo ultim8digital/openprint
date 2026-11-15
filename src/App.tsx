@@ -42,6 +42,8 @@ const Tools = lazy(() => import('./Tools'));
 const Admin = lazy(() => import('./Admin'));
 const About = lazy(() => import('./About'));
 const Studio = lazy(() => import('./Studio'));
+const CatalogApp = lazy(() => import('./CatalogApp'));
+const CatalogEditor = lazy(() => import('./CatalogEditor'));
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, loading } = useApp();
@@ -166,9 +168,10 @@ export default function App() {
         : ['Проект', 'Project'])),
   );
   useEffect(() => {
+    if (context.mode === 'catalog') return;
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.title = `${pageTitle} · OpenPrint`;
-  }, [location.pathname, pageTitle]);
+  }, [location.pathname, pageTitle, context.mode]);
   const nav = [
     { to: '/', icon: LayoutGrid, label: t('Обзор', 'Overview') },
     { to: '/studios', icon: Store, label: t('Мастерские', 'Workshops') },
@@ -177,6 +180,13 @@ export default function App() {
     { to: '/tools', icon: Layers3, label: t('3D-инструменты', '3D tools') },
     { to: '/studio', icon: Sparkles, label: 'Neofab Studio' },
   ];
+  if (context.loading) return <Loading />;
+  if (context.mode === 'catalog')
+    return (
+      <Suspense fallback={<Loading />}>
+        <CatalogApp />
+      </Suspense>
+    );
   return (
     <>
       <a className="skip-link" href="#main">
@@ -236,7 +246,7 @@ export default function App() {
             <div className="sidebar-foot">
               <span className="online-dot" />
               {t('Открыто для каждого', 'Open to everyone')}
-              <span>v0.4</span>
+              <span>v0.5</span>
             </div>
           </div>
         </aside>
@@ -357,6 +367,11 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/studios" element={<Directory />} />
                 <Route path="/studios/:id" element={<ProfilePage />} />
+                <Route path="/catalog/new" element={<CatalogEditor key="new" />} />
+                <Route
+                  path="/catalog/:id/edit"
+                  element={<CatalogEditor key={location.pathname} />}
+                />
                 <Route path="/catalog/:id" element={<CatalogPage />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route

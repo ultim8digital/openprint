@@ -66,7 +66,14 @@ function answer(value: unknown, input = 123, output = 456) {
 async function fixture(ai: StudioAIConfig = {}, cad: CadOptions = { python: '' }) {
   const dir = mkdtempSync(join(tmpdir(), 'neofab-cad-ai-')),
     store = new Store(join(dir, 'community.sqlite'));
-  const app = createApp({ store, dataDir: dir, appUrl: 'http://test.local', studioAI: ai, cad });
+  const app = createApp({
+    mode: 'community',
+    store,
+    dataDir: dir,
+    appUrl: 'http://test.local',
+    studioAI: ai,
+    cad,
+  });
   const server = app.listen(0, '127.0.0.1');
   await new Promise<void>((resolve) => server.once('listening', resolve));
   const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
@@ -695,7 +702,7 @@ test('proposal apply observes existing CAD/history capacity instead of bypassing
   }
 });
 
-test('v3 CAD history migrates additively to v5 and existing AI usage defaults to brief', async () => {
+test('v3 CAD history migrates additively to v6 and existing AI usage defaults to brief', async () => {
   const f = await fixture();
   try {
     const p = await create(f.owner),
@@ -720,11 +727,11 @@ test('v3 CAD history migrates additively to v5 and existing AI usage defaults to
       Date.now(),
     );
     f.store.db.exec(
-      'DROP TABLE catalog_studios; DROP TABLE studio_cad_proposals; DROP TRIGGER studio_ai_task_immutable; ALTER TABLE studio_ai_runs DROP COLUMN task; PRAGMA user_version=3;',
+      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE catalog_studios; DROP TABLE studio_cad_proposals; DROP TRIGGER studio_ai_task_immutable; ALTER TABLE studio_ai_runs DROP COLUMN task; PRAGMA user_version=3;',
     );
     const migrated = new Store(f.store.path);
     try {
-      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 5);
+      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 6);
       assert.equal(
         migrated.get<{ task: string }>('SELECT task FROM studio_ai_runs')!.task,
         'brief',

@@ -1,70 +1,40 @@
 # OpenPrint
 
-**From a requirement to CAD and a maker. An open workshop community with Neofab Studio.**
+**An open directory of printing studios and workshops. No registration or moderators.**
 
-[Русский](README.md) · [Self-hosting](docs/SELF_HOSTING.md) · [Architecture](docs/ARCHITECTURE.md) · [Contributing](CONTRIBUTING.md) · [Validation](docs/VALIDATION.md)
+[Русский](README.md) · [Self-publication](docs/OPEN_CATALOG.md) · [Self-hosting](docs/SELF_HOSTING.md) · [Contributing](CONTRIBUTING.md) · [Validation](docs/VALIDATION.md)
 
-Run OpenPrint for a city, maker club, or small network of workshops. Customers share a brief; makers ask questions and send offers; both parties discuss scope and record the exact agreement. There is no required Vercel, Supabase, AI, or email-service account.
+Find a maker on the map and contact them directly. If your workshop is missing, submit its contacts and capabilities: the listing is published immediately. Save the private management link to edit or delete it later. There are no accounts, email confirmation or approval queues in the default catalogue mode.
 
-![OpenPrint overview with fictional demo data](docs/images/overview.png)
+The public source is MIT licensed. Run it with Node.js 24 and local SQLite; no Vercel, Supabase, email provider, paid AI or third-party login is required. GitHub hosts the code and releases. A shared website accepting anonymous submissions needs a running API server; [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) alone cannot execute Node.js or persist visitor changes.
 
-## Try it locally
+## Catalogue features
 
-Requires **Node.js 24 LTS**. Clone this repository, then:
+- Search by name, city and technology. Map every matching location independently of list pagination.
+- Publish without an account; choose a map point or enter coordinates. Unlocated records remain searchable.
+- Edit/delete one listing with its private capability link, with version checks for concurrent edits.
+- Find existing studios before publishing; exact name/city/address duplicates are rejected automatically.
+- Import an existing catalogue with source attribution. Operator imports cannot overwrite self-published listings.
+- Russian/English UI and OpenStreetMap tiles without an API key.
 
-```sh
-npm ci
-npm run demo
-```
+Publication does not verify business ownership or quality. Confirm capabilities and terms with the studio. Keep management links private: possession grants control over that listing. There is no email recovery.
 
-Open **http://localhost:5173**. Switch between fictional customers, workshops, an engineer, and the moderator using the demo bar. All sample people, companies, and projects are fictional. Demo data lives in `.local/demo`.
-
-**Do not expose demo mode publicly.** It includes one-click access to fictional accounts. Real instances start empty, have no default administrator password, and have no demo sign-in endpoint.
-
-## Who is it for?
-
-- Customers: public or direct briefs, private attachments, comparable offers, recorded agreements, and customer-confirmed completion.
-- Workshops and engineers: self-managed profiles, an open project board, direct requests, questions before quoting, immutable offer revisions, and delivery status.
-- Model creators: share original designs with attribution and a CC license, moderator review, and publication controls.
-- Moderators: review profiles and model files, handle reports, hide inappropriate content, and inspect decision history.
-- Community operators: one Node.js process, SQLite, local private uploads, CLI administrator setup and recovery, backup/restore instructions, and Docker Compose.
-- Visitors: search makers, download approved open models, inspect STL/OBJ files locally, and build custom-size parts without signing in.
-
-The interface supports Russian and English. User-generated content stays in its original language. The optional OpenStreetMap map loads only on request; core workflows require no third-party API calls.
-
-Operators can connect an existing studio catalogue through [JSON import](docs/CATALOG_IMPORT.md). Search combines source-attributed catalogue records and registered makers; the map includes all matching coordinates independently of list pagination. Catalogue records do not acquire user accounts, review badges or the ability to accept platform orders. Specific datasets are stored locally and are not bundled in the public repository.
-
-## Neofab Studio and local CAD
-
-Neofab expands the project toward a digital factory for functional parts, repairs, spares, furniture, engineered assemblies and small batches. Studio connects a private idea, editable requirements, components, a CAD revision, a confirmed package and an immutable request to a maker.
-
-The manual path needs no API key. Optional server-side OpenAI Responses assistance prepares briefs and declarative CAD proposals. The server routes clarification, detailed review and CAD tasks to configurable models, sharing attempt limits and token usage records. CAD proposals are reviewed and applied separately, then built locally; generating a proposal does not change the saved design. Live paid API calls have not been validated for this build.
-
-Since version 0.2, an optional local CadQuery engine is available for parts and assemblies made from boxes, cylinders, extrusions, fillets and chamfers. It produces assembly and per-part STEP/STL, BOM, source JSON and a geometry report, with revision history and a 3D component viewer. The owner can grant a named participant access for quotation; the recipient of a direct request receives the confirmed CAD package when it is sent. Public briefs do not expose CAD files. The three simple FDM templates remain available without Python. CAM, machine code, strength analysis and multi-workshop execution are future work.
-
-See the [setup guide](docs/NEOFAB_SETUP.md), [CAD engine instructions](docs/CAD_ENGINE.md), [CAD/CAM architecture](docs/NEOFAB_BLUEPRINT.md) and [business hypotheses](docs/NEOFAB_BUSINESS.md) (the Studio/product guides are in Russian).
-
-## Run a real community
+## Run your own instance
 
 ```sh
 npm ci
 npm run build
 cp .env.example .env
-npm run admin -- operator@example.org
 npm start
 ```
 
-The administrator command prints a private, one-use setup link that expires in 30 minutes. Open **http://localhost:3000**. Configure your public HTTPS origin, operator contact, moderation process, and backups before exposing the instance. See [self-hosting](docs/SELF_HOSTING.md).
+The default `APP_MODE=catalog` needs no administrator or user setup. Configure HTTPS, `APP_URL` and backups using [self-hosting instructions](docs/SELF_HOSTING.md), or run `docker compose up --build -d`. Import an existing dataset with the [catalogue CLI](docs/CATALOG_IMPORT.md). Instance datasets are excluded from this repository and its images.
 
-You can also keep the source only on GitHub, without operating a public site. A running shared community still needs a computer or server.
+## Optional community / Neofab mode
 
-The default Docker image needs no Python. To include the optional CAD runtime, use `docker compose -f compose.yaml -f compose.cad.yaml up --build -d`. A local installation can instead set the server-side `CAD_PYTHON` interpreter path; see [self-hosting](docs/SELF_HOSTING.md).
+Set `APP_MODE=community` explicitly to enable the existing private project, quotation, model library and Neofab Studio workflows, with their original accounts and permissions. Switching modes preserves data. Catalogue mode neither exposes private history through the API nor resumes queued CAD work.
 
-## Deliberate limits
-
-OpenPrint 0.4 is intended for small communities. It does not provide payments, escrow, identity verification, manufacturing-safety certification, antivirus scanning, or dispute arbitration. Makers and customers arrange payments and delivery directly. CAD geometry checks cover the declared model; they do not establish strength, process suitability or physical performance. Physical manufacturing has not been validated.
-
-The declarative CAD scope is limited to 24 physical components and 300 operations. Arbitrary STEP import into editable feature history, CAM, G-code and FEA are outside this release. Use one application process with local storage. Team memberships, horizontal scaling, SMTP, autonomous multi-agent delegation, SSR/SEO, automatic translation of member content, and Supabase account migration are not included. The operator can access server data; this is not end-to-end encryption. See [product scope](docs/PRODUCT.md), [privacy](PRIVACY.md), and [security](SECURITY.md).
+[Neofab Studio](docs/NEOFAB_SETUP.md) supports versioned manufacturing briefs, BOM and bounded declarative CAD with STEP/STL. CAD and AI are optional. CAM/G-code and physical manufacturing validation are not implemented.
 
 ## Development
 
@@ -76,14 +46,6 @@ npm run test:e2e
 npm run format:check
 ```
 
-The test suite covers real API sessions and permissions, stale and concurrent offer acceptance, file access, paginated conversations, recovery, moderation, backup and restore, generated mesh topology, and complete browser workflows. Automated accessibility checks are included; they are not a claim of full WCAG compliance. See [validation](docs/VALIDATION.md).
+GitHub Actions verifies API/browser workflows and default/native CAD containers. Tests use fictional data. See [validation evidence](docs/VALIDATION.md), [product scope](docs/PRODUCT.md), [privacy](PRIVACY.md) and [security](SECURITY.md).
 
-Native geometry checks and the browser assembly-build scenario need CadQuery and `CAD_PYTHON`. Without that runtime, six browser tests execute and the native assembly test is skipped. See [CAD engine instructions](docs/CAD_ENGINE.md) for installation and test commands.
-
-## License and provenance
-
-Code, UI, original SVG illustrations, and documentation are [MIT](LICENSE). Member-uploaded models have their own explicit licenses. Three fictional demo geometries are offered under CC0; their generator code remains MIT.
-
-The optional CAD compiler adapts an MIT-licensed geometry module; attribution and the extraction boundary are recorded in [cad-worker/NOTICE.md](cad-worker/NOTICE.md). Provider integrations, private history, user data and credentials are excluded.
-
-Inspired by [3d-online.app](https://3d-online.app), implemented separately. Production accounts, private Git history, user files and credentials were not copied. Existing studio catalogues can be imported separately into an operator's installation; the public repository contains the importer and synthetic fixtures. Contributions welcome: [CONTRIBUTING.md](CONTRIBUTING.md).
+This independent implementation develops the idea of [3d-online.app](https://3d-online.app). Original production accounts, secrets, private Git history and user files are not bundled. The code, UI and documentation are [MIT](LICENSE); third-party dependencies and user datasets have separate rights. The CAD extraction retains its [original notice](cad-worker/NOTICE.md). See [third-party notices](THIRD_PARTY_NOTICES.md).

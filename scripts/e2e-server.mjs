@@ -43,7 +43,8 @@ const child = spawn(process.execPath, ['build/server/index.js'], {
   env: {
     ...process.env,
     NODE_ENV: 'production',
-    DEMO_MODE: '1',
+    DEMO_MODE: process.env.E2E_CATALOG_MODE === '1' ? '0' : '1',
+    APP_MODE: process.env.E2E_CATALOG_MODE === '1' ? 'catalog' : 'community',
     DATA_DIR: dir,
     HOST: '127.0.0.1',
     PORT: '3012',

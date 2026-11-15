@@ -11,6 +11,9 @@ const host = process.env.HOST || '127.0.0.1',
   appUrl = process.env.APP_URL || 'http://localhost:3000';
 const dataDir = resolve(process.env.DATA_DIR || '.local/data'),
   demo = process.env.DEMO_MODE === '1';
+const mode = process.env.APP_MODE || 'catalog';
+if (mode !== 'catalog' && mode !== 'community')
+  throw new Error('APP_MODE must be catalog or community');
 const publicUrl = new URL(appUrl);
 if (
   !['http:', 'https:'].includes(publicUrl.protocol) ||
@@ -52,8 +55,8 @@ const release = () => {
 };
 process.on('exit', release);
 const store = new Store(join(dataDir, 'openprint.sqlite'));
-if (demo) await seedDemo(store);
-else if (store.get("SELECT 1 FROM meta WHERE key='demo'"))
+if (demo && mode === 'community') await seedDemo(store);
+else if (!demo && store.get("SELECT 1 FROM meta WHERE key='demo'"))
   throw new Error('This is a demo database. Choose a clean DATA_DIR for a real community.');
 const userLimit = Number(process.env.USER_STORAGE_MB || 200) * 1024 * 1024,
   totalLimit = Number(process.env.MAX_STORAGE_MB || 1024) * 1024 * 1024;
@@ -63,6 +66,7 @@ const app = createApp({
   store,
   dataDir,
   appUrl,
+  mode,
   demo,
   development: process.env.NODE_ENV === 'development',
   trustProxy: process.env.TRUST_PROXY === '1',
@@ -71,7 +75,7 @@ const app = createApp({
   staticDir: existsSync('dist/index.html') ? 'dist' : undefined,
 });
 const server = app.listen(port, host, () =>
-  console.log(`OpenPrint ${demo ? '(fictional local demo)' : ''} → ${appUrl}`),
+  console.log(`OpenPrint (${mode}) ${demo ? '(local demo storage)' : ''} → ${appUrl}`),
 );
 server.on('error', (error) => {
   console.error(error.message);
@@ -81,7 +85,7 @@ server.on('error', (error) => {
 });
 const cleanup = setInterval(() => {
   try {
-    cleanupFiles(store, dataDir);
+    if (mode === 'community') cleanupFiles(store, dataDir);
   } catch (error) {
     console.error('Upload cleanup failed', error instanceof Error ? error.message : '');
   }

@@ -17,14 +17,14 @@ const technologyAliases: Record<string, string> = {
   'SLA/DLP/LCD': 'SLA',
   'SLM/DMLS (металл)': 'DMLS',
 };
-const technology = (value: string) =>
+export const normalizeCatalogTechnology = (value: string) =>
   Object.hasOwn(technologyAliases, value) ? technologyAliases[value] : value;
 const text = (max: number) => z.string().trim().max(max);
 const optionalText = (max: number) =>
   text(max)
     .nullish()
     .transform((value) => value ?? '');
-function safeHttpURL(value: string) {
+export function safeHttpURL(value: string) {
   try {
     const url = new URL(value);
     return (
@@ -63,7 +63,7 @@ const importRecordSchema = z
       .array(text(100).min(1))
       .max(40)
       .nullish()
-      .transform((items) => [...new Set((items ?? []).map(technology))]),
+      .transform((items) => [...new Set((items ?? []).map(normalizeCatalogTechnology))]),
     materials: z
       .array(text(100).min(1))
       .max(50)
@@ -132,6 +132,20 @@ export function importCatalog(store: Store, input: ParsedCatalogImport) {
       'SELECT count(*) n FROM catalog_studios WHERE source_key=?',
       parsed.source.sourceKey,
     )!.n;
+    // Importing a source must not introduce an active self-published duplicate either.
+    for (const row of parsed.records)
+      ensure(
+        !store.get(
+          `SELECT 1 FROM directory_submissions WHERE deleted_at IS NULL AND
+        unicode_fold(name)=unicode_fold(?) AND unicode_fold(city)=unicode_fold(?) AND unicode_fold(address)=unicode_fold(?) LIMIT 1`,
+          row.name,
+          row.city,
+          row.address,
+        ),
+        409,
+        'DUPLICATE_STUDIO',
+        'Import overlaps a self-published workshop / Импорт содержит уже добавленную мастерскую',
+      );
     store.run('DELETE FROM catalog_studios WHERE source_key=?', parsed.source.sourceKey);
     const insert = store.db.prepare(
       `INSERT INTO catalog_studios(id,source_key,source_id,name,city,region,country,description,technologies,materials,website,phone,address,lat,lng,source_name,source_url,imported_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
@@ -168,11 +182,11 @@ export function importCatalog(store: Store, input: ParsedCatalogImport) {
   });
 }
 
-type CatalogRow = Omit<CatalogStudio, 'technologies' | 'materials'> & {
+export type CatalogRow = Omit<CatalogStudio, 'technologies' | 'materials'> & {
   technologies: string;
   materials: string;
 };
-function catalogObject(row: CatalogRow): CatalogStudio {
+export function catalogObject(row: CatalogRow): CatalogStudio {
   return {
     id: row.id,
     name: row.name,
@@ -190,8 +204,28 @@ function catalogObject(row: CatalogRow): CatalogStudio {
     source_name: row.source_name,
     source_url: row.source_url,
     imported_at: row.imported_at,
+    listing_type: row.listing_type,
+    version: row.version,
+    updated_at: row.updated_at,
   };
 }
+
+/** Public projection shared by public detail and management responses; never selects key hashes. */
+export function readCatalogStudio(store: Store, id: string): CatalogStudio | undefined {
+  const row = store.get<CatalogRow>(
+    `SELECT id,name,city,region,country,description,technologies,materials,
+    website,phone,address,lat,lng,source_name,source_url,imported_at,
+    'imported' listing_type,0 version,imported_at updated_at FROM catalog_studios WHERE id=?
+    UNION ALL
+    SELECT id,name,city,region,country,description,technologies,materials,website,phone,address,lat,lng,
+    'Self-published / Добавлено самостоятельно','',created_at,'self-published',version,updated_at
+    FROM directory_submissions WHERE id=? AND deleted_at IS NULL`,
+    id,
+    id,
+  );
+  return row ? catalogObject(row) : undefined;
+}
+
 type DirectoryRow = CatalogRow & {
   source: 'member' | 'catalog';
   user_id: string;
@@ -231,17 +265,23 @@ const pageSchema = z.object({
   limit: z.coerce.number().int().min(1).max(200).default(24),
   offset: z.coerce.number().int().min(0).max(10000000).default(0),
 });
-function directoryFilter(query: unknown) {
+function directoryFilter(query: unknown, catalogOnly = false) {
   const q = querySchema.parse(query);
   const cte = `WITH directory AS (
     SELECT 'member' source,p.id,p.name,p.city,p.description,p.technologies,p.materials,p.website,p.lat,p.lng,
       p.user_id,p.kind,p.remote,p.verified,p.demo,p.created_at,
-      '' region,'' country,'' phone,'' address,'' source_name,'' source_url,0 imported_at
-      FROM profiles p JOIN users u ON u.id=p.user_id WHERE p.published=1 AND u.suspended=0
+      '' region,'' country,'' phone,'' address,'' source_name,'' source_url,0 imported_at,
+      'imported' listing_type,0 version,p.created_at updated_at
+      FROM profiles p JOIN users u ON u.id=p.user_id WHERE p.published=1 AND u.suspended=0 ${catalogOnly ? 'AND 1=0' : ''}
     UNION ALL
     SELECT 'catalog',c.id,c.name,c.city,c.description,c.technologies,c.materials,c.website,c.lat,c.lng,
-      '', 'studio',0,0,0,c.imported_at,c.region,c.country,c.phone,c.address,c.source_name,c.source_url,c.imported_at
-      FROM catalog_studios c
+      '', 'studio',0,0,0,c.imported_at,c.region,c.country,c.phone,c.address,c.source_name,c.source_url,c.imported_at,
+      'imported',0,c.imported_at FROM catalog_studios c
+    UNION ALL
+    SELECT 'catalog',s.id,s.name,s.city,s.description,s.technologies,s.materials,s.website,s.lat,s.lng,
+      '', 'studio',0,0,0,s.created_at,s.region,s.country,s.phone,s.address,
+      'Self-published / Добавлено самостоятельно','',s.created_at,'self-published',s.version,s.updated_at
+      FROM directory_submissions s WHERE s.deleted_at IS NULL
   ), filtered AS (SELECT * FROM directory WHERE
     (?='all' OR source=?) AND
     (?='' OR instr(unicode_fold(name),unicode_fold(?))>0 OR instr(unicode_fold(city),unicode_fold(?))>0 OR instr(unicode_fold(description),unicode_fold(?))>0) AND
@@ -261,7 +301,7 @@ function directoryFilter(query: unknown) {
       q.city,
       q.city,
       q.technology,
-      technology(q.technology),
+      normalizeCatalogTechnology(q.technology),
       q.kind,
       q.kind,
       q.kind,
@@ -283,10 +323,10 @@ function readSnapshot<T>(store: Store, read: () => T): T {
     throw error;
   }
 }
-export function createDirectoryRouter(store: Store) {
+export function createDirectoryRouter(store: Store, options: { catalogOnly?: boolean } = {}) {
   const router = Router();
   router.get('/directory', (req, res) => {
-    const { cte, params } = directoryFilter(req.query),
+    const { cte, params } = directoryFilter(req.query, options.catalogOnly),
       page = pageSchema.parse(req.query);
     const response = readSnapshot(store, () => {
       const counts = store.get<{ total: number; members: number; catalog: number }>(
@@ -315,7 +355,7 @@ export function createDirectoryRouter(store: Store) {
     res.json(response);
   });
   router.get('/directory/map', (req, res) => {
-    const { cte, params } = directoryFilter(req.query);
+    const { cte, params } = directoryFilter(req.query, options.catalogOnly);
     const response = readSnapshot(store, () => {
       const counts = store.get<{ total: number; mappable: number }>(
         `${cte} SELECT count(*) total,
@@ -340,11 +380,9 @@ export function createDirectoryRouter(store: Store) {
   });
   router.get('/directory/catalog/:id', (req, res) => {
     const parsed = z.string().uuid().safeParse(req.params.id);
-    const studio = parsed.success
-      ? store.get<CatalogRow>('SELECT * FROM catalog_studios WHERE id=?', parsed.data)
-      : undefined;
+    const studio = parsed.success ? readCatalogStudio(store, parsed.data) : undefined;
     ensure(studio, 404, 'NOT_FOUND', 'Catalog workshop not found / Мастерская каталога не найдена');
-    res.json({ studio: catalogObject(studio) });
+    res.json({ studio });
   });
   return router;
 }

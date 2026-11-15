@@ -1,5 +1,20 @@
 import type { Profile } from './types.js';
 
+export type PublicStudioInput = {
+  name: string;
+  city: string;
+  region: string;
+  country: string;
+  description: string;
+  technologies: string[];
+  materials: string[];
+  website: string;
+  phone: string;
+  address: string;
+  lat: number | null;
+  lng: number | null;
+};
+
 export type CatalogStudio = {
   id: string;
   name: string;
@@ -17,6 +32,9 @@ export type CatalogStudio = {
   source_name: string;
   source_url: string;
   imported_at: number;
+  listing_type: 'imported' | 'self-published';
+  version: number;
+  updated_at: number;
 };
 
 export type DirectoryEntry =

@@ -15,6 +15,7 @@ async function fixture() {
   const dir = mkdtempSync(join(tmpdir(), 'openprint-test-')),
     store = new Store(join(dir, 'openprint.sqlite'));
   const server = createApp({
+    mode: 'community',
     store,
     dataDir: dir,
     appUrl: 'http://test.local',

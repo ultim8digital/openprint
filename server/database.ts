@@ -40,9 +40,9 @@ export class Store {
     const version = Number(
       this.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0,
     );
-    if (version > 5)
+    if (version > 6)
       throw new Error('Database is newer than this OpenPrint version. Upgrade the application.');
-    if (version === 5) return;
+    if (version === 6) return;
     if (version === 0)
       this.transaction(() =>
         this.db.exec(`
@@ -300,8 +300,9 @@ export class Store {
       PRAGMA user_version=4;
     `),
       );
-    this.transaction(() =>
-      this.db.exec(`
+    if (version < 5)
+      this.transaction(() =>
+        this.db.exec(`
       CREATE TABLE catalog_studios (
         id TEXT PRIMARY KEY, source_key TEXT NOT NULL, source_id TEXT NOT NULL,
         name TEXT NOT NULL CHECK(length(name) BETWEEN 1 AND 200), city TEXT NOT NULL,
@@ -316,6 +317,42 @@ export class Store {
       ) STRICT;
       CREATE INDEX catalog_studios_city ON catalog_studios(city);
       PRAGMA user_version=5;
+    `),
+      );
+    this.transaction(() =>
+      this.db.exec(`
+      CREATE TABLE directory_submissions (
+        id TEXT PRIMARY KEY, key_hash TEXT NOT NULL UNIQUE CHECK(length(key_hash)=64),
+        initial_body_hash TEXT NOT NULL CHECK(length(initial_body_hash)=64),
+        name TEXT, city TEXT, region TEXT, country TEXT, description TEXT,
+        technologies TEXT CHECK(technologies IS NULL OR json_valid(technologies)),
+        materials TEXT CHECK(materials IS NULL OR json_valid(materials)),
+        website TEXT, phone TEXT, address TEXT, lat REAL, lng REAL,
+        version INTEGER NOT NULL CHECK(version>0), created_at INTEGER NOT NULL,
+        updated_at INTEGER NOT NULL, deleted_at INTEGER,
+        CHECK((deleted_at IS NULL AND name IS NOT NULL AND city IS NOT NULL AND
+          region IS NOT NULL AND country IS NOT NULL AND description IS NOT NULL AND
+          technologies IS NOT NULL AND materials IS NOT NULL AND website IS NOT NULL AND
+          phone IS NOT NULL AND address IS NOT NULL) OR
+          (deleted_at IS NOT NULL AND name IS NULL AND city IS NULL AND region IS NULL AND
+          country IS NULL AND description IS NULL AND technologies IS NULL AND materials IS NULL AND
+          website IS NULL AND phone IS NULL AND address IS NULL AND lat IS NULL AND lng IS NULL)),
+        CHECK((lat IS NULL AND lng IS NULL) OR
+          (lat IS NOT NULL AND lng IS NOT NULL AND lat BETWEEN -90 AND 90 AND lng BETWEEN -180 AND 180))
+      ) STRICT;
+      CREATE UNIQUE INDEX directory_submission_identity ON directory_submissions(
+        unicode_fold(name),unicode_fold(city),unicode_fold(address)) WHERE deleted_at IS NULL;
+      CREATE TRIGGER directory_submission_identity_immutable BEFORE UPDATE OF id,key_hash,initial_body_hash,created_at ON directory_submissions
+        BEGIN SELECT RAISE(ABORT, 'Submission identity is immutable'); END;
+      CREATE TRIGGER directory_submission_deleted_immutable BEFORE UPDATE ON directory_submissions WHEN OLD.deleted_at IS NOT NULL
+        BEGIN SELECT RAISE(ABORT, 'Deleted submission cannot be resurrected'); END;
+      CREATE TABLE directory_create_usage (
+        submission_id TEXT PRIMARY KEY REFERENCES directory_submissions(id),
+        ip_hash TEXT NOT NULL CHECK(length(ip_hash)=64), created_at INTEGER NOT NULL
+      ) STRICT;
+      CREATE INDEX directory_create_usage_time ON directory_create_usage(created_at);
+      CREATE INDEX directory_create_usage_ip ON directory_create_usage(ip_hash,created_at);
+      PRAGMA user_version=6;
     `),
     );
   }
