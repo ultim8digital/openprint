@@ -3,8 +3,6 @@
   "sourceLocale": "en",
   "protected": {
     "LANGUAGE_INDEX": "docs/i18n/README.md",
-    "ENGLISH_README": "README.md",
-    "RUSSIAN_README": "docs/readme/README.ru.md",
     "GITHUB_PAGES": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
     "OPEN_CATALOG": "docs/OPEN_CATALOG.md",
     "LOCAL_URL": "`http://localhost:3000`",
@@ -28,8 +26,6 @@
   },
   "relativeLinks": [
     "LANGUAGE_INDEX",
-    "ENGLISH_README",
-    "RUSSIAN_README",
     "OPEN_CATALOG",
     "SELF_HOSTING",
     "CATALOG_IMPORT",
@@ -60,8 +56,8 @@
     {
       "id": "navigation",
       "kind": "navigation",
-      "en": "[Languages / Языки]({LANGUAGE_INDEX}) · [English]({ENGLISH_README}) · [Русский]({RUSSIAN_README})",
-      "ru": "[Languages / Языки]({LANGUAGE_INDEX}) · [English]({ENGLISH_README}) · [Русский]({RUSSIAN_README})"
+      "en": "Choose a language",
+      "ru": "Choose a language"
     },
     {
       "id": "intro",

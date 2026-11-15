@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { dirname, resolve, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { format, resolveConfig } from 'prettier';
-import { localeCodes } from '../shared/locales.ts';
+import { localeCodes, LOCALES } from '../shared/locales.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const translatedLocales = localeCodes.filter((locale) => locale !== 'en' && locale !== 'ru');
@@ -172,6 +172,14 @@ export function renderMarkdown(source, locale, dictionary = {}) {
       const key = token.slice(1, -1);
       return (local.has(key) ? prefix : '') + source.protected[key];
     });
+    if (block.kind === 'navigation' && block.id === 'navigation') {
+      const links = LOCALES.map(({ code, name }) => {
+        const target = code === 'en' ? 'README.md' : `docs/readme/README.${code}.md`;
+        const link = `[${name}](${prefix}${target})`;
+        return code === locale ? `**${link}**` : link;
+      });
+      text = `<details>\n<summary>${text}</summary>\n\n${links.join(' · ')}\n\n</details>`;
+    }
     if (block.kind === 'heading') text = '#'.repeat(block.level) + ' ' + text;
     if (block.kind === 'bullet') text = '- ' + text;
     if (block.kind === 'code') text = '```' + block.language + '\n' + text + '\n```';

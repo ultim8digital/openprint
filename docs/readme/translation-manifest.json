@@ -53,7 +53,7 @@
   "model": "tg27",
   "prompt_version": "openprint-translategemma-v2",
   "reviewed_sha256": "edf515e72524a354dbd992a1dda8b8d3149b59b4a6cea7f77e58a78dd466afb6",
-  "source_sha256": "4d561475b23a8cc54c516e5c24ec29e3cd9ee2b691e8f4d4e2e27341ff1dc40d",
+  "source_sha256": "32e04c7c3d14fcc9437cadd35db683d55c952e0c4d006b233f1626fe59ebce94",
   "validation": "structural checks; no native-speaker review claimed",
   "version": 1
 }
