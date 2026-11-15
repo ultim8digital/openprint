@@ -1,49 +1,51 @@
-# Product scope
+# Product scope — v0.5
 
 ## Purpose
 
-Help a real local fabrication community coordinate useful work. A customer gets understandable choices; a workshop controls its own profile and terms; an engineer is discoverable without pretending to be a print shop; an author shares designs with a clear license; a moderator maintains trust; an operator runs the community without mandatory cloud accounts.
+OpenPrint is an open directory of fabrication workshops. A visitor finds a workshop by city, technology or map location and contacts it directly. A workshop can publish its details immediately, without registering an account or waiting for a moderator, then maintain the listing through a private management link.
 
-The original 3d-online.app concept combines discovery, model preparation, orders and engineering help. OpenPrint keeps that chain in a separate portable implementation, starting with participant-managed data rather than republishing a collected directory.
+The original 3d-online.app concept combines discovery, model preparation, orders and engineering help. This portable implementation now starts in `APP_MODE=catalog`. The earlier collaboration and Neofab Studio workflows remain available when an operator explicitly chooses `APP_MODE=community`; switching modes preserves the stored data.
 
-## A complete useful free path
+## The default catalog path
 
-Visitors can discover providers, inspect STL/OBJ, construct/download simple parts and download approved open models. Accounts add private collaboration. No central subscription or paid AI key gates these paths. Hosting still costs resources; an operator decides how to fund their community outside this application.
+1. Search existing cards and map points by name, city and manufacturing technology.
+2. Open a workshop card and contact its public website or phone number.
+3. Add a workshop with a name, city and usable website or phone; coordinates are optional.
+4. Confirm the right to publish the supplied information. A valid, nonduplicate submission becomes public immediately.
+5. Save the private management link. It allows its holder to update or delete this one listing without an account.
 
-1. Describe a need, dimensions and intended use, even without a model.
-2. Share it publicly or send it to one provider.
-3. Ask questions before proposing a price.
-4. Compare total prices, lead times, scope and revisions in the project currency.
-5. Accept exact displayed terms and share the attachment with the chosen provider.
-6. Receive the result and confirm completion.
-7. Share original designs with attribution and explicit licensing.
+Self-published cards and operator-imported cards have distinct provenance labels. Neither label certifies the business, the submitter's identity, current availability or manufacturing capability. The catalog does not invent ratings or verification badges. Counts describe listings, not active suppliers or completed business.
 
-An empty community is not presented as an established network of suppliers. Seeded demo accounts and projects are fictional; real installations start empty. An operator can import an existing studio catalogue into either installation. Those records are labelled as catalogue entries, contactable through their public website/phone, and are separate from registered makers who can receive platform orders. The map covers all matching coordinates independently of list pagination. See [catalogue import](CATALOG_IMPORT.md).
+The management link is a secret: anyone holding it can change or delete that listing. The application offers copying/downloading the link and retains access in the current browser tab's session storage. It has no email recovery or identity-based ownership claim. Editing checks the displayed version so a stale window cannot silently overwrite newer changes. Deleting a card removes its public details; retrying its original publication cannot restore it.
 
-## Neofab Studio in v0.4
+A workshop without coordinates remains discoverable in the list. The map uses all matching coordinates independently of list pagination, with explicit counts and a 50,000-point limit. Optional OpenStreetMap tiles require an external tile request. See [catalog import](CATALOG_IMPORT.md) for bringing an operator's existing directory into the separate imported-record store.
 
-Neofab Studio adds private versioned briefs, components and operations, optional AI drafting, local declarative CAD and a confirmed handoff. CAD supports bounded parts and assemblies, STEP/STL and BOM exports, a geometry report, component preview, version history and named-provider quotation access. Functional parts, repairs, furniture and small batches can share this workflow; each manufacturing process still needs its own engineering preparation. See [setup](NEOFAB_SETUP.md), [CAD scope](CAD_ENGINE.md) and the broader [CAD/CAM architecture](NEOFAB_BLUEPRINT.md).
+No account, subscription, model API key, moderator action or third-party CAPTCHA gates this path. Publication requires the operator's running Node/SQLite service. GitHub distributes the source and releases; GitHub Pages alone cannot execute these write APIs or persist the shared directory. A repository release is not a claim that a public service has been deployed.
 
-The complete manual path has no required AI key. Installing the optional CAD runtime enables geometry without an AI service; leaving it disabled preserves briefs, collaboration and simple browser templates.
+## Operating limits
 
-## Deliberate limits of v0.4
+- Each instance permits five successful new listings per IP over 24 hours and 200 across the instance. The counters survive restarts and deletion. Networks sharing one public IP share that allowance.
+- Management reads allow 60 requests per IP per minute; edits/deletions share 20. General API and creation-attempt throttles also apply.
+- Up to 50,000 self-published identities are retained, including deleted-card tombstones. Deletion does not free this lifetime capacity because an old key must remain unable to resurrect a deleted card.
+- Exact duplicates use Unicode-normalized name, city and address across imported and active self-published records. Separate branch addresses are allowed. Spelling variations and fraudulent ownership claims are not resolved automatically.
+- Imported records can be contacted directly but cannot be claimed or edited using a self-publication key. Import replacement changes only its named source and rejects a batch overlapping an active self-published card.
+- Self-publication stores public business details, not account email addresses, ratings, reviews or a moderation queue. Publishing requires an explicit rights acknowledgement; this is not an independent legal or identity check.
+- The operator still controls the server and data. There is no federation, shared cross-instance directory, offline tile cache or automatic recovery of a lost management key.
 
-- One user manages one provider profile. Shared workshop staff and granular permissions are future work.
-- No payments, commission accounting, escrow, tax calculation, shipping integration or automatic dispute arbitration. Participants handle these directly.
-- No automatic identity/email verification, public ratings or invented reputation scores.
-- Optional AI drafts briefs and bounded declarative CAD proposals. Models are selected by task on the server; reviewed CAD proposals are applied and built separately. Autonomous agent delegation and monetary budgets are future work; a third-party model API is not required for the manual path.
-- No full validation of arbitrary CAD safety, printability or malware. Preview supports STL/OBJ; other supported formats are attachments.
-- Ordinary uploaded attachments are shared after provider selection. Confirmed CAD packages additionally support direct-recipient and explicit per-provider quotation access. Access to an already downloaded copy cannot be recalled.
-- CAD accepts up to 24 physical components and 300 bounded operations. Arbitrary STEP import into editable history, freeform modelling, FEA, CAM, G-code and machine-profile validation are not included. Geometry passing does not release manufacturing.
-- No offline tile cache or installable offline PWA. The app is a locally runnable self-hosted web service.
-- Published briefs and CAD handoffs are immutable. Cancel and create a revised brief before assignment when scope changes. Post-agreement changes need their own future versioning workflow.
-- Dashboard/moderator queries show bounded windows (up to 200 records; notifications 100; direct requests 100). Historical dashboard pagination is future work. Public directory/library and message histories already have explicit pagination.
-- No production Supabase migration, SSR/SEO parity, native mobile app, federation or horizontal scaling.
+## Optional community and Neofab Studio
+
+`APP_MODE=community` restores registered maker/engineer profiles, private collaboration, offers, exact acceptance, delivery, licensed model sharing and the earlier moderation tools. These features are optional workflows, not requirements for catalog publication. Imported and self-published cards remain separate from account-owned profiles and do not become order recipients automatically. Demo accounts and projects are fictional.
+
+Neofab Studio retains private versioned briefs, components and operations, optional AI drafting, local declarative CAD and confirmed handoffs. Supported bounded parts and assemblies can produce STEP/STL, a BOM and a geometry report with component preview, version history and named-provider quotation access. Functional parts, repairs, furniture and small batches can use this path; each manufacturing process still needs its own engineering preparation. See [setup](NEOFAB_SETUP.md), [CAD scope](CAD_ENGINE.md) and the broader [CAD/CAM architecture](NEOFAB_BLUEPRINT.md).
+
+The community manual path has no required AI key. Installing the optional CAD runtime enables geometry without an AI service. Catalog mode does not start the CAD service or resume queued private builds, even when the same database contains earlier Studio work.
+
+The existing community limits remain: one provider profile per account; no payments, escrow, tax or shipping integration; no automatic identity/email verification; bounded dashboard history; no shared workshop staff; immutable published briefs and accepted terms. Ordinary attachments and confirmed CAD packages have their documented participant-access rules. An already downloaded copy cannot be recalled.
+
+CAD supports up to 24 physical components and 300 bounded operations. AI offers reviewable proposals selected by server-side task configuration; it does not automatically apply, build, confirm or publish them. Editable arbitrary STEP import, freeform modelling, FEA, CAM/G-code, machine-profile validation, autonomous agent delegation and monetary AI budgets remain future work. A passing geometry report does not release a design for manufacturing.
 
 ## Useful next contributions
 
-Start with evidence from a small real maker community: onboarding, completed collaborations, 200% zoom, screen readers, mobile devices, recovery/restore drills and clearer briefs. A scraped-listing count or demo account count is not evidence of demand or active supply.
+Prioritize real workshop onboarding, contact accuracy, lost-link guidance, accessible mobile forms, keyboard/screen-reader testing and restore drills. Validate that people can find and maintain useful listings before treating catalog size as demand.
 
-Bounded extensions: team membership, complete dashboard history, optional email outbox, configurable map providers, versioned request amendments, moderation appeals, reusable CAD templates, model-quality evaluations and licensed user-supplied data import. Multi-provider routes and manufacturing adapters need their own versioned inputs, permissions and validation.
-
-Keep payments, AI and public-data adapters optional. Do not infer downstream model rights from a search result or a generic “commercial use” label.
+Bounded extensions include configurable map providers, better duplicate suggestions, explicit listing transfer, reusable CAD templates and measured model-quality evaluations. Team membership, versioned request amendments and multi-provider manufacturing routes belong to the optional community workflow and need their own permissions and validation. Keep paid services and external data adapters optional, and establish redistribution rights for each imported dataset.

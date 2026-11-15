@@ -3121,7 +3121,6 @@ label small,
 }
 .catalog-editor h2 {
   margin: 0 0 14px;
-  font-family: var(--serif);
   font-weight: 500;
 }
 .catalog-editor p {

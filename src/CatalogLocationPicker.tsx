@@ -51,6 +51,10 @@ export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: 
     if (!marker.current) {
       marker.current = L.marker(position, {
         draggable: true,
+        title: t(
+          'Точка студии; для точного ввода используйте поля координат',
+          'Studio location; use the coordinate fields for precise entry',
+        ),
         icon: L.divIcon({
           className: 'catalog-location-pin',
           html: '<span aria-hidden="true">●</span>',
@@ -75,6 +79,15 @@ export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: 
     element.current
       ?.querySelector('.leaflet-control-zoom-out')
       ?.setAttribute('aria-label', t('Отдалить', 'Zoom out'));
+    marker.current
+      ?.getElement()
+      ?.setAttribute(
+        'aria-label',
+        t(
+          'Точка студии; для точного ввода используйте поля координат',
+          'Studio location; use the coordinate fields for precise entry',
+        ),
+      );
   }, [t]);
   return (
     <div>

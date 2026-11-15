@@ -21,27 +21,98 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - run: npm audit --omit=dev --audit-level=high
-      - name: Build container and verify empty-instance isolation
+      - name: Verify default catalog container and guest publication persistence
         run: |
+          set -euo pipefail
+          trap 'docker rm -fv openprint-check >/dev/null 2>&1 || true' EXIT
           docker build -t openprint:test .
           docker run -d --name openprint-check -p 127.0.0.1:3100:3000 -e APP_URL=http://127.0.0.1:3100 openprint:test
           node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {randomBytes} from 'node:crypto';
+          import {spawnSync} from 'node:child_process';
           import {setTimeout} from 'node:timers/promises';
-          let ready=false;
-          for(let n=0;n<30;n++){
-            try{const r=await fetch('http://127.0.0.1:3100/api/health');if(r.ok){ready=true;break;}}catch{}
-            await setTimeout(1000);
+          const origin='http://127.0.0.1:3100';
+          async function call(path,method='GET',body,key){
+            const response=await fetch(origin+'/api'+path,{
+              method,signal:AbortSignal.timeout(5000),
+              headers:{...(body===undefined?{}:{Origin:origin,'Content-Type':'application/json'}),...(key?{'X-Catalog-Key':key}:{})},
+              ...(body===undefined?{}:{body:JSON.stringify(body)}),
+            });
+            return {status:response.status,data:await response.json()};
           }
-          if(!ready)throw new Error('Container did not become healthy');
-          const state=await(await fetch('http://127.0.0.1:3100/api/bootstrap')).json();
-          if(state.demo || state.demoUsers.length || state.user || state.stats.profiles)throw new Error('Production must start empty');
-          console.log('Container healthy; demo accounts absent');
+          async function healthy(){
+            for(let n=0;n<30;n++){
+              let result;
+              try{result=await call('/health');}catch{}
+              if(result?.status===200){assert.equal(result.data.mode,'catalog');return;}
+              await setTimeout(1000);
+            }
+            throw new Error('Container did not become healthy');
+          }
+          async function publicMode(){
+            const state=await call('/bootstrap');
+            assert.equal(state.status,200);
+            assert.equal(state.data.mode,'catalog');
+            assert.equal(state.data.user,null);
+            assert.equal(state.data.profile,null);
+            assert.equal(state.data.demo,false);
+            assert.deepEqual(state.data.demoUsers,[]);
+            const registration=await call('/auth/register','POST',{});
+            assert.equal(registration.status,404);
+            assert.equal(registration.data.code,'NOT_FOUND');
+          }
+          function docker(...args){
+            const result=spawnSync('docker',args,{stdio:'inherit',timeout:30000});
+            if(result.error || result.status!==0)throw new Error('Container lifecycle check failed');
+          }
+          await healthy();
+          await publicMode();
+          assert.equal((await call('/directory')).data.total,0);
+          // The random management key remains only in this process, never in logs or files.
+          const key=randomBytes(32).toString('hex');
+          const studio={name:'Synthetic CI workshop',city:'Test city',region:'',country:'',
+            description:'A fictional container smoke-test listing.',technologies:['FDM'],materials:['PLA'],
+            website:'https://workshop.example.test',phone:'',address:'',lat:0,lng:0};
+          const created=await call('/directory/submissions','POST',{management_key:key,studio,rights_confirmed:true});
+          assert.equal(created.status,201);
+          const id=created.data.studio.id;
+          assert.match(id,/^[a-f0-9-]{36}$/);
+          async function visible(){
+            const list=await call('/directory'),map=await call('/directory/map');
+            assert.equal(list.status,200);
+            assert.equal(list.data.total,1);
+            assert.equal(list.data.members,0);
+            assert.equal(list.data.entries[0].studio.id,id);
+            assert.equal(map.status,200);
+            assert.equal(map.data.total,1);
+            assert.equal(map.data.mappable,1);
+            assert.deepEqual(map.data.points,[{id,source:'catalog',name:studio.name,city:studio.city,lat:0,lng:0}]);
+            const detail=await call('/directory/catalog/'+id);
+            assert.equal(detail.status,200);
+            assert.equal(detail.data.studio.name,studio.name);
+          }
+          await visible();
+          docker('stop','openprint-check');
+          docker('start','openprint-check');
+          await healthy();
+          await publicMode();
+          await visible();
+          const managed=await call('/directory/submissions/'+id,'GET',undefined,key);
+          assert.equal(managed.status,200);
+          assert.equal(managed.data.studio.id,id);
+          assert.equal(managed.data.studio.version,1);
+          const deleted=await call('/directory/submissions/'+id,'DELETE',{version:1},key);
+          assert.equal(deleted.status,200);
+          assert.equal(deleted.data.deleted,true);
+          assert.equal((await call('/directory/catalog/'+id)).status,404);
+          assert.equal((await call('/directory')).data.total,0);
+          assert.equal((await call('/directory/map')).data.total,0);
+          // Confirm that guest publication did not create hidden accounts, profiles or orders.
+          docker('exec','openprint-check','node','--input-type=module','-e',
+            "import {DatabaseSync} from 'node:sqlite';import {join} from 'node:path';const db=new DatabaseSync(join(process.env.DATA_DIR,'openprint.sqlite'),{readOnly:true});for(const table of ['users','profiles','sessions','jobs'])if(db.prepare('SELECT count(*) n FROM '+table).get().n!==0)throw new Error('Unexpected account or order data');db.close();");
+          console.log('Default catalog: anonymous publication, restart, secret management and deletion passed; no accounts created');
           JS
-          docker stop openprint-check
-          docker start openprint-check
-          sleep 2
-          curl --fail http://127.0.0.1:3100/api/health
-          docker rm -f openprint-check
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: failure()
         with:

@@ -4,7 +4,9 @@ OpenPrint is for people who make things together. Useful contributions include c
 
 ## For makers and model authors
 
-Create/update your provider profile in the application instead of opening a GitHub issue with personal contacts. Publish only models you own or can redistribute under the chosen license. Add dimensions, intended use, limitations and attribution. Do not submit scraped company databases, customer drawings or purchased models without redistribution rights.
+Search the directory first. If your workshop is missing, use “Add a studio” in the application and save the private management link to update or delete the listing. The default catalog requires no account or moderator approval. Do not post the management key or private contacts in GitHub issues.
+
+In the optional community mode, registered participants can maintain provider profiles and share models. Publish only models you own or can redistribute under the chosen license. Add dimensions, intended use, limitations and attribution. Do not submit scraped company databases, customer drawings or purchased models without redistribution rights.
 
 For the repository, add original parametric designs with explicit licensing and geometry tests. Avoid embedding personal/private files in commits or screenshots. Demo content must remain clearly fictional.
 
@@ -26,7 +28,9 @@ Make a focused branch and pull request. Explain the concrete before/after behavi
 
 Check permissions on the server, not just by hiding buttons. Preserve exact offer revisions, private-file access, thread membership, pagination/read cursors, money in integer minor units and customer confirmation. Never grant admin roles from user-editable metadata, the first registration, or an email match alone.
 
-Do not require a paid API for a core user path. Do not silently introduce tracking, third-party font calls or map requests on page load. Run `node scripts/licenses.mjs` after relevant dependency updates and include updated notices.
+Keep anonymous publication, private-key management, duplicate rejection and retry recovery usable without accounts or human approval. Treat catalog cards as public contact records, not verified identities or order-recipient accounts. Test catalog and explicit community modes separately; switching mode must preserve private history.
+
+Do not require a paid API for a core user path. Do not introduce tracking or third-party font calls. Map tiles may load when the directory map or location picker is visible; disclose provider changes and avoid tile calls on other screens. Run `node scripts/licenses.mjs` after relevant dependency updates and include updated notices.
 
 ## For translators and designers
 
@@ -34,7 +38,7 @@ The initial interface uses `t('Russian', 'English')` pairs. Translate both the e
 
 ## Reporting bugs
 
-Use the issue template with version, Node/OS, a minimal reproduction, expected/actual behavior and redacted logs. Say whether the issue is in local demo or a real instance. Never include passwords, session cookies, recovery tokens, `.env`, a real database or customer attachments.
+Use the issue template with version, Node/OS, application mode, a minimal reproduction, expected/actual behavior and redacted logs. Say whether the issue is in local demo or a real instance. Never include private management links/keys, passwords, session cookies, recovery tokens, `.env`, a real database or customer attachments.
 
 Security findings should use private reporting as described in [SECURITY.md](SECURITY.md).
 

@@ -1,55 +1,74 @@
 # Architecture
 
-OpenPrint is a single self-hosted application: React, Express, local SQLite and private filesystem storage. Primary community workflows do not call a cloud provider.
+OpenPrint is one self-hosted React/Express application with local SQLite and private filesystem storage. `APP_MODE=catalog` is the default. It exposes the public directory and immediate self-publication without accounts or moderation. `APP_MODE=community` explicitly enables the earlier account, collaboration and Neofab Studio APIs. Both modes use the same additive schema v6; choosing catalog mode does not delete community data.
 
-`server/directory.ts` combines public member profiles with a separate local studio catalogue for discovery. `/api/directory` paginates cards, while `/api/directory/map` returns the matching coordinates independently, with total/mappable/unmapped counts and an explicit 50,000-point cap. Each response reads counts and records within one SQLite snapshot, including during an external import. Imported catalogue records do not participate in account, verification or order authorization. `scripts/catalog-import.ts` validates an allowlisted snapshot before atomic replacement of one source; stable source IDs preserve public card IDs. Source datasets stay outside Git. See [catalogue setup](CATALOG_IMPORT.md).
+In catalog mode, the API permits health/bootstrap and directory routes. Account, profile, order, file, Studio and moderator endpoints return not found, including for existing session cookies. Bootstrap does not expose old accounts, demo identities or community statistics. Directory queries exclude registered profiles. The application does not construct `CadService`, resume queued CAD work or run community upload cleanup in this mode.
+
+`server/directory.ts` combines imported and self-published catalog cards, plus eligible account-owned profiles only in community mode. `/api/directory` paginates cards, while `/api/directory/map` returns matching coordinates independently, with total/mappable/unmapped counts and an explicit 50,000-point cap. Counts and rows share one SQLite read snapshot, including during an external import. Catalog identities never grant account, verification or order permissions.
 
 ```mermaid
 flowchart LR
-    Member[Visitor / member] --> UI[React interface]
+    Visitor[Visitor or workshop] --> UI[React catalog]
     UI --> API[Same-origin Express API]
-    API --> Auth[Session + permission checks]
-    Auth --> DB[(SQLite / WAL)]
-    API --> Files[Private local uploads]
-    API --> Studio[Versioned Studio briefs + confirmation + publication]
-    Studio --> DB
-    Studio --> Queue[Version-bound CAD queue]
-    Queue --> CAD[Optional local CadQuery process]
-    CAD --> Verify[Artifact schemas + hashes + limits]
-    Verify --> DB
-    Studio -. Explicit consent, optional server key .-> AI[OpenAI Responses API]
-    UI --> Tools[Browser-only STL / OBJ tools]
-    UI -. Explicit map action .-> OSM[OpenStreetMap tiles]
-    Operator[Operator CLI] --> Admin[One-use setup / recovery token]
-    Admin --> DB
-    Operator --> Backup[Stopped-instance backup + hash checks]
+    API --> Read[Public cards and map]
+    API --> Publish[Validate, check duplicates and quotas, publish]
+    UI --> Manage[Private key header and exact version]
+    Manage --> API
+    Read --> DB[(SQLite schema v6)]
+    Publish --> DB
+    Operator[Operator CLI] --> Import[Atomic source import]
+    Import --> DB
+    UI -. Optional map tiles .-> OSM[OpenStreetMap]
+    Mode[Explicit community mode] --> Community[Accounts, collaboration and Studio]
+    Community --> DB
+    Community --> Queue[Optional CAD service and native worker]
+    Community -. Explicit consent and server key .-> AI[OpenAI Responses API]
+    Operator --> Backup[Stopped-instance backup and integrity checks]
 ```
+
+## Catalog publication and data separation
+
+`catalog_studios` contains only allowlisted operator-imported fields, source attribution and stable source-derived public IDs. `scripts/catalog-import.ts` validates a nonempty snapshot of at most 50,000 rows and 50 MiB before atomically replacing one source. It never changes self-published rows or user profiles. An incoming batch that exactly overlaps an active self-published workshop is rejected before deleting the previous source. Source datasets stay outside Git. See [catalog setup](CATALOG_IMPORT.md).
+
+`directory_submissions` separately stores self-published details, a random public UUID, SHA-256 of the management key, a hash of the initial normalized request, version and timestamps. The browser generates the 256-bit key. The private link places it in the URL fragment, which is removed from the address before optional map content mounts; management requests use `X-Catalog-Key`. The browser keeps pending creation/access in session storage and offers a private-link download. The server never returns the key or its hash in a public or management response. Private responses use `Cache-Control: private, no-store`.
+
+Creation, duplicate rejection and quota reservation run in one `BEGIN IMMEDIATE` transaction. Name and city are required, together with an HTTP(S) website or a syntactically valid phone number; coordinates must be a finite pair or both null. The submitter must explicitly confirm publication rights. Valid records commit directly into the public directory, without a pending/moderation state or a user row. A Unicode-normalized name/city/address match against imported or active self-published records returns a generic duplicate error. An index enforces the same identity among active self-published rows. These checks do not verify business ownership or catch every spelling variation.
+
+The same key plus the same initial normalized body replays an existing create without consuming another slot, even if the card was subsequently edited. Reusing the key with a different initial body conflicts. Updates require the current version and increment it; concurrent stale edits fail. Deletion clears every public contact/content field and retains a minimal identity/hash/version/timestamp tombstone. The old key can replay a deletion but cannot republish or resurrect the card. There is no account recovery for a lost key.
+
+`directory_create_usage` records only successful creates, with an HMAC of the server-observed IP using a random persistent instance salt in `meta`. Raw IPs and plaintext management keys are not stored in these tables. A transaction enforces five creates per IP and 200 per instance over 24 hours, including after deletion or restart. Expired usage rows are purged in a subsequent successful creation transaction; the retained ledger is bounded by the instance quota. Management reads are throttled to 60 per IP/minute, while edits/deletions share 20. Creation attempts have a separate 20/minute throttle alongside the general API limit. Mutation Origin/JSON checks and explicit trusted-proxy configuration remain in force.
+
+The total self-published identity limit is 50,000, including tombstones; this bounds permanent replay metadata. It is independent of the map-point cap and per-source import cap. Switching modes or removing a card does not reset usage. Backups contain the database, including private hashes and the IP salt, and require private storage.
 
 ## Code map
 
-| Location                                                                             | Responsibility                                                                               |
-| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| `src/App.tsx`, `src/core.tsx`                                                        | Navigation, state, localization, cancelled requests, notifications                           |
-| `src/Browse.tsx`                                                                     | Overview, directory, profiles, project board                                                 |
-| `src/NewProject.tsx`, `src/Project.tsx`                                              | Briefs, offers, acceptance, delivery, conversations                                          |
-| `src/Workspace.tsx`                                                                  | Dashboard, provider profile, export, password, removal                                       |
-| `src/Models.tsx`, `src/Tools.tsx`                                                    | Licensed model sharing and browser-only tools                                                |
-| `server/app.ts`                                                                      | Routes, validation, permissions and error responses                                          |
-| `server/domain.ts`                                                                   | Brief access, offer revisions, atomic acceptance, thread membership                          |
-| `server/database.ts`                                                                 | Schemas v1–v5, transactions, indexes, immutable snapshot triggers                            |
-| `src/Studio.tsx`, `shared/studio.ts`                                                 | Private CAD/CAM brief editor, components, confirmation and handoff                           |
-| `server/studio.ts`, `server/studio-ai.ts`, `server/ai-ledger.ts`, `server/cad-ai.ts` | Ownership/version gates, shared AI call ledger, private CAD proposals, bounded Responses API |
-| `server/studio-geometry.ts`                                                          | Deterministic FDM template checks, STL and packet manifests                                  |
-| `shared/cad.ts`, `server/cad.ts`, `server/cad-data.ts`                               | Declarative CAD contracts, revisions, grants and exact handoffs                              |
-| `server/cad-runner.ts`, `cad-worker/`                                                | Durable queue, bounded native process, CadQuery compiler and artifact validation             |
-| `src/CadStudio.tsx`, `src/cad-preview.tsx`, `src/JobCad.tsx`                         | CAD editing, assembly preview and quotation-file access                                      |
-| `server/security.ts`                                                                 | Password hashing, sessions, bounded throttles, permission guards                             |
-| `server/files.ts`                                                                    | Headers, names, quotas, ownership, reads and cleanup                                         |
-| `server/demo.ts`                                                                     | Opt-in fictional accounts and projects; operator catalogues import separately                |
-| `shared/validation.ts`, `shared/parts.ts`                                            | Schemas, exact minor-unit amounts, deterministic meshes                                      |
-| `scripts/`, `tests/`                                                                 | Operator tools, backup, API/state/security and browser tests                                 |
+| Location                                                                             | Responsibility                                                                                 |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `src/App.tsx`, `src/core.tsx`                                                        | Navigation, state, localization, cancelled requests, notifications                             |
+| `src/CatalogApp.tsx`, `src/CatalogEditor.tsx`, `src/CatalogLocationPicker.tsx`       | Default catalog shell, anonymous editor, private-link management and optional map picker       |
+| `server/directory.ts`, `server/directory-submissions.ts`, `shared/directory.ts`      | Public discovery, self-publication, key/version checks, duplicate checks and persistent quotas |
+| `src/Browse.tsx`                                                                     | Overview, directory, profiles, project board                                                   |
+| `src/NewProject.tsx`, `src/Project.tsx`                                              | Briefs, offers, acceptance, delivery, conversations                                            |
+| `src/Workspace.tsx`                                                                  | Dashboard, provider profile, export, password, removal                                         |
+| `src/Models.tsx`, `src/Tools.tsx`                                                    | Licensed model sharing and browser-only tools                                                  |
+| `server/app.ts`                                                                      | Routes, validation, permissions and error responses                                            |
+| `server/domain.ts`                                                                   | Brief access, offer revisions, atomic acceptance, thread membership                            |
+| `server/database.ts`                                                                 | Schemas v1–v6, transactions, indexes, immutable snapshot triggers                              |
+| `src/Studio.tsx`, `shared/studio.ts`                                                 | Private CAD/CAM brief editor, components, confirmation and handoff                             |
+| `server/studio.ts`, `server/studio-ai.ts`, `server/ai-ledger.ts`, `server/cad-ai.ts` | Ownership/version gates, shared AI call ledger, private CAD proposals, bounded Responses API   |
+| `server/studio-geometry.ts`                                                          | Deterministic FDM template checks, STL and packet manifests                                    |
+| `shared/cad.ts`, `server/cad.ts`, `server/cad-data.ts`                               | Declarative CAD contracts, revisions, grants and exact handoffs                                |
+| `server/cad-runner.ts`, `cad-worker/`                                                | Durable queue, bounded native process, CadQuery compiler and artifact validation               |
+| `src/CadStudio.tsx`, `src/cad-preview.tsx`, `src/JobCad.tsx`                         | CAD editing, assembly preview and quotation-file access                                        |
+| `server/security.ts`                                                                 | Password hashing, sessions, bounded throttles, permission guards                               |
+| `server/files.ts`                                                                    | Headers, names, quotas, ownership, reads and cleanup                                           |
+| `server/demo.ts`                                                                     | Opt-in fictional accounts and projects; operator catalogues import separately                  |
+| `shared/validation.ts`, `shared/parts.ts`                                            | Schemas, exact minor-unit amounts, deterministic meshes                                        |
+| `scripts/`, `tests/`                                                                 | Operator tools, backup, API/state/security and browser tests                                   |
 
-## Data and access
+## Optional community: data and access
+
+The following workflows are enabled by `APP_MODE=community`. They remain stored when catalog mode is selected, but their APIs and account-based permissions are not exposed there.
 
 `users` have a self-asserted email, scrypt password hash and server-owned role. Email ownership is not automatically verified. `sessions` store only SHA-256 digests of random 256-bit tokens; the raw token is in an HttpOnly cookie, never localStorage. Seven-day sessions are revoked on logout, recovery, password change and account closure as appropriate.
 
@@ -67,7 +86,7 @@ One `profile` belongs to one user and represents a workshop, an engineer or both
 
 `models` require attribution, explicit CC licensing, a rights acknowledgement and moderator approval. A third-party model URL is not treated as evidence of redistribution rights.
 
-## Exact acceptance
+## Optional community: exact acceptance
 
 1. The browser displays price, currency, days, scope and revision in a confirmation dialog.
 2. It submits the offer UUID/revision and displayed project version.
@@ -78,7 +97,7 @@ One `profile` belongs to one user and represents a workshop, an engineer or both
 
 Workflow: `open → assigned → delivered → completed`. The chosen provider marks delivery; the customer confirms completion. Only an open project can be cancelled. There is no escrow or automatic arbitration after assignment.
 
-## Files and tools
+## Optional community: files and tools
 
 Uploads are authenticated, Origin-checked raw byte requests capped at 20 MB, with user/instance quotas. Attachments support STL, OBJ, STEP/STP, GLB and 3MF. Header checks prevent simple type confusion, **not malware or full CAD validation**. The server does not unpack uploaded 3MF or compile uploaded executable source. The separate optional CAD path accepts only its strict JSON specification. Downloads use attachment disposition and `nosniff`.
 
@@ -86,9 +105,9 @@ STL/OBJ preview and parametric construction run locally in the browser. Coordina
 
 Unreferenced uploads older than 24 hours are removed hourly while the app runs, or by `npm run cleanup`. Referenced files do not expire. Filesystem and database operations are not a distributed transaction; cleanup or operator recovery may be needed after storage failure.
 
-## Neofab Studio and CAD
+## Optional community: Neofab Studio and CAD
 
-Studio keeps private projects and revisions in SQLite schema v5. The owner edits a brief and confirms an exact version and content hash for discussion/quotation. Open questions, assumptions and unknown component quantities remain explicit in the handoff; confirmation does not release production. Request intent chooses design/consultation or manufacturing quotation independently of geometry support. Publication freezes that version into one job and a downloadable packet; retries return the existing job. A project may use an explicitly selected FDM template or an optional declarative CAD design. See [setup and limits](NEOFAB_SETUP.md).
+Studio keeps private projects and revisions in the shared SQLite schema v6. The owner edits a brief and confirms an exact version and content hash for discussion/quotation. Open questions, assumptions and unknown component quantities remain explicit in the handoff; confirmation does not release production. Request intent chooses design/consultation or manufacturing quotation independently of geometry support. Publication freezes that version into one job and a downloadable packet; retries return the existing job. A project may use an explicitly selected FDM template or an optional declarative CAD design. See [setup and limits](NEOFAB_SETUP.md).
 
 CAD specification edits and removal advance the Studio version and clear confirmation. `studio_cad_revisions` preserves each specification and hash; `studio_cad_builds` binds a request ID to the owner, revision and brief version. A single local worker executes queued jobs. Successful results remain immutable; an older build finishing after an edit remains historical and cannot satisfy confirmation of the current version. After restart, interrupted running jobs fail explicitly and eligible queued jobs resume. Cancellation and account deletion cannot restore removed project data through a late result.
 
@@ -100,12 +119,14 @@ Attempt and output quotas are checked before compute. CAD daily usage counts ret
 
 Optional AI assistance calls one fixed provider endpoint with the idea, saved brief and user instruction after explicit consent. CAD requests also include the current declarative specification. The server holds the key, routes by task, validates structured output and records attempted calls before network I/O. Brief and CAD tasks share project/user/instance limits and running-request limits. Stale AI results cannot overwrite a newer revision. User deletion removes private project content while preserving the minimal usage ledger for the anonymized account. These are attempt/token limits, not monetary reservations.
 
-CAD results are immutable private proposals with a source brief version, CAD revision and confirmation state. A separate reviewed apply request uses the same CAD save/quota/version path as manual edits. It cannot build, confirm or publish. The provider schema converts homogeneous tuple definitions into fixed-length arrays and disjoint operation unions into `anyOf`; the complete local schema still checks ranges, geometry structure and total limits. Passing that schema does not establish semantic or engineering correctness. The user inspects the compiled result and confirms the exact package before publication.
+AI CAD results are immutable private proposals with a source brief version, CAD revision and confirmation state. A separate reviewed apply request uses the same CAD save/quota/version path as manual edits. It cannot build, confirm or publish. The provider schema converts homogeneous tuple definitions into fixed-length arrays and disjoint operation unions into `anyOf`; the complete local schema still checks ranges, geometry structure and total limits. Passing that schema does not establish semantic or engineering correctness. The user inspects the compiled result and confirms the exact package before publication.
 
 The current flat component list and textual operations are the first step toward the [universal CAD/CAM architecture](NEOFAB_BLUEPRINT.md), not a functioning multi-provider manufacturing graph.
 
 ## Runtime boundaries
 
-One process, local disk, exact public HTTPS origin, explicit proxy configuration and a private data directory. No cloud secret is required. No runtime secret is embedded into the frontend. The map and 3D modules load separately from the initial overview.
+One process, local disk, exact public HTTPS origin, explicit proxy configuration and a private data directory. No cloud secret is required. No operator/API secret is embedded into the frontend; a self-publication management key is generated locally and held only for its listing. The map and 3D modules load separately from the initial overview.
 
-No end-to-end encryption, automatic email verification, team memberships, horizontal scaling, SSR, payments, SMTP outbox or federation is included. Optional CAD is a resource-limited local native process with a scrubbed environment, not a complete filesystem/network sandbox. There is no CAM/G-code, FEA, autonomous multi-agent delegation or automatic manufacturing release. No production import from the original service is supplied. Backups require the app to be stopped: see [SELF_HOSTING.md](SELF_HOSTING.md).
+No end-to-end encryption, automatic email verification, team memberships, horizontal scaling, SSR, payments, SMTP outbox or federation is included. Optional CAD is a resource-limited local native process with a scrubbed environment, not a complete filesystem/network sandbox. There is no CAM/G-code, FEA, autonomous multi-agent delegation or automatic manufacturing release. The optional catalog importer uses an operator-supplied, rights-cleared snapshot; no production account/order migration from the original service is supplied. Backups require the app to be stopped: see [SELF_HOSTING.md](SELF_HOSTING.md).
+
+Source and release delivery through GitHub does not host the running service. Express mutations, SQLite persistence and optional native CAD need a Node-capable host or local installation; GitHub Pages cannot run this backend.

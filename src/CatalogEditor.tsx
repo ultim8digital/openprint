@@ -5,7 +5,10 @@ import type { CatalogStudio, DirectoryResponse, PublicStudioInput } from '../sha
 import { api, ApiError, useApp, Loading } from './core';
 
 const LocationPicker = lazy(() => import('./CatalogLocationPicker'));
-const keyPattern = /^[a-f0-9]{64}$/;
+const keyPattern = /^[a-f0-9]{64}$(?![\s\S])/;
+// Retain a just-consumed fragment through React's development-only repeated initializer.
+// The authenticated load clears this temporary memory entry.
+const fragmentKeys = new Map<string, string>();
 const pendingStorage = 'openprint.catalog.pending.v1';
 const keyStorage = (id: string) => `openprint.catalog.key.v1.${id}`;
 type Pending = { key: string; studio: PublicStudioInput };
@@ -30,18 +33,44 @@ const emptyStudio: PublicStudioInput = {
   lng: null,
 };
 const toDraft = (studio: PublicStudioInput): Draft => ({
-  ...studio,
+  name: studio.name,
+  city: studio.city,
+  region: studio.region,
+  country: studio.country,
+  description: studio.description,
+  website: studio.website,
+  phone: studio.phone,
+  address: studio.address,
   technologies: studio.technologies.join(', '),
   materials: studio.materials.join(', '),
   lat: studio.lat === null ? '' : String(studio.lat),
   lng: studio.lng === null ? '' : String(studio.lng),
 });
+function isStudioInput(value: unknown): value is PublicStudioInput {
+  if (!value || typeof value !== 'object') return false;
+  const item = value as Record<string, unknown>;
+  return (
+    ['name', 'city', 'region', 'country', 'description', 'website', 'phone', 'address'].every(
+      (field) => typeof item[field] === 'string',
+    ) &&
+    ['technologies', 'materials'].every(
+      (field) =>
+        Array.isArray(item[field]) &&
+        item[field].every((entry: unknown) => typeof entry === 'string'),
+    ) &&
+    (item.lat === null ||
+      (typeof item.lat === 'number' && Number.isFinite(item.lat) && Math.abs(item.lat) <= 90)) &&
+    (item.lng === null ||
+      (typeof item.lng === 'number' && Number.isFinite(item.lng) && Math.abs(item.lng) <= 180))
+  );
+}
 function readAccess(id?: string) {
   // Strip the private fragment before mounting effects or any optional external map content.
   const fragment = new URLSearchParams(location.hash.slice(1));
   const provided = fragment.get('key') || '';
   if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
-  let key = keyPattern.test(provided) ? provided : '';
+  if (id && keyPattern.test(provided)) fragmentKeys.set(id, provided);
+  let key = id ? fragmentKeys.get(id) || '' : '';
   let pending: Pending | null = null;
   let storageBlocked = false;
   try {
@@ -57,9 +86,7 @@ function readAccess(id?: string) {
           typeof parsed.key === 'string' &&
           keyPattern.test(parsed.key) &&
           'studio' in parsed &&
-          parsed.studio &&
-          typeof parsed.studio === 'object' &&
-          typeof (parsed.studio as PublicStudioInput).name === 'string'
+          isStudioInput(parsed.studio)
         )
           pending = parsed as Pending;
       }
@@ -319,6 +346,7 @@ function Editor({ id }: { id?: string }) {
     }).then(
       ({ studio: loaded }) => {
         if (controller.signal.aborted) return;
+        fragmentKeys.delete(id);
         setStudio(loaded);
         setDraft(toDraft(loaded));
         setLoading(false);
@@ -330,6 +358,7 @@ function Editor({ id }: { id?: string }) {
       },
       (caught) => {
         if (controller.signal.aborted) return;
+        fragmentKeys.delete(id);
         setError(messageFor(caught));
         setLoading(false);
         setSecret('');
@@ -467,12 +496,16 @@ function Editor({ id }: { id?: string }) {
       persist(pendingStorage, null);
     } catch (caught) {
       setError(messageFor(caught));
-      // Definite client failures did not create a record; ambiguous transport/5xx errors retain the exact request.
+      // A deterministic validation refusal or post-lookup duplicate/capacity refusal lets the user
+      // repair the draft even after a lost response. Retry throttles can precede the key
+      // lookup, so they must retain the original request and recovery key.
       if (
         caught instanceof ApiError &&
-        caught.status >= 400 &&
-        caught.status < 500 &&
-        !['REQUEST_ID_REUSED', 'SUBMISSION_DELETED'].includes(caught.code)
+        (['VALIDATION', 'DUPLICATE_STUDIO', 'SUBMISSION_CAPACITY'].includes(caught.code) ||
+          (!retry &&
+            caught.status >= 400 &&
+            caught.status < 500 &&
+            !['REQUEST_ID_REUSED', 'SUBMISSION_DELETED'].includes(caught.code)))
       ) {
         setPending(null);
         persist(pendingStorage, null);
@@ -542,6 +575,7 @@ function Editor({ id }: { id?: string }) {
         body: JSON.stringify({ version: studio.version }),
       });
       persist(keyStorage(id), null);
+      fragmentKeys.delete(id);
       setDeleted(true);
       setSecret('');
       setKeyInput('');
