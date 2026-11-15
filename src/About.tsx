@@ -7,7 +7,7 @@ export default function About() {
   return (
     <div className="page narrow">
       <PageTitle
-        eyebrow="OPEN BY DESIGN"
+        eyebrow={t('ОТКРЫТО ПО ЗАМЫСЛУ', 'OPEN BY DESIGN')}
         title={t('Делать вместе — проще.', 'Making is better together.')}
         description={t(
           'OpenPrint соединяет тех, у кого есть идея, с теми, кто умеет придать ей форму. Открытое сообщество без обязательных подписок на платформы.',
@@ -72,12 +72,12 @@ export default function About() {
                 rel="noreferrer"
               >
                 {c.link}
-                <ArrowUpRight size={14} />
+                <ArrowUpRight className="directional-icon" size={14} />
               </a>
             ) : (
               <Link className="text-button" style={{ marginTop: 17 }} to={c.to}>
                 {c.link}
-                <ArrowUpRight size={14} />
+                <ArrowUpRight className="directional-icon" size={14} />
               </Link>
             )}
           </section>
@@ -164,11 +164,11 @@ export default function About() {
             rel="noreferrer"
             href="https://github.com/ultim8digital/openprint"
           >
-            <Code2 size={15} /> GitHub <ArrowUpRight size={15} />
+            <Code2 size={15} /> GitHub <ArrowUpRight className="directional-icon" size={15} />
           </a>
           <Link className="text-button" to="/tools">
             {t('Попробовать конструктор', 'Try the part builder')}
-            <ArrowUpRight size={15} />
+            <ArrowUpRight className="directional-icon" size={15} />
           </Link>
         </div>
       </section>

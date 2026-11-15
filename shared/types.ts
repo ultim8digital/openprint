@@ -143,3 +143,38 @@ export type Notification = {
   seen: boolean;
   created_at: number;
 };
+
+export const technologyLabel = (value: string, t: (ru: string, en: string) => string) => {
+  const names: Record<string, string> = {
+    FDM: t('FDM-печать', 'FDM printing'),
+    SLA: t('SLA-печать', 'SLA printing'),
+    SLS: t('SLS-печать', 'SLS printing'),
+    MJF: t('MJF-печать', 'MJF printing'),
+    DMLS: t('Печать металлом', 'Metal printing'),
+    LASER: t('Лазерная резка', 'Laser cutting'),
+    CNC: t('Фрезеровка ЧПУ', 'CNC milling'),
+    CNC_TURNING: t('Токарная обработка ЧПУ', 'CNC turning'),
+    WOOD_CNC: t('ЧПУ по дереву', 'CNC woodworking'),
+    WATERJET: t('Гидроабразивная резка', 'Waterjet cutting'),
+    PLASMA: t('Плазменная резка', 'Plasma cutting'),
+    SHEET_METAL: t('Листовой металл и гибка', 'Sheet metal & bending'),
+    CAD: t('Проектирование CAD', 'CAD engineering'),
+  };
+  return names[value] || value;
+};
+
+/** Translate known material identifiers without changing unknown user-supplied names. */
+export const materialLabel = (value: string, t: (ru: string, en: string) => string): string => {
+  const names: Record<string, string> = {
+    Nylon: t('Нейлон', 'Nylon'),
+    Resin: t('Фотополимер', 'Resin'),
+    Metal: t('Металл', 'Metal'),
+    Wood: t('Дерево', 'Wood'),
+    Plywood: t('Фанера', 'Plywood'),
+    Acrylic: t('Акрил', 'Acrylic'),
+    Aluminum: t('Алюминий', 'Aluminum'),
+    Steel: t('Сталь', 'Steel'),
+    Any: t('Любой материал', 'Any material'),
+  };
+  return names[value] || value;
+};

@@ -1,6 +1,18 @@
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  type ReactNode,
+} from 'react';
 import type { User, Profile } from '../shared/types';
-export type Lang = 'ru' | 'en';
+import { normalizeLocale, localeTag, localeDirection, type Lang } from '../shared/locales';
+import type { Translator } from '../shared/messages';
+import { loadLocale, localeLoaded, translate, setActiveLanguage } from './i18n';
+import { localizedError } from './errors';
+export type { Lang } from '../shared/locales';
 export type Bootstrap = {
   mode: 'catalog' | 'community';
   user: User | null;
@@ -51,8 +63,9 @@ export async function upload(file: File) {
   });
 }
 export function useRemote<T>(path: string | null, key: unknown = '') {
+  const { t } = useApp();
   const [data, setData] = useState<T | null>(null),
-    [error, setError] = useState(''),
+    [failure, setFailure] = useState<unknown>(null),
     [loading, setLoading] = useState(true),
     [revision, setRevision] = useState(0);
   const reload = useCallback(() => setRevision((x) => x + 1), []);
@@ -64,18 +77,18 @@ export function useRemote<T>(path: string | null, key: unknown = '') {
     }
     const controller = new AbortController();
     setLoading(true);
-    setError('');
+    setFailure(null);
     api<T>(path, { signal: controller.signal })
       .then(setData)
       .catch((e) => {
-        if (e.name !== 'AbortError') setError(e.message);
+        if (e.name !== 'AbortError') setFailure(e);
       })
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
   }, [path, key, revision]);
-  return { data, error, loading, reload };
+  return { data, error: failure ? localizedError(failure, t) : '', loading, reload };
 }
 const empty: Bootstrap = {
   mode: 'catalog',
@@ -90,10 +103,11 @@ const empty: Bootstrap = {
 };
 type Context = Bootstrap & {
   lang: Lang;
-  t: (ru: string, en: string) => string;
+  t: Translator;
   refresh: () => Promise<void>;
   toast: (message: string) => void;
   loading: boolean;
+  languageLoading: boolean;
 };
 const AppContext = createContext<Context>(null!);
 export const useApp = () => useContext(AppContext);
@@ -102,12 +116,53 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [loading, setLoading] = useState(true),
     [lang, setLang] = useState<Lang>(() => {
       try {
-        return localStorage.getItem('openprint.language') === 'en' ? 'en' : 'ru';
+        return normalizeLocale(localStorage.getItem('openprint.language')) ?? 'ru';
       } catch {
         return 'ru';
       }
     }),
+    [languageLoading, setLanguageLoading] = useState(false),
+    [languageReady, setLanguageReady] = useState(() => localeLoaded(lang)),
     [message, setMessage] = useState('');
+  const languageRequest = useRef(0);
+  const changeLanguage = useCallback(
+    (next: Lang) => {
+      const request = ++languageRequest.current;
+      setLanguageLoading(true);
+      void loadLocale(next)
+        .then(() => {
+          if (request !== languageRequest.current) return;
+          setActiveLanguage(next);
+          setLang(next);
+          setLanguageReady(true);
+        })
+        .catch(() => {
+          if (request !== languageRequest.current) return;
+          setMessage(
+            translate(
+              lang,
+              'Не удалось загрузить язык. Проверьте соединение и повторите.',
+              'The language could not be loaded. Check your connection and try again.',
+            ),
+          );
+          if (!localeLoaded(lang)) {
+            setLang('ru');
+            setActiveLanguage('ru');
+          }
+          setLanguageReady(true);
+        })
+        .finally(() => {
+          if (request === languageRequest.current) setLanguageLoading(false);
+        });
+    },
+    [lang],
+  );
+  useEffect(() => {
+    if (!localeLoaded(lang)) changeLanguage(lang);
+    return () => {
+      languageRequest.current++;
+    };
+  }, []);
   const refresh = useCallback(async () => {
     setState(await api<Bootstrap>('/bootstrap'));
     setLoading(false);
@@ -125,7 +180,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
   }, [refresh]);
   useEffect(() => {
-    document.documentElement.lang = lang;
+    document.documentElement.lang = localeTag(lang);
+    document.documentElement.dir = localeDirection(lang);
+    setActiveLanguage(lang);
     try {
       localStorage.setItem('openprint.language', lang);
     } catch {
@@ -137,11 +194,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const timer = setTimeout(() => setMessage(''), 5000);
     return () => clearTimeout(timer);
   }, [message]);
-  const t = useCallback((ru: string, en: string) => (lang === 'ru' ? ru : en), [lang]);
+  const t: Translator = useCallback((ru, en, params) => translate(lang, ru, en, params), [lang]);
   return (
-    <AppContext.Provider value={{ ...state, lang, t, refresh, toast: setMessage, loading }}>
-      <LanguageContext.Provider value={setLang}>
-        {children}
+    <AppContext.Provider
+      value={{ ...state, lang, t, refresh, toast: setMessage, loading, languageLoading }}
+    >
+      <LanguageContext.Provider value={changeLanguage}>
+        {languageReady ? (
+          children
+        ) : (
+          <div
+            className="loading"
+            role="status"
+            aria-label={t('Загрузка языка…', 'Loading language…')}
+          >
+            <span className="spinner" />
+          </div>
+        )}
         <div className={'toast' + (message ? ' visible' : '')} role="status" aria-live="polite">
           {message}
         </div>
@@ -151,13 +220,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
 }
 export const LanguageContext = createContext<(lang: Lang) => void>(() => {});
 export const formatMoney = (minor: number, currency: string, lang: Lang = 'ru') =>
-  new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : 'en-US', {
+  new Intl.NumberFormat(localeTag(lang), {
     style: 'currency',
     currency,
     maximumFractionDigits: 2,
   }).format(minor / 100);
 export const formatDate = (time: number, lang: Lang = 'ru') =>
-  new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', {
+  new Intl.DateTimeFormat(localeTag(lang), {
     day: 'numeric',
     month: 'short',
   }).format(time);
@@ -169,13 +238,12 @@ export const initials = (name: string) =>
     .map((n) => n[0])
     .join('')
     .toUpperCase();
-export const errorText = (error: unknown) =>
-  error instanceof Error ? error.message : String(error);
+export const errorText = localizedError;
 export function ErrorBox({ error, retry }: { error: string; retry?: () => void }) {
   const { t } = useApp();
   return error ? (
     <div className="error-box" role="alert">
-      <span>{error}</span>
+      <span>{localizedError(error, t)}</span>
       {retry && (
         <button className="text-button" onClick={retry}>
           {t('Повторить', 'Try again')}

@@ -23,29 +23,30 @@ export default function CadPreview({ url }: { url: string }) {
   const { t } = useApp();
   const host = useRef<HTMLDivElement>(null);
   const [mesh, setMesh] = useState<CadMesh | null>(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<unknown>(null);
+  const [previewUnavailable, setPreviewUnavailable] = useState(false);
   const [selected, setSelected] = useState('');
   const [explode, setExplode] = useState(0);
   const controlsRef = useRef<{ reset: () => void; zoom: (amount: number) => void } | null>(null);
   const updateRef = useRef<((selected: string, explode: number) => void) | null>(null);
   useEffect(() => {
     const controller = new AbortController();
-    setError('');
+    setError(null);
     setMesh(null);
+    setPreviewUnavailable(false);
     setSelected('');
     setExplode(0);
     fetch(url, { signal: controller.signal })
       .then(async (response) => {
-        if (!response.ok)
-          throw new Error(t('Не удалось загрузить геометрию.', 'Could not load geometry.'));
+        if (!response.ok) throw new Error('CAD_MESH_FETCH');
         return cadMeshSchema.parse(await response.json());
       })
       .then(setMesh)
       .catch((reason) => {
-        if (reason.name !== 'AbortError') setError(errorText(reason));
+        if (reason.name !== 'AbortError') setError(reason);
       });
     return () => controller.abort();
-  }, [url, t]);
+  }, [url]);
   useEffect(() => {
     if (!host.current || !mesh) return;
     const container = host.current;
@@ -53,14 +54,10 @@ export default function CadPreview({ url }: { url: string }) {
     try {
       renderer = new WebGLRenderer({ antialias: true });
     } catch {
-      setError(
-        t(
-          '3D-просмотр недоступен. Отчёт и файлы можно скачать ниже.',
-          '3D preview is unavailable. The report and files are still available below.',
-        ),
-      );
+      setPreviewUnavailable(true);
       return;
     }
+    setPreviewUnavailable(false);
     const scene = new Scene();
     scene.background = new Color('#edf2e7');
     const assembly = new Group();
@@ -134,13 +131,7 @@ export default function CadPreview({ url }: { url: string }) {
     scene.add(light);
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     renderer.domElement.setAttribute('role', 'img');
-    renderer.domElement.setAttribute(
-      'aria-label',
-      t(
-        'Геометрия CAD. Поверните перетаскиванием или используйте кнопки масштаба.',
-        'CAD geometry. Drag to orbit or use the zoom buttons.',
-      ),
-    );
+
     container.appendChild(renderer.domElement);
     const observer = new ResizeObserver(() => {
       const width = container.clientWidth,
@@ -173,13 +164,37 @@ export default function CadPreview({ url }: { url: string }) {
       renderer.forceContextLoss();
       renderer.domElement.remove();
     };
-  }, [mesh, t]);
+  }, [mesh]);
+  useEffect(() => {
+    host.current
+      ?.querySelector('canvas')
+      ?.setAttribute(
+        'aria-label',
+        t(
+          'Геометрия CAD. Поверните перетаскиванием или используйте кнопки масштаба.',
+          'CAD geometry. Drag to orbit or use the zoom buttons.',
+        ),
+      );
+  }, [t, mesh]);
   useEffect(() => {
     updateRef.current?.(selected, explode);
   }, [selected, explode, mesh]);
   return (
     <div className="cad-preview">
-      <ErrorBox error={error} />
+      <ErrorBox
+        error={
+          previewUnavailable
+            ? t(
+                '3D-просмотр недоступен. Отчёт и файлы можно скачать ниже.',
+                '3D preview is unavailable. The report and files are still available below.',
+              )
+            : error instanceof Error && error.message === 'CAD_MESH_FETCH'
+              ? t('Не удалось загрузить геометрию.', 'Could not load geometry.')
+              : error
+                ? errorText(error)
+                : ''
+        }
+      />
       {!mesh && !error && <Loading />}
       {mesh && (
         <>
@@ -187,9 +202,11 @@ export default function CadPreview({ url }: { url: string }) {
             <label>
               {t('Показать компонент', 'Show component')}
               <select value={selected} onChange={(event) => setSelected(event.target.value)}>
-                <option value="">{t('Вся сборка', 'Whole assembly')}</option>
+                <option dir="auto" value="">
+                  {t('Вся сборка', 'Whole assembly')}
+                </option>
                 {mesh.groups.map((group) => (
-                  <option key={group.id} value={group.id}>
+                  <option dir="auto" key={group.id} value={group.id}>
                     {group.name}
                   </option>
                 ))}
@@ -198,6 +215,7 @@ export default function CadPreview({ url }: { url: string }) {
             <label>
               {t('Разнести компоненты', 'Explode components')} · {explode}%
               <input
+                dir="auto"
                 type="range"
                 min="0"
                 max="100"

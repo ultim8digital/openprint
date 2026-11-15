@@ -12,6 +12,8 @@ For the repository, add original parametric designs with explicit licensing and 
 
 ## For developers
 
+For interface and README translations, start with the [50-locale index and maintenance notes](docs/i18n/README.md). Preserve interpolation tokens, technical identifiers, units, numbers and link targets. Review meaning as well as grammar, especially private-link access, data rights and manufacturing limitations. Do not translate user records or upload real workshop databases as translation fixtures.
+
 Use Node.js 24 and the committed lockfile:
 
 ```sh

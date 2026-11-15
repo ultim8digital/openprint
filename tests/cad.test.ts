@@ -897,7 +897,7 @@ test('CAD restart marks interrupted work failed and SQLite backup preserves arti
   }
 });
 
-test('v2 Studio revisions and confirmations survive migration to CAD schema v6 and reopening', () => {
+test('v2 Studio revisions and confirmations survive migration to CAD schema v7 and reopening', () => {
   const dir = mkdtempSync(join(tmpdir(), 'neofab-cad-migration-')),
     path = join(dir, 'openprint.sqlite');
   try {
@@ -938,7 +938,7 @@ test('v2 Studio revisions and confirmations survive migration to CAD schema v6 a
     );
     v2.close();
     const migrated = new Store(path);
-    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 6);
+    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 7);
     assert.equal(
       migrated.get<{ confirmed_hash: string }>(
         'SELECT confirmed_hash FROM studio_projects WHERE id=?',

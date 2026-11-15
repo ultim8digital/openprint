@@ -526,7 +526,7 @@ test('schema 5 upgrades additively to 6 and default catalog mode excludes every 
       'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; PRAGMA user_version=5;',
     );
     await f.restart();
-    assert.equal(f.store.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 6);
+    assert.equal(f.store.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 7);
     for (const [table, records] of previous)
       assert.equal(JSON.stringify(f.store.all(`SELECT * FROM "${table}"`)), records, table);
     assert.deepEqual(f.store.all('PRAGMA foreign_key_check'), []);

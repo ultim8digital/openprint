@@ -1,9 +1,17 @@
+import { localeTag } from '../shared/locales';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Paperclip, ShieldCheck, Upload, X } from 'lucide-react';
 import { useApp, useRemote, post, upload, ErrorBox, errorText, formatMoney } from './core';
 import { PageTitle } from './Browse';
-import { technologies, technologyName, materials, currencies, type Profile } from '../shared/types';
+import {
+  technologies,
+  technologyLabel,
+  materialLabel,
+  materials,
+  currencies,
+  type Profile,
+} from '../shared/types';
 import { minorUnits, jobInput } from '../shared/validation';
 type Draft = {
   title: string;
@@ -156,6 +164,7 @@ export default function NewProject() {
             <label>
               {t('Что нужно сделать?', 'What would you like to make?')}
               <input
+                dir="auto"
                 value={draft.title}
                 onChange={(e) => set('title', e.target.value)}
                 required
@@ -171,14 +180,21 @@ export default function NewProject() {
               <label>
                 {t('Тип проекта', 'Project type')}
                 <select value={draft.kind} onChange={(e) => set('kind', e.target.value)}>
-                  <option value="print">{t('Изготовить изделие', 'Manufacture a product')}</option>
-                  <option value="design">{t('Спроектировать модель', 'Design a model')}</option>
-                  <option value="repair">{t('Восстановить деталь', 'Repair a part')}</option>
+                  <option dir="auto" value="print">
+                    {t('Изготовить изделие', 'Manufacture a product')}
+                  </option>
+                  <option dir="auto" value="design">
+                    {t('Спроектировать модель', 'Design a model')}
+                  </option>
+                  <option dir="auto" value="repair">
+                    {t('Восстановить деталь', 'Repair a part')}
+                  </option>
                 </select>
               </label>
               <label>
                 {t('Город или «Удалённо»', 'City or “Remote”')}
                 <input
+                  dir="auto"
                   value={draft.city}
                   onChange={(e) => set('city', e.target.value)}
                   required
@@ -191,6 +207,7 @@ export default function NewProject() {
             <label>
               {t('Описание задачи', 'Project brief')}
               <textarea
+                dir="auto"
                 aria-label={t('Описание задачи', 'Project brief')}
                 aria-describedby="brief-privacy"
                 value={draft.description}
@@ -222,10 +239,12 @@ export default function NewProject() {
                   value={draft.technology}
                   onChange={(e) => set('technology', e.target.value)}
                 >
-                  <option value="Any">{t('Помогите выбрать', 'Help me choose')}</option>
+                  <option dir="auto" value="Any">
+                    {t('Помогите выбрать', 'Help me choose')}
+                  </option>
                   {technologies.map((s) => (
-                    <option key={s} value={s}>
-                      {technologyName(s, lang)}
+                    <option dir="auto" key={s} value={s}>
+                      {technologyLabel(s, t)}
                     </option>
                   ))}
                 </select>
@@ -234,8 +253,8 @@ export default function NewProject() {
                 {t('Материал', 'Material')}
                 <select value={draft.material} onChange={(e) => set('material', e.target.value)}>
                   {materials.map((s) => (
-                    <option key={s} value={s}>
-                      {s === 'Any' ? t('Помогите выбрать', 'Help me choose') : s}
+                    <option dir="auto" key={s} value={s}>
+                      {s === 'Any' ? t('Помогите выбрать', 'Help me choose') : materialLabel(s, t)}
                     </option>
                   ))}
                 </select>
@@ -243,6 +262,7 @@ export default function NewProject() {
               <label>
                 {t('Количество', 'Quantity')}
                 <input
+                  dir="auto"
                   type="number"
                   min={1}
                   max={10000}
@@ -254,6 +274,7 @@ export default function NewProject() {
               <label>
                 {t('Желаемая дата · необязательно', 'Preferred date · optional')}
                 <input
+                  dir="auto"
                   type="date"
                   min={new Date().toISOString().slice(0, 10)}
                   value={draft.deadline}
@@ -263,6 +284,7 @@ export default function NewProject() {
               <label>
                 {t('Бюджет · необязательно', 'Budget · optional')}
                 <input
+                  dir="auto"
                   inputMode="decimal"
                   value={draft.budget}
                   onChange={(e) => set('budget', e.target.value)}
@@ -276,7 +298,9 @@ export default function NewProject() {
                 {t('Валюта', 'Currency')}
                 <select value={draft.currency} onChange={(e) => set('currency', e.target.value)}>
                   {currencies.map((s) => (
-                    <option key={s}>{s}</option>
+                    <option dir="auto" key={s}>
+                      {s}
+                    </option>
                   ))}
                 </select>
               </label>
@@ -286,6 +310,7 @@ export default function NewProject() {
               <label>
                 {t('Файл модели · необязательно', 'Model file · optional')}
                 <input
+                  dir="auto"
                   type="file"
                   accept=".stl,.obj,.step,.stp,.3mf,.glb"
                   onChange={(e) => {
@@ -302,7 +327,13 @@ export default function NewProject() {
                 <small>STL, OBJ, STEP, 3MF, GLB · {t('до 20 МБ', 'up to 20 MB')}</small>
                 {file && (
                   <small>
-                    <Paperclip size={12} /> {file.name} · {(file.size / 1024).toFixed(1)} KB
+                    <Paperclip size={12} /> {file.name} ·{' '}
+                    {t('{size} КБ', '{size} KB', {
+                      size: (file.size / 1024).toLocaleString(localeTag(lang), {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1,
+                      }),
+                    })}
                   </small>
                 )}
               </label>
@@ -339,7 +370,7 @@ export default function NewProject() {
                 [t('Город', 'City'), draft.city],
                 [
                   t('Технология / материал', 'Technology / material'),
-                  `${draft.technology} / ${draft.material}`,
+                  `${technologyLabel(draft.technology, t)} / ${materialLabel(draft.material, t)}`,
                 ],
                 [t('Количество', 'Quantity'), draft.quantity],
                 [
@@ -375,7 +406,7 @@ export default function NewProject() {
               </div>
             )}
             <label className="check-label">
-              <input type="checkbox" required />
+              <input dir="auto" type="checkbox" required />
               {t(
                 'Описание проверено. У меня есть права на приложенные материалы.',
                 'I’ve checked the brief and have rights to the attached materials.',
@@ -391,7 +422,7 @@ export default function NewProject() {
             disabled={busy}
             onClick={() => (step ? setStep((s) => s - 1) : navigate('/projects'))}
           >
-            <ArrowLeft size={15} />
+            <ArrowLeft className="directional-icon" size={15} />
             {t('Назад', 'Back')}
           </button>
           <button className="button" disabled={busy || !!target.error}>
@@ -400,7 +431,7 @@ export default function NewProject() {
               : step === 2
                 ? t('Опубликовать проект', 'Publish project')
                 : t('Продолжить', 'Continue')}
-            <ArrowRight size={16} />
+            <ArrowRight className="directional-icon" size={16} />
           </button>
         </div>
       </form>

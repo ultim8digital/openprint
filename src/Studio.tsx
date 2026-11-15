@@ -56,28 +56,53 @@ const fromDraft = (draft: Draft): StudioBrief => ({
   operations: lines(draft.operations),
   acceptance: lines(draft.acceptance),
 });
+function matchReason(reason: string, t: ReturnType<typeof useApp>['t']): string {
+  switch (reason) {
+    case 'Проектирование CAD':
+    case 'CAD design':
+      return t('Проектирование CAD', 'CAD design');
+    case 'В вашем городе':
+    case 'In your city':
+      return t('В вашем городе', 'In your city');
+    case 'Принимает удалённые заказы':
+    case 'Accepts remote projects':
+      return t('Принимает удалённые заказы', 'Accepts remote projects');
+    case 'Материал указан в профиле':
+    case 'Material listed in profile':
+      return t('Материал указан в профиле', 'Material listed in profile');
+    case 'Профиль просмотрен модератором':
+    case 'Profile reviewed by moderator':
+      return t('Профиль просмотрен модератором', 'Profile reviewed by moderator');
+  }
+  const listed = /^(?:В профиле указаны: |Listed capabilities: )(.*)$/.exec(reason);
+  return listed
+    ? t('В профиле указаны: {capabilities}', 'Listed capabilities: {capabilities}', {
+        capabilities: listed[1]!,
+      })
+    : reason;
+}
 const emptyPart = { kind: 'plate' as const, width: 70, depth: 45, height: 5, hole: 10 };
-const processNames: Record<string, [string, string]> = {
-  FDM: ['3D-печать FDM', 'FDM 3D printing'],
-  SLA: ['Фотополимерная печать SLA', 'SLA resin printing'],
-  SLS: ['Порошковая печать SLS', 'SLS powder printing'],
-  MJF: ['Порошковая печать MJF', 'MJF powder printing'],
-  DMLS: ['3D-печать металлом', 'Metal 3D printing'],
-  LASER: ['Лазерная резка', 'Laser cutting'],
-  CNC: ['Фрезерование с ЧПУ', 'CNC milling'],
-  CNC_TURNING: ['Токарная обработка с ЧПУ', 'CNC turning'],
-  WOOD_CNC: ['ЧПУ по дереву', 'Wood CNC'],
-  WATERJET: ['Гидроабразивная резка', 'Waterjet cutting'],
-  PLASMA: ['Плазменная резка', 'Plasma cutting'],
-  SHEET_METAL: ['Листовой металл и гибка', 'Sheet metal & bending'],
-  MIXED: ['Несколько технологий', 'Multiple processes'],
-  UNSURE: ['Нужен выбор технологии', 'Help choosing a process'],
-};
+const processNames = (t: ReturnType<typeof useApp>['t']): Record<string, string> => ({
+  FDM: t('3D-печать FDM', 'FDM 3D printing'),
+  SLA: t('Фотополимерная печать SLA', 'SLA resin printing'),
+  SLS: t('Порошковая печать SLS', 'SLS powder printing'),
+  MJF: t('Порошковая печать MJF', 'MJF powder printing'),
+  DMLS: t('3D-печать металлом', 'Metal 3D printing'),
+  LASER: t('Лазерная резка', 'Laser cutting'),
+  CNC: t('Фрезерование с ЧПУ', 'CNC milling'),
+  CNC_TURNING: t('Токарная обработка с ЧПУ', 'CNC turning'),
+  WOOD_CNC: t('ЧПУ по дереву', 'Wood CNC'),
+  WATERJET: t('Гидроабразивная резка', 'Waterjet cutting'),
+  PLASMA: t('Плазменная резка', 'Plasma cutting'),
+  SHEET_METAL: t('Листовой металл и гибка', 'Sheet metal & bending'),
+  MIXED: t('Несколько технологий', 'Multiple processes'),
+  UNSURE: t('Нужен выбор технологии', 'Help choosing a process'),
+});
 function ProcessOptions() {
   const { t } = useApp();
   return manufacturingProcesses.map((process) => (
-    <option key={process} value={process}>
-      {t(...processNames[process])}
+    <option dir="auto" key={process} value={process}>
+      {processNames(t)[process]}
     </option>
   ));
 }
@@ -154,6 +179,7 @@ function StudioStart({ capabilities }: { capabilities: StudioCapabilities | null
             )}
           </label>
           <textarea
+            dir="auto"
             id="studio-idea"
             value={idea}
             onChange={(event) => setIdea(event.target.value)}
@@ -174,7 +200,11 @@ function StudioStart({ capabilities }: { capabilities: StudioCapabilities | null
           </p>
           <ErrorBox error={error} />
           <button className="button" disabled={busy}>
-            {busy ? <LoaderCircle size={16} className="studio-spin" /> : <ArrowRight size={16} />}
+            {busy ? (
+              <LoaderCircle size={16} className="studio-spin" />
+            ) : (
+              <ArrowRight className="directional-icon" size={16} />
+            )}
             {t('Создать рабочий проект', 'Create a workspace')}
           </button>
           {capabilities && (
@@ -280,7 +310,7 @@ function StudioStart({ capabilities }: { capabilities: StudioCapabilities | null
                         ? t('ТЗ подтверждено', 'Brief confirmed')
                         : t('Черновик', 'Draft')}
                   </span>
-                  <ArrowRight size={17} />
+                  <ArrowRight className="directional-icon" size={17} />
                 </div>
               </Link>
             ))}
@@ -393,10 +423,11 @@ function StudioEditor({
     const parsed = studioBriefSchema.safeParse(fromDraft(draft));
     if (!parsed.success) {
       setError(
-        t('Проверьте поля: ', 'Please check: ') +
-          parsed.error.issues
+        t('Проверьте поля: {issues}', 'Please check: {issues}', {
+          issues: parsed.error.issues
             .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
             .join(' · '),
+        }),
       );
       return;
     }
@@ -461,7 +492,7 @@ function StudioEditor({
     return (
       <div className="page">
         <Link className="text-button" to="/studio">
-          <ArrowLeft size={15} /> Neofab Studio
+          <ArrowLeft className="directional-icon" size={15} /> Neofab Studio
         </Link>
         <ErrorBox error={error} retry={() => window.location.reload()} />
       </div>
@@ -486,18 +517,18 @@ function StudioEditor({
   const retryingAssist =
     pendingAssist.current?.key === JSON.stringify([project.version, aiMessage, quality]);
   const fieldLocked = !!busy || published;
-  const labels: Record<LineField, [string, string]> = {
-    requirements: ['Требования к изделию', 'Product requirements'],
-    questions: ['Открытые вопросы', 'Open questions'],
-    assumptions: ['Неподтверждённые допущения', 'Unconfirmed assumptions'],
-    operations: ['Операции изготовления и сборки', 'Manufacturing & assembly operations'],
-    acceptance: ['Критерии приёмки', 'Acceptance criteria'],
+  const labels: Record<LineField, string> = {
+    requirements: t('Требования к изделию', 'Product requirements'),
+    questions: t('Открытые вопросы', 'Open questions'),
+    assumptions: t('Неподтверждённые допущения', 'Unconfirmed assumptions'),
+    operations: t('Операции изготовления и сборки', 'Manufacturing & assembly operations'),
+    acceptance: t('Критерии приёмки', 'Acceptance criteria'),
   };
   return (
     <div className="page studio-page">
       <div className="studio-editor-top">
         <Link className="text-button" to="/studio">
-          <ArrowLeft size={15} /> {t('Рабочие проекты', 'Workspaces')}
+          <ArrowLeft className="directional-icon" size={15} /> {t('Рабочие проекты', 'Workspaces')}
         </Link>
         <span className="studio-version">
           {t('Версия', 'Revision')} {project.version} ·{' '}
@@ -545,7 +576,7 @@ function StudioEditor({
           </div>
           <Link className="button" to={'/projects/' + project.job_id}>
             {t('Открыть заявку', 'Open request')}
-            <ArrowRight size={16} />
+            <ArrowRight className="directional-icon" size={16} />
           </Link>
         </div>
       )}
@@ -580,10 +611,10 @@ function StudioEditor({
                       update('requestKind', event.target.value as StudioBrief['requestKind'])
                     }
                   >
-                    <option value="design">
+                    <option dir="auto" value="design">
                       {t('Проектирование и консультация', 'Design & consultation')}
                     </option>
-                    <option value="manufacture">
+                    <option dir="auto" value="manufacture">
                       {t('Расчёт изготовления', 'Manufacturing quote')}
                     </option>
                   </select>
@@ -591,6 +622,7 @@ function StudioEditor({
                 <label>
                   {t('Название проекта', 'Project title')}
                   <input
+                    dir="auto"
                     value={draft.title}
                     onChange={(e) => update('title', e.target.value)}
                     minLength={5}
@@ -601,6 +633,7 @@ function StudioEditor({
                 <label>
                   {t('Назначение и условия эксплуатации', 'Purpose & operating conditions')}
                   <textarea
+                    dir="auto"
                     value={draft.purpose}
                     onChange={(e) => update('purpose', e.target.value)}
                     rows={5}
@@ -622,6 +655,7 @@ function StudioEditor({
                   <label>
                     {t('Материал или требования к материалу', 'Material or material requirements')}
                     <input
+                      dir="auto"
                       value={draft.material}
                       onChange={(e) => update('material', e.target.value)}
                       maxLength={80}
@@ -631,6 +665,7 @@ function StudioEditor({
                   <label>
                     {t('Количество изделий', 'Product quantity')}
                     <input
+                      dir="auto"
                       type="number"
                       min={1}
                       max={10000}
@@ -645,6 +680,7 @@ function StudioEditor({
                   <label>
                     {t('Город или «Удалённо»', 'City or “Remote”')}
                     <input
+                      dir="auto"
                       value={draft.city}
                       onChange={(e) => update('city', e.target.value)}
                       maxLength={80}
@@ -653,8 +689,9 @@ function StudioEditor({
                   </label>
                 </div>
                 <label>
-                  {t(...labels.requirements)}
+                  {labels.requirements}
                   <textarea
+                    dir="auto"
                     value={draft.requirements}
                     onChange={(e) => update('requirements', e.target.value)}
                     rows={4}
@@ -707,12 +744,14 @@ function StudioEditor({
                       <div className="studio-component" key={index}>
                         <div className="studio-component-heading">
                           <span>
-                            {t('Позиция', 'Component')} {index + 1}
+                            {t('Позиция {number}', 'Component {number}', { number: index + 1 })}
                           </span>
                           <button
                             type="button"
                             className="studio-icon-button"
-                            aria-label={t('Удалить позицию ', 'Remove component ') + (index + 1)}
+                            aria-label={t('Удалить позицию {number}', 'Remove component {number}', {
+                              number: index + 1,
+                            })}
                             onClick={() =>
                               update(
                                 'components',
@@ -727,6 +766,7 @@ function StudioEditor({
                           <label>
                             {t('Название позиции', 'Component name')}
                             <input
+                              dir="auto"
                               value={component.name}
                               minLength={2}
                               maxLength={100}
@@ -737,6 +777,7 @@ function StudioEditor({
                           <label>
                             {t('Кол-во', 'Qty')}
                             <input
+                              dir="auto"
                               type="number"
                               value={component.quantity ?? ''}
                               min={1}
@@ -766,6 +807,7 @@ function StudioEditor({
                           <label>
                             {t('Материал позиции', 'Component material')}
                             <input
+                              dir="auto"
                               value={component.material}
                               maxLength={80}
                               onChange={(e) => change({ material: e.target.value })}
@@ -778,6 +820,7 @@ function StudioEditor({
                             'Component dimensions & requirements',
                           )}
                           <textarea
+                            dir="auto"
                             value={component.requirements}
                             maxLength={600}
                             rows={2}
@@ -811,8 +854,9 @@ function StudioEditor({
                 <div className="studio-line-fields">
                   {(['operations', 'acceptance'] as const).map((key) => (
                     <label key={key}>
-                      {t(...labels[key])}
+                      {labels[key]}
                       <textarea
+                        dir="auto"
                         value={draft[key]}
                         onChange={(e) => update(key, e.target.value)}
                         rows={3}
@@ -854,8 +898,9 @@ function StudioEditor({
                 <div className="studio-line-fields">
                   {(['questions', 'assumptions'] as const).map((key) => (
                     <label key={key}>
-                      {t(...labels[key])}
+                      {labels[key]}
                       <textarea
+                        dir="auto"
                         value={draft[key]}
                         onChange={(e) => update(key, e.target.value)}
                         rows={3}
@@ -902,22 +947,25 @@ function StudioEditor({
                       )
                     }
                   >
-                    <option value="none">
+                    <option dir="auto" value="none">
                       {t('Своя конструкция — без шаблона', 'Custom design — no template')}
                     </option>
                     <option
+                      dir="auto"
                       value="block"
                       disabled={draft.process !== 'FDM' || draft.components.length > 0}
                     >
                       {t('Блок', 'Block')}
                     </option>
                     <option
+                      dir="auto"
                       value="plate"
                       disabled={draft.process !== 'FDM' || draft.components.length > 0}
                     >
                       {t('Пластина с отверстием', 'Drilled plate')}
                     </option>
                     <option
+                      dir="auto"
                       value="tube"
                       disabled={draft.process !== 'FDM' || draft.components.length > 0}
                     >
@@ -954,6 +1002,7 @@ function StudioEditor({
                                   ? t('Высота, мм', 'Height, mm')
                                   : t('Диаметр отверстия, мм', 'Hole diameter, mm')}
                             <input
+                              dir="auto"
                               type="number"
                               value={draft.part![field]}
                               min={field === 'hole' ? 0 : field === 'height' ? 1 : 4}
@@ -1045,6 +1094,7 @@ function StudioEditor({
                 <div className="studio-maker-options">
                   <label className={'studio-maker-choice' + (!target ? ' selected' : '')}>
                     <input
+                      dir="auto"
                       type="radio"
                       name="studio-target"
                       checked={!target}
@@ -1072,6 +1122,7 @@ function StudioEditor({
                       }
                     >
                       <input
+                        dir="auto"
                         type="radio"
                         name="studio-target"
                         checked={target === match.profile.id}
@@ -1091,7 +1142,7 @@ function StudioEditor({
                         </p>
                         <div className="studio-match-reasons">
                           {match.reasons.map((reason) => (
-                            <span key={reason}>{reason}</span>
+                            <span key={reason}>{matchReason(reason, t)}</span>
                           ))}
                         </div>
                       </div>
@@ -1099,7 +1150,9 @@ function StudioEditor({
                         className="text-button"
                         to={'/studios/' + match.profile.id}
                         target="_blank"
-                        aria-label={t('Профиль: ', 'Profile: ') + match.profile.name}
+                        aria-label={t('Профиль: {name}', 'Profile: {name}', {
+                          name: match.profile.name,
+                        })}
                       >
                         {t('Профиль', 'Profile')} ↗
                       </Link>
@@ -1140,12 +1193,15 @@ function StudioEditor({
                       disabled={!!busy}
                     >
                       {currencies.map((item) => (
-                        <option key={item}>{item}</option>
+                        <option dir="auto" key={item}>
+                          {item}
+                        </option>
                       ))}
                     </select>
                   </label>
                   <label className="check-label">
                     <input
+                      dir="auto"
                       type="checkbox"
                       checked={publishConsent}
                       onChange={(e) => setPublishConsent(e.target.checked)}
@@ -1194,7 +1250,7 @@ function StudioEditor({
                     {busy === 'publish' ? (
                       <LoaderCircle size={16} className="studio-spin" />
                     ) : (
-                      <ArrowRight size={16} />
+                      <ArrowRight className="directional-icon" size={16} />
                     )}
                     {target
                       ? t('Отправить выбранному исполнителю', 'Send to selected maker')
@@ -1206,7 +1262,7 @@ function StudioEditor({
             {published && (
               <Link className="button secondary" to={'/projects/' + project.job_id}>
                 {t('Предложения и переписка', 'Offers & messages')}
-                <ArrowRight size={16} />
+                <ArrowRight className="directional-icon" size={16} />
               </Link>
             )}
           </section>
@@ -1233,6 +1289,7 @@ function StudioEditor({
                   <label>
                     {t('Что проработать?', 'What should we work on?')}
                     <textarea
+                      dir="auto"
                       value={aiMessage}
                       onChange={(e) => setAiMessage(e.target.value)}
                       required
@@ -1253,8 +1310,12 @@ function StudioEditor({
                       onChange={(e) => setQuality(e.target.value as 'standard' | 'review')}
                       disabled={!!busy}
                     >
-                      <option value="standard">{t('Уточнение задачи', 'Clarify the task')}</option>
-                      <option value="review">{t('Подробный разбор', 'Detailed review')}</option>
+                      <option dir="auto" value="standard">
+                        {t('Уточнение задачи', 'Clarify the task')}
+                      </option>
+                      <option dir="auto" value="review">
+                        {t('Подробный разбор', 'Detailed review')}
+                      </option>
                     </select>
                   </label>
                   <p className="studio-help">
@@ -1265,6 +1326,7 @@ function StudioEditor({
                   </p>
                   <label className="check-label">
                     <input
+                      dir="auto"
                       type="checkbox"
                       checked={consent}
                       onChange={(e) => setConsent(e.target.checked)}
@@ -1388,7 +1450,7 @@ function StudioEditor({
                   >
                     {check.level === 'passed' ? <Check size={13} /> : '!'}
                   </span>
-                  <p>{lang === 'ru' ? check.ru : check.en}</p>
+                  <p>{t(check.ru, check.en)}</p>
                 </li>
               ))}
             </ul>

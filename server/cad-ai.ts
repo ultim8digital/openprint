@@ -1,3 +1,5 @@
+import type { Lang } from '../shared/locales.js';
+import { createTranslator } from './i18n.js';
 import { randomUUID } from 'node:crypto';
 import { Router, type Request } from 'express';
 import { z } from 'zod';
@@ -76,7 +78,7 @@ requirements.expected_solids is the declared intended solid count; bounds are ex
 export function cadAIInput(options: {
   idea: string;
   brief: StudioBrief;
-  language: 'ru' | 'en';
+  language: Lang;
   spec: CadSpec | null;
   message: string;
 }) {
@@ -100,7 +102,7 @@ export async function requestCadProposal(
   config: ResolvedStudioAIConfig,
   options: {
     input: string;
-    language: 'ru' | 'en';
+    language: Lang;
   },
 ): Promise<{ proposal: CadProposalOutput; usage: AIUsage }> {
   ensure(
@@ -123,13 +125,13 @@ export async function requestCadProposal(
   if (!proposal.spec && !proposal.questions.length)
     throw new StudioAIError('AI_INVALID', result.usage);
   if (proposal.spec) {
-    const notice =
-      options.language === 'ru'
-        ? 'Предложение CAD создано ИИ; размеры, требования и пригодность к изготовлению требуют проверки человеком.'
-        : 'AI CAD proposal; dimensions, requirements and manufacturing suitability require human review.';
-    const questions = proposal.questions.map(
-      (question) =>
-        `${options.language === 'ru' ? 'Открытый вопрос' : 'Open question'}: ${question}`,
+    const t = createTranslator(options.language);
+    const notice = t(
+      'Предложение CAD создано ИИ; размеры, требования и пригодность к изготовлению требуют проверки человеком.',
+      'AI CAD proposal; dimensions, requirements and manufacturing suitability require human review.',
+    );
+    const questions = proposal.questions.map((question) =>
+      t('Открытый вопрос: {question}', 'Open question: {question}', { question }),
     );
     const spec = cadSpecSchema.safeParse({
       ...proposal.spec,

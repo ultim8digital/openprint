@@ -109,6 +109,7 @@ export default function Auth({ recovery = false }: { recovery?: boolean }) {
               <label>
                 {t('Одноразовый код из ссылки', 'One-use code from your link')}
                 <input
+                  dir="auto"
                   type="password"
                   autoComplete="off"
                   value={token}
@@ -123,18 +124,33 @@ export default function Auth({ recovery = false }: { recovery?: boolean }) {
                 {register && (
                   <label>
                     {t('Как вас зовут?', 'Your name')}
-                    <input name="name" autoComplete="name" required minLength={2} maxLength={80} />
+                    <input
+                      dir="auto"
+                      name="name"
+                      autoComplete="name"
+                      required
+                      minLength={2}
+                      maxLength={80}
+                    />
                   </label>
                 )}
                 <label>
                   {t('Электронная почта', 'Email')}
-                  <input name="email" type="email" autoComplete="email" required maxLength={254} />
+                  <input
+                    dir="auto"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    maxLength={254}
+                  />
                 </label>
               </>
             )}
             <label>
               {recovery ? t('Новый пароль', 'New password') : t('Пароль', 'Password')}
               <input
+                dir="auto"
                 aria-label={recovery ? t('Новый пароль', 'New password') : t('Пароль', 'Password')}
                 name="password"
                 type="password"
@@ -161,7 +177,7 @@ export default function Auth({ recovery = false }: { recovery?: boolean }) {
                   : register
                     ? t('Присоединиться', 'Join the community')
                     : t('Войти в аккаунт', 'Sign in')}
-              <ArrowRight size={16} />
+              <ArrowRight className="directional-icon" size={16} />
             </button>
             {!register && !recovery && (
               <Link className="text-button" to="/recover">

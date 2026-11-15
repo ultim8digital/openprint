@@ -522,7 +522,7 @@ test('map reports truncation explicitly above 50000 points, including registered
   }
 });
 
-test('v4 community data migrates to v6 without modifying existing profiles or AI accounting', async () => {
+test('v4 community data migrates to v7 without modifying existing profiles or AI accounting', async () => {
   const f = await fixture();
   try {
     const member = f.member({ verified: 1 });
@@ -540,7 +540,7 @@ test('v4 community data migrates to v6 without modifying existing profiles or AI
     );
     const migrated = new Store(f.store.path);
     try {
-      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 6);
+      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 7);
       assert.deepEqual(migrated.all('SELECT * FROM profiles'), prior);
       assert.equal(migrated.get<{ n: number }>('SELECT count(*) n FROM catalog_studios')!.n, 0);
       assert.equal(

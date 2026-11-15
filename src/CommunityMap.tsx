@@ -80,12 +80,10 @@ export default function CommunityMap({
             const label = document.createElement('p');
             label.textContent =
               p.source === 'member'
-                ? lang === 'ru'
-                  ? 'Участник OpenPrint'
-                  : 'OpenPrint member'
-                : lang === 'ru'
-                  ? 'Справочная запись'
-                  : 'Directory listing';
+                ? t('Участник OpenPrint', 'OpenPrint member')
+                : t('Справочная запись', 'Directory listing');
+            content.dir = document.documentElement.dir;
+            link.dir = 'auto';
             content.append(link, label);
             return content;
           })
@@ -102,9 +100,9 @@ export default function CommunityMap({
     }
     const zoomIn = container.current?.querySelector('.leaflet-control-zoom-in');
     const zoomOut = container.current?.querySelector('.leaflet-control-zoom-out');
-    zoomIn?.setAttribute('aria-label', lang === 'ru' ? 'Приблизить карту' : 'Zoom in');
-    zoomOut?.setAttribute('aria-label', lang === 'ru' ? 'Отдалить карту' : 'Zoom out');
-  }, [points, datasetKey, loading, lang]);
+    zoomIn?.setAttribute('aria-label', t('Приблизить карту', 'Zoom in'));
+    zoomOut?.setAttribute('aria-label', t('Отдалить карту', 'Zoom out'));
+  }, [points, datasetKey, loading, lang, t]);
   return (
     <>
       {tileError && (

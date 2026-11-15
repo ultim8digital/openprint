@@ -26,7 +26,8 @@ import {
 import { PageTitle, JobCard } from './Browse';
 import {
   technologies,
-  technologyName,
+  technologyLabel,
+  materialLabel,
   materials,
   type Job,
   type Profile,
@@ -102,25 +103,44 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
       <div className="form-grid">
         <label>
           {t('Название мастерской или ваше имя', 'Workshop name or your name')}
-          <input name="name" defaultValue={profile?.name} minLength={2} maxLength={100} required />
+          <input
+            dir="auto"
+            name="name"
+            defaultValue={profile?.name}
+            minLength={2}
+            maxLength={100}
+            required
+          />
         </label>
         <label>
           {t('Чем занимаетесь?', 'What do you offer?')}
           <select name="kind" defaultValue={profile?.kind || 'studio'}>
-            <option value="studio">{t('Изготавливаю детали', 'Making & printing')}</option>
-            <option value="engineer">{t('Проектирую модели', 'Design & engineering')}</option>
-            <option value="both">
+            <option dir="auto" value="studio">
+              {t('Изготавливаю детали', 'Making & printing')}
+            </option>
+            <option dir="auto" value="engineer">
+              {t('Проектирую модели', 'Design & engineering')}
+            </option>
+            <option dir="auto" value="both">
               {t('И проектирую, и изготавливаю', 'Both design and manufacturing')}
             </option>
           </select>
         </label>
         <label>
           {t('Город', 'City')}
-          <input name="city" defaultValue={profile?.city} required minLength={2} maxLength={80} />
+          <input
+            dir="auto"
+            name="city"
+            defaultValue={profile?.city}
+            required
+            minLength={2}
+            maxLength={80}
+          />
         </label>
         <label>
           {t('Сайт · необязательно', 'Website · optional')}
           <input
+            dir="auto"
             name="website"
             type="url"
             placeholder="https://"
@@ -132,6 +152,7 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
       <label>
         {t('О ваших возможностях', 'Tell us about your work')}
         <textarea
+          dir="auto"
           rows={5}
           name="description"
           defaultValue={profile?.description}
@@ -150,11 +171,12 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
           {technologies.map((value) => (
             <label className="check-label" key={value}>
               <input
+                dir="auto"
                 type="checkbox"
                 checked={tech.includes(value)}
                 onChange={() => toggle(tech, value, setTech)}
               />
-              {t(technologyName(value, 'ru'), technologyName(value, 'en'))}
+              {technologyLabel(value, t)}
             </label>
           ))}
         </div>
@@ -165,17 +187,20 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
           {materials.map((value) => (
             <label className="check-label" key={value}>
               <input
+                dir="auto"
                 type="checkbox"
                 checked={mat.includes(value)}
                 onChange={() => toggle(mat, value, setMat)}
               />
-              {value === 'Any' ? t('Консультирую по выбору', 'Material advice') : value}
+              {value === 'Any'
+                ? t('Консультирую по выбору', 'Material advice')
+                : materialLabel(value, t)}
             </label>
           ))}
         </div>
       </fieldset>
       <label className="check-label">
-        <input name="remote" type="checkbox" defaultChecked={profile?.remote} />
+        <input dir="auto" name="remote" type="checkbox" defaultChecked={profile?.remote} />
         {t('Работаю удалённо / отправляю заказы', 'Remote work / shipping available')}
       </label>
       <details>
@@ -189,6 +214,7 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
           <label>
             {t('Широта', 'Latitude')}
             <input
+              dir="auto"
               name="lat"
               type="number"
               min={-85}
@@ -200,6 +226,7 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
           <label>
             {t('Долгота', 'Longitude')}
             <input
+              dir="auto"
               name="lng"
               type="number"
               min={-180}
@@ -343,6 +370,7 @@ function AccountSettings({ data, reload }: { data: Dashboard; reload: () => void
           <label>
             {t('Текущий пароль', 'Current password')}
             <input
+              dir="auto"
               name="current"
               type="password"
               autoComplete="current-password"
@@ -353,6 +381,7 @@ function AccountSettings({ data, reload }: { data: Dashboard; reload: () => void
           <label>
             {t('Новый пароль · от 12 символов', 'New password · at least 12 characters')}
             <input
+              dir="auto"
               name="password"
               type="password"
               autoComplete="new-password"
@@ -380,6 +409,7 @@ function AccountSettings({ data, reload }: { data: Dashboard; reload: () => void
           <label>
             {t('Подтвердите паролем', 'Confirm with your password')}
             <input
+              dir="auto"
               name="delete-password"
               type="password"
               autoComplete="current-password"
@@ -433,7 +463,7 @@ export default function Workspace() {
     <div className="page">
       <PageTitle
         eyebrow={t('ВАША ЛИЧНАЯ МАСТЕРСКАЯ', 'YOUR PERSONAL WORKSPACE')}
-        title={t('Привет, ', 'Hello, ') + user?.name.split(' · ')[0] + '.'}
+        title={t('Привет, {name}.', 'Hello, {name}.', { name: user?.name.split(' · ')[0] || '' })}
         description={t(
           'Идеи, договорённости и разговоры — всё под рукой.',
           'Your ideas, agreements, and conversations, all in one place.',
@@ -508,7 +538,7 @@ export default function Workspace() {
                 <div className="row" style={{ marginTop: 15 }}>
                   <Link className="text-button" to={'/projects/' + o.job_id}>
                     {t('Открыть проект', 'View project')}
-                    <ArrowUpRight size={15} />
+                    <ArrowUpRight className="directional-icon" size={15} />
                   </Link>
                   <Status value={o.job_status} />
                 </div>
@@ -524,7 +554,7 @@ export default function Workspace() {
             >
               <Link className="button secondary" to="/projects">
                 {t('Найти задачу', 'Explore projects')}
-                <ArrowUpRight size={15} />
+                <ArrowUpRight className="directional-icon" size={15} />
               </Link>
             </Empty>
           )}

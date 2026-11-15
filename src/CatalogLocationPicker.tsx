@@ -79,16 +79,14 @@ export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: 
     element.current
       ?.querySelector('.leaflet-control-zoom-out')
       ?.setAttribute('aria-label', t('Отдалить', 'Zoom out'));
-    marker.current
-      ?.getElement()
-      ?.setAttribute(
-        'aria-label',
-        t(
-          'Точка студии; для точного ввода используйте поля координат',
-          'Studio location; use the coordinate fields for precise entry',
-        ),
-      );
-  }, [t]);
+    const markerElement = marker.current?.getElement();
+    const label = t(
+      'Точка студии; для точного ввода используйте поля координат',
+      'Studio location; use the coordinate fields for precise entry',
+    );
+    markerElement?.setAttribute('aria-label', label);
+    markerElement?.setAttribute('title', label);
+  }, [t, lat, lng]);
   return (
     <div>
       <p className="micro muted">

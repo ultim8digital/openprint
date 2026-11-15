@@ -87,7 +87,7 @@ for (const spec of selected) {
     {
       PLAYWRIGHT_BLOB_OUTPUT_FILE: blobFile,
       E2E_DIRECTORY_FIXTURE: spec === 'directory.spec.ts' ? '1' : '0',
-      E2E_CATALOG_MODE: spec === 'catalog-submit.spec.ts' ? '1' : '0',
+      E2E_CATALOG_MODE: ['catalog-submit.spec.ts', 'i18n.spec.ts'].includes(spec) ? '1' : '0',
     },
   );
   outcomes.push({ spec, code: code || (existsSync(blobFile) ? 0 : 1) });

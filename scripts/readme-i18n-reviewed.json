@@ -1,0 +1,357 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "locale": "ar-SA",
+      "id": "publication_limits",
+      "en": "Publication does not verify business ownership or service quality. Confirm equipment, capabilities and terms with the studio. Anyone holding the private management link can control that listing. Keep it private; there is no email recovery. Read the [self-publication guide]({OPEN_CATALOG}).",
+      "ru": "Публикация не подтверждает принадлежность бизнеса или качество услуг. Оборудование, возможности и условия уточняйте у студии. Любой обладатель личной ссылки может управлять этой записью. Храните ссылку приватно; восстановления через почту нет. Подробнее — в [инструкции самостоятельной публикации]({OPEN_CATALOG}).",
+      "text": "لا تتحقق عملية النشر من ملكية المنشأة أو جودة الخدمة. يرجى التأكد من المعدات والإمكانيات والشروط مع الاستوديو. يمكن لأي شخص يمتلك رابط الإدارة الخاص التحكم في هذا الإدراج. حافظ على سرية الرابط؛ لا يمكن استعادة الوصول عبر البريد الإلكتروني. اقرأ [دليل النشر الذاتي]({OPEN_CATALOG}).",
+      "reason": "Recovery concerns access by email, not recovery of email itself; preserve the unverified business ownership statement."
+    },
+    {
+      "locale": "de-DE",
+      "id": "publication_limits",
+      "en": "Publication does not verify business ownership or service quality. Confirm equipment, capabilities and terms with the studio. Anyone holding the private management link can control that listing. Keep it private; there is no email recovery. Read the [self-publication guide]({OPEN_CATALOG}).",
+      "ru": "Публикация не подтверждает принадлежность бизнеса или качество услуг. Оборудование, возможности и условия уточняйте у студии. Любой обладатель личной ссылки может управлять этой записью. Храните ссылку приватно; восстановления через почту нет. Подробнее — в [инструкции самостоятельной публикации]({OPEN_CATALOG}).",
+      "text": "Die Veröffentlichung bestätigt weder die Inhaberschaft des Unternehmens noch die Qualität der Dienstleistungen. Klären Sie Ausstattung, Fähigkeiten und Bedingungen direkt mit dem Studio. Jeder, der den privaten Verwaltungslink besitzt, kann diesen Eintrag verwalten. Halten Sie den Link geheim; der Zugriff kann nicht per E-Mail wiederhergestellt werden. Lesen Sie die [Anleitung zur Selbstveröffentlichung]({OPEN_CATALOG}).",
+      "reason": "Restore business ownership rather than general business status, and access recovery rather than email recovery."
+    },
+    {
+      "locale": "de-DE",
+      "id": "community_cad",
+      "en": "[Neofab Studio]({NEOFAB_SETUP}) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.",
+      "ru": "[Neofab Studio]({NEOFAB_SETUP}) поддерживает версии производственного ТЗ, спецификации состава и ограниченную декларативную CAD-геометрию с экспортом STEP/STL. CAD и ИИ необязательны. Предложения ИИ требуют проверки и отдельного применения; они не публикуют заказы и не строят геометрию автоматически. CAM, G-code и проверка физической пригодности изделий не реализованы.",
+      "text": "[Neofab Studio]({NEOFAB_SETUP}) unterstützt versionierte Fertigungsspezifikationen, Stücklisten und deklarative CAD-Geometrie mit begrenztem Funktionsumfang sowie STEP/STL-Exporte. CAD und KI sind optional. KI-Vorschläge müssen geprüft und in einem separaten Schritt angewendet werden; sie veröffentlichen keine Aufträge automatisch und erzeugen auch keine Geometrie automatisch. CAM, G-Code und die physische Überprüfung der Fertigungseignung sind nicht implementiert.",
+      "reason": "Make the separate application step and the lack of automatic order publication and geometry generation explicit; preserve manufacturing-validation limits."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "community_cad",
+      "en": "[Neofab Studio]({NEOFAB_SETUP}) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.",
+      "ru": "[Neofab Studio]({NEOFAB_SETUP}) поддерживает версии производственного ТЗ, спецификации состава и ограниченную декларативную CAD-геометрию с экспортом STEP/STL. CAD и ИИ необязательны. Предложения ИИ требуют проверки и отдельного применения; они не публикуют заказы и не строят геометрию автоматически. CAM, G-code и проверка физической пригодности изделий не реализованы.",
+      "text": "[Neofab Studio]({NEOFAB_SETUP}) prend en charge des cahiers des charges de fabrication versionnés, des nomenclatures et une géométrie CAD déclarative aux capacités limitées, avec export STEP/STL. CAD et IA sont facultatifs. Les propositions de l’IA doivent être vérifiées puis appliquées lors d’une étape distincte ; elles ne publient pas automatiquement de commandes et ne construisent pas automatiquement la géométrie. CAM, G-code et la validation physique de l’aptitude à la fabrication ne sont pas implémentés.",
+      "reason": "Source-bound replacement for a structurally rejected paragraph that omitted CAD/CAM or links; preserves optional tools, explicit application and manufacturing limits."
+    },
+    {
+      "locale": "ja",
+      "id": "publication_limits",
+      "en": "Publication does not verify business ownership or service quality. Confirm equipment, capabilities and terms with the studio. Anyone holding the private management link can control that listing. Keep it private; there is no email recovery. Read the [self-publication guide]({OPEN_CATALOG}).",
+      "ru": "Публикация не подтверждает принадлежность бизнеса или качество услуг. Оборудование, возможности и условия уточняйте у студии. Любой обладатель личной ссылки может управлять этой записью. Храните ссылку приватно; восстановления через почту нет. Подробнее — в [инструкции самостоятельной публикации]({OPEN_CATALOG}).",
+      "text": "掲載によって事業の所有者やサービスの品質が確認されるわけではありません。設備、対応可能な業務、条件についてはスタジオに直接確認してください。非公開の管理リンクを持つ人は誰でも、その掲載情報を管理できます。リンクは秘密に保管してください。メールでアクセス権を復旧することはできません。[自己公開ガイド]({OPEN_CATALOG})をお読みください。",
+      "reason": "Restore recovery of access rather than a nonexistent account, and make secret-link handling explicit."
+    },
+    {
+      "locale": "ja",
+      "id": "community_cad",
+      "en": "[Neofab Studio]({NEOFAB_SETUP}) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.",
+      "ru": "[Neofab Studio]({NEOFAB_SETUP}) поддерживает версии производственного ТЗ, спецификации состава и ограниченную декларативную CAD-геометрию с экспортом STEP/STL. CAD и ИИ необязательны. Предложения ИИ требуют проверки и отдельного применения; они не публикуют заказы и не строят геометрию автоматически. CAM, G-code и проверка физической пригодности изделий не реализованы.",
+      "text": "[Neofab Studio]({NEOFAB_SETUP}) は、バージョン管理された製造向け技術仕様書、部品表、対応範囲を限定した宣言型CADとSTEP/STL形式でのエクスポートをサポートします。CADとAIは任意の機能です。AIの提案は内容を確認したうえで別の操作により適用する必要があり、注文を自動公開したり、形状を自動生成したりするものではありません。CAM、G-code、実物による製造適合性の検証は実装されていません。",
+      "reason": "Application means explicitly applying a proposal, not submitting an approval request. Bounded CAD means a limited supported scope, not boundary geometry."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "development_checks",
+      "en": "GitHub Actions checks types, API and browser workflows, and the default and native CAD containers. Tests use fictional records. Exact evidence, coverage and remaining limits are recorded in [validation]({VALIDATION}) and [product scope]({PRODUCT}).",
+      "ru": "GitHub Actions проверяет типы, API, браузерные сценарии и контейнеры обычной версии и версии с нативным CAD. В тестах используются вымышленные записи. Точные результаты, покрытие и ограничения приведены в [документе проверок]({VALIDATION}) и [описании продукта]({PRODUCT}).",
+      "text": "GitHub Actions vérifie les types, les API, les parcours dans le navigateur ainsi que les conteneurs standard et ceux avec CAD natif. Les tests utilisent des données fictives. Les résultats précis, la couverture et les limites restantes figurent dans la [documentation de validation]({VALIDATION}) et la [description du produit]({PRODUCT}).",
+      "reason": "Restore protected product names and both Markdown links; preserve the scope of CI evidence."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "community_cad",
+      "en": "[Neofab Studio]({NEOFAB_SETUP}) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.",
+      "ru": "[Neofab Studio]({NEOFAB_SETUP}) поддерживает версии производственного ТЗ, спецификации состава и ограниченную декларативную CAD-геометрию с экспортом STEP/STL. CAD и ИИ необязательны. Предложения ИИ требуют проверки и отдельного применения; они не публикуют заказы и не строят геометрию автоматически. CAM, G-code и проверка физической пригодности изделий не реализованы.",
+      "text": "[Neofab Studio]({NEOFAB_SETUP}) prend en charge des cahiers des charges de fabrication versionnés, des nomenclatures et une géométrie CAD déclarative aux capacités limitées, avec export STEP/STL. CAD et IA sont facultatifs. Les propositions de l’IA doivent être vérifiées puis appliquées lors d’une étape distincte; elles ne publient pas automatiquement de commandes et ne construisent pas automatiquement la géométrie. CAM, G-code et la validation physique de l’aptitude à la fabrication ne sont pas implémentés.",
+      "reason": "Restore protected CAD/CAM terms and link; preserve explicit application and manufacturing limits."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "development_checks",
+      "en": "GitHub Actions checks types, API and browser workflows, and the default and native CAD containers. Tests use fictional records. Exact evidence, coverage and remaining limits are recorded in [validation]({VALIDATION}) and [product scope]({PRODUCT}).",
+      "ru": "GitHub Actions проверяет типы, API, браузерные сценарии и контейнеры обычной версии и версии с нативным CAD. В тестах используются вымышленные записи. Точные результаты, покрытие и ограничения приведены в [документе проверок]({VALIDATION}) и [описании продукта]({PRODUCT}).",
+      "text": "GitHub Actions vérifie les types, les API, les parcours dans le navigateur ainsi que les conteneurs standard et ceux avec CAD natif. Les tests utilisent des données fictives. Les résultats précis, la couverture et les limites restantes figurent dans la [documentation de validation]({VALIDATION}) et la [description du produit]({PRODUCT}).",
+      "reason": "Restore protected product names and both Markdown links; preserve the scope of CI evidence."
+    },
+    {
+      "locale": "hi",
+      "id": "data_rights",
+      "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
+      "ru": "Лицензия MIT на программу не предоставляет прав на импортированные сведения об организациях. Одно указание источника не разрешает копирование данных Google Maps, 2ГИС, Яндекс Карт и других сервисов. До использования базы проверьте разрешения на хранение, публикацию и распространение. Подробнее — в [документе о происхождении данных и границах проверки]({DATA_PROVENANCE}).",
+      "text": "MIT सॉफ़्टवेयर लाइसेंस आयातित व्यावसायिक रिकॉर्ड के लिए कोई अधिकार प्रदान नहीं करता है। केवल स्रोत का उल्लेख करने से Google मैप्स, 2जीआईएस, यांडेक्स मैप्स या अन्य स्रोतों से डेटा की प्रतिलिपि बनाने की अनुमति नहीं मिलती है। किसी डेटासेट का उपयोग करने से पहले, भंडारण, प्रकाशन और पुनर्वितरण के लिए अनुमतियों की जाँच करें। [डेटा की उत्पत्ति और समीक्षा की सीमाएँ]({DATA_PROVENANCE}) देखें।",
+      "reason": "Repair the Markdown destination without changing the rights limitation."
+    },
+    {
+      "locale": "hi",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "मूल स्रोत कोड, यूआई, SVG चित्र, दस्तावेज़ और पैरामीट्रिक जेनरेटर [MIT लाइसेंस]({LICENSE}) के तहत उपलब्ध हैं। निर्भरताएँ अपने स्वयं के लाइसेंस और सूचनाओं को बरकरार रखती हैं। उपयोगकर्ता मॉडल के लिए उनके लेखकों द्वारा चुना गया अलग लाइसेंस होता है। काल्पनिक डेमो प्रोफ़ाइल और डेमो तकनीकी आवश्यकताओं के पाठ, तथा तीन उत्पन्न डेमो डिज़ाइन CC0 के तहत समर्पित हैं; जेनरेटर MIT के तहत रहता है। [तृतीय-पक्ष सूचनाएँ]({THIRD_PARTY_NOTICES}) देखें।",
+      "reason": "Restore protected license terms and links; translate brief as technical requirements rather than short text. Explicit demo qualifiers keep CC0 limited to fixture text rather than user technical requirements."
+    },
+    {
+      "locale": "ja",
+      "id": "independence",
+      "en": "Run OpenPrint with Node.js 24 and local SQLite. Vercel, Supabase, an email provider, paid AI and third-party login are not required. GitHub hosts the source and releases; a shared website accepting submissions needs a running API server. [GitHub Pages]({GITHUB_PAGES}) alone cannot run the Node.js API or persist visitor changes.",
+      "ru": "OpenPrint работает с Node.js 24 и локальной SQLite. Vercel, Supabase, почтовый сервис, платный ИИ и сторонний вход не требуются. GitHub хранит исходники и релизы; общему сайту с добавлением записей нужен работающий API-сервер. Одного [GitHub Pages]({GITHUB_PAGES}) недостаточно: он не выполняет Node.js API и не сохраняет изменения посетителей.",
+      "text": "OpenPrintを、バージョン24のNode.jsとローカルのSQLiteで実行します。Vercel、Supabase、メールサービス、有料AI、およびサードパーティのログインは不要です。GitHubはソースコードとリリースをホストします。コンテンツ投稿を受け付ける共有ウェブサイトには、稼働中のAPIサーバーが必要です。[GitHub Pages]({GITHUB_PAGES})だけでは、Node.js APIを実行したり、訪問者の変更を保存したりすることはできません。",
+      "reason": "Restore the space between Node.js and API so the protected technical term remains exact."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "O código original, a interface do usuário, as ilustrações SVG, a documentação e o gerador paramétrico são [licenciados sob MIT]({LICENSE}). As dependências mantêm suas próprias licenças e avisos. Os modelos criados pelos usuários têm uma licença separada, escolhida por seus autores. Os textos fictícios de demonstração, tanto dos perfis quanto das especificações técnicas, assim como os três projetos de demonstração gerados, são dedicados sob CC0; o gerador permanece sob MIT. Consulte os [avisos de terceiros]({THIRD_PARTY_NOTICES}).",
+      "reason": "Restore protected license terms and links; brief refers to technical specifications, not a summary. Explicit demo qualifiers keep CC0 limited to fixture text rather than user technical requirements."
+    },
+    {
+      "locale": "tr",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "Orijinal kaynak kodu, kullanıcı arayüzü, SVG çizimleri, dokümantasyon ve parametrik oluşturucu [MIT lisansı]({LICENSE}) altında yayınlanmıştır. Bağımlılıklar kendi lisanslarını ve bildirimlerini korur. Kullanıcı modelleri, yazarları tarafından seçilen ayrı bir lisansa sahiptir. Kurgusal örnek profil metinleri ve örnek teknik gereksinim metinleri ile üç oluşturulmuş örnek tasarım, CC0 kapsamında sunulmuştur; oluşturucu MIT kapsamında kalır. Ayrıntılar için [üçüncü taraf bildirimlerine]({THIRD_PARTY_NOTICES}) bakın.",
+      "reason": "Repair both Markdown links, keeping the license scopes unchanged. Explicit demo qualifiers keep CC0 limited to fixture text rather than user technical requirements."
+    },
+    {
+      "locale": "tr",
+      "id": "publication_limits",
+      "en": "Publication does not verify business ownership or service quality. Confirm equipment, capabilities and terms with the studio. Anyone holding the private management link can control that listing. Keep it private; there is no email recovery. Read the [self-publication guide]({OPEN_CATALOG}).",
+      "ru": "Публикация не подтверждает принадлежность бизнеса или качество услуг. Оборудование, возможности и условия уточняйте у студии. Любой обладатель личной ссылки может управлять этой записью. Храните ссылку приватно; восстановления через почту нет. Подробнее — в [инструкции самостоятельной публикации]({OPEN_CATALOG}).",
+      "text": "Yayımlama, işletmenin sahipliğini veya hizmet kalitesini doğrulamaz. Ekipmanı, olanakları ve koşulları stüdyoyla teyit edin. Özel yönetim bağlantısına sahip herkes bu kaydı yönetebilir. Bağlantıyı gizli tutun; erişim e-posta yoluyla kurtarılamaz. [Kendi kaydınızı yayımlama kılavuzunu]({OPEN_CATALOG}) okuyun.",
+      "reason": "Restore the guide link and make recovery of access, rather than email itself, explicit."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "translation_maintenance",
+      "en": "The English README is the reference for full translated editions. The [language index]({LANGUAGE_INDEX}) documents translation maintenance and review limits. Interface localization does not translate user-authored listings, project content or every external technical diagnostic.",
+      "ru": "Английский README служит исходником полных переводов. В [указателе языков]({LANGUAGE_INDEX}) описаны сопровождение переводов и границы их проверки. Локализация интерфейса не переводит пользовательские карточки, содержимое проектов и все внешние технические сообщения.",
+      "text": "英文版的 README 文件是完整翻译版本的参考。[语言索引]({LANGUAGE_INDEX}) 记录了翻译维护和审核的范围。界面本地化不会翻译用户创建的列表、项目内容或所有外部技术诊断信息。",
+      "reason": "Remove the backslash escaping the Markdown link label; all translated wording is preserved."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "translation_maintenance",
+      "en": "The English README is the reference for full translated editions. The [language index]({LANGUAGE_INDEX}) documents translation maintenance and review limits. Interface localization does not translate user-authored listings, project content or every external technical diagnostic.",
+      "ru": "Английский README служит исходником полных переводов. В [указателе языков]({LANGUAGE_INDEX}) описаны сопровождение переводов и границы их проверки. Локализация интерфейса не переводит пользовательские карточки, содержимое проектов и все внешние технические сообщения.",
+      "text": "英文版的 README 文件是完整翻譯版本的參考依據。[語言索引]({LANGUAGE_INDEX}) 文件記錄了翻譯維護和審核的限制。介面本地化不會翻譯使用者撰寫的列表、專案內容或所有外部技術診斷。",
+      "reason": "Remove the backslash escaping the Markdown link label; all translated wording is preserved."
+    },
+    {
+      "locale": "or-IN",
+      "id": "run_import",
+      "en": "Use the [catalog import CLI]({CATALOG_IMPORT}) for an existing dataset after checking its rights. Instance datasets, uploads and backups are not bundled in the repository or container images.",
+      "ru": "Существующую базу подключайте через [CLI импорта каталога]({CATALOG_IMPORT}) после проверки прав на данные. Базы отдельных установок, загруженные файлы и резервные копии не поставляются в репозитории и контейнерах.",
+      "text": "ବିଦ୍ୟମାନ ତଥ୍ୟସମୂହର ଅଧିକାର ଯାଞ୍ଚ କରିବା ପରେ [କ୍ୟାଟାଲଗ୍ ଆମଦାନି CLI]({CATALOG_IMPORT}) ବ୍ୟବହାର କରନ୍ତୁ। ନିଜ ସ୍ଥାପନର ତଥ୍ୟସମୂହ, ଅପଲୋଡ୍ ଏବଂ ବ୍ୟାକଅପ୍ ରିପୋଜିଟୋରି କିମ୍ବା କଣ୍ଟେନର ଇମେଜରେ ଅନ୍ତର୍ଭୁକ୍ତ ନୁହେଁ।",
+      "reason": "Repairs mixed-script output while retaining data permissions, exact protected terms and links, optional AI/CAD and explicit manufacturing limits."
+    },
+    {
+      "locale": "or-IN",
+      "id": "community_cad",
+      "en": "[Neofab Studio]({NEOFAB_SETUP}) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.",
+      "ru": "[Neofab Studio]({NEOFAB_SETUP}) поддерживает версии производственного ТЗ, спецификации состава и ограниченную декларативную CAD-геометрию с экспортом STEP/STL. CAD и ИИ необязательны. Предложения ИИ требуют проверки и отдельного применения; они не публикуют заказы и не строят геометрию автоматически. CAM, G-code и проверка физической пригодности изделий не реализованы.",
+      "text": "[Neofab Studio]({NEOFAB_SETUP}) ସଂସ୍କରଣ ସହିତ ନିର୍ମାଣ ଆବଶ୍ୟକତାପତ୍ର, ସାମଗ୍ରୀର ତାଲିକା ଏବଂ STEP/STL ରପ୍ତାନି ସହିତ ସୀମିତ ଘୋଷଣାମୂଳକ CAD ସମର୍ଥନ କରେ। CAD ଏବଂ AI ଇଚ୍ଛାଧୀନ। AI ପ୍ରସ୍ତାବକୁ ସମୀକ୍ଷା କରି ପୃଥକ ଭାବେ ପ୍ରୟୋଗ କରିବା ଆବଶ୍ୟକ; ଏଗୁଡ଼ିକ ସ୍ୱୟଂକ୍ରିୟ ଭାବେ ଅର୍ଡର ପ୍ରକାଶ କରେ ନାହିଁ କିମ୍ବା ଜ୍ୟାମିତି ନିର୍ମାଣ କରେ ନାହିଁ। CAM, G-code ଏବଂ ବାସ୍ତବ ନିର୍ମାଣର ଉପଯୋଗିତା ଯାଞ୍ଚ କାର୍ଯ୍ୟକାରୀ ହୋଇନାହିଁ।",
+      "reason": "Repairs mixed-script output while retaining data permissions, exact protected terms and links, optional AI/CAD and explicit manufacturing limits."
+    },
+    {
+      "locale": "or-IN",
+      "id": "data_rights",
+      "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
+      "ru": "Лицензия MIT на программу не предоставляет прав на импортированные сведения об организациях. Одно указание источника не разрешает копирование данных Google Maps, 2ГИС, Яндекс Карт и других сервисов. До использования базы проверьте разрешения на хранение, публикацию и распространение. Подробнее — в [документе о происхождении данных и границах проверки]({DATA_PROVENANCE}).",
+      "text": "MIT ସଫ୍ଟୱେର୍ ଲାଇସେନ୍ସ ଆମଦାନି କରାଯାଇଥିବା ବ୍ୟବସାୟ ତଥ୍ୟ ଉପରେ ଅଧିକାର ଦିଏ ନାହିଁ। କେବଳ ଉତ୍ସ ଉଲ୍ଲେଖ କଲେ Google Maps, 2GIS, Yandex Maps କିମ୍ବା ଅନ୍ୟ ଉତ୍ସର ତଥ୍ୟ ନକଲ କରିବାର ଅନୁମତି ମିଳେ ନାହିଁ। ତଥ୍ୟସମୂହ ବ୍ୟବହାର ପୂର୍ବରୁ ସଂରକ୍ଷଣ, ପ୍ରକାଶନ ଏବଂ ପୁନଃବିତରଣ ପାଇଁ ଅନୁମତି ଯାଞ୍ଚ କରନ୍ତୁ। [ତଥ୍ୟର ଉତ୍ସ ଏବଂ ସମୀକ୍ଷାର ସୀମା]({DATA_PROVENANCE}) ଦେଖନ୍ତୁ।",
+      "reason": "Repairs mixed-script output while retaining data permissions, exact protected terms and links, optional AI/CAD and explicit manufacturing limits."
+    },
+    {
+      "locale": "or-IN",
+      "id": "license_heading",
+      "en": "Licensing and contributions",
+      "ru": "Лицензии и участие",
+      "text": "ଲାଇସେନ୍ସ ଏବଂ ଅବଦାନ",
+      "reason": "Repairs mixed-script output while retaining data permissions, exact protected terms and links, optional AI/CAD and explicit manufacturing limits."
+    },
+    {
+      "en": "Find a maker on the map, check their capabilities and contact them directly. If your workshop is missing, add its contacts and services: the listing appears immediately. Save the private management link to edit or delete your listing later. The default catalog has no accounts, email confirmation or approval queue.",
+      "id": "intro",
+      "locale": "hr",
+      "reason": "Repair mixed-script corruption or lost protected Markdown/technical tokens; retain the documented scope and data-rights condition.",
+      "ru": "Найдите мастерскую на карте, уточните её возможности и свяжитесь напрямую. Если вашей мастерской нет, добавьте контакты и услуги: карточка появится сразу. Сохраните личную ссылку управления, чтобы позднее исправить или удалить запись. В основном режиме каталога нет аккаунтов, подтверждения почты и очереди одобрения.",
+      "text": "Pronađite proizvođača na karti, provjerite njegove mogućnosti i izravno ga kontaktirajte. Ako vaše radionice nema na popisu, dodajte njezine kontakte i usluge: unos se odmah pojavljuje. Spremite privatnu poveznicu za upravljanje kako biste kasnije mogli urediti ili izbrisati svoj unos. Zadani katalog nema korisničkih računa, potvrde e-poštom ni reda za odobravanje."
+    },
+    {
+      "en": "GitHub Actions checks types, API and browser workflows, and the default and native CAD containers. Tests use fictional records. Exact evidence, coverage and remaining limits are recorded in [validation]({VALIDATION}) and [product scope]({PRODUCT}).",
+      "id": "development_checks",
+      "locale": "fi",
+      "reason": "Repair mixed-script corruption or lost protected Markdown/technical tokens; retain the documented scope and data-rights condition.",
+      "ru": "GitHub Actions проверяет типы, API, браузерные сценарии и контейнеры обычной версии и версии с нативным CAD. В тестах используются вымышленные записи. Точные результаты, покрытие и ограничения приведены в [документе проверок]({VALIDATION}) и [описании продукта]({PRODUCT}).",
+      "text": "GitHub Actions tarkistaa tyypit, API- ja selaintyönkulut sekä oletuskontin ja natiivin CAD-kontin. Testeissä käytetään kuvitteellisia tietoja. Tarkka näyttö, testauksen kattavuus ja jäljellä olevat rajoitukset on kirjattu [validointiin]({VALIDATION}) ja [tuotteen laajuuteen]({PRODUCT})."
+    },
+    {
+      "en": "[Neofab Studio]({NEOFAB_SETUP}) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.",
+      "id": "community_cad",
+      "locale": "he",
+      "reason": "Repair mixed-script corruption or lost protected Markdown/technical tokens; retain the documented scope and data-rights condition.",
+      "ru": "[Neofab Studio]({NEOFAB_SETUP}) поддерживает версии производственного ТЗ, спецификации состава и ограниченную декларативную CAD-геометрию с экспортом STEP/STL. CAD и ИИ необязательны. Предложения ИИ требуют проверки и отдельного применения; они не публикуют заказы и не строят геометрию автоматически. CAM, G-code и проверка физической пригодности изделий не реализованы.",
+      "text": "[Neofab Studio]({NEOFAB_SETUP}) תומך במסמכי דרישות לייצור עם ניהול גרסאות, ברשימות חומרים וב-CAD הצהרתי בעל מגבלות מוגדרות, עם ייצוא ל-STEP/STL. CAD ובינה מלאכותית הם רכיבים אופציונליים. הצעות של בינה מלאכותית דורשות בדיקה ושלב יישום נפרד; הן אינן מפרסמות הזמנות או בונות גאומטריה באופן אוטומטי. CAM, קוד G ואימות פיזי של הייצור אינם ממומשים."
+    },
+    {
+      "en": "Use the [catalog import CLI]({CATALOG_IMPORT}) for an existing dataset after checking its rights. Instance datasets, uploads and backups are not bundled in the repository or container images.",
+      "id": "run_import",
+      "locale": "he",
+      "reason": "Repair mixed-script corruption or lost protected Markdown/technical tokens; retain the documented scope and data-rights condition.",
+      "ru": "Существующую базу подключайте через [CLI импорта каталога]({CATALOG_IMPORT}) после проверки прав на данные. Базы отдельных установок, загруженные файлы и резервные копии не поставляются в репозитории и контейнерах.",
+      "text": "השתמשו ב[כלי ייבוא הקטלוג בשורת הפקודה]({CATALOG_IMPORT}) עבור מערך נתונים קיים, לאחר בדיקת זכויות השימוש בו. מערכי נתונים של מופע מסוים, קבצים שהועלו וגיבויים אינם נכללים במאגר או בתמונות הקונטיינר."
+    },
+    {
+      "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
+      "id": "data_rights",
+      "locale": "bn-BD",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Лицензия MIT на программу не предоставляет прав на импортированные сведения об организациях. Одно указание источника не разрешает копирование данных Google Maps, 2ГИС, Яндекс Карт и других сервисов. До использования базы проверьте разрешения на хранение, публикацию и распространение. Подробнее — в [документе о происхождении данных и границах проверки]({DATA_PROVENANCE}).",
+      "text": "MIT সফটওয়্যার লাইসেন্স আমদানি করা ব্যবসায়িক রেকর্ডের ওপর কোনো অধিকার দেয় না। শুধু উৎসের উল্লেখ করলে Google Maps, 2GIS, Yandex Maps বা অন্য উৎস থেকে তথ্য অনুলিপি করার অনুমতি পাওয়া যায় না। কোনো ডেটাসেট ব্যবহারের আগে সংরক্ষণ, প্রকাশ ও পুনর্বিতরণের অনুমতি যাচাই করুন। [তথ্যের উৎস ও পর্যালোচনার সীমা]({DATA_PROVENANCE}) দেখুন।"
+    },
+    {
+      "en": "Publication does not verify business ownership or service quality. Confirm equipment, capabilities and terms with the studio. Anyone holding the private management link can control that listing. Keep it private; there is no email recovery. Read the [self-publication guide]({OPEN_CATALOG}).",
+      "id": "publication_limits",
+      "locale": "bn-BD",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Публикация не подтверждает принадлежность бизнеса или качество услуг. Оборудование, возможности и условия уточняйте у студии. Любой обладатель личной ссылки может управлять этой записью. Храните ссылку приватно; восстановления через почту нет. Подробнее — в [инструкции самостоятельной публикации]({OPEN_CATALOG}).",
+      "text": "প্রকাশনার মাধ্যমে ব্যবসার মালিকানা বা পরিষেবার মান যাচাই করা হয় না। সরঞ্জাম, সক্ষমতা ও শর্তাবলি স্টুডিওর সঙ্গে নিশ্চিত করুন। ব্যক্তিগত ব্যবস্থাপনা লিঙ্ক যার কাছে আছে, সে এই তালিকা নিয়ন্ত্রণ করতে পারে। লিঙ্কটি গোপন রাখুন; ইমেলের মাধ্যমে প্রবেশাধিকার পুনরুদ্ধারের ব্যবস্থা নেই। [নিজে প্রকাশ করার নির্দেশিকা]({OPEN_CATALOG}) পড়ুন।"
+    },
+    {
+      "en": "Use the [catalog import CLI]({CATALOG_IMPORT}) for an existing dataset after checking its rights. Instance datasets, uploads and backups are not bundled in the repository or container images.",
+      "id": "run_import",
+      "locale": "bn-BD",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Существующую базу подключайте через [CLI импорта каталога]({CATALOG_IMPORT}) после проверки прав на данные. Базы отдельных установок, загруженные файлы и резервные копии не поставляются в репозитории и контейнерах.",
+      "text": "বিদ্যমান ডেটাসেটের অধিকার যাচাই করার পরে [ক্যাটালগ আমদানির CLI]({CATALOG_IMPORT}) ব্যবহার করুন। প্রতিটি ইনস্ট্যান্সের ডেটাসেট, আপলোড করা ফাইল ও ব্যাকআপ রিপোজিটরি বা কন্টেইনার ইমেজের সঙ্গে দেওয়া হয় না।"
+    },
+    {
+      "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
+      "id": "data_rights",
+      "locale": "gu-IN",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Лицензия MIT на программу не предоставляет прав на импортированные сведения об организациях. Одно указание источника не разрешает копирование данных Google Maps, 2ГИС, Яндекс Карт и других сервисов. До использования базы проверьте разрешения на хранение, публикацию и распространение. Подробнее — в [документе о происхождении данных и границах проверки]({DATA_PROVENANCE}).",
+      "text": "MIT સોફ્ટવેર લાઇસન્સ આયાત કરેલા વ્યવસાયિક રેકોર્ડ્સ પર અધિકારો આપતું નથી. ફક્ત સ્ત્રોતનો ઉલ્લેખ કરવાથી Google Maps, 2GIS, Yandex Maps અથવા અન્ય સ્ત્રોતોમાંથી ડેટાની નકલ કરવાની મંજૂરી મળતી નથી. ડેટાસેટનો ઉપયોગ કરતા પહેલાં સંગ્રહ, પ્રકાશન અને પુનઃવિતરણ માટેની પરવાનગીઓ ચકાસો. [ડેટાની ઉત્પત્તિ અને સમીક્ષાની સીમાઓ]({DATA_PROVENANCE}) જુઓ."
+    },
+    {
+      "en": "Open {LOCAL_URL}. The default {CATALOG_MODE} needs no administrator or user setup. Configure {APP_URL}, HTTPS and backups using the [self-hosting guide]({SELF_HOSTING}). Docker Compose is also available: {COMPOSE_COMMAND}.",
+      "id": "run_config",
+      "locale": "kn-IN",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Откройте {LOCAL_URL}. Режим по умолчанию {CATALOG_MODE} не требует создания администратора или пользователей. Настройте {APP_URL}, HTTPS и резервные копии по [инструкции установки]({SELF_HOSTING}). Также доступен Docker Compose: {COMPOSE_COMMAND}.",
+      "text": "{LOCAL_URL} ತೆರೆಯಿರಿ. ಪೂರ್ವನಿಯೋಜಿತ {CATALOG_MODE}ಗೆ ನಿರ್ವಾಹಕ ಅಥವಾ ಬಳಕೆದಾರರನ್ನು ಹೊಂದಿಸುವ ಅಗತ್ಯವಿಲ್ಲ. [ಸ್ವಯಂ ಹೋಸ್ಟಿಂಗ್ ಮಾರ್ಗದರ್ಶಿ]({SELF_HOSTING}) ಬಳಸಿ {APP_URL}, HTTPS ಮತ್ತು ಬ್ಯಾಕಪ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ. Docker Compose ಕೂಡ ಲಭ್ಯವಿದೆ: {COMPOSE_COMMAND}."
+    },
+    {
+      "en": "**An open directory of printing studios and workshops. No registration or moderators.**",
+      "id": "tagline",
+      "locale": "kn-IN",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "**Открытый каталог студий печати и мастерских. Без регистрации и модераторов.**",
+      "text": "**ಮುದ್ರಣ ಸ್ಟುಡಿಯೋಗಳು ಮತ್ತು ಕಾರ್ಯಾಗಾರಗಳ ಮುಕ್ತ ಡೈರೆಕ್ಟರಿ. ನೋಂದಣಿ ಅಥವಾ ಮಾಡರೇಟರ್‌ಗಳಿಲ್ಲ.**"
+    },
+    {
+      "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
+      "id": "data_rights",
+      "locale": "mr-IN",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Лицензия MIT на программу не предоставляет прав на импортированные сведения об организациях. Одно указание источника не разрешает копирование данных Google Maps, 2ГИС, Яндекс Карт и других сервисов. До использования базы проверьте разрешения на хранение, публикацию и распространение. Подробнее — в [документе о происхождении данных и границах проверки]({DATA_PROVENANCE}).",
+      "text": "MIT सॉफ्टवेअर परवाना आयात केलेल्या व्यावसायिक नोंदींवरील अधिकार देत नाही. केवळ स्रोताचा उल्लेख केल्याने Google Maps, 2GIS, Yandex Maps किंवा इतर स्रोतांमधून डेटा कॉपी करण्याची परवानगी मिळत नाही. डेटासेट वापरण्यापूर्वी साठवण, प्रकाशन आणि पुनर्वितरणासाठी परवानग्या तपासा. [डेटाचा उगम आणि परीक्षणाच्या मर्यादा]({DATA_PROVENANCE}) पहा."
+    },
+    {
+      "en": "Use the [catalog import CLI]({CATALOG_IMPORT}) for an existing dataset after checking its rights. Instance datasets, uploads and backups are not bundled in the repository or container images.",
+      "id": "run_import",
+      "locale": "mr-IN",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Существующую базу подключайте через [CLI импорта каталога]({CATALOG_IMPORT}) после проверки прав на данные. Базы отдельных установок, загруженные файлы и резервные копии не поставляются в репозитории и контейнерах.",
+      "text": "विद्यमान डेटासेटवरील अधिकार तपासल्यानंतर [कॅटलॉग आयात CLI]({CATALOG_IMPORT}) वापरा. प्रत्येक इंस्टन्सचा डेटासेट, अपलोड केलेल्या फाइल्स आणि बॅकअप रिपॉझिटरी किंवा कंटेनर इमेजमध्ये समाविष्ट नसतात."
+    },
+    {
+      "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
+      "id": "data_rights",
+      "locale": "pa-IN",
+      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
+      "ru": "Лицензия MIT на программу не предоставляет прав на импортированные сведения об организациях. Одно указание источника не разрешает копирование данных Google Maps, 2ГИС, Яндекс Карт и других сервисов. До использования базы проверьте разрешения на хранение, публикацию и распространение. Подробнее — в [документе о происхождении данных и границах проверки]({DATA_PROVENANCE}).",
+      "text": "MIT ਸਾਫਟਵੇਅਰ ਲਾਇਸੈਂਸ ਆਯਾਤ ਕੀਤੇ ਕਾਰੋਬਾਰੀ ਰਿਕਾਰਡਾਂ ਉੱਤੇ ਅਧਿਕਾਰ ਨਹੀਂ ਦਿੰਦਾ। ਸਿਰਫ਼ ਸਰੋਤ ਦਾ ਜ਼ਿਕਰ ਕਰਨ ਨਾਲ Google Maps, 2GIS, Yandex Maps ਜਾਂ ਹੋਰ ਸਰੋਤਾਂ ਤੋਂ ਡਾਟਾ ਕਾਪੀ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਮਿਲਦੀ। ਡਾਟਾਸੈੱਟ ਵਰਤਣ ਤੋਂ ਪਹਿਲਾਂ ਸਟੋਰੇਜ, ਪ੍ਰਕਾਸ਼ਨ ਅਤੇ ਮੁੜ ਵੰਡ ਦੀਆਂ ਇਜਾਜ਼ਤਾਂ ਜਾਂਚੋ। [ਡਾਟਾ ਦੀ ਉਤਪੱਤੀ ਅਤੇ ਸਮੀਖਿਆ ਦੀਆਂ ਸੀਮਾਵਾਂ]({DATA_PROVENANCE}) ਵੇਖੋ।"
+    },
+    {
+      "locale": "fr-FR",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "Le code source original, l’interface utilisateur, les illustrations SVG, la documentation et le générateur paramétrique sont [sous licence MIT]({LICENSE}). Les dépendances conservent leurs propres licences et mentions. Les modèles créés par les utilisateurs ont une licence distincte choisie par leurs auteurs. Les textes des profils fictifs de démonstration et des cahiers des charges de démonstration, ainsi que les trois modèles de démonstration générés, sont mis à disposition sous CC0 ; le générateur reste sous MIT. Consultez les [mentions relatives aux tiers]({THIRD_PARTY_NOTICES}).",
+      "reason": "Restore the MIT Markdown link and demo technical-brief text instead of short text; CC0 applies to fictional demo texts and three generated designs, not user models."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "Le code source original, l’interface utilisateur, les illustrations SVG, la documentation et le générateur paramétrique sont [sous licence MIT]({LICENSE}). Les dépendances conservent leurs propres licences et mentions. Les modèles créés par les utilisateurs ont une licence distincte choisie par leurs auteurs. Les textes des profils fictifs de démonstration et des cahiers des charges de démonstration, ainsi que les trois modèles de démonstration générés, sont mis à disposition sous CC0 ; le générateur reste sous MIT. Consultez les [mentions relatives aux tiers]({THIRD_PARTY_NOTICES}).",
+      "reason": "Restore the MIT Markdown link and demo technical-brief text instead of short text; CC0 applies to fictional demo texts and three generated designs, not user models."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "মূল সোর্স কোড, ইউজার ইন্টারফেস, SVG চিত্র, ডকুমেন্টেশন এবং প্যারামেট্রিক জেনারেটর [MIT লাইসেন্সের]({LICENSE}) অধীনে প্রকাশিত। নির্ভরশীলতাগুলো তাদের নিজস্ব লাইসেন্স এবং বিজ্ঞপ্তি বজায় রাখে। ব্যবহারকারীর মডেলগুলোর জন্য লেখকদের নির্বাচিত আলাদা লাইসেন্স রয়েছে। কাল্পনিক ডেমো প্রোফাইলের পাঠ্য ও ডেমো প্রযুক্তিগত চাহিদার পাঠ্য, এবং তৈরি করা তিনটি ডেমো ডিজাইন CC0-এর অধীনে উৎসর্গীকৃত; জেনারেটরটি MIT-এর অধীনেই থাকে। [তৃতীয় পক্ষের বিজ্ঞপ্তি]({THIRD_PARTY_NOTICES}) দেখুন।",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "મૂળ સ્રોત કોડ, યુઝર ઇન્ટરફેસ, SVG ચિત્રો, દસ્તાવેજીકરણ અને પેરામેટ્રિક જનરેટર [MIT લાઇસન્સ]({LICENSE}) હેઠળ છે. નિર્ભર ઘટકો તેમના પોતાના લાઇસન્સ અને સૂચનાઓ જાળવી રાખે છે. વપરાશકર્તા મોડેલો માટે તેમના લેખકો દ્વારા પસંદ કરાયેલ અલગ લાઇસન્સ છે. કાલ્પનિક ડેમો પ્રોફાઇલના લખાણો અને ડેમો તકનીકી આવશ્યકતાઓના લખાણો, તેમજ ત્રણ જનરેટ કરેલી ડેમો ડિઝાઇન CC0 હેઠળ સમર્પિત છે; જનરેટર MIT હેઠળ રહે છે. [ત્રીજા પક્ષની સૂચનાઓ]({THIRD_PARTY_NOTICES}) જુઓ.",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "ಮೂಲ ಕೋಡ್, ಬಳಕೆದಾರ ಇಂಟರ್‌ಫೇಸ್, SVG ಚಿತ್ರಗಳು, ದಾಖಲಾತಿ ಮತ್ತು ಪ್ಯಾರಾಮೆಟ್ರಿಕ್ ಜನರೇಟರ್ [MIT ಪರವಾನಗಿಯ]({LICENSE}) ಅಡಿಯಲ್ಲಿ ವಿತರಿಸಲ್ಪಡುತ್ತವೆ. ಅವಲಂಬಿತ ಅಂಶಗಳು ತಮ್ಮದೇ ಆದ ಪರವಾನಗಿಗಳು ಮತ್ತು ಸೂಚನೆಗಳನ್ನು ಉಳಿಸಿಕೊಳ್ಳುತ್ತವೆ. ಬಳಕೆದಾರರ ಮಾದರಿಗಳಿಗೆ ಲೇಖಕರು ಆಯ್ಕೆ ಮಾಡಿದ ಪ್ರತ್ಯೇಕ ಪರವಾನಗಿ ಇರುತ್ತದೆ. ಕಲ್ಪಿತ ಪ್ರದರ್ಶನ ಪ್ರೊಫೈಲ್‌ಗಳ ಪಠ್ಯಗಳು ಮತ್ತು ಪ್ರದರ್ಶನ ತಾಂತ್ರಿಕ ಅವಶ್ಯಕತೆಗಳ ಪಠ್ಯಗಳು, ಹಾಗೂ ಉತ್ಪಾದಿಸಿದ ಮೂರು ಪ್ರದರ್ಶನ ವಿನ್ಯಾಸಗಳನ್ನು CC0 ಅಡಿಯಲ್ಲಿ ಸಮರ್ಪಿಸಲಾಗಿದೆ; ಜನರೇಟರ್ MIT ಅಡಿಯಲ್ಲಿಯೇ ಇರುತ್ತದೆ. [ಮೂರನೇ ಪಕ್ಷದ ಸೂಚನೆಗಳನ್ನು]({THIRD_PARTY_NOTICES}) ನೋಡಿ.",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "മൂല സോഴ്സ് കോഡ്, യുഐ, SVG ചിത്രീകരണങ്ങൾ, ഡോക്യുമെന്റേഷൻ, പരാമീറ്റ്രിക് ജനറേറ്റർ എന്നിവ [MIT ലൈസൻസിനു]({LICENSE}) കീഴിലാണ്. ആശ്രിത ഘടകങ്ങൾ അവയുടെ സ്വന്തം ലൈസൻസുകളും അറിയിപ്പുകളും നിലനിർത്തുന്നു. ഉപയോക്താക്കളുടെ മോഡലുകൾക്ക് അവയുടെ രചയിതാക്കൾ തിരഞ്ഞെടുക്കുന്ന പ്രത്യേക ലൈസൻസുകളുണ്ട്. സാങ്കൽപ്പിക ഡെമോ പ്രൊഫൈലുകളുടെയും ഡെമോ സാങ്കേതിക ആവശ്യകതകളുടെയും പാഠങ്ങളും സൃഷ്ടിച്ച മൂന്ന് ഡെമോ ഡിസൈനുകളും CC0 പ്രകാരം സമർപ്പിച്ചിരിക്കുന്നു; ജനറേറ്റർ MIT ലൈസൻസിനു കീഴിൽ തുടരുന്നു. [മൂന്നാം കക്ഷി അറിയിപ്പുകൾ]({THIRD_PARTY_NOTICES}) കാണുക.",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies. Repair mixed-script corruption."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "मूळ कोड, वापरकर्ता इंटरफेस, SVG आकृत्या, दस्तऐवज आणि पॅरामीट्रिक जनरेटर [MIT परवान्याअंतर्गत]({LICENSE}) उपलब्ध आहेत. अवलंबित्वे त्यांचे स्वतःचे परवाने आणि सूचना जतन करतात. वापरकर्त्यांनी तयार केलेल्या मॉडेल्ससाठी लेखकांनी निवडलेला स्वतंत्र परवाना असतो. काल्पनिक डेमो प्रोफाइलचे मजकूर आणि डेमो तांत्रिक आवश्यकतांचे मजकूर, तसेच तीन तयार केलेले डेमो डिझाइन CC0 अंतर्गत समर्पित आहेत; जनरेटर MIT अंतर्गत राहतो. [तृतीय-पक्ष सूचना]({THIRD_PARTY_NOTICES}) पहा.",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "ਮੂਲ ਕੋਡ, UI, SVG ਚਿੱਤਰ, ਦਸਤਾਵੇਜ਼ ਅਤੇ ਪੈਰਾਮੀਟ੍ਰਿਕ ਜਨਰੇਟਰ [MIT ਲਾਇਸੈਂਸ]({LICENSE}) ਦੇ ਅਧੀਨ ਹਨ। ਨਿਰਭਰਤਾਵਾਂ ਆਪਣੇ ਲਾਇਸੈਂਸ ਅਤੇ ਨੋਟਿਸ ਰੱਖਦੀਆਂ ਹਨ। ਉਪਭੋਗਤਾ ਮਾਡਲਾਂ ਦਾ ਵੱਖਰਾ ਲਾਇਸੈਂਸ ਹੁੰਦਾ ਹੈ, ਜੋ ਉਨ੍ਹਾਂ ਦੇ ਲੇਖਕਾਂ ਦੁਆਰਾ ਚੁਣਿਆ ਜਾਂਦਾ ਹੈ। ਕਾਲਪਨਿਕ ਡੈਮੋ ਪ੍ਰੋਫਾਈਲਾਂ ਅਤੇ ਡੈਮੋ ਤਕਨੀਕੀ ਲੋੜਾਂ ਦੇ ਟੈਕਸਟ, ਅਤੇ ਤਿੰਨ ਤਿਆਰ ਕੀਤੇ ਡੈਮੋ ਡਿਜ਼ਾਈਨ CC0 ਦੇ ਅਧੀਨ ਸਮਰਪਿਤ ਹਨ; ਜਨਰੇਟਰ MIT ਦੇ ਅਧੀਨ ਰਹਿੰਦਾ ਹੈ। [ਤੀਜੀ ਧਿਰ ਦੇ ਨੋਟਿਸ]({THIRD_PARTY_NOTICES}) ਦੇਖੋ।",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    },
+    {
+      "locale": "te-IN",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "మూల కోడ్, యూజర్ ఇంటర్‌ఫేస్, SVG చిత్రాలు, డాక్యుమెంటేషన్ మరియు పారామెట్రిక్ జనరేటర్ [MIT లైసెన్స్]({LICENSE}) క్రింద విడుదల చేయబడ్డాయి. డిపెండెన్సీలు వాటి స్వంత లైసెన్స్‌లు మరియు నోటీసులను కలిగి ఉంటాయి. వినియోగదారు నమూనాలకు వాటి రచయితలు ఎంచుకున్న ప్రత్యేక లైసెన్స్ ఉంటుంది. కల్పిత డెమో ప్రొఫైల్‌ల పాఠ్యాలు, డెమో సాంకేతిక అవసరాల పాఠ్యాలు మరియు రూపొందించిన మూడు డెమో డిజైన్‌లు CC0 క్రింద అంకితం చేయబడ్డాయి; జనరేటర్ MIT క్రింద ఉంటుంది. [మూడవ పక్ష నోటీసులను]({THIRD_PARTY_NOTICES}) చూడండి.",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "license_code",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
+      "text": "اصل سورس کوڈ، صارف انٹرفیس، SVG تصاویر، دستاویزات اور پیرامیٹرک جنریٹر [MIT لائسنس]({LICENSE}) کے تحت فراہم کیے گئے ہیں۔ انحصاری اجزاء اپنے لائسنس اور نوٹس برقرار رکھتے ہیں۔ صارف کے ماڈلز کے لیے ان کے مصنفین کا منتخب کردہ الگ لائسنس ہوتا ہے۔ فرضی ڈیمو پروفائلز اور ڈیمو تکنیکی تقاضوں کے متون، نیز تین تیار کردہ ڈیمو ڈیزائن CC0 کے تحت وقف کیے گئے ہیں؛ جنریٹر MIT کے تحت رہتا ہے۔ [تھرڈ پارٹی نوٹس]({THIRD_PARTY_NOTICES}) دیکھیں۔",
+      "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { localeTag } from '../shared/locales';
 import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
@@ -33,7 +34,13 @@ import {
   api,
 } from './core';
 import { HeroArt } from './art';
-import { technologies, technologyName, type Profile, type Job } from '../shared/types';
+import {
+  technologies,
+  technologyLabel,
+  materialLabel,
+  type Profile,
+  type Job,
+} from '../shared/types';
 import type {
   CatalogStudio,
   DirectoryResponse,
@@ -84,21 +91,23 @@ export function ProfileCard({ profile }: { profile: Profile }) {
           )}
         </p>
       </div>
-      <p className="card-description">{profile.description}</p>
+      <p className="card-description" dir="auto">
+        {profile.description}
+      </p>
       <div className="tags">
         {profile.technologies.slice(0, 4).map((s) => (
-          <span key={s}>{t(technologyName(s, 'ru'), technologyName(s, 'en'))}</span>
+          <span key={s}>{technologyLabel(s, t)}</span>
         ))}
         {profile.materials
           .filter((m) => m !== 'Any')
           .slice(0, 2)
           .map((s) => (
-            <span key={s}>{s}</span>
+            <span key={s}>{materialLabel(s, t)}</span>
           ))}
       </div>
       <Link className="card-link" to={`/studios/${profile.id}`}>
         {t('Познакомиться', 'Meet the maker')}
-        <ArrowUpRight size={17} />
+        <ArrowUpRight className="directional-icon" size={17} />
       </Link>
     </article>
   );
@@ -130,14 +139,18 @@ export function JobCard({ job, compact = false }: { job: Job; compact?: boolean 
         <h3>
           <Link to={`/projects/${job.id}`}>{job.title}</Link>
         </h3>
-        {!compact && <p className="card-description">{job.description}</p>}
+        {!compact && (
+          <p className="card-description" dir="auto">
+            {job.description}
+          </p>
+        )}
         <div className="job-meta">
           <span>
             <MapPin size={13} />
             {job.city}
           </span>
-          {job.technology !== 'Any' && <span>{job.technology}</span>}
-          {job.material !== 'Any' && <span>{job.material}</span>}
+          {job.technology !== 'Any' && <span>{technologyLabel(job.technology, t)}</span>}
+          {job.material !== 'Any' && <span>{materialLabel(job.material, t)}</span>}
           <span>
             {job.quantity} {t('шт.', 'pcs')}
           </span>
@@ -155,10 +168,10 @@ export function JobCard({ job, compact = false }: { job: Job; compact?: boolean 
         </span>
         <Link
           className="round-arrow"
-          aria-label={t('Открыть проект', 'View project') + ': ' + job.title}
+          aria-label={t('Открыть проект: {title}', 'View project: {title}', { title: job.title })}
           to={`/projects/${job.id}`}
         >
-          <ArrowUpRight size={19} />
+          <ArrowUpRight className="directional-icon" size={19} />
         </Link>
       </div>
     </article>
@@ -226,7 +239,7 @@ export function Home() {
             </Link>
             <Link className="text-button" to="/studios">
               {t('Найти мастерскую', 'Find a workshop')}
-              <ArrowUpRight size={17} />
+              <ArrowUpRight className="directional-icon" size={17} />
             </Link>
           </div>
           <div className="hero-proof">
@@ -263,7 +276,8 @@ export function Home() {
           </p>
         </div>
         <Link className="text-button" to="/projects/new">
-          {t('У меня уже есть ТЗ', 'I already have a brief')} <ArrowUpRight size={16} />
+          {t('У меня уже есть ТЗ', 'I already have a brief')}{' '}
+          <ArrowUpRight className="directional-icon" size={16} />
         </Link>
       </div>
       <section
@@ -342,7 +356,7 @@ export function Home() {
               <p>{c.desc}</p>
               <span className="card-link">
                 {c.label}
-                <ArrowUpRight size={16} />
+                <ArrowUpRight className="directional-icon" size={16} />
               </span>
             </Link>
           ))}
@@ -356,7 +370,7 @@ export function Home() {
           </div>
           <Link className="text-button" to="/studios">
             {t('Все участники', 'All makers')}
-            <ArrowRight size={16} />
+            <ArrowRight className="directional-icon" size={16} />
           </Link>
         </div>
         <ErrorBox error={profiles.error} retry={profiles.reload} />
@@ -391,7 +405,7 @@ export function Home() {
           </div>
           <Link className="text-button" to="/projects">
             {t('Все проекты', 'All projects')}
-            <ArrowRight size={16} />
+            <ArrowRight className="directional-icon" size={16} />
           </Link>
         </div>
         <ErrorBox error={projects.error} retry={projects.reload} />
@@ -422,7 +436,7 @@ export function Home() {
           <Layers3 size={37} />
         </span>
         <div>
-          <span className="eyebrow">OPEN BY DESIGN</span>
+          <span className="eyebrow">{t('ОТКРЫТО ПО ЗАМЫСЛУ', 'OPEN BY DESIGN')}</span>
           <h2>{t('Ваше сообщество. Ваши правила.', 'Your community. Your way.')}</h2>
           <p>
             {t(
@@ -433,7 +447,7 @@ export function Home() {
         </div>
         <Link className="button secondary" to="/about">
           {t('О проекте', 'About OpenPrint')}
-          <ArrowUpRight size={16} />
+          <ArrowUpRight className="directional-icon" size={16} />
         </Link>
       </section>
     </div>
@@ -487,9 +501,7 @@ function CatalogCard({ studio }: { studio: CatalogStudio }) {
       </p>
       <div className="tags">
         {studio.technologies.slice(0, 4).map((technology) => (
-          <span key={technology}>
-            {t(technologyName(technology, 'ru'), technologyName(technology, 'en'))}
-          </span>
+          <span key={technology}>{technologyLabel(technology, t)}</span>
         ))}
         {studio.lat === null || studio.lng === null ? (
           <span>{t('Без точки на карте', 'No map location')}</span>
@@ -503,7 +515,7 @@ function CatalogCard({ studio }: { studio: CatalogStudio }) {
       </p>
       <Link className="card-link" to={`/catalog/${studio.id}`}>
         {t('Контакты студии', 'Studio contacts')}
-        <ArrowUpRight size={17} />
+        <ArrowUpRight className="directional-icon" size={17} />
       </Link>
     </article>
   );
@@ -593,6 +605,7 @@ export function Directory() {
         <div className="search-input">
           <Search size={18} />
           <input
+            dir="auto"
             aria-label={t('Поиск мастерских', 'Search workshops')}
             maxLength={100}
             placeholder={t('Название, город или специализация', 'Name, city, or specialty')}
@@ -608,18 +621,30 @@ export function Directory() {
                 value={params.get('source') || 'all'}
                 onChange={(event) => filter('source', event.target.value)}
               >
-                <option value="all">{t('Участники и каталог', 'Members and directory')}</option>
-                <option value="member">{t('Участники OpenPrint', 'OpenPrint members')}</option>
-                <option value="catalog">{t('Каталог студий', 'Studio directory')}</option>
+                <option dir="auto" value="all">
+                  {t('Участники и каталог', 'Members and directory')}
+                </option>
+                <option dir="auto" value="member">
+                  {t('Участники OpenPrint', 'OpenPrint members')}
+                </option>
+                <option dir="auto" value="catalog">
+                  {t('Каталог студий', 'Studio directory')}
+                </option>
               </select>
               <select
                 aria-label={t('Тип участника', 'Maker type')}
                 value={params.get('kind') || ''}
                 onChange={(e) => filter('kind', e.target.value)}
               >
-                <option value="">{t('Все специализации', 'All specialties')}</option>
-                <option value="studio">{t('Мастерские', 'Workshops')}</option>
-                <option value="engineer">{t('Инженеры', 'Engineers')}</option>
+                <option dir="auto" value="">
+                  {t('Все специализации', 'All specialties')}
+                </option>
+                <option dir="auto" value="studio">
+                  {t('Мастерские', 'Workshops')}
+                </option>
+                <option dir="auto" value="engineer">
+                  {t('Инженеры', 'Engineers')}
+                </option>
               </select>
             </>
           )}
@@ -628,14 +653,16 @@ export function Directory() {
             value={params.get('technology') || ''}
             onChange={(e) => filter('technology', e.target.value)}
           >
-            <option value="">{t('Все технологии', 'All technologies')}</option>
+            <option dir="auto" value="">
+              {t('Все технологии', 'All technologies')}
+            </option>
             {technologies.map((s) => (
-              <option key={s} value={s}>
-                {t(technologyName(s, 'ru'), technologyName(s, 'en'))}
+              <option dir="auto" key={s} value={s}>
+                {technologyLabel(s, t)}
               </option>
             ))}
             {['PolyJet', 'Binder Jetting'].map((technology) => (
-              <option key={technology} value={technology}>
+              <option dir="auto" key={technology} value={technology}>
                 {technology}
               </option>
             ))}
@@ -776,7 +803,7 @@ export function Directory() {
         {remote.data?.has_more && (
           <button className="button secondary" onClick={() => page(offset + 12)}>
             {t('Следующая страница', 'Next page')}
-            <ArrowRight size={16} />
+            <ArrowRight className="directional-icon" size={16} />
           </button>
         )}
       </div>
@@ -807,7 +834,10 @@ export function CatalogPage() {
   return (
     <div className="page narrow catalog-page">
       <Link className="back-link" to="/studios?source=catalog">
-        ← {t('Каталог студий', 'Studio directory')}
+        <span className="directional-icon" aria-hidden="true">
+          ←
+        </span>{' '}
+        {t('Каталог студий', 'Studio directory')}
       </Link>
       <section className="panel profile-detail catalog-detail">
         <span className="catalog-label">
@@ -815,27 +845,33 @@ export function CatalogPage() {
             ? t('Самостоятельная публикация', 'Self-published')
             : t('Справочная запись', 'Directory listing')}
         </span>
-        <h1>{studio.name}</h1>
+        <h1 dir="auto">{studio.name}</h1>
         <p className="location">
           <MapPin size={15} />
           {catalogLocation(studio) || t('Город не указан', 'City not specified')}
         </p>
-        {studio.address && <p className="prose">{studio.address}</p>}
+        {studio.address && (
+          <p className="prose" dir="auto">
+            {studio.address}
+          </p>
+        )}
         <div className="info-box">
           {t(
             'Сведения опубликованы в открытом каталоге. Принадлежность записи организации не проверяется. Контакты, наличие оборудования и условия работы уточняйте непосредственно у студии.',
             'Details are published in an open directory. The listing’s ownership is not verified. Confirm contact details, available equipment, and terms directly with the studio.',
           )}
         </div>
-        {studio.description && <p className="prose">{studio.description}</p>}
+        {studio.description && (
+          <p className="prose" dir="auto">
+            {studio.description}
+          </p>
+        )}
         {!!(studio.technologies.length || studio.materials.length) && (
           <>
             <h2>{t('Технологии и материалы', 'Technologies and materials')}</h2>
             <div className="tags">
               {[...studio.technologies, ...studio.materials].map((value, index) => (
-                <span key={value + index}>
-                  {t(technologyName(value, 'ru'), technologyName(value, 'en'))}
-                </span>
+                <span key={value + index}>{materialLabel(technologyLabel(value, t), t)}</span>
               ))}
             </div>
           </>
@@ -912,7 +948,7 @@ export function CatalogPage() {
           ) : (
             <p className="micro muted">
               {t('Импортировано', 'Imported')}:{' '}
-              {new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', { dateStyle: 'medium' })
+              {new Intl.DateTimeFormat(localeTag(lang), { dateStyle: 'medium' })
                 .format(studio.imported_at)
                 .replace(/\.$/, '')}
               .{' '}
@@ -943,7 +979,10 @@ export function ProfilePage() {
   return (
     <div className="page narrow">
       <Link className="back-link" to="/studios">
-        ← {t('Все мастерские', 'All makers')}
+        <span className="directional-icon" aria-hidden="true">
+          ←
+        </span>{' '}
+        {t('Все мастерские', 'All makers')}
       </Link>
       <section className="panel profile-detail">
         <div className="between">
@@ -960,17 +999,19 @@ export function ProfilePage() {
         <span className="eyebrow">
           {p.kind === 'engineer' ? t('ИНЖЕНЕР', 'ENGINEER') : t('МАСТЕРСКАЯ', 'WORKSHOP')}
         </span>
-        <h1>{p.name}</h1>
+        <h1 dir="auto">{p.name}</h1>
         <p className="location">
           <MapPin size={15} />
           {p.city}
           {p.remote && <span>· {t('Работает удалённо', 'Works remotely')}</span>}
         </p>
-        <p className="prose">{p.description}</p>
+        <p className="prose" dir="auto">
+          {p.description}
+        </p>
         <h3>{t('Технологии и материалы', 'Technologies & materials')}</h3>
         <div className="tags">
           {[...p.technologies, ...p.materials.filter((x) => x !== 'Any')].map((tag, i) => (
-            <span key={tag + i}>{tag}</span>
+            <span key={tag + i}>{materialLabel(technologyLabel(tag, t), t)}</span>
           ))}
         </div>
         <div className="detail-actions">
@@ -980,7 +1021,7 @@ export function ProfilePage() {
               to={`/projects/new?target=${p.id}&kind=${p.kind === 'engineer' ? 'design' : 'print'}`}
             >
               {t('Обсудить проект', 'Discuss a project')}
-              <ArrowUpRight size={17} />
+              <ArrowUpRight className="directional-icon" size={17} />
             </Link>
           )}
           {p.website && (
@@ -1044,6 +1085,7 @@ export function ReportButton({
       <label>
         {t('Что произошло?', 'What happened?')}
         <textarea
+          dir="auto"
           minLength={10}
           maxLength={2000}
           required
@@ -1102,6 +1144,7 @@ export function Projects() {
         <div className="search-input">
           <Search size={18} />
           <input
+            dir="auto"
             aria-label={t('Поиск проектов', 'Search projects')}
             placeholder={t('Что хотите сделать?', 'What would you like to make?')}
             value={params.get('q') || ''}
@@ -1126,6 +1169,7 @@ export function Projects() {
             ))}
           </div>
           <input
+            dir="auto"
             aria-label={t('Город проекта', 'Project city')}
             placeholder={t('Любой город', 'Any city')}
             value={params.get('city') || ''}
@@ -1168,7 +1212,7 @@ export function Projects() {
         {remote.data?.has_more && (
           <button className="button secondary" onClick={() => setOffset((v) => v + 12)}>
             {t('Дальше', 'Next page')}
-            <ArrowRight size={15} />
+            <ArrowRight className="directional-icon" size={15} />
           </button>
         )}
       </div>

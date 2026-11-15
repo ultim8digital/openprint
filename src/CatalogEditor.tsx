@@ -111,7 +111,7 @@ function saveText(name: string, content: string, type = 'text/plain;charset=utf-
 }
 function SecretLink({ id, secret }: { id: string; secret: string }) {
   const { t } = useApp();
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<'copied' | 'manual' | null>(null);
   const link = `${location.origin}/catalog/${id}/edit#key=${secret}`;
   return (
     <section className="catalog-secret" aria-labelledby="catalog-secret-title">
@@ -125,6 +125,7 @@ function SecretLink({ id, secret }: { id: string; secret: string }) {
       <label>
         {t('Личная ссылка управления', 'Private management link')}
         <textarea
+          dir="auto"
           readOnly
           rows={3}
           value={link}
@@ -140,11 +141,9 @@ function SecretLink({ id, secret }: { id: string; secret: string }) {
           onClick={async () => {
             try {
               await navigator.clipboard.writeText(link);
-              setMessage(t('Ссылка скопирована', 'Link copied'));
+              setMessage('copied');
             } catch {
-              setMessage(
-                t('Выделите и скопируйте ссылку вручную.', 'Select and copy the link manually.'),
-              );
+              setMessage('manual');
             }
           }}
         >
@@ -157,7 +156,11 @@ function SecretLink({ id, secret }: { id: string; secret: string }) {
           onClick={() =>
             saveText(
               `openprint-${id}-private.txt`,
-              `OpenPrint — private management link\n${link}\n\nKeep this file private. Anyone with this key can edit or delete the listing.\n`,
+              t(
+                'OpenPrint — личная ссылка управления\n{link}\n\nХраните этот файл в секрете. Любой обладатель ключа может изменить или удалить запись.\n',
+                'OpenPrint — private management link\n{link}\n\nKeep this file private. Anyone with this key can edit or delete the listing.\n',
+                { link },
+              ),
             )
           }
         >
@@ -166,7 +169,11 @@ function SecretLink({ id, secret }: { id: string; secret: string }) {
         </button>
       </div>
       <p role="status" className="micro">
-        {message}
+        {message === 'copied'
+          ? t('Ссылка скопирована', 'Link copied')
+          : message === 'manual'
+            ? t('Выделите и скопируйте ссылку вручную.', 'Select and copy the link manually.')
+            : ''}
       </p>
     </section>
   );
@@ -271,7 +278,7 @@ function Editor({ id }: { id?: string }) {
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(!!id && !!access.key);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
+  const [notice, setNotice] = useState(false);
   const [rights, setRights] = useState(false);
   const [storageBlocked, setStorageBlocked] = useState(access.storageBlocked);
   const [created, setCreated] = useState(false);
@@ -293,43 +300,43 @@ function Editor({ id }: { id?: string }) {
   }
   function messageFor(caught: unknown) {
     const code = caught instanceof ApiError ? caught.code : '';
-    const messages: Record<string, [string, string]> = {
-      MANAGEMENT_KEY_INVALID: [
+    const messages: Record<string, string> = {
+      MANAGEMENT_KEY_INVALID: t(
         'Ключ не подходит к этой записи. Проверьте личную ссылку или вставьте ключ заново.',
         'This key does not match the listing. Check your private link or enter the key again.',
-      ],
-      VERSION_CONFLICT: [
+      ),
+      VERSION_CONFLICT: t(
         'Запись уже изменена в другом окне. Ваши правки сохранены в форме. Загрузите актуальную запись только после сохранения нужных правок.',
         'This listing changed in another window. Your edits remain in the form. Save any needed edits before loading the latest listing.',
-      ],
-      DUPLICATE_STUDIO: [
+      ),
+      DUPLICATE_STUDIO: t(
         'Такая студия уже есть в каталоге. Найдите существующую запись ниже.',
         'This studio already exists in the directory. Find the existing listing below.',
-      ],
-      REQUEST_ID_REUSED: [
+      ),
+      REQUEST_ID_REUSED: t(
         'Этот ключ уже использован для другой публикации. Откройте ранее сохранённую личную ссылку.',
         'This key has already been used for another submission. Open your previously saved private link.',
-      ],
-      SUBMISSION_DELETED: [
+      ),
+      SUBMISSION_DELETED: t(
         'Эта запись удалена. Старый ключ больше не позволяет её восстановить.',
         'This listing was deleted. Its old key cannot restore it.',
-      ],
-      RATE_LIMIT: [
+      ),
+      RATE_LIMIT: t(
         'Слишком много попыток. Подождите немного и повторите.',
         'Too many attempts. Wait a little and try again.',
-      ],
-      SUBMISSION_CAPACITY: [
+      ),
+      SUBMISSION_CAPACITY: t(
         'Каталог временно не принимает новые записи. Попробуйте позже.',
         'The directory temporarily cannot accept new listings. Please try later.',
-      ],
-      VALIDATION: [
+      ),
+      VALIDATION: t(
         'Проверьте поля: название и город, сайт или телефон, обе координаты или ни одной.',
         'Check the fields: name and city, website or phone, and either both coordinates or neither.',
-      ],
+      ),
     };
     const translated = messages[code];
     return translated
-      ? t(...translated)
+      ? translated
       : t(
           'Не удалось получить ответ сервера. Проверьте соединение и повторите действие.',
           'The server did not respond. Check your connection and retry.',
@@ -384,7 +391,7 @@ function Editor({ id }: { id?: string }) {
   function change<K extends keyof Draft>(field: K, value: Draft[K]) {
     setDraft((previous) => ({ ...previous, [field]: value }));
     setRights(false);
-    setNotice('');
+    setNotice(false);
   }
   function payload(): PublicStudioInput | null {
     const list = (value: string) => [
@@ -524,7 +531,7 @@ function Editor({ id }: { id?: string }) {
     if (!data || !studio || !rights) return;
     setBusy(true);
     setError('');
-    setNotice('');
+    setNotice(false);
     try {
       const result = await api<{ studio: CatalogStudio }>('/directory/submissions/' + id, {
         method: 'PATCH',
@@ -535,7 +542,7 @@ function Editor({ id }: { id?: string }) {
       setDraft(toDraft(result.studio));
       setRights(false);
       setConflict(false);
-      setNotice(t('Изменения опубликованы', 'Changes published'));
+      setNotice(true);
     } catch (caught) {
       setError(messageFor(caught));
       if (caught instanceof ApiError && caught.code === 'VERSION_CONFLICT') setConflict(true);
@@ -602,7 +609,10 @@ function Editor({ id }: { id?: string }) {
   return (
     <div className="page narrow catalog-editor">
       <Link className="back-link" to="/studios">
-        ← {t('Каталог студий', 'Studio directory')}
+        <span className="directional-icon" aria-hidden="true">
+          ←
+        </span>{' '}
+        {t('Каталог студий', 'Studio directory')}
       </Link>
       <div className="page-heading">
         <div>
@@ -633,7 +643,7 @@ function Editor({ id }: { id?: string }) {
       )}
       {notice && (
         <p className="info-box" role="status">
-          {notice}
+          {t('Изменения опубликованы', 'Changes published')}
         </p>
       )}
       {deleted ? (
@@ -696,6 +706,7 @@ function Editor({ id }: { id?: string }) {
           <label>
             {t('Ключ управления', 'Management key')}
             <input
+              dir="auto"
               type="password"
               autoComplete="off"
               spellCheck={false}
@@ -746,6 +757,7 @@ function Editor({ id }: { id?: string }) {
               </button>
               <label className="check-label">
                 <input
+                  dir="auto"
                   type="checkbox"
                   checked={reloadConfirmed}
                   onChange={(event) => setReloadConfirmed(event.target.checked)}
@@ -773,6 +785,7 @@ function Editor({ id }: { id?: string }) {
                 <label className="span-2">
                   {t('Название студии', 'Studio name')} *
                   <input
+                    dir="auto"
                     required
                     minLength={2}
                     maxLength={200}
@@ -784,6 +797,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Город', 'City')} *
                   <input
+                    dir="auto"
                     required
                     minLength={2}
                     maxLength={120}
@@ -795,6 +809,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Регион', 'Region')}
                   <input
+                    dir="auto"
                     maxLength={160}
                     value={draft.region}
                     onChange={(event) => change('region', event.target.value)}
@@ -804,6 +819,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Страна', 'Country')}
                   <input
+                    dir="auto"
                     maxLength={80}
                     value={draft.country}
                     onChange={(event) => change('country', event.target.value)}
@@ -813,6 +829,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Адрес', 'Address')}
                   <input
+                    dir="auto"
                     maxLength={500}
                     value={draft.address}
                     onChange={(event) => change('address', event.target.value)}
@@ -822,6 +839,7 @@ function Editor({ id }: { id?: string }) {
                 <label className="span-2">
                   {t('Описание возможностей', 'Capabilities')}
                   <textarea
+                    dir="auto"
                     rows={4}
                     maxLength={4000}
                     value={draft.description}
@@ -831,6 +849,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Технологии через запятую', 'Technologies, comma separated')}
                   <input
+                    dir="auto"
                     maxLength={4039}
                     placeholder="FDM, SLA, CNC"
                     value={draft.technologies}
@@ -840,6 +859,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Материалы через запятую', 'Materials, comma separated')}
                   <input
+                    dir="auto"
                     maxLength={5049}
                     placeholder="PLA, PETG, ABS"
                     value={draft.materials}
@@ -859,6 +879,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Сайт', 'Website')}
                   <input
+                    dir="auto"
                     type="url"
                     maxLength={2048}
                     placeholder="https://studio.example"
@@ -869,6 +890,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Телефон', 'Phone')}
                   <input
+                    dir="auto"
                     type="tel"
                     maxLength={100}
                     value={draft.phone}
@@ -888,6 +910,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Широта', 'Latitude')}
                   <input
+                    dir="auto"
                     type="number"
                     step="any"
                     min={-90}
@@ -899,6 +922,7 @@ function Editor({ id }: { id?: string }) {
                 <label>
                   {t('Долгота', 'Longitude')}
                   <input
+                    dir="auto"
                     type="number"
                     step="any"
                     min={-180}
@@ -988,6 +1012,7 @@ function Editor({ id }: { id?: string }) {
               )}
               <label className="check-label catalog-rights">
                 <input
+                  dir="auto"
                   type="checkbox"
                   checked={rights}
                   onChange={(event) => setRights(event.target.checked)}
@@ -1034,6 +1059,7 @@ function Editor({ id }: { id?: string }) {
                 <>
                   <label className="check-label">
                     <input
+                      dir="auto"
                       type="checkbox"
                       checked={deleteConfirmed}
                       onChange={(event) => setDeleteConfirmed(event.target.checked)}

@@ -1,28 +1,28 @@
 # OpenPrint
 
-**Открытый каталог студий печати и мастерских. Без регистрации и модераторов.**
+**An open directory of printing studios and workshops. No registration or moderators.**
 
-[English](README.en.md) · [Самостоятельная публикация](docs/OPEN_CATALOG.md) · [Установка](docs/SELF_HOSTING.md) · [Участвовать](CONTRIBUTING.md) · [Проверки](docs/VALIDATION.md)
+[Languages / Языки](docs/i18n/README.md) · [English](README.md) · [Русский](docs/readme/README.ru.md)
 
-Найдите студию на карте, уточните её технологии и свяжитесь напрямую. Если вашей мастерской нет в каталоге, добавьте её через форму — карточка появится сразу. Сайт, телефон, адрес и возможности доступны всем. Для последующего редактирования или удаления сохраните личную ссылку, которую получите после публикации.
+Find a maker on the map, check their capabilities and contact them directly. If your workshop is missing, add its contacts and services: the listing appears immediately. Save the private management link to edit or delete your listing later. The default catalog has no accounts, email confirmation or approval queue.
 
-Код публичный, лицензия MIT. Для работы нужны Node.js 24 и SQLite; Vercel, Supabase, почтовый сервис, платный ИИ и сторонний вход не требуются. GitHub хранит код и релизы. Общему сайту с самостоятельным добавлением записей нужен работающий сервер: [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) не выполняет Node.js API и не хранит изменения посетителей.
+Run OpenPrint with Node.js 24 and local SQLite. Vercel, Supabase, an email provider, paid AI and third-party login are not required. GitHub hosts the source and releases; a shared website accepting submissions needs a running API server. [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) alone cannot run the Node.js API or persist visitor changes.
 
-## Что умеет каталог
+## Catalog features
 
-- Поиск по названию, городу и технологиям; карта всех подходящих точек независимо от страницы списка.
-- Добавление студии без аккаунта, пароля, письма и очереди одобрения.
-- Выбор точки на карте или ввод координат; запись без координат остаётся доступна в списке.
-- Исправление и удаление своей карточки по личной ссылке; защита от перезаписи одновременно открытых версий.
-- Подсказки о существующих записях и автоматическое отклонение точного дубля названия, города и адреса.
-- Импорт существующего каталога с указанием источника. Импортированные сведения и самостоятельные публикации хранятся отдельно.
-- Русский и английский интерфейс. Подключение карты OpenStreetMap без API-ключа.
+- Search by name, city and technology. The map includes matching locations independently of list pagination.
+- Publish without an account. Choose a map point or enter coordinates; listings without coordinates remain searchable.
+- Edit or delete one listing with its private link. Version checks protect against conflicting edits in different tabs.
+- Find existing studios before publishing. Exact name, city and address duplicates are rejected automatically.
+- Import a catalog with source attribution. Operator imports cannot overwrite self-published listings.
+- View OpenStreetMap tiles without an API key. Tiles load when a map is displayed, including the default landing page.
+- Choose the interface language from the language menu. Read the full README in your language through the language index above.
 
-Самостоятельная публикация не является проверкой принадлежности бизнеса. Контакты, оборудование и условия уточняйте у исполнителя. Личная ссылка даёт доступ к изменению только одной записи; её нельзя публиковать. Восстановления через почту нет.
+Publication does not verify business ownership or service quality. Confirm equipment, capabilities and terms with the studio. Anyone holding the private management link can control that listing. Keep it private; there is no email recovery. Read the [self-publication guide](docs/OPEN_CATALOG.md).
 
-## Запуск своего экземпляра
+## Run your own instance
 
-После клонирования репозитория:
+Install Node.js 24, clone this repository and run:
 
 ```sh
 npm ci
@@ -31,17 +31,25 @@ cp .env.example .env
 npm start
 ```
 
-По умолчанию `APP_MODE=catalog`: каталог работает без создания администратора или пользователей. Настройте `APP_URL`, HTTPS и резервные копии по [инструкции](docs/SELF_HOSTING.md). Есть [Docker Compose](compose.yaml): `docker compose up --build -d`.
+Open `http://localhost:3000`. The default `APP_MODE=catalog` needs no administrator or user setup. Configure `APP_URL`, HTTPS and backups using the [self-hosting guide](docs/SELF_HOSTING.md). Docker Compose is also available: `docker compose up --build -d`.
 
-Существующую базу студий подключите через [импорт JSON](docs/CATALOG_IMPORT.md). Данные конкретных установок не включены в репозиторий и контейнеры. Проект развивает идею [3d-online.app](https://3d-online.app), сохраняя код и данные независимыми от его облачных сервисов.
+The supported deployment is one application process with SQLite on a local disk. Automatic publication and request quotas limit abuse without a moderation queue. A shared office IP can share a publication quota. See [limits and management-link behavior](docs/OPEN_CATALOG.md) before opening a public instance.
 
-## Необязательный режим проектов и CAD
+Use the [catalog import CLI](docs/CATALOG_IMPORT.md) for an existing dataset after checking its rights. Instance datasets, uploads and backups are not bundled in the repository or container images.
 
-Для существующих сообществ сохранён явный `APP_MODE=community`: приватные проекты, предложения исполнителей, модели и Neofab Studio. В этом режиме действуют прежние аккаунты и права доступа. Переключение режима не удаляет историю, а каталог не раскрывает её через API и не запускает накопленные CAD-задания.
+## Optional community and Neofab mode
 
-[Neofab Studio](docs/NEOFAB_SETUP.md) поддерживает производственное ТЗ, BOM и ограниченную декларативную CAD-геометрию с STEP/STL. CAD и ИИ подключаются отдельно. CAM/G-code и проверка физической пригодности изделия не реализованы.
+Set `APP_MODE=community` explicitly to enable private projects, provider quotations, the model library and Neofab Studio. These workflows use their own accounts and permissions. Switching modes preserves stored data. Catalog mode does not expose private community history through its API or resume queued CAD work.
 
-## Разработка и проверки
+[Neofab Studio](docs/NEOFAB_SETUP.md) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.
+
+## Data rights and privacy
+
+The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries](docs/DATA_PROVENANCE.md).
+
+Self-published contact details are public; management keys are private. Keep databases and backups out of publicly served directories, and provide a contact for corrections and removal requests. Read [privacy](PRIVACY.md) and [security](SECURITY.md) before deployment.
+
+## Development and translation
 
 ```sh
 npm run dev
@@ -51,14 +59,14 @@ npm run test:e2e
 npm run format:check
 ```
 
-GitHub Actions проверяет типы, API, браузерные сценарии и оба Docker-варианта. В тестах используются вымышленные записи. Точные результаты, состав проверок и ограничения: [VALIDATION.md](docs/VALIDATION.md). Участие: [CONTRIBUTING.md](CONTRIBUTING.md).
+GitHub Actions checks types, API and browser workflows, and the default and native CAD containers. Tests use fictional records. Exact evidence, coverage and remaining limits are recorded in [validation](docs/VALIDATION.md) and [product scope](docs/PRODUCT.md).
 
-Поддерживается один процесс приложения и локальная SQLite. Публикации ограничены автоматическими квотами; никакая ручная модерация не требуется. Безопасность и данные: [SECURITY.md](SECURITY.md), [PRIVACY.md](PRIVACY.md).
+The English README is the reference for full translated editions. The [language index](docs/i18n/README.md) documents translation maintenance and review limits. Interface localization does not translate user-authored listings, project content or every external technical diagnostic.
 
-## Лицензии и участие
+## Licensing and contributions
 
-Код, интерфейс, авторские SVG-иллюстрации и документация — [MIT](LICENSE). Пользовательские модели имеют **отдельную**, явно выбранную автором лицензию. Три геометрических примера локального демо предоставляются как CC0; код их генерации остаётся MIT. [Подробности](THIRD_PARTY_NOTICES.md).
+The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed](LICENSE). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices](THIRD_PARTY_NOTICES.md).
 
-Геометрическое ядро адаптировано из MIT-разработки Neofab с сохранением лицензии и [указанием происхождения](cad-worker/NOTICE.md). История исходного репозитория, его настройки провайдеров, ключи и пользовательские данные не перенесены.
+This independent implementation develops the idea of [3d-online.app](https://3d-online.app). Original production accounts, secrets, private Git history and user files are not included. The adapted MIT Neofab CAD compiler retains its [original license and provenance notice](cad-worker/NOTICE.md).
 
-Будут полезны не только PR с кодом: переводы, улучшения сценариев, открытые параметрические детали, проверка запуска и обратная связь от настоящих мастерских. Начните с [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions can include code, translation corrections, usability improvements, open parametric parts, installation checks and feedback from real workshops. Start with [CONTRIBUTING.md](CONTRIBUTING.md).

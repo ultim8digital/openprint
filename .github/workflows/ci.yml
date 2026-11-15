@@ -16,6 +16,10 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Check translation runner safeguards without API calls
+        run: python3 -B scripts/translate-locales.py --self-test
+      - name: Check README renderer safeguards without API calls
+        run: node scripts/render-readmes.mjs --self-test
       - run: npm run format:check
       - run: npm run check
       - run: npx playwright install --with-deps chromium
@@ -111,6 +115,21 @@ jobs:
           // Confirm that guest publication did not create hidden accounts, profiles or orders.
           docker('exec','openprint-check','node','--input-type=module','-e',
             "import {DatabaseSync} from 'node:sqlite';import {join} from 'node:path';const db=new DatabaseSync(join(process.env.DATA_DIR,'openprint.sqlite'),{readOnly:true});for(const table of ['users','profiles','sessions','jobs'])if(db.prepare('SELECT count(*) n FROM '+table).get().n!==0)throw new Error('Unexpected account or order data');db.close();");
+          docker('exec','openprint-check','node','--input-type=module','-e', `
+            import assert from 'node:assert/strict';
+            import {readFileSync,readdirSync} from 'node:fs';
+            import {localeCodes} from './build/shared/locales.js';
+            import {messageId} from './build/shared/messages.js';
+            import {createTranslator} from './build/server/i18n.js';
+            const locales=localeCodes.filter(code=>code!=='en'&&code!=='ru');
+            assert.deepEqual(readdirSync('./build/locales').sort(),locales.map(code=>code+'.json').sort());
+            for(const locale of locales){
+              const expected=JSON.parse(readFileSync('./build/locales/'+locale+'.json','utf8'))[messageId('Укажите количество изделий.','Specify the quantity.')];
+              assert.ok(expected);
+              assert.equal(createTranslator(locale)('Укажите количество изделий.','Specify the quantity.'),expected);
+            }
+            console.log('All 48 translated dictionaries load through the compiled server inside the default container');
+          `);
           console.log('Default catalog: anonymous publication, restart, secret management and deletion passed; no accounts created');
           JS
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
