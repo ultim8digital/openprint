@@ -212,7 +212,11 @@ def test_cli_stdin_and_failed_checks_still_export(shelf, tmp_path):
     assert not list(tmp_path.glob(".neofab-cad-*"))
 
 
-@pytest.mark.parametrize("payload", ['{"x":1,"x":2}', '{"x":NaN}', "x" * (256 * 1024 + 1)])
+@pytest.mark.parametrize(
+    "payload",
+    ['{"x":1,"x":2}', '{"x":NaN}', "x" * (256 * 1024 + 1)],
+    ids=["duplicate-key", "non-finite", "oversized"],
+)
 def test_cli_rejects_ambiguous_and_oversized_input_atomically(payload, tmp_path):
     result = _cli(tmp_path, payload)
     assert result.returncode == 2
