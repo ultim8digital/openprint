@@ -6,10 +6,12 @@ export type StudioAIConfig = {
   apiKey?: string;
   model?: string;
   reviewModel?: string;
+  cadModel?: string;
   maxCallsPerProject?: number;
   maxCallsPerUserDay?: number;
   maxCallsPerInstanceDay?: number;
   maxOutputTokens?: number;
+  cadMaxOutputTokens?: number;
   timeoutMs?: number;
   /** Test transport injection. Endpoint and credentials never come from a request. */
   fetch?: typeof fetch;
@@ -27,10 +29,12 @@ export function loadStudioAIConfig(): StudioAIConfig {
     apiKey: process.env.OPENAI_API_KEY,
     model: process.env.OPENAI_MODEL,
     reviewModel: process.env.OPENAI_REVIEW_MODEL,
+    cadModel: process.env.OPENAI_CAD_MODEL,
     maxCallsPerProject: number('STUDIO_AI_MAX_PROJECT_CALLS'),
     maxCallsPerUserDay: number('STUDIO_AI_MAX_USER_DAILY_CALLS'),
     maxCallsPerInstanceDay: number('STUDIO_AI_MAX_DAILY_CALLS'),
     maxOutputTokens: number('STUDIO_AI_MAX_OUTPUT_TOKENS'),
+    cadMaxOutputTokens: number('STUDIO_AI_CAD_MAX_OUTPUT_TOKENS'),
   };
 }
 function bounded(value: number | undefined, fallback: number, maximum: number) {
@@ -43,10 +47,12 @@ export function resolveStudioAIConfig(config: StudioAIConfig = loadStudioAIConfi
     apiKey: config.apiKey?.trim() || '',
     model: config.model?.trim() || 'gpt-6-luna',
     reviewModel: config.reviewModel?.trim() || 'gpt-6.1-sol',
+    cadModel: config.cadModel?.trim() || config.reviewModel?.trim() || 'gpt-6.1-sol',
     maxCallsPerProject: bounded(config.maxCallsPerProject, 3, 20),
     maxCallsPerUserDay: bounded(config.maxCallsPerUserDay, 10, 100),
     maxCallsPerInstanceDay: bounded(config.maxCallsPerInstanceDay, 50, 1000),
     maxOutputTokens: bounded(config.maxOutputTokens, 3000, 6000),
+    cadMaxOutputTokens: bounded(config.cadMaxOutputTokens, 8000, 16000),
     timeoutMs: bounded(config.timeoutMs, 60000, 120000),
     fetch: config.fetch ?? fetch,
   };
@@ -80,7 +86,7 @@ const errors: Record<string, { status: number; message: string }> = {
   AI_INVALID: {
     status: 502,
     message:
-      'AI returned an invalid brief. Your draft is unchanged / ИИ вернул некорректное ТЗ. Черновик сохранён без изменений',
+      'AI returned invalid structured output. Your draft is unchanged / ИИ вернул некорректный результат. Черновик сохранён без изменений',
   },
   AI_INTERRUPTED: {
     status: 409,
@@ -193,22 +199,22 @@ export function explicitlySpecifiedPart(
   );
 }
 
-export async function requestStudioBrief(
+export async function requestStructuredOutput(
   config: ResolvedStudioAIConfig,
   options: {
     model: string;
     input: string;
-    previous: StudioBrief;
-    explicitText: string;
-    language: 'ru' | 'en';
+    instructions: string;
+    schema: Record<string, unknown>;
+    schemaName: string;
+    maxOutputTokens: number;
   },
-): Promise<{ brief: StudioBrief; usage: AIUsage }> {
+): Promise<{ value: unknown; usage: AIUsage }> {
   if (!config.apiKey) throw new StudioAIError('AI_DISABLED');
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), config.timeoutMs);
   let usage = emptyUsage();
   try {
-    const schema = z.toJSONSchema(studioBriefSchema);
     const response = await config.fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
       redirect: 'error',
@@ -217,11 +223,16 @@ export async function requestStudioBrief(
       body: JSON.stringify({
         model: options.model,
         store: false,
-        instructions,
+        instructions: options.instructions,
         input: [{ role: 'user', content: [{ type: 'input_text', text: options.input }] }],
-        max_output_tokens: config.maxOutputTokens,
+        max_output_tokens: options.maxOutputTokens,
         text: {
-          format: { type: 'json_schema', name: 'neofab_manufacturing_brief', strict: true, schema },
+          format: {
+            type: 'json_schema',
+            name: options.schemaName,
+            strict: true,
+            schema: options.schema,
+          },
         },
       }),
     });
@@ -248,24 +259,7 @@ export async function requestStudioBrief(
       }
     }
     if (texts.length !== 1) throw new StudioAIError('AI_INVALID', usage);
-    const result = studioBriefSchema.safeParse(JSON.parse(texts[0]));
-    if (!result.success) throw new StudioAIError('AI_INVALID', usage);
-    const brief = result.data;
-    brief.requestKind = options.previous.requestKind;
-    if (
-      brief.part &&
-      (brief.process !== 'FDM' ||
-        brief.components.length > 0 ||
-        !explicitlySpecifiedPart(brief.part, options.previous.part, options.explicitText))
-    ) {
-      brief.part = null;
-      const question =
-        options.language === 'ru'
-          ? 'Уточните форму и все размеры детали в миллиметрах; модель ещё не построена.'
-          : 'Specify the shape and all dimensions in millimeters; no model has been built.';
-      brief.questions = [...brief.questions.slice(0, 5), question];
-    }
-    return { brief, usage };
+    return { value: JSON.parse(texts[0]), usage };
   } catch (error) {
     if (error instanceof StudioAIError) throw error;
     if (controller.signal.aborted) throw new StudioAIError('AI_TIMEOUT', usage);
@@ -274,4 +268,42 @@ export async function requestStudioBrief(
   } finally {
     clearTimeout(timer);
   }
+}
+
+export async function requestStudioBrief(
+  config: ResolvedStudioAIConfig,
+  options: {
+    model: string;
+    input: string;
+    previous: StudioBrief;
+    explicitText: string;
+    language: 'ru' | 'en';
+  },
+): Promise<{ brief: StudioBrief; usage: AIUsage }> {
+  const { value, usage } = await requestStructuredOutput(config, {
+    model: options.model,
+    input: options.input,
+    instructions,
+    schema: z.toJSONSchema(studioBriefSchema),
+    schemaName: 'neofab_manufacturing_brief',
+    maxOutputTokens: config.maxOutputTokens,
+  });
+  const result = studioBriefSchema.safeParse(value);
+  if (!result.success) throw new StudioAIError('AI_INVALID', usage);
+  const brief = result.data;
+  brief.requestKind = options.previous.requestKind;
+  if (
+    brief.part &&
+    (brief.process !== 'FDM' ||
+      brief.components.length > 0 ||
+      !explicitlySpecifiedPart(brief.part, options.previous.part, options.explicitText))
+  ) {
+    brief.part = null;
+    const question =
+      options.language === 'ru'
+        ? 'Уточните форму и все размеры детали в миллиметрах; модель ещё не построена.'
+        : 'Specify the shape and all dimensions in millimeters; no model has been built.';
+    brief.questions = [...brief.questions.slice(0, 5), question];
+  }
+  return { brief, usage };
 }

@@ -814,14 +814,14 @@ test('timeouts and truncated output keep conservative accounting and never silen
   }
 });
 
-test('v1 community data migrates additively to v3 and usage survives reopening', async () => {
+test('v1 community data migrates additively to v4 and usage survives reopening', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'neofab-migration-test-')),
     path = join(dir, 'community.sqlite');
   try {
     const v1 = new Store(path),
       owner = randomUUID();
     v1.db.exec(
-      'DROP INDEX events_action_time; DROP TABLE studio_cad_grants; DROP TABLE studio_cad_handoffs; DROP TABLE studio_cad_artifacts; DROP TABLE studio_cad_builds; DROP TABLE studio_cad_revisions; DROP TABLE studio_ai_runs; DROP TABLE studio_confirmations; DROP TABLE studio_revisions; DROP TABLE studio_projects; PRAGMA user_version=1;',
+      'DROP TABLE studio_cad_proposals; DROP INDEX events_action_time; DROP TABLE studio_cad_grants; DROP TABLE studio_cad_handoffs; DROP TABLE studio_cad_artifacts; DROP TABLE studio_cad_builds; DROP TABLE studio_cad_revisions; DROP TABLE studio_ai_runs; DROP TABLE studio_confirmations; DROP TABLE studio_revisions; DROP TABLE studio_projects; PRAGMA user_version=1;',
     );
     v1.run(
       'INSERT INTO users(id,email,name,password_hash,created_at) VALUES(?,?,?,?,?)',
@@ -834,7 +834,7 @@ test('v1 community data migrates additively to v3 and usage survives reopening',
     v1.run('INSERT INTO meta(key,value) VALUES(?,?)', 'existing', 'preserve me');
     v1.close();
     const migrated = new Store(path);
-    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 3);
+    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 4);
     assert.equal(
       migrated.get<{ name: string }>('SELECT name FROM users WHERE id=?', owner)!.name,
       'Legacy owner',

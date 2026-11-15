@@ -1011,6 +1011,10 @@ function StudioEditor({
               project={project}
               blocked={dirty || !!busy}
               onDirtyChange={setCadDirty}
+              usage={detail.usage}
+              onUsageChanged={(usage) =>
+                setDetail((current) => (current ? { ...current, usage } : current))
+              }
               onProjectChanged={(next) => {
                 setDetail((current) => (current ? { ...current, project: next } : current));
                 setPublishConsent(false);

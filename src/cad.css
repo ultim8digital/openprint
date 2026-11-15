@@ -392,3 +392,225 @@
   display: block;
   margin-top: 5px;
 }
+.cad-assistant {
+  border: 1px solid #d1dfc8;
+  border-radius: 12px;
+  padding: 20px;
+  background: #f7f9f2;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+.cad-assistant-heading {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+}
+.cad-assistant-heading > svg {
+  flex-shrink: 0;
+  color: #426b44;
+  margin-top: 2px;
+}
+.cad-assistant-heading h3 {
+  font-size: 17px;
+}
+.cad-assistant-heading p,
+.cad-assistant-off p {
+  color: #5a6b53;
+  font-size: 12px;
+  line-height: 1.65;
+  margin-top: 6px;
+}
+.cad-assistant-off strong {
+  font-size: 13px;
+}
+.cad-assistant-form,
+.cad-proposal-history,
+.cad-proposal,
+.cad-proposal-spec,
+.cad-proposal-apply {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 0;
+}
+.cad-assistant-form > .button,
+.cad-proposal-apply > .button {
+  align-self: start;
+}
+.cad-ai-role {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11px;
+  color: #52694b;
+}
+.cad-ai-role code {
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.cad-ai-retry > .text-button {
+  margin-top: 9px;
+  font-size: 12px;
+}
+.cad-proposal {
+  border-top: 1px solid #d6e0ce;
+  padding-top: 18px;
+}
+.cad-proposal-title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.cad-proposal-title h4,
+.cad-proposal-spec > h4,
+.cad-proposal-notes h4 {
+  font-size: 14px;
+}
+.cad-proposal-title > span {
+  font-size: 11px;
+  color: #5a6b53;
+}
+.cad-proposal > p,
+.cad-proposal-spec > p,
+.cad-proposal-notes li {
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.cad-proposal-notes ul {
+  margin: 8px 0 0;
+  padding-left: 19px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cad-proposal-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.cad-proposal-facts > div {
+  background: #edf2e6;
+  border: 1px solid #dce5d4;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.cad-proposal-facts dt {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #536a4b;
+}
+.cad-proposal-facts dd {
+  margin: 5px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.cad-proposal-parts {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.cad-proposal-parts details {
+  border: 1px solid #d7e1cf;
+  background: #fff;
+  border-radius: 9px;
+  min-width: 0;
+}
+.cad-proposal-parts summary {
+  padding: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.cad-proposal-parts summary > span {
+  margin-left: 8px;
+  color: #62745a;
+  font-size: 10px;
+}
+.cad-proposal-parts details > div {
+  padding: 0 12px 12px;
+  font-size: 11px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.cad-proposal-parts ol {
+  padding-left: 18px;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cad-proposal-parts li p {
+  margin-top: 3px;
+  color: #52664b;
+}
+.cad-proposal-json {
+  min-width: 0;
+}
+.cad-proposal-json summary {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+.cad-proposal-json pre {
+  max-height: 380px;
+  overflow: auto;
+  background: #fefefb;
+  border: 1px solid #d9e2d2;
+  border-radius: 8px;
+  padding: 12px;
+  font:
+    11px/1.65 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+}
+.cad-proposal-json .text-button {
+  margin-top: 10px;
+  font-size: 12px;
+}
+.cad-proposal-applied {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #396b40;
+  font-size: 12px;
+}
+.cad-proposal-applied > svg {
+  flex-shrink: 0;
+}
+.cad-proposal-empty {
+  background: #edf2e6;
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: #52664b;
+}
+.cad-proposal-apply {
+  padding-top: 17px;
+  border-top: 1px solid #d6e0ce;
+}
+@media (max-width: 700px) {
+  .cad-assistant {
+    padding: 14px;
+  }
+  .cad-proposal-facts {
+    gap: 8px;
+  }
+  .cad-proposal-facts > div {
+    padding: 9px;
+  }
+  .cad-assistant-form > .button,
+  .cad-proposal-apply > .button {
+    width: 100%;
+  }
+}

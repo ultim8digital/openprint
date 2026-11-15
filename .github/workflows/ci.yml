@@ -75,6 +75,8 @@ jobs:
       - run: python cad-worker/worker.py --check
       - run: python -m pytest cad-worker/tests -q
       - run: npm ci --ignore-scripts
+      - name: Verify AI proposal application with the real CAD kernel
+        run: node --import tsx --test tests/cad-ai.test.ts
       - run: npm run build
       - run: node scripts/cad-check.mjs
       - run: npx playwright install --with-deps chromium

@@ -36,9 +36,9 @@ The interface supports Russian and English. User-generated content stays in its 
 
 Neofab expands the project toward a digital factory for functional parts, repairs, spares, furniture, engineered assemblies and small batches. Studio connects a private idea, editable requirements, components, a CAD revision, a confirmed package and an immutable request to a maker.
 
-The manual path needs no API key. Optional server-side OpenAI Responses assistance prepares a draft, with separate configurable models for clarification and detailed review, attempt limits and token usage records. Live paid API calls have not been validated for this build.
+The manual path needs no API key. Optional server-side OpenAI Responses assistance prepares briefs and declarative CAD proposals. The server routes clarification, detailed review and CAD tasks to configurable models, sharing attempt limits and token usage records. CAD proposals are reviewed and applied separately, then built locally; generating a proposal does not change the saved design. Live paid API calls have not been validated for this build.
 
-Version 0.2 adds an optional local CadQuery engine for parts and assemblies made from boxes, cylinders, extrusions, fillets and chamfers. It produces assembly and per-part STEP/STL, BOM, source JSON and a geometry report, with revision history and a 3D component viewer. The owner can grant a named participant access for quotation; the recipient of a direct request receives the confirmed CAD package when it is sent. Public briefs do not expose CAD files. The three simple FDM templates remain available without Python. CAM, machine code, strength analysis and multi-workshop execution are future work.
+Since version 0.2, an optional local CadQuery engine is available for parts and assemblies made from boxes, cylinders, extrusions, fillets and chamfers. It produces assembly and per-part STEP/STL, BOM, source JSON and a geometry report, with revision history and a 3D component viewer. The owner can grant a named participant access for quotation; the recipient of a direct request receives the confirmed CAD package when it is sent. Public briefs do not expose CAD files. The three simple FDM templates remain available without Python. CAM, machine code, strength analysis and multi-workshop execution are future work.
 
 See the [setup guide](docs/NEOFAB_SETUP.md), [CAD engine instructions](docs/CAD_ENGINE.md), [CAD/CAM architecture](docs/NEOFAB_BLUEPRINT.md) and [business hypotheses](docs/NEOFAB_BUSINESS.md) (the Studio/product guides are in Russian).
 
@@ -60,9 +60,9 @@ The default Docker image needs no Python. To include the optional CAD runtime, u
 
 ## Deliberate limits
 
-OpenPrint 0.2 is intended for small communities. It does not provide payments, escrow, identity verification, manufacturing-safety certification, antivirus scanning, or dispute arbitration. Makers and customers arrange payments and delivery directly. CAD geometry checks cover the declared model; they do not establish strength, process suitability or physical performance. Physical manufacturing has not been validated.
+OpenPrint 0.3 is intended for small communities. It does not provide payments, escrow, identity verification, manufacturing-safety certification, antivirus scanning, or dispute arbitration. Makers and customers arrange payments and delivery directly. CAD geometry checks cover the declared model; they do not establish strength, process suitability or physical performance. Physical manufacturing has not been validated.
 
-The declarative CAD scope is limited to 24 physical components and 300 operations. Arbitrary STEP import into editable feature history, CAM, G-code and FEA are outside this release. Use one application process with local storage. Team memberships, horizontal scaling, SMTP, AI-generated CAD, automatic agent routing, SSR/SEO, automatic translation of member content, and Supabase account migration are not included. The operator can access server data; this is not end-to-end encryption. See [product scope](docs/PRODUCT.md), [privacy](PRIVACY.md), and [security](SECURITY.md).
+The declarative CAD scope is limited to 24 physical components and 300 operations. Arbitrary STEP import into editable feature history, CAM, G-code and FEA are outside this release. Use one application process with local storage. Team memberships, horizontal scaling, SMTP, autonomous multi-agent delegation, SSR/SEO, automatic translation of member content, and Supabase account migration are not included. The operator can access server data; this is not end-to-end encryption. See [product scope](docs/PRODUCT.md), [privacy](PRIVACY.md), and [security](SECURITY.md).
 
 ## Development
 

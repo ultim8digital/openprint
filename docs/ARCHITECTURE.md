@@ -25,27 +25,27 @@ flowchart LR
 
 ## Code map
 
-| Location                                                     | Responsibility                                                                   |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| `src/App.tsx`, `src/core.tsx`                                | Navigation, state, localization, cancelled requests, notifications               |
-| `src/Browse.tsx`                                             | Overview, directory, profiles, project board                                     |
-| `src/NewProject.tsx`, `src/Project.tsx`                      | Briefs, offers, acceptance, delivery, conversations                              |
-| `src/Workspace.tsx`                                          | Dashboard, provider profile, export, password, removal                           |
-| `src/Models.tsx`, `src/Tools.tsx`                            | Licensed model sharing and browser-only tools                                    |
-| `server/app.ts`                                              | Routes, validation, permissions and error responses                              |
-| `server/domain.ts`                                           | Brief access, offer revisions, atomic acceptance, thread membership              |
-| `server/database.ts`                                         | Schemas v1–v3, transactions, indexes, immutable snapshot triggers                |
-| `src/Studio.tsx`, `shared/studio.ts`                         | Private CAD/CAM brief editor, components, confirmation and handoff               |
-| `server/studio.ts`, `server/studio-ai.ts`                    | Ownership/version gates, durable AI call ledger, bounded Responses API           |
-| `server/studio-geometry.ts`                                  | Deterministic FDM template checks, STL and packet manifests                      |
-| `shared/cad.ts`, `server/cad.ts`, `server/cad-data.ts`       | Declarative CAD contracts, revisions, grants and exact handoffs                  |
-| `server/cad-runner.ts`, `cad-worker/`                        | Durable queue, bounded native process, CadQuery compiler and artifact validation |
-| `src/CadStudio.tsx`, `src/cad-preview.tsx`, `src/JobCad.tsx` | CAD editing, assembly preview and quotation-file access                          |
-| `server/security.ts`                                         | Password hashing, sessions, bounded throttles, permission guards                 |
-| `server/files.ts`                                            | Headers, names, quotas, ownership, reads and cleanup                             |
-| `server/demo.ts`                                             | Opt-in fictional local demo, isolated from real data                             |
-| `shared/validation.ts`, `shared/parts.ts`                    | Schemas, exact minor-unit amounts, deterministic meshes                          |
-| `scripts/`, `tests/`                                         | Operator tools, backup, API/state/security and browser tests                     |
+| Location                                                                             | Responsibility                                                                               |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| `src/App.tsx`, `src/core.tsx`                                                        | Navigation, state, localization, cancelled requests, notifications                           |
+| `src/Browse.tsx`                                                                     | Overview, directory, profiles, project board                                                 |
+| `src/NewProject.tsx`, `src/Project.tsx`                                              | Briefs, offers, acceptance, delivery, conversations                                          |
+| `src/Workspace.tsx`                                                                  | Dashboard, provider profile, export, password, removal                                       |
+| `src/Models.tsx`, `src/Tools.tsx`                                                    | Licensed model sharing and browser-only tools                                                |
+| `server/app.ts`                                                                      | Routes, validation, permissions and error responses                                          |
+| `server/domain.ts`                                                                   | Brief access, offer revisions, atomic acceptance, thread membership                          |
+| `server/database.ts`                                                                 | Schemas v1–v4, transactions, indexes, immutable snapshot triggers                            |
+| `src/Studio.tsx`, `shared/studio.ts`                                                 | Private CAD/CAM brief editor, components, confirmation and handoff                           |
+| `server/studio.ts`, `server/studio-ai.ts`, `server/ai-ledger.ts`, `server/cad-ai.ts` | Ownership/version gates, shared AI call ledger, private CAD proposals, bounded Responses API |
+| `server/studio-geometry.ts`                                                          | Deterministic FDM template checks, STL and packet manifests                                  |
+| `shared/cad.ts`, `server/cad.ts`, `server/cad-data.ts`                               | Declarative CAD contracts, revisions, grants and exact handoffs                              |
+| `server/cad-runner.ts`, `cad-worker/`                                                | Durable queue, bounded native process, CadQuery compiler and artifact validation             |
+| `src/CadStudio.tsx`, `src/cad-preview.tsx`, `src/JobCad.tsx`                         | CAD editing, assembly preview and quotation-file access                                      |
+| `server/security.ts`                                                                 | Password hashing, sessions, bounded throttles, permission guards                             |
+| `server/files.ts`                                                                    | Headers, names, quotas, ownership, reads and cleanup                                         |
+| `server/demo.ts`                                                                     | Opt-in fictional local demo, isolated from real data                                         |
+| `shared/validation.ts`, `shared/parts.ts`                                            | Schemas, exact minor-unit amounts, deterministic meshes                                      |
+| `scripts/`, `tests/`                                                                 | Operator tools, backup, API/state/security and browser tests                                 |
 
 ## Data and access
 
@@ -86,7 +86,7 @@ Unreferenced uploads older than 24 hours are removed hourly while the app runs, 
 
 ## Neofab Studio and CAD
 
-Studio keeps private projects and revisions in SQLite schema v3. The owner edits a brief and confirms an exact version and content hash for discussion/quotation. Open questions, assumptions and unknown component quantities remain explicit in the handoff; confirmation does not release production. Request intent chooses design/consultation or manufacturing quotation independently of geometry support. Publication freezes that version into one job and a downloadable packet; retries return the existing job. A project may use an explicitly selected FDM template or an optional declarative CAD design. See [setup and limits](NEOFAB_SETUP.md).
+Studio keeps private projects and revisions in SQLite schema v4. The owner edits a brief and confirms an exact version and content hash for discussion/quotation. Open questions, assumptions and unknown component quantities remain explicit in the handoff; confirmation does not release production. Request intent chooses design/consultation or manufacturing quotation independently of geometry support. Publication freezes that version into one job and a downloadable packet; retries return the existing job. A project may use an explicitly selected FDM template or an optional declarative CAD design. See [setup and limits](NEOFAB_SETUP.md).
 
 CAD specification edits and removal advance the Studio version and clear confirmation. `studio_cad_revisions` preserves each specification and hash; `studio_cad_builds` binds a request ID to the owner, revision and brief version. A single local worker executes queued jobs. Successful results remain immutable; an older build finishing after an edit remains historical and cannot satisfy confirmation of the current version. After restart, interrupted running jobs fail explicitly and eligible queued jobs resume. Cancellation and account deletion cannot restore removed project data through a late result.
 
@@ -96,7 +96,9 @@ The confirmed packet records the CAD revision/build, compiler version, specifica
 
 Attempt and output quotas are checked before compute. CAD daily usage counts retained `cad.queued` events, so account closure cannot erase instance accounting. Limits cover 30 builds per project, 10 per user/day, 100 per instance/day, 128 MiB per result, and 256 MiB/user and 2 GiB/instance of registered CAD artifacts. Specification history has separate size limits. These limits do not include all database/WAL, temporary-storage or backup overhead.
 
-Optional AI assistance calls one fixed provider endpoint with the idea, saved brief and user instruction after explicit consent. The server holds the key, validates structured output and records attempted calls before network I/O. Stale AI results cannot overwrite a newer revision. Project, user and instance limits survive process restart; user deletion removes private project content while preserving the minimal usage ledger for the anonymized account. These are attempt/token limits, not monetary reservations. The user confirms the result before any publication.
+Optional AI assistance calls one fixed provider endpoint with the idea, saved brief and user instruction after explicit consent. CAD requests also include the current declarative specification. The server holds the key, routes by task, validates structured output and records attempted calls before network I/O. Brief and CAD tasks share project/user/instance limits and running-request limits. Stale AI results cannot overwrite a newer revision. User deletion removes private project content while preserving the minimal usage ledger for the anonymized account. These are attempt/token limits, not monetary reservations.
+
+CAD results are immutable private proposals with a source brief version, CAD revision and confirmation state. A separate reviewed apply request uses the same CAD save/quota/version path as manual edits. It cannot build, confirm or publish. The provider schema converts homogeneous tuple definitions into fixed-length arrays and disjoint operation unions into `anyOf`; the complete local schema still checks ranges, geometry structure and total limits. Passing that schema does not establish semantic or engineering correctness. The user inspects the compiled result and confirms the exact package before publication.
 
 The current flat component list and textual operations are the first step toward the [universal CAD/CAM architecture](NEOFAB_BLUEPRINT.md), not a functioning multi-provider manufacturing graph.
 
@@ -104,4 +106,4 @@ The current flat component list and textual operations are the first step toward
 
 One process, local disk, exact public HTTPS origin, explicit proxy configuration and a private data directory. No cloud secret is required. No runtime secret is embedded into the frontend. The map and 3D modules load separately from the initial overview.
 
-No end-to-end encryption, automatic email verification, team memberships, horizontal scaling, SSR, payments, SMTP outbox or federation is included. Optional CAD is a resource-limited local native process with a scrubbed environment, not a complete filesystem/network sandbox. There is no CAM/G-code, FEA or automatic AI-to-CAD generation. No production import from the original service is supplied. Backups require the app to be stopped: see [SELF_HOSTING.md](SELF_HOSTING.md).
+No end-to-end encryption, automatic email verification, team memberships, horizontal scaling, SSR, payments, SMTP outbox or federation is included. Optional CAD is a resource-limited local native process with a scrubbed environment, not a complete filesystem/network sandbox. There is no CAM/G-code, FEA, autonomous multi-agent delegation or automatic manufacturing release. No production import from the original service is supplied. Backups require the app to be stopped: see [SELF_HOSTING.md](SELF_HOSTING.md).
