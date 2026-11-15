@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 — 2026-11-15
+
+- The interface supports the same 50 locales as our apps, including regional variants, native language names, right-to-left layouts and locale-aware dates and numbers. Dictionaries load on demand; changing languages preserves unsaved forms and CAD views.
+- All README editions share a full English reference, protected commands and links, and a common language index. Translation sources, bounded generation tooling and reviewed corrections are versioned. Machine translation and structural checks do not constitute native-speaker review.
+- SQLite schema 7 accepts all supported project languages while retaining existing project and revision history. Starter questions and handoff headings use the selected language; original user content remains unchanged. AI model quality in every language has not been established.
+- Added exact translation coverage, placeholder, migration, multilingual HTTP and browser checks. The validation record distinguishes final results from earlier release evidence.
+- Documented the limited repository data-provenance review and source-provider restrictions. The software license does not grant rights to an imported business directory. Real operator datasets remain outside Git and container images.
+
 ## 0.5.0 — 2026-11-15
 
 - The default `APP_MODE=catalog` is an open workshop directory with no registration, account UI or moderation queue. Community/CAD workflows remain available only through explicit `APP_MODE=community`; switching preserves private history.

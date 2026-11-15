@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { Profile, Currency } from './types.js';
+import { localeCodes, type Lang } from './locales.js';
 
 export const manufacturingProcesses = [
   'FDM',
@@ -68,7 +69,7 @@ export const studioSaveSchema = z
 export const studioCreateSchema = z
   .object({
     idea: z.string().trim().min(20).max(3000),
-    language: z.enum(['ru', 'en']),
+    language: z.enum(localeCodes),
   })
   .strict();
 export type StudioCheck = {
@@ -80,7 +81,7 @@ export type StudioCheck = {
 export type StudioProject = {
   id: string;
   idea: string;
-  language: 'ru' | 'en';
+  language: Lang;
   brief: StudioBrief;
   version: number;
   confirmed_version: number | null;

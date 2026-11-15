@@ -11,6 +11,8 @@ import { digest, hashPassword } from '../server/security.js';
 import { canonicalJSON } from '../server/studio-geometry.js';
 import { explicitlySpecifiedPart, type StudioAIConfig } from '../server/studio-ai.js';
 import type { StudioBrief } from '../shared/studio.js';
+import { localeCodes } from '../shared/locales.js';
+import { createTranslator } from '../server/i18n.js';
 
 const password = 'test-studio-only-passphrase-123';
 const idea = 'A simple plate for organizing small tools on my desk.';
@@ -161,6 +163,77 @@ async function fixture(ai: StudioAIConfig = {}) {
   };
 }
 type Actor = Awaited<ReturnType<typeof fixture>>['owner'];
+test('all 50 project languages persist through HTTP with localized starter questions and unchanged user content', async () => {
+  const f = await fixture();
+  try {
+    let actor = f.owner;
+    for (const [index, language] of localeCodes.entries()) {
+      if (index % 20 === 0) actor = f.actor(`Locale fixture ${index}`);
+      const result = await actor.call('/studio/projects', 'POST', { idea, language });
+      assert.equal(result.status, 201, language);
+      const t = createTranslator(language);
+      assert.equal(result.data.project.language, language);
+      assert.equal(result.data.project.brief.purpose, idea);
+      assert.equal(
+        result.data.project.brief.questions[0],
+        t(
+          'Какие размеры и условия использования важны?',
+          'Which dimensions and conditions of use matter?',
+        ),
+      );
+      const stored = await actor.call(`/studio/projects/${result.data.project.id}`);
+      assert.equal(stored.data.project.language, language);
+      assert.deepEqual(stored.data.project.brief, result.data.project.brief);
+    }
+    assert.equal(f.store.get<{ n: number }>('SELECT count(*) n FROM studio_ai_runs')!.n, 0);
+  } finally {
+    await f.close();
+  }
+});
+
+test('a non-English project sends its selected language to AI and publishes translated handoff labels', async () => {
+  let outbound: Record<string, unknown> | undefined;
+  const transport = (async (_url, options) => {
+    outbound = JSON.parse(String(options?.body));
+    const brief = readyBrief();
+    brief.part = null;
+    return answer(brief);
+  }) as typeof fetch;
+  const f = await fixture({ apiKey: 'test-key-not-real', fetch: transport });
+  try {
+    const language = 'ar-SA';
+    const created = await f.owner.call('/studio/projects', 'POST', { idea, language });
+    assert.equal(created.status, 201);
+    const path = `/studio/projects/${created.data.project.id}`;
+    const assisted = await f.owner.call(path + '/assist', 'POST', request(1));
+    assert.equal(assisted.status, 200);
+    const input = outbound!.input as Array<{ content: Array<{ text: string }> }>;
+    assert.equal(JSON.parse(input[0].content[0].text).language, language);
+    assert.equal(assisted.data.project.brief.purpose, readyBrief().purpose);
+    const version = assisted.data.project.version;
+    assert.equal((await f.owner.call(path + '/confirm', 'POST', { version })).status, 200);
+    const published = await f.owner.call(path + '/publish', 'POST', publish(version));
+    assert.equal(published.status, 200);
+    const job = f.store.get<{ description: string }>(
+      'SELECT description FROM jobs WHERE id=?',
+      published.data.job_id,
+    )!;
+    const t = createTranslator(language);
+    assert.ok(job.description.includes(t('ТЗ Neofab', 'Neofab brief')));
+    assert.ok(job.description.includes(readyBrief().purpose));
+    assert.ok(
+      job.description.includes(
+        t(
+          'Требуется подтверждение исполнителем технологии, материала, допусков и подготовки оборудования. CAM и G-code отсутствуют.',
+          'The provider must confirm process, material, tolerances and machine setup. CAM and G-code are not included.',
+        ),
+      ),
+    );
+  } finally {
+    await f.close();
+  }
+});
+
 async function create(owner: Actor) {
   const response = await owner.call('/studio/projects', 'POST', { idea, language: 'en' });
   assert.equal(response.status, 201);
@@ -815,7 +888,7 @@ test('timeouts and truncated output keep conservative accounting and never silen
   }
 });
 
-test('v1 community data migrates additively to v6 and usage survives reopening', async () => {
+test('v1 community data migrates to v7 and usage survives reopening', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'neofab-migration-test-')),
     path = join(dir, 'community.sqlite');
   try {
@@ -835,7 +908,7 @@ test('v1 community data migrates additively to v6 and usage survives reopening',
     v1.run('INSERT INTO meta(key,value) VALUES(?,?)', 'existing', 'preserve me');
     v1.close();
     const migrated = new Store(path);
-    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 6);
+    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 7);
     assert.equal(
       migrated.get<{ name: string }>('SELECT name FROM users WHERE id=?', owner)!.name,
       'Legacy owner',

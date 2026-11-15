@@ -1,3 +1,4 @@
+import { localeTag } from '../shared/locales';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Check, EyeOff, Eye, ArrowUpRight } from 'lucide-react';
@@ -26,7 +27,7 @@ type AdminData = {
   events: { action: string; created_at: number }[];
 };
 export default function Admin() {
-  const { t, user, toast, refresh } = useApp(),
+  const { t, lang, user, toast, refresh } = useApp(),
     [tab, setTab] = useState('profiles'),
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false),
@@ -103,7 +104,7 @@ export default function Admin() {
             <div className="workspace-card" key={p.id}>
               <div className="between">
                 <div>
-                  <h3>{p.name}</h3>
+                  <h3 dir="auto">{p.name}</h3>
                   <p>
                     {p.city} · {p.kind}
                   </p>
@@ -120,7 +121,7 @@ export default function Admin() {
               <div className="row" style={{ marginTop: 17 }}>
                 <Link className="text-button" to={'/studios/' + p.id}>
                   {t('Открыть профиль', 'View profile')}
-                  <ArrowUpRight size={13} />
+                  <ArrowUpRight className="directional-icon" size={13} />
                 </Link>
                 <button
                   className="button small secondary"
@@ -235,10 +236,17 @@ export default function Admin() {
               </details>
               <label>
                 {t('Решение и пояснение', 'Decision & explanation')}
-                <textarea name="resolution" rows={2} minLength={5} maxLength={1000} required />
+                <textarea
+                  dir="auto"
+                  name="resolution"
+                  rows={2}
+                  minLength={5}
+                  maxLength={1000}
+                  required
+                />
               </label>
               <label className="check-label">
-                <input type="checkbox" name="hide" />
+                <input dir="auto" type="checkbox" name="hide" />
                 {t(
                   'Скрыть содержимое из публичного доступа / переписки',
                   'Hide the reported content from its audience',
@@ -266,7 +274,9 @@ export default function Admin() {
           {remote.data?.events.map((event, i) => (
             <div className="between" key={i}>
               <code className="small muted">{event.action}</code>
-              <span className="micro muted">{new Date(event.created_at).toLocaleString()}</span>
+              <span className="micro muted">
+                {new Date(event.created_at).toLocaleString(localeTag(lang))}
+              </span>
             </div>
           ))}
         </section>

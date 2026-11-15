@@ -1,3 +1,5 @@
+import type { Lang } from '../shared/locales.js';
+import { createTranslator } from './i18n.js';
 import { cadChecks, cadSnapshot, latestCadRevision } from './cad-data.js';
 import {
   reserveAIRequest,
@@ -42,7 +44,7 @@ export type ProjectRow = {
   id: string;
   owner_id: string;
   idea: string;
-  language: 'ru' | 'en';
+  language: Lang;
   brief: string;
   version: number;
   confirmed_version: number | null;
@@ -325,7 +327,8 @@ function detail(store: Store, row: ProjectRow) {
     ...matches(store, row),
   };
 }
-function skeleton(idea: string, language: 'ru' | 'en'): StudioBrief {
+function skeleton(idea: string, language: Lang): StudioBrief {
+  const t = createTranslator(language);
   return {
     title: idea.slice(0, 120),
     purpose: idea,
@@ -340,69 +343,68 @@ function skeleton(idea: string, language: 'ru' | 'en'): StudioBrief {
     components: [],
     operations: [],
     acceptance: [],
-    questions:
-      language === 'ru'
-        ? [
-            'Какие размеры и условия использования важны?',
-            'Сколько изделий нужно и куда их доставить?',
-            'Какие материал, технология и критерии приёмки требуются?',
-          ]
-        : [
-            'Which dimensions and conditions of use matter?',
-            'How many items are needed, and where should they be delivered?',
-            'Which material, process and acceptance criteria are required?',
-          ],
+    questions: [
+      t(
+        'Какие размеры и условия использования важны?',
+        'Which dimensions and conditions of use matter?',
+      ),
+      t(
+        'Сколько изделий нужно и куда их доставить?',
+        'How many items are needed, and where should they be delivered?',
+      ),
+      t(
+        'Какие материал, технология и критерии приёмки требуются?',
+        'Which material, process and acceptance criteria are required?',
+      ),
+    ],
   };
 }
 function handoffDescription(row: ProjectRow, brief: StudioBrief) {
-  const ru = row.language === 'ru',
-    heading = (a: string, b: string) => (ru ? a : b);
+  const t = createTranslator(row.language);
   const lines = [
-    `${heading('ТЗ Neofab', 'Neofab brief')} · v${row.version} · SHA-256 ${row.confirmed_hash}`,
+    `${t('ТЗ Neofab', 'Neofab brief')} · v${row.version} · SHA-256 ${row.confirmed_hash}`,
     brief.purpose,
-    `${heading('Тип запроса', 'Request type')}: ${brief.requestKind}`,
-    `${heading('Технология', 'Process')}: ${brief.process}`,
-    `${heading('Материал', 'Material')}: ${brief.material || heading('согласовать с исполнителем', 'to agree with provider')}`,
-    `${heading('Количество изделий', 'Product quantity')}: ${brief.quantity}`,
-    `${heading('Город / доставка', 'City / delivery')}: ${brief.city}`,
-    ...brief.requirements.map((text) => `${heading('Требование', 'Requirement')}: ${text}`),
+    `${t('Тип запроса', 'Request type')}: ${brief.requestKind}`,
+    `${t('Технология', 'Process')}: ${brief.process}`,
+    `${t('Материал', 'Material')}: ${brief.material || t('согласовать с исполнителем', 'to agree with provider')}`,
+    `${t('Количество изделий', 'Product quantity')}: ${brief.quantity}`,
+    `${t('Город / доставка', 'City / delivery')}: ${brief.city}`,
+    ...brief.requirements.map((text) => `${t('Требование', 'Requirement')}: ${text}`),
     ...(brief.part
       ? [
-          `${heading('Шаблон детали, мм', 'Part template, mm')}: ${brief.part.kind}; X=${brief.part.width}; Y=${brief.part.depth}; Z=${brief.part.height}; Ø=${brief.part.hole}`,
+          `${t('Шаблон детали, мм', 'Part template, mm')}: ${brief.part.kind}; X=${brief.part.width}; Y=${brief.part.depth}; Z=${brief.part.height}; Ø=${brief.part.hole}`,
         ]
       : []),
     ...(brief.components.length
       ? [
-          heading('Состав одного изделия (BOM):', 'Components per product (BOM):'),
+          t('Состав одного изделия (BOM):', 'Components per product (BOM):'),
           ...brief.components.map(
             (c, index) =>
-              `${index + 1}. ${c.name} × ${c.quantity ?? heading('уточнить', 'to clarify')}; ${c.process}; ${c.material || '—'}; ${c.requirements}`,
+              `${index + 1}. ${c.name} × ${c.quantity ?? t('уточнить', 'to clarify')}; ${c.process}; ${c.material || '—'}; ${c.requirements}`,
           ),
         ]
       : []),
-    ...brief.operations.map(
-      (text, index) => `${heading('Операция', 'Operation')} ${index + 1}: ${text}`,
-    ),
-    ...brief.acceptance.map((text) => `${heading('Приёмка', 'Acceptance')}: ${text}`),
-    ...brief.questions.map((text) => `${heading('Открытый вопрос', 'Open question')}: ${text}`),
+    ...brief.operations.map((text, index) => `${t('Операция', 'Operation')} ${index + 1}: ${text}`),
+    ...brief.acceptance.map((text) => `${t('Приёмка', 'Acceptance')}: ${text}`),
+    ...brief.questions.map((text) => `${t('Открытый вопрос', 'Open question')}: ${text}`),
     ...brief.assumptions.map(
-      (text) => `${heading('Неподтверждённое предположение', 'Unconfirmed assumption')}: ${text}`,
+      (text) => `${t('Неподтверждённое предположение', 'Unconfirmed assumption')}: ${text}`,
     ),
-    heading(
+    t(
       'Требуется подтверждение исполнителем технологии, материала, допусков и подготовки оборудования. CAM и G-code отсутствуют.',
       'The provider must confirm process, material, tolerances and machine setup. CAM and G-code are not included.',
     ),
     JSON.parse(row.packet || '{}').cad
-      ? heading(
+      ? t(
           'Приложен версионный комплект CAD: STEP, STL, BOM и отчёт. Доступ выдаётся исполнителю отдельно; прямой адресат получает его сразу.',
           'A versioned CAD package includes STEP, STL, BOM and a report. Access is granted separately; a direct recipient receives it immediately.',
         )
       : brief.part
-        ? heading(
+        ? t(
             'Приложена геометрия одного параметрического шаблона, без проверки в слайсере.',
             'Attached geometry is one parametric template, without slicer verification.',
           )
-        : heading(
+        : t(
             'Готовой CAD-модели в пакете нет. Требуется согласовать исходные файлы или проектирование.',
             'The packet contains no completed CAD model. Agree on source files or design work.',
           ),

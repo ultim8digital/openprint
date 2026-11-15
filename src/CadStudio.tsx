@@ -1,3 +1,4 @@
+import { localeTag } from '../shared/locales';
 import {
   lazy,
   Suspense,
@@ -53,14 +54,68 @@ const asLines = (value: string) =>
     .split('\n')
     .map((line) => line.trim())
     .filter(Boolean);
-const operationNames: Record<CadOperation['type'], [string, string]> = {
-  box: ['Прямоугольный блок', 'Box'],
-  cylinder: ['Цилиндр', 'Cylinder'],
-  extrude: ['Выдавливание контура', 'Extrude a contour'],
-  fillet: ['Скругление', 'Fillet'],
-  chamfer: ['Фаска', 'Chamfer'],
-};
-function russianCheck(check: CadReport['checks'][number], report: CadReport) {
+const operationNames = (
+  t: ReturnType<typeof useApp>['t'],
+): Record<CadOperation['type'], string> => ({
+  box: t('Прямоугольный блок', 'Box'),
+  cylinder: t('Цилиндр', 'Cylinder'),
+  extrude: t('Выдавливание контура', 'Extrude a contour'),
+  fillet: t('Скругление', 'Fillet'),
+  chamfer: t('Фаска', 'Chamfer'),
+});
+function localizedSample(name: 'plate' | 'shelf', t: ReturnType<typeof useApp>['t']): CadSpec {
+  const sample = sampleCadSpec(name);
+  if (name === 'plate') {
+    sample.name = t('Учебная пластина', 'Example plate');
+    sample.material = t('Не выбран', 'Not selected');
+    sample.process = t('Не выбрана', 'Not selected');
+    sample.description = t(
+      'Учебная пластина 80 × 50 × 6 мм с двумя отверстиями Ø5 мм. Размеры условные.',
+      'Example plate 80 × 50 × 6 mm with two Ø5 mm holes. Example dimensions only.',
+    );
+    sample.assumptions = [
+      t(
+        'Размеры примера не являются измерениями изделия. Нагрузки и технология не заданы.',
+        'Example dimensions are not measurements of a real part. Loads and manufacturing process are unspecified.',
+      ),
+    ];
+  } else {
+    sample.name = t('Учебная сборка из панелей', 'Example panel assembly');
+    sample.material = t('По компонентам', 'By component');
+    sample.process = t('Сборка', 'Assembly');
+    sample.description = t(
+      'Три отдельные панели: основание и две боковины. Учебная компоновка с условными размерами.',
+      'Three separate panels: a base and two sides. An educational layout with example dimensions.',
+    );
+    sample.assumptions = [
+      t(
+        'Учебная сборка: нагрузки, устойчивость и производственные допуски не рассчитаны.',
+        'Example assembly: loads, stability and manufacturing tolerances have not been calculated.',
+      ),
+    ];
+    sample.missing_geometry = [
+      t(
+        'Соединения панелей и отверстия для крепежа требуют проектирования.',
+        'Panel joints and fastener holes still require design.',
+      ),
+    ];
+    sample.components.forEach((part) => {
+      part.name =
+        part.id === 'base'
+          ? t('Основание', 'Base')
+          : part.id === 'left'
+            ? t('Левая боковина', 'Left side')
+            : t('Правая боковина', 'Right side');
+      part.material = t('Фанера', 'Plywood');
+    });
+  }
+  return sample;
+}
+function localizedCheck(
+  check: CadReport['checks'][number],
+  report: CadReport,
+  t: ReturnType<typeof useApp>['t'],
+) {
   const partName = (id: string) => report.components.find((part) => part.id === id)?.name ?? id;
   switch (check.code) {
     case 'component_solid': {
@@ -68,42 +123,57 @@ function russianCheck(check: CadReport['checks'][number], report: CadReport) {
       const count = /^(\d+) solid\(s\)$/.exec(check.detail);
       return {
         name: part
-          ? `${partName(part[1]!)}: одно корректное тело`
-          : 'Одно корректное тело компонента',
-        detail: count ? `Число тел: ${count[1]}` : check.detail,
+          ? t('{part}: одно корректное тело', '{part}: single valid solid', {
+              part: partName(part[1]!),
+            })
+          : t('Одно корректное тело компонента', 'Single valid component solid'),
+        detail: count
+          ? t('Число тел: {count}', 'Solids: {count}', { count: count[1]! })
+          : check.detail,
       };
     }
     case 'brep':
       return {
-        name: 'Корректность B-Rep',
+        name: t('Корректность B-Rep', 'B-Rep validity'),
         detail:
           check.detail === 'OpenCascade geometry check'
-            ? 'Проверка геометрии OpenCascade'
+            ? t('Проверка геометрии OpenCascade', 'OpenCascade geometry check')
             : check.detail,
       };
     case 'solid_count': {
       const count = /^(\d+) \/ (\d+)$/.exec(check.detail);
       return {
-        name: 'Заявленное число тел',
-        detail: count ? `Тел: ${count[1]}; ожидается: ${count[2]}` : check.detail,
+        name: t('Заявленное число тел', 'Declared solid count'),
+        detail: count
+          ? t('Тел: {count}; ожидается: {expected}', 'Solids: {count}; expected: {expected}', {
+              count: count[1]!,
+              expected: count[2]!,
+            })
+          : check.detail,
       };
     }
     case 'missing_geometry':
       return {
-        name: 'Заявленная недостающая геометрия',
-        // A failed check contains the user's declarations; never translate or replace them.
+        name: t('Заявленная недостающая геометрия', 'Declared missing geometry'),
         detail:
           check.passed &&
           check.detail === 'None declared; not an independent completeness assessment'
-            ? 'Не заявлена; полнота модели независимо не проверялась.'
+            ? t(
+                'Не заявлена; полнота модели независимо не проверялась.',
+                'None declared; not an independent completeness assessment',
+              )
             : check.detail,
       };
     case 'bounds': {
       const bounds = /^(\[[^\]]+\]) mm; check tolerance ([\d.+eE-]+) mm$/.exec(check.detail);
       return {
-        name: 'Заданные габариты',
+        name: t('Заданные габариты', 'Declared bounds'),
         detail: bounds
-          ? `Габариты: ${bounds[1]} мм; допуск проверки: ${bounds[2]} мм`
+          ? t(
+              'Габариты: {bounds} мм; допуск проверки: {tolerance} мм',
+              'Bounds: {bounds} mm; check tolerance: {tolerance} mm',
+              { bounds: bounds[1]!, tolerance: bounds[2]! },
+            )
           : check.detail,
       };
     }
@@ -115,29 +185,42 @@ function russianCheck(check: CadReport['checks'][number], report: CadReport) {
       const volume = /^Common volume ([\d.+eE-]+) mm3$/.exec(check.detail);
       return {
         name: parts
-          ? `Пересечение: ${partName(parts[1]!)} / ${partName(parts[2]!)}`
-          : 'Пересечение компонентов',
-        detail: volume ? `Общий объём: ${volume[1]} мм³` : check.detail,
+          ? t('Пересечение: {first} / {second}', 'Interference: {first} / {second}', {
+              first: partName(parts[1]!),
+              second: partName(parts[2]!),
+            })
+          : t('Пересечение компонентов', 'Component interference'),
+        detail: volume
+          ? t('Общий объём: {volume} мм³', 'Common volume: {volume} mm³', { volume: volume[1]! })
+          : check.detail,
       };
     }
   }
 }
-const standardWarnings = [
-  [
-    'Geometry checks do not authorize manufacture.',
-    'Проверка геометрии не означает разрешения на изготовление.',
-  ],
-  [
-    'Wall thickness, tool access, strength, fatigue, GD&T and process compensation are not checked.',
-    'Толщина стенок, доступ инструмента, прочность, усталость, геометрические допуски (GD&T) и компенсации технологии не проверялись.',
-  ],
-  ['No CAM or machine code is generated.', 'CAM и управляющий код для станка не создаются.'],
-] as const;
-function russianWarning(warning: string, index: number) {
-  // Only the worker's three fixed entries are translated. Later entries are user assumptions.
-  const standard = standardWarnings[index];
-  return standard?.[0] === warning ? standard[1] : warning;
+function localizedWarning(warning: string, index: number, t: ReturnType<typeof useApp>['t']) {
+  // Only the worker's fixed messages are translated; later entries are user assumptions.
+  if (index === 0 && warning === 'Geometry checks do not authorize manufacture.')
+    return t(
+      'Проверка геометрии не означает разрешения на изготовление.',
+      'Geometry checks do not authorize manufacture.',
+    );
+  if (
+    index === 1 &&
+    warning ===
+      'Wall thickness, tool access, strength, fatigue, GD&T and process compensation are not checked.'
+  )
+    return t(
+      'Толщина стенок, доступ инструмента, прочность, усталость, геометрические допуски (GD&T) и компенсации технологии не проверялись.',
+      'Wall thickness, tool access, strength, fatigue, GD&T and process compensation are not checked.',
+    );
+  if (index === 2 && warning === 'No CAM or machine code is generated.')
+    return t(
+      'CAM и управляющий код для станка не создаются.',
+      'No CAM or machine code is generated.',
+    );
+  return warning;
 }
+
 function operation(type: CadOperation['type'], id: string): CadOperation {
   if (type === 'box') return { id, type, mode: 'add', size: [20, 20, 10], at: [0, 0, 0] };
   if (type === 'cylinder')
@@ -188,6 +271,7 @@ function CadNumber({
   useEffect(() => setText(String(value)), [value]);
   return (
     <input
+      dir="auto"
       {...props}
       type="number"
       value={text}
@@ -260,7 +344,7 @@ function OperationEditor({
     <details className="cad-operation" open={index === 0}>
       <summary>
         <span>
-          {String(index + 1).padStart(2, '0')} · {t(...operationNames[value.type])}
+          {String(index + 1).padStart(2, '0')} · {operationNames(t)[value.type]}
         </span>
         <code>{value.id}</code>
       </summary>
@@ -269,6 +353,7 @@ function OperationEditor({
           <label>
             {t('ID операции', 'Operation ID')}
             <input
+              dir="auto"
               value={value.id}
               pattern="[A-Za-z][A-Za-z0-9_-]{0,39}"
               maxLength={40}
@@ -284,8 +369,12 @@ function OperationEditor({
                   onChange({ ...value, mode: event.target.value as 'add' | 'cut' })
                 }
               >
-                <option value="add">{t('Добавить материал', 'Add material')}</option>
-                <option value="cut">{t('Вычесть материал', 'Cut material')}</option>
+                <option dir="auto" value="add">
+                  {t('Добавить материал', 'Add material')}
+                </option>
+                <option dir="auto" value="cut">
+                  {t('Вычесть материал', 'Cut material')}
+                </option>
               </select>
             </label>
           )}
@@ -331,7 +420,9 @@ function OperationEditor({
                 }
               >
                 {['x', 'y', 'z'].map((axis) => (
-                  <option key={axis}>{axis}</option>
+                  <option dir="auto" key={axis}>
+                    {axis}
+                  </option>
                 ))}
               </select>
             </label>
@@ -349,7 +440,9 @@ function OperationEditor({
                   }
                 >
                   {['XY', 'XZ', 'YZ'].map((plane) => (
-                    <option key={plane}>{plane}</option>
+                    <option dir="auto" key={plane}>
+                      {plane}
+                    </option>
                   ))}
                 </select>
               </label>
@@ -371,13 +464,17 @@ function OperationEditor({
                   <span>{row + 1}</span>
                   {point.map((coordinate, axis) => (
                     <input
+                      dir="auto"
                       key={axis}
                       type="number"
                       step="any"
                       min="-2000"
                       max="2000"
                       value={coordinate}
-                      aria-label={`${t('Вершина', 'Vertex')} ${row + 1} ${['U', 'V'][axis]}`}
+                      aria-label={t('Вершина {number} {axis}', 'Vertex {number} {axis}', {
+                        number: row + 1,
+                        axis: ['U', 'V'][axis]!,
+                      })}
                       onChange={(event) => {
                         const points = clone(value.points);
                         points[row]![axis] = Number(event.target.value);
@@ -388,7 +485,9 @@ function OperationEditor({
                   <button
                     type="button"
                     className="icon-button"
-                    aria-label={`${t('Удалить вершину', 'Remove vertex')} ${row + 1}`}
+                    aria-label={t('Удалить вершину {number}', 'Remove vertex {number}', {
+                      number: row + 1,
+                    })}
                     disabled={value.points.length <= 3}
                     onClick={() =>
                       onChange({ ...value, points: value.points.filter((_, i) => i !== row) })
@@ -432,7 +531,7 @@ function OperationEditor({
               }
             >
               {['|X', '|Y', '|Z', '>Z', '<Z', 'all'].map((selector) => (
-                <option key={selector} value={selector}>
+                <option dir="auto" key={selector} value={selector}>
                   {selector === 'all' ? t('Все рёбра', 'All edges') : selector}
                 </option>
               ))}
@@ -599,10 +698,11 @@ export default function CadStudio({
     const parsed = cadSpecSchema.safeParse(input);
     if (!parsed.success)
       throw new Error(
-        t('Проверьте модель: ', 'Check the model: ') +
-          parsed.error.issues
+        t('Проверьте модель: {issues}', 'Check the model: {issues}', {
+          issues: parsed.error.issues
             .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
             .join(' · '),
+        }),
       );
     return parsed.data;
   }
@@ -678,7 +778,16 @@ export default function CadStudio({
   }
   const activeBuild = state?.builds.find((build) => build.id === selectedBuild) ?? state?.builds[0];
   const buildLabel = (build: CadBuild) =>
-    `${t('ТЗ v', 'Brief v')}${build.project_version} · ${t(...({ queued: ['В очереди', 'Queued'], running: ['Построение', 'Building'], succeeded: ['Построено', 'Built'], failed: ['Ошибка', 'Failed'] } satisfies Record<CadBuild['status'], [string, string]>)[build.status])} · ${formatDate(build.created_at, lang)}`;
+    t('ТЗ v{version} · {status} · {date}', 'Brief v{version} · {status} · {date}', {
+      version: build.project_version,
+      status: {
+        queued: t('В очереди', 'Queued'),
+        running: t('Построение', 'Building'),
+        succeeded: t('Построено', 'Built'),
+        failed: t('Ошибка', 'Failed'),
+      }[build.status],
+      date: formatDate(build.created_at, lang),
+    });
   const artifactURL = (build: CadBuild, name: string) =>
     `/api${path}/builds/${build.id}/artifacts/${encodeURIComponent(name)}`;
   const canBuild =
@@ -782,10 +891,10 @@ export default function CadStudio({
                       disabled={locked}
                       onChange={(event) => setSample(event.target.value as 'plate' | 'shelf')}
                     >
-                      <option value="plate">
+                      <option dir="auto" value="plate">
                         {t('Пластина с отверстиями', 'Plate with holes')}
                       </option>
-                      <option value="shelf">
+                      <option dir="auto" value="shelf">
                         {t('Сборка из трёх панелей', 'Three-panel assembly')}
                       </option>
                     </select>
@@ -795,7 +904,7 @@ export default function CadStudio({
                     className="button secondary"
                     disabled={locked}
                     onClick={() => {
-                      updateSpec(sampleCadSpec(sample));
+                      updateSpec(localizedSample(sample, t));
                       setSelectedPart(sample === 'shelf' ? 'base' : 'body');
                     }}
                   >
@@ -848,6 +957,7 @@ export default function CadStudio({
                       <label>
                         {t('Название CAD-модели', 'CAD model name')}
                         <input
+                          dir="auto"
                           value={spec.name}
                           maxLength={120}
                           onChange={(event) => updateSpec({ ...spec, name: event.target.value })}
@@ -856,6 +966,7 @@ export default function CadStudio({
                       <label>
                         {t('Описание CAD-модели', 'CAD model description')}
                         <textarea
+                          dir="auto"
                           value={spec.description}
                           rows={2}
                           maxLength={4000}
@@ -937,6 +1048,7 @@ export default function CadStudio({
                         <label>
                           {t('Название компонента', 'Component name')}
                           <input
+                            dir="auto"
                             value={selected.name}
                             maxLength={120}
                             onChange={(event) =>
@@ -949,6 +1061,7 @@ export default function CadStudio({
                         <label>
                           {t('Материал CAD', 'CAD material')}
                           <input
+                            dir="auto"
                             value={selected?.material ?? spec.material}
                             maxLength={160}
                             onChange={(event) =>
@@ -961,6 +1074,7 @@ export default function CadStudio({
                         <label>
                           {t('Технология CAD', 'CAD process')}
                           <input
+                            dir="auto"
                             value={selected?.process ?? spec.process}
                             maxLength={160}
                             onChange={(event) =>
@@ -1030,9 +1144,9 @@ export default function CadStudio({
                               setOperationType(event.target.value as CadOperation['type'])
                             }
                           >
-                            {Object.entries(operationNames).map(([key, label]) => (
-                              <option key={key} value={key}>
-                                {t(...label)}
+                            {Object.entries(operationNames(t)).map(([key, label]) => (
+                              <option dir="auto" key={key} value={key}>
+                                {label}
                               </option>
                             ))}
                           </select>
@@ -1107,6 +1221,7 @@ export default function CadStudio({
                         </div>
                         <label className="check-label">
                           <input
+                            dir="auto"
                             type="checkbox"
                             checked={!!spec.requirements.bounds}
                             onChange={(event) =>
@@ -1137,6 +1252,7 @@ export default function CadStudio({
                         <label>
                           {t('Допущения CAD, по одному на строку', 'CAD assumptions, one per line')}
                           <textarea
+                            dir="auto"
                             rows={3}
                             value={spec.assumptions.join('\n')}
                             onBlur={() =>
@@ -1161,6 +1277,7 @@ export default function CadStudio({
                             'Missing geometry, one per line',
                           )}
                           <textarea
+                            dir="auto"
                             rows={3}
                             value={spec.missing_geometry.join('\n')}
                             onBlur={() =>
@@ -1199,6 +1316,7 @@ export default function CadStudio({
                       <label>
                         {t('JSON модели', 'Model JSON')}
                         <textarea
+                          dir="auto"
                           className="cad-json-input"
                           maxLength={262144}
                           value={raw}
@@ -1299,6 +1417,7 @@ export default function CadStudio({
                   <Upload size={16} />
                   <span>{t('Импортировать JSON модели', 'Import model JSON')}</span>
                   <input
+                    dir="auto"
                     type="file"
                     accept=".json,application/json"
                     disabled={locked}
@@ -1331,7 +1450,9 @@ export default function CadStudio({
                       <h3>{t('Геометрия и файлы', 'Geometry & files')}</h3>
                       <p className="studio-help">
                         {state.revision
-                          ? `${t('Модель CAD v', 'CAD model v')}${state.revision.number}`
+                          ? t('Модель CAD v{version}', 'CAD model v{version}', {
+                              version: state.revision.number,
+                            })
                           : t(
                               'CAD откреплён; доступна история',
                               'CAD detached; history is available',
@@ -1372,7 +1493,7 @@ export default function CadStudio({
                         onChange={(event) => setSelectedBuild(event.target.value)}
                       >
                         {state.builds.map((build) => (
-                          <option key={build.id} value={build.id}>
+                          <option dir="auto" key={build.id} value={build.id}>
                             {buildLabel(build)}
                           </option>
                         ))}
@@ -1480,10 +1601,7 @@ export default function CadStudio({
                               </p>
                               <ul>
                                 {activeBuild.report.checks.map((check, index) => {
-                                  const label =
-                                    lang === 'ru'
-                                      ? russianCheck(check, activeBuild.report!)
-                                      : check;
+                                  const label = localizedCheck(check, activeBuild.report!, t);
                                   return (
                                     <li
                                       key={index}
@@ -1504,7 +1622,7 @@ export default function CadStudio({
                               </ul>
                               {activeBuild.report.warnings.map((warning, index) => (
                                 <p className="studio-action-note" key={index}>
-                                  {lang === 'ru' ? russianWarning(warning, index) : warning}
+                                  {localizedWarning(warning, index, t)}
                                 </p>
                               ))}
                             </div>
@@ -1529,8 +1647,13 @@ export default function CadStudio({
                                   <span>
                                     {artifact.name}
                                     <small>
-                                      {(artifact.size / 1024).toFixed(1)} KB ·{' '}
-                                      {t('ТЗ v', 'Brief v')}
+                                      {t('{size} КБ', '{size} KB', {
+                                        size: (artifact.size / 1024).toLocaleString(
+                                          localeTag(lang),
+                                          { minimumFractionDigits: 1, maximumFractionDigits: 1 },
+                                        ),
+                                      })}{' '}
+                                      · {t('ТЗ v', 'Brief v')}
                                       {activeBuild.project_version}
                                     </small>
                                   </span>
@@ -1554,6 +1677,7 @@ export default function CadStudio({
                   </p>
                   <label className="check-label">
                     <input
+                      dir="auto"
                       type="checkbox"
                       checked={detachConsent}
                       disabled={locked || dirty}

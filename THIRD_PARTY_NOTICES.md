@@ -16,7 +16,9 @@ Models uploaded by participants are separate works. The application records thei
 
 ## Maps
 
-Leaflet uses the 2-clause BSD license. Optional map tiles and map data come from OpenStreetMap; visible attribution is retained in the map control. Tile loading requires an explicit UI action. Respect the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/) and [OSM attribution](https://www.openstreetmap.org/copyright). There is no offline tile cache, scraping, prefetch, or SLA. At larger scale, replace or disable the optional map rather than relying on unlimited free OSM tile capacity.
+Leaflet uses the 2-clause BSD license. The base map uses OpenStreetMap tiles with visible attribution in the map control. Tiles load when a map view mounts, including the default catalogue landing page; a separate click is not required there. Respect the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/) and [OSM attribution](https://www.openstreetmap.org/copyright). There is no application-managed offline tile cache, scraping, prefetch, or SLA. At larger scale, replace or disable the map rather than relying on unlimited free OSM tile capacity.
+
+Studio locations and descriptions come from operator imports or self-publication, not from the OpenStreetMap tile license. They retain their own rights and restrictions. See [directory data provenance](docs/DATA_PROVENANCE.md) before importing or publishing an external catalogue; the MIT software license does not relicense it.
 
 ## Original service
 

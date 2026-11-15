@@ -17,7 +17,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { useApp } from './core';
 export default function ModelViewer({ geometry }: { geometry: BufferGeometry }) {
   const container = useRef<HTMLDivElement>(null),
-    [error, setError] = useState(''),
+    [error, setError] = useState(false),
     { t } = useApp(),
     commands = useRef<{ zoom: (factor: number) => void; reset: () => void } | null>(null);
   useEffect(() => {
@@ -27,14 +27,10 @@ export default function ModelViewer({ geometry }: { geometry: BufferGeometry }) 
     try {
       renderer = new WebGLRenderer({ antialias: true, alpha: false });
     } catch {
-      setError(
-        t(
-          'Просмотр 3D недоступен в этом браузере. Размеры и экспорт STL продолжат работать.',
-          '3D preview is unavailable in this browser. Dimensions and STL export still work.',
-        ),
-      );
+      setError(true);
       return;
     }
+    setError(false);
     const scene = new Scene();
     scene.background = new Color('#edf2e7');
     const material = new MeshStandardMaterial({
@@ -86,13 +82,7 @@ export default function ModelViewer({ geometry }: { geometry: BufferGeometry }) 
     scene.add(light);
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     host.appendChild(renderer.domElement);
-    renderer.domElement.setAttribute(
-      'aria-label',
-      t(
-        'Трёхмерная модель. Поверните перетаскиванием, измените масштаб колёсиком.',
-        '3D preview. Drag to orbit and scroll to zoom.',
-      ),
-    );
+
     renderer.domElement.setAttribute('role', 'img');
     const observer = new ResizeObserver(() => {
       const width = host.clientWidth,
@@ -121,14 +111,32 @@ export default function ModelViewer({ geometry }: { geometry: BufferGeometry }) 
       renderer.forceContextLoss();
       renderer.domElement.remove();
     };
-  }, [geometry, t]);
+  }, [geometry]);
+  useEffect(() => {
+    container.current
+      ?.querySelector('canvas')
+      ?.setAttribute(
+        'aria-label',
+        t(
+          'Трёхмерная модель. Поверните перетаскиванием, измените масштаб колёсиком.',
+          '3D preview. Drag to orbit and scroll to zoom.',
+        ),
+      );
+  }, [t, geometry]);
   return (
     <div className="viewer" ref={container}>
       {error ? (
-        <div className="info-box">{error}</div>
+        <div className="info-box">
+          {t(
+            'Просмотр 3D недоступен в этом браузере. Размеры и экспорт STL продолжат работать.',
+            '3D preview is unavailable in this browser. Dimensions and STL export still work.',
+          )}
+        </div>
       ) : (
         <>
-          <span className="viewer-badge">OPENPRINT / 3D VIEW</span>
+          <span className="viewer-badge">
+            {t('OPENPRINT / ПРОСМОТР 3D', 'OPENPRINT / 3D VIEW')}
+          </span>
           <div className="viewer-actions">
             <button
               aria-label={t('Увеличить модель', 'Zoom in')}

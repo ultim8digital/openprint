@@ -1,6 +1,7 @@
 import { DatabaseSync, type SQLInputValue } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { localeCodes } from '../shared/locales.js';
 
 export class Store {
   readonly db: DatabaseSync;
@@ -40,9 +41,9 @@ export class Store {
     const version = Number(
       this.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0,
     );
-    if (version > 6)
+    if (version > 7)
       throw new Error('Database is newer than this OpenPrint version. Upgrade the application.');
-    if (version === 6) return;
+    if (version === 7) return;
     if (version === 0)
       this.transaction(() =>
         this.db.exec(`
@@ -319,8 +320,9 @@ export class Store {
       PRAGMA user_version=5;
     `),
       );
-    this.transaction(() =>
-      this.db.exec(`
+    if (version < 6)
+      this.transaction(() =>
+        this.db.exec(`
       CREATE TABLE directory_submissions (
         id TEXT PRIMARY KEY, key_hash TEXT NOT NULL UNIQUE CHECK(length(key_hash)=64),
         initial_body_hash TEXT NOT NULL CHECK(length(initial_body_hash)=64),
@@ -354,6 +356,37 @@ export class Store {
       CREATE INDEX directory_create_usage_ip ON directory_create_usage(ip_hash,created_at);
       PRAGMA user_version=6;
     `),
-    );
+      );
+    // SQLite requires rebuilding a table to widen its CHECK constraint. Disable foreign keys
+    // outside the transaction so dropping the old parent cannot cascade into immutable history.
+    this.db.exec('PRAGMA foreign_keys=OFF');
+    try {
+      this.transaction(() => {
+        this.db.exec(`
+          CREATE TABLE studio_projects_localized (
+            id TEXT PRIMARY KEY, owner_id TEXT NOT NULL REFERENCES users(id), idea TEXT NOT NULL,
+            language TEXT NOT NULL CHECK(language IN (${localeCodes.map((code) => `'${code}'`).join(',')})),
+            brief TEXT NOT NULL CHECK(json_valid(brief)), version INTEGER NOT NULL CHECK(version>0),
+            confirmed_version INTEGER, confirmed_hash TEXT,
+            source TEXT NOT NULL CHECK(source IN ('manual','openai')),
+            job_id TEXT UNIQUE REFERENCES jobs(id), packet TEXT CHECK(packet IS NULL OR json_valid(packet)), model_stl BLOB,
+            file_id TEXT REFERENCES files(id), created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL,
+            CHECK((confirmed_version IS NULL AND confirmed_hash IS NULL) OR (confirmed_version=version AND confirmed_hash IS NOT NULL))
+          ) STRICT;
+          INSERT INTO studio_projects_localized SELECT * FROM studio_projects;
+          DROP TABLE studio_projects;
+          ALTER TABLE studio_projects_localized RENAME TO studio_projects;
+          CREATE INDEX studio_projects_owner ON studio_projects(owner_id, updated_at DESC);
+          CREATE INDEX studio_projects_file ON studio_projects(file_id);
+          CREATE TRIGGER studio_published_immutable BEFORE UPDATE OF brief,version,confirmed_version,confirmed_hash,packet,model_stl,job_id,file_id ON studio_projects WHEN OLD.job_id IS NOT NULL
+            BEGIN SELECT RAISE(ABORT, 'Published studio projects are immutable'); END;
+        `);
+        if (this.all('PRAGMA foreign_key_check').length)
+          throw new Error('Locale migration failed foreign-key validation');
+        this.db.exec('PRAGMA user_version=7');
+      });
+    } finally {
+      this.db.exec('PRAGMA foreign_keys=ON');
+    }
   }
 }

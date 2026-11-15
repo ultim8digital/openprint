@@ -1,3 +1,4 @@
+import { localeTag } from '../shared/locales';
 import { lazy, Suspense, useState } from 'react';
 import { Download, RefreshCw, LockKeyhole } from 'lucide-react';
 import type { CadBuild } from '../shared/cad';
@@ -21,7 +22,7 @@ export default function JobCad({
   owner: boolean;
   revision: string;
 }) {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const remote = useRemote<Handoff>(`/jobs/${jobId}/cad`, revision);
   const [busy, setBusy] = useState('');
   const [error, setError] = useState('');
@@ -122,7 +123,10 @@ export default function JobCad({
                     {file.name}
                   </a>
                   <span className="micro muted">
-                    {Math.ceil(file.size / 1024)} KB · SHA-256 {file.sha256}
+                    {t('{size} КБ', '{size} KB', {
+                      size: Math.ceil(file.size / 1024).toLocaleString(localeTag(lang)),
+                    })}{' '}
+                    · <bdi>SHA-256 {file.sha256}</bdi>
                   </span>
                 </li>
               ))}

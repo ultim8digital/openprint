@@ -1,3 +1,5 @@
+import { useApp } from './core';
+import { localeTag } from '../shared/locales';
 export function PartArt({ variant = 0 }: { variant?: number }) {
   if (variant === 1)
     return (
@@ -65,6 +67,7 @@ export function PartArt({ variant = 0 }: { variant?: number }) {
   );
 }
 export function HeroArt() {
+  const { t, lang } = useApp();
   return (
     <svg viewBox="0 0 520 390" className="hero-art" aria-hidden="true">
       <defs>
@@ -113,7 +116,9 @@ export function HeroArt() {
         fontSize="12"
         transform="rotate(-28 325 311)"
       >
-        70.00 mm
+        {t('{size} мм', '{size} mm', {
+          size: (70).toLocaleString(localeTag(lang), { minimumFractionDigits: 2 }),
+        })}
       </text>
       <path d="m88 177 173-94M88 177v-15M261 83V68" stroke="#77927d" fill="none" />
       <text
@@ -124,7 +129,9 @@ export function HeroArt() {
         fontSize="12"
         transform="rotate(-28 145 130)"
       >
-        45.00 mm
+        {t('{size} мм', '{size} mm', {
+          size: (45).toLocaleString(localeTag(lang), { minimumFractionDigits: 2 }),
+        })}
       </text>
       <circle cx="423" cy="73" r="5" fill="#325c42" />
       <path d="M423 73h40v41" stroke="#799b82" fill="none" />
@@ -132,7 +139,7 @@ export function HeroArt() {
         PETG / FDM
       </text>
       <text x="100" y="365" fill="#7d9783" fontFamily="monospace" fontSize="10">
-        OPENPRINT — MADE TO BE MADE.
+        {t('OPENPRINT — СОЗДАНО ДЛЯ ВОПЛОЩЕНИЯ.', 'OPENPRINT — MADE TO BE MADE.')}
       </text>
     </svg>
   );

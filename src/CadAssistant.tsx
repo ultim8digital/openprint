@@ -21,37 +21,63 @@ type Props = {
   onApplyingChange: (applying: boolean) => void;
   onApplied: (result: { project: StudioProject; cad: CadState }) => void;
 };
-const types: Record<CadOperation['type'], [string, string]> = {
-  box: ['Блок', 'Box'],
-  cylinder: ['Цилиндр', 'Cylinder'],
-  extrude: ['Выдавливание', 'Extrude'],
-  fillet: ['Скругление', 'Fillet'],
-  chamfer: ['Фаска', 'Chamfer'],
-};
+const types = (t: ReturnType<typeof useApp>['t']): Record<CadOperation['type'], string> => ({
+  box: t('Блок', 'Box'),
+  cylinder: t('Цилиндр', 'Cylinder'),
+  extrude: t('Выдавливание', 'Extrude'),
+  fillet: t('Скругление', 'Fillet'),
+  chamfer: t('Фаска', 'Chamfer'),
+});
 function ProposalSpec({ spec }: { spec: CadSpec }) {
   const { t } = useApp();
   const vector = (values: number[]) => values.join(' × ');
   function describe(operation: CadOperation) {
-    const origin =
-      'at' in operation
-        ? `${t('начало', 'origin')}: [${operation.at.join(', ')}] ${t('мм', 'mm')}`
-        : '';
+    const origin = 'at' in operation ? operation.at.join(', ') : '';
     const mode =
       'mode' in operation
-        ? t(
-            operation.mode === 'add' ? 'добавить' : 'вычесть',
-            operation.mode === 'add' ? 'add' : 'cut',
-          )
+        ? operation.mode === 'add'
+          ? t('добавить', 'add')
+          : t('вычесть', 'cut')
         : '';
     if (operation.type === 'box')
-      return `${mode} · ${vector(operation.size)} ${t('мм', 'mm')} · ${origin}`;
+      return t(
+        '{mode} · {size} мм · начало: [{origin}] мм',
+        '{mode} · {size} mm · origin: [{origin}] mm',
+        { mode, size: vector(operation.size), origin },
+      );
     if (operation.type === 'cylinder')
-      return `${mode} · R ${operation.radius} ${t('мм', 'mm')} · ${t('длина', 'length')} ${operation.height} ${t('мм', 'mm')} · ${t('ось', 'axis')} ${operation.axis.toUpperCase()} · ${origin}`;
+      return t(
+        '{mode} · R {radius} мм · длина {height} мм · ось {axis} · начало: [{origin}] мм',
+        '{mode} · R {radius} mm · length {height} mm · axis {axis} · origin: [{origin}] mm',
+        {
+          mode,
+          radius: operation.radius,
+          height: operation.height,
+          axis: operation.axis.toUpperCase(),
+          origin,
+        },
+      );
     if (operation.type === 'extrude')
-      return `${mode} · ${operation.plane} · ${operation.points.length} ${t('вершин', 'vertices')} · ${t('выдавливание', 'distance')} ${operation.distance} ${t('мм', 'mm')} · ${origin}`;
+      return t(
+        '{mode} · {plane} · вершин: {count} · выдавливание {distance} мм · начало: [{origin}] мм',
+        '{mode} · {plane} · vertices: {count} · distance {distance} mm · origin: [{origin}] mm',
+        {
+          mode,
+          plane: operation.plane,
+          count: operation.points.length,
+          distance: operation.distance,
+          origin,
+        },
+      );
     if (operation.type === 'fillet')
-      return `R ${operation.radius} ${t('мм', 'mm')} · ${t('рёбра', 'edges')} ${operation.selector}`;
-    return `${operation.length} ${t('мм', 'mm')} · ${t('рёбра', 'edges')} ${operation.selector}`;
+      return t('R {radius} мм · рёбра {selector}', 'R {radius} mm · edges {selector}', {
+        radius: operation.radius,
+        selector: operation.selector,
+      });
+    return t('{length} мм · рёбра {selector}', '{length} mm · edges {selector}', {
+      length: operation.length,
+      selector: operation.selector,
+    });
   }
   const parts = [
     ...(spec.operations.length
@@ -71,7 +97,7 @@ function ProposalSpec({ spec }: { spec: CadSpec }) {
   ];
   return (
     <div className="cad-proposal-spec">
-      <h4>{spec.name}</h4>
+      <h4 dir="auto">{spec.name}</h4>
       {spec.description && <p>{spec.description}</p>}
       <dl className="cad-proposal-facts">
         <div>
@@ -107,7 +133,7 @@ function ProposalSpec({ spec }: { spec: CadSpec }) {
             <summary>
               <strong>{part.name}</strong>
               <span>
-                {part.operations.length} {t('операций', 'operations')}
+                {t('Операций: {count}', 'Operations: {count}', { count: part.operations.length })}
               </span>
             </summary>
             <div>
@@ -123,7 +149,7 @@ function ProposalSpec({ spec }: { spec: CadSpec }) {
                 {part.operations.map((operation) => (
                   <li key={operation.id}>
                     <strong>
-                      {t(...types[operation.type])} · {operation.id}
+                      {types(t)[operation.type]} · {operation.id}
                     </strong>
                     <p>{describe(operation)}</p>
                     {operation.type === 'extrude' && (
@@ -394,7 +420,17 @@ export default function CadAssistant({
     }
   }
   const proposalLabel = (proposal: CadProposal) =>
-    `${t('ТЗ v', 'Brief v')}${proposal.input_version} · ${formatDate(proposal.created_at, lang)} · ${proposal.applied_version ? t('Применено', 'Applied') : proposal.stale || proposal.input_version !== project.version ? t('Предыдущая версия', 'Previous revision') : proposal.spec ? t('На проверке', 'For review') : t('Нужны уточнения', 'Needs clarification')}`;
+    t('ТЗ v{version} · {date} · {status}', 'Brief v{version} · {date} · {status}', {
+      version: proposal.input_version,
+      date: formatDate(proposal.created_at, lang),
+      status: proposal.applied_version
+        ? t('Применено', 'Applied')
+        : proposal.stale || proposal.input_version !== project.version
+          ? t('Предыдущая версия', 'Previous revision')
+          : proposal.spec
+            ? t('На проверке', 'For review')
+            : t('Нужны уточнения', 'Needs clarification'),
+    });
   return (
     <section className="cad-assistant" aria-labelledby="cad-assistant-heading">
       <div className="cad-assistant-heading">
@@ -453,6 +489,7 @@ export default function CadAssistant({
               <label>
                 {t('Что спроектировать или изменить?', 'What should be designed or changed?')}
                 <textarea
+                  dir="auto"
                   value={message}
                   onChange={(event) => {
                     setMessage(event.target.value);
@@ -476,6 +513,7 @@ export default function CadAssistant({
               </p>
               <label className="check-label">
                 <input
+                  dir="auto"
                   type="checkbox"
                   checked={consent}
                   disabled={!!busy || blocked || templateAttached}
@@ -574,7 +612,7 @@ export default function CadAssistant({
                   }}
                 >
                   {data.proposals.map((proposal) => (
-                    <option key={proposal.id} value={proposal.id}>
+                    <option dir="auto" key={proposal.id} value={proposal.id}>
                       {proposalLabel(proposal)}
                     </option>
                   ))}
@@ -635,6 +673,7 @@ export default function CadAssistant({
                       </p>
                       <label className="check-label">
                         <input
+                          dir="auto"
                           type="checkbox"
                           checked={reviewed}
                           disabled={!!busy || blocked || templateAttached || stale}

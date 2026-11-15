@@ -1,6 +1,6 @@
 # Architecture
 
-OpenPrint is one self-hosted React/Express application with local SQLite and private filesystem storage. `APP_MODE=catalog` is the default. It exposes the public directory and immediate self-publication without accounts or moderation. `APP_MODE=community` explicitly enables the earlier account, collaboration and Neofab Studio APIs. Both modes use the same additive schema v6; choosing catalog mode does not delete community data.
+OpenPrint is one self-hosted React/Express application with local SQLite and private filesystem storage. `APP_MODE=catalog` is the default. It exposes the public directory and immediate self-publication without accounts or moderation. `APP_MODE=community` explicitly enables the earlier account, collaboration and Neofab Studio APIs. Both modes use schema v7; choosing catalog mode does not delete community data. The v7 migration widens the project language constraint in a transaction, preserves parent and child rows, checks foreign keys and restores enforcement.
 
 In catalog mode, the API permits health/bootstrap and directory routes. Account, profile, order, file, Studio and moderator endpoints return not found, including for existing session cookies. Bootstrap does not expose old accounts, demo identities or community statistics. Directory queries exclude registered profiles. The application does not construct `CadService`, resume queued CAD work or run community upload cleanup in this mode.
 
@@ -14,7 +14,7 @@ flowchart LR
     API --> Publish[Validate, check duplicates and quotas, publish]
     UI --> Manage[Private key header and exact version]
     Manage --> API
-    Read --> DB[(SQLite schema v6)]
+    Read --> DB[(SQLite schema v7)]
     Publish --> DB
     Operator[Operator CLI] --> Import[Atomic source import]
     Import --> DB
@@ -40,7 +40,13 @@ The same key plus the same initial normalized body replays an existing create wi
 
 The total self-published identity limit is 50,000, including tombstones; this bounds permanent replay metadata. It is independent of the map-point cap and per-source import cap. Switching modes or removing a card does not reset usage. Backups contain the database, including private hashes and the IP salt, and require private storage.
 
-## Code map
+## Localization
+
+`shared/locales.ts` defines the 50 supported locale identifiers and writing directions. English and Russian source strings are authored in code; `scripts/i18n-extract.mjs` creates stable, collision-checked identifiers and the translation inventory. Other dictionaries are committed JSON data. The browser downloads only the selected dictionary, preserves drafts when switching, retries failed downloads, and ignores responses for superseded language selections. It saves the preference when browser storage permits it and updates document language and direction.
+
+The server uses the same dictionaries for deterministic Studio text; `npm run build` copies them into `build/locales` for Node and Docker installations. User-supplied names, descriptions, project text and geometry are not automatically translated. Project languages are stored independently of the current interface preference. AI language requests do not establish translation or engineering quality. Source changes must regenerate the inventory, update dictionaries and pass the completeness and placeholder checks described in [localization maintenance](i18n/README.md).
+
+## Source files
 
 | Location                                                                             | Responsibility                                                                                 |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
@@ -53,7 +59,7 @@ The total self-published identity limit is 50,000, including tombstones; this bo
 | `src/Models.tsx`, `src/Tools.tsx`                                                    | Licensed model sharing and browser-only tools                                                  |
 | `server/app.ts`                                                                      | Routes, validation, permissions and error responses                                            |
 | `server/domain.ts`                                                                   | Brief access, offer revisions, atomic acceptance, thread membership                            |
-| `server/database.ts`                                                                 | Schemas v1–v6, transactions, indexes, immutable snapshot triggers                              |
+| `server/database.ts`                                                                 | Schemas v1–v7, transactions, indexes, immutable snapshot triggers                              |
 | `src/Studio.tsx`, `shared/studio.ts`                                                 | Private CAD/CAM brief editor, components, confirmation and handoff                             |
 | `server/studio.ts`, `server/studio-ai.ts`, `server/ai-ledger.ts`, `server/cad-ai.ts` | Ownership/version gates, shared AI call ledger, private CAD proposals, bounded Responses API   |
 | `server/studio-geometry.ts`                                                          | Deterministic FDM template checks, STL and packet manifests                                    |

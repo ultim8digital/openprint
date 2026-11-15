@@ -1,4 +1,6 @@
-import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
+import LanguageSelector from './LanguageSelector';
+import { localeTag } from '../shared/locales';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Route, Routes, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import {
   Layers3,
@@ -11,7 +13,6 @@ import {
   Plus,
   Search,
   Bell,
-  Globe2,
   ArrowRight,
   ChevronDown,
   Code2,
@@ -20,17 +21,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react';
-import {
-  useApp,
-  LanguageContext,
-  post,
-  errorText,
-  Loading,
-  ErrorBox,
-  useRemote,
-  initials,
-  type Lang,
-} from './core';
+import { useApp, post, errorText, Loading, ErrorBox, useRemote, initials } from './core';
 import type { Notification } from '../shared/types';
 import { Home, Directory, CatalogPage, ProfilePage, Projects } from './Browse';
 const Auth = lazy(() => import('./Auth'));
@@ -58,19 +49,19 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
     />
   );
 }
-const names: Record<string, [string, string]> = {
-  '/': ['Обзор сообщества', 'Community overview'],
-  '/studios': ['Мастерские и инженеры', 'Workshops & engineers'],
-  '/projects': ['Биржа проектов', 'Project board'],
-  '/models': ['Библиотека моделей', 'Model library'],
-  '/tools': ['3D-инструменты', '3D tools'],
-  '/workspace': ['Моя мастерская', 'My workspace'],
-  '/about': ['О сообществе', 'About the community'],
-  '/admin': ['Модерация', 'Moderation'],
-  '/login': ['Добро пожаловать', 'Welcome'],
-  '/recover': ['Восстановить доступ', 'Account recovery'],
-  '/studio': ['Neofab Studio', 'Neofab Studio'],
-};
+const names = (t: ReturnType<typeof useApp>['t']): Record<string, string> => ({
+  '/': t('Обзор сообщества', 'Community overview'),
+  '/studios': t('Мастерские и инженеры', 'Workshops & engineers'),
+  '/projects': t('Биржа проектов', 'Project board'),
+  '/models': t('Библиотека моделей', 'Model library'),
+  '/tools': t('3D-инструменты', '3D tools'),
+  '/workspace': t('Моя мастерская', 'My workspace'),
+  '/about': t('О сообществе', 'About the community'),
+  '/admin': t('Модерация', 'Moderation'),
+  '/login': t('Добро пожаловать', 'Welcome'),
+  '/recover': t('Восстановить доступ', 'Account recovery'),
+  '/studio': t('Neofab Studio', 'Neofab Studio'),
+});
 function Notifications({ close }: { close: () => void }) {
   const { t, lang, refresh } = useApp(),
     dialog = useRef<HTMLDialogElement>(null),
@@ -80,16 +71,16 @@ function Notifications({ close }: { close: () => void }) {
     el?.showModal();
     return () => el?.close();
   }, []);
-  const labels: Record<string, [string, string]> = {
-    'offer.created': ['Новое предложение', 'New offer'],
-    'offer.accepted': ['Ваше предложение принято', 'Your offer was accepted'],
-    'offer.closed': ['Исполнитель выбран', 'A provider was selected'],
-    'message.new': ['Новое сообщение', 'New message'],
-    'job.direct': ['Личный запрос', 'Direct request'],
-    'job.delivered': ['Результат готов к проверке', 'Delivery is ready to review'],
-    'job.completed': ['Проект завершён', 'Project completed'],
-    'profile.moderated': ['Обновлён статус профиля', 'Profile moderation update'],
-    'model.moderated': ['Обновлён статус модели', 'Model moderation update'],
+  const labels: Record<string, string> = {
+    'offer.created': t('Новое предложение', 'New offer'),
+    'offer.accepted': t('Ваше предложение принято', 'Your offer was accepted'),
+    'offer.closed': t('Исполнитель выбран', 'A provider was selected'),
+    'message.new': t('Новое сообщение', 'New message'),
+    'job.direct': t('Личный запрос', 'Direct request'),
+    'job.delivered': t('Результат готов к проверке', 'Delivery is ready to review'),
+    'job.completed': t('Проект завершён', 'Project completed'),
+    'profile.moderated': t('Обновлён статус профиля', 'Profile moderation update'),
+    'model.moderated': t('Обновлён статус модели', 'Model moderation update'),
   };
   async function mark() {
     if (remote.data?.notifications.length) {
@@ -129,11 +120,9 @@ function Notifications({ close }: { close: () => void }) {
                 to={n.path}
                 onClick={() => void mark()}
               >
-                <span>{t(...(labels[key] || [key, key]))}</span>
+                <span>{labels[key] || key}</span>
                 <strong>{title}</strong>
-                <small>
-                  {new Date(n.created_at).toLocaleString(lang === 'ru' ? 'ru-RU' : 'en-GB')}
-                </small>
+                <small>{new Date(n.created_at).toLocaleString(localeTag(lang))}</small>
               </Link>
             );
           })}
@@ -156,17 +145,15 @@ function Notifications({ close }: { close: () => void }) {
 export default function App() {
   const context = useApp(),
     { t, user, profile, lang, demo, demoUsers, refresh, toast, unread } = context,
-    setLang = useContext(LanguageContext),
     location = useLocation(),
     navigate = useNavigate();
   const [search, setSearch] = useState(''),
     [notifications, setNotifications] = useState(false);
-  const pageTitle = t(
-    ...(names[location.pathname] ||
-      (location.pathname.startsWith('/catalog/')
-        ? ['Карточка студии', 'Studio listing']
-        : ['Проект', 'Project'])),
-  );
+  const pageTitle =
+    names(t)[location.pathname] ||
+    (location.pathname.startsWith('/catalog/')
+      ? t('Карточка студии', 'Studio listing')
+      : t('Проект', 'Project'));
   useEffect(() => {
     if (context.mode === 'catalog') return;
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -240,7 +227,7 @@ export default function App() {
                 )}
               </p>
               <a href="https://github.com/ultim8digital/openprint" target="_blank" rel="noreferrer">
-                GitHub <ArrowUpRight size={14} />
+                GitHub <ArrowUpRight className="directional-icon" size={14} />
               </a>
             </div>
             <div className="sidebar-foot">
@@ -267,6 +254,7 @@ export default function App() {
               >
                 <Search size={16} />
                 <input
+                  dir="auto"
                   aria-label={t('Поиск по сообществу', 'Search the community')}
                   placeholder={t('Найти мастерскую…', 'Find a workshop…')}
                   value={search}
@@ -274,17 +262,7 @@ export default function App() {
                 />
                 <kbd>↵</kbd>
               </form>
-              <label className="language-control">
-                <Globe2 size={17} />
-                <select
-                  aria-label={t('Язык', 'Language')}
-                  value={lang}
-                  onChange={(e) => setLang(e.target.value as Lang)}
-                >
-                  <option value="ru">RU</option>
-                  <option value="en">EN</option>
-                </select>
-              </label>
+              <LanguageSelector />
               {user ? (
                 <>
                   <button
@@ -298,14 +276,16 @@ export default function App() {
                   <Link
                     to="/workspace"
                     className="user-avatar"
-                    aria-label={`${initials(user.name)} · ${t('Мой кабинет', 'My workspace')}`}
+                    aria-label={t('{initials} · Мой кабинет', '{initials} · My workspace', {
+                      initials: initials(user.name),
+                    })}
                   >
                     {initials(user.name)}
                   </Link>
                 </>
               ) : (
                 <Link className="button small secondary" to="/login">
-                  {t('Войти', 'Sign in')} <ArrowUpRight size={14} />
+                  {t('Войти', 'Sign in')} <ArrowUpRight className="directional-icon" size={14} />
                 </Link>
               )}
             </div>
@@ -334,9 +314,11 @@ export default function App() {
                     }
                   }}
                 >
-                  <option value="">{t('Гость', 'Guest')}</option>
+                  <option dir="auto" value="">
+                    {t('Гость', 'Guest')}
+                  </option>
                   {demoUsers.map((u) => (
-                    <option key={u.id} value={u.id}>
+                    <option dir="auto" key={u.id} value={u.id}>
                       {u.name}
                     </option>
                   ))}
@@ -417,7 +399,7 @@ export default function App() {
                       </p>
                       <Link className="button" to="/">
                         {t('На главную', 'Back home')}
-                        <ArrowRight size={16} />
+                        <ArrowRight className="directional-icon" size={16} />
                       </Link>
                     </div>
                   }
@@ -433,7 +415,7 @@ export default function App() {
             <div>
               <Link to="/about">{t('Сообщество', 'Community')}</Link>
               <a href="https://github.com/ultim8digital/openprint" target="_blank" rel="noreferrer">
-                <Code2 size={14} /> MIT · Open source
+                <Code2 size={14} /> {t('MIT · Открытый код', 'MIT · Open source')}
               </a>
             </div>
           </footer>

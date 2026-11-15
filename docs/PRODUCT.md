@@ -1,4 +1,4 @@
-# Product scope — v0.5
+# Product scope — v0.6
 
 ## Purpose
 

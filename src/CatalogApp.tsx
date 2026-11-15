@@ -1,8 +1,9 @@
-import { lazy, Suspense, useContext, useEffect } from 'react';
+import LanguageSelector from './LanguageSelector';
+import { lazy, Suspense, useEffect } from 'react';
 import { Link, NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { Layers3, MapPin, Plus, BookOpen, Globe2, Code2, ArrowUpRight } from 'lucide-react';
+import { Layers3, MapPin, Plus, BookOpen, Code2, ArrowUpRight } from 'lucide-react';
 import { Directory, CatalogPage, PageTitle } from './Browse';
-import { LanguageContext, Loading, useApp, type Lang } from './core';
+import { Loading, useApp } from './core';
 
 const CatalogEditor = lazy(() => import('./CatalogEditor'));
 
@@ -11,7 +12,7 @@ function CatalogAbout() {
   return (
     <div className="page narrow">
       <PageTitle
-        eyebrow="OPEN SOURCE · MIT"
+        eyebrow={t('ОТКРЫТЫЙ КОД · MIT', 'OPEN SOURCE · MIT')}
         title={t('Открытый каталог мастерских.', 'An open workshop directory.')}
         description={t(
           'Найдите исполнителя и свяжитесь с ним напрямую. Студии добавляют и обновляют свои карточки самостоятельно.',
@@ -57,7 +58,7 @@ function CatalogAbout() {
           target="_blank"
           rel="noreferrer"
         >
-          GitHub <ArrowUpRight size={15} />
+          GitHub <ArrowUpRight className="directional-icon" size={15} />
         </a>
         {operatorContact && (
           <p>
@@ -72,8 +73,7 @@ function CatalogAbout() {
 }
 
 export default function CatalogApp() {
-  const { t, lang } = useApp();
-  const setLang = useContext(LanguageContext);
+  const { t } = useApp();
   const location = useLocation();
   const title =
     location.pathname === '/catalog/new'
@@ -130,12 +130,13 @@ export default function CatalogApp() {
                 )}
               </p>
               <a href="https://github.com/ultim8digital/openprint" target="_blank" rel="noreferrer">
-                GitHub <ArrowUpRight size={14} />
+                GitHub <ArrowUpRight className="directional-icon" size={14} />
               </a>
             </div>
             <div className="sidebar-foot">
               <span className="online-dot" />
-              MIT · Open source<span>v0.5</span>
+              {t('MIT · Открытый код', 'MIT · Open source')}
+              <span>v0.5</span>
             </div>
           </div>
         </aside>
@@ -146,17 +147,7 @@ export default function CatalogApp() {
               <span>/</span>
               <strong>{title}</strong>
             </div>
-            <label className="language-control">
-              <Globe2 size={17} />
-              <select
-                aria-label={t('Язык', 'Language')}
-                value={lang}
-                onChange={(e) => setLang(e.target.value as Lang)}
-              >
-                <option value="ru">RU</option>
-                <option value="en">EN</option>
-              </select>
-            </label>
+            <LanguageSelector />
           </header>
           <main id="main" tabIndex={-1}>
             <Suspense fallback={<Loading />}>
@@ -196,7 +187,7 @@ export default function CatalogApp() {
               <Link to="/about">{t('Как это работает', 'How it works')}</Link>
               <a href="https://github.com/ultim8digital/openprint" target="_blank" rel="noreferrer">
                 <Code2 size={14} />
-                MIT · Open source
+                {t('MIT · Открытый код', 'MIT · Open source')}
               </a>
             </div>
           </footer>

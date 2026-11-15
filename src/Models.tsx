@@ -42,7 +42,7 @@ function PublishForm() {
         </p>
         <Link className="button" to="/login?next=/models?publish=1">
           {t('Войти', 'Sign in')}
-          <ArrowUpRight size={15} />
+          <ArrowUpRight className="directional-icon" size={15} />
         </Link>
       </div>
     );
@@ -61,7 +61,7 @@ function PublishForm() {
         </p>
         <Link className="button secondary" to="/workspace?tab=models">
           {t('Мои модели', 'My models')}
-          <ArrowUpRight size={15} />
+          <ArrowUpRight className="directional-icon" size={15} />
         </Link>
       </div>
     );
@@ -96,38 +96,60 @@ function PublishForm() {
       <h2>{t('Новая модель для сообщества', 'A new design for the community')}</h2>
       <label>
         {t('Название', 'Title')}
-        <input name="title" required minLength={5} maxLength={120} />
+        <input dir="auto" name="title" required minLength={5} maxLength={120} />
       </label>
       <label>
         {t('Описание, размеры и советы по печати', 'Description, dimensions & printing notes')}
-        <textarea name="description" required minLength={30} maxLength={3000} rows={5} />
+        <textarea dir="auto" name="description" required minLength={30} maxLength={3000} rows={5} />
       </label>
       <div className="form-grid">
         <label>
           {t('Категория', 'Category')}
           <select name="category">
-            <option value="parts">{t('Детали', 'Parts')}</option>
-            <option value="home">{t('Для дома', 'Home')}</option>
-            <option value="tools">{t('Инструменты', 'Tools')}</option>
-            <option value="art">{t('Творчество', 'Art')}</option>
+            <option dir="auto" value="parts">
+              {t('Детали', 'Parts')}
+            </option>
+            <option dir="auto" value="home">
+              {t('Для дома', 'Home')}
+            </option>
+            <option dir="auto" value="tools">
+              {t('Инструменты', 'Tools')}
+            </option>
+            <option dir="auto" value="art">
+              {t('Творчество', 'Art')}
+            </option>
           </select>
         </label>
         <label>
           {t('Лицензия', 'License')}
           <select name="license">
-            <option value="CC-BY-4.0">CC BY 4.0</option>
-            <option value="CC-BY-SA-4.0">CC BY-SA 4.0</option>
-            <option value="CC0-1.0">CC0 1.0</option>
+            <option dir="auto" value="CC-BY-4.0">
+              CC BY 4.0
+            </option>
+            <option dir="auto" value="CC-BY-SA-4.0">
+              CC BY-SA 4.0
+            </option>
+            <option dir="auto" value="CC0-1.0">
+              CC0 1.0
+            </option>
           </select>
         </label>
       </div>
       <label>
         {t('Имя автора для указания при использовании', 'Creator attribution')}
-        <input name="attribution" defaultValue={user.name} required minLength={2} maxLength={120} />
+        <input
+          dir="auto"
+          name="attribution"
+          defaultValue={user.name}
+          required
+          minLength={2}
+          maxLength={120}
+        />
       </label>
       <label>
         {t('Файл модели', 'Model file')}
         <input
+          dir="auto"
           aria-label={t('Файл модели', 'Model file')}
           name="file"
           type="file"
@@ -155,7 +177,7 @@ function PublishForm() {
         </a>
       </p>
       <label className="check-label">
-        <input name="rights" type="checkbox" required />
+        <input dir="auto" name="rights" type="checkbox" required />
         {t(
           'Я автор или имею право распространять эту модель под выбранной лицензией.',
           'I am the creator or have permission to distribute this model under the selected license.',
@@ -164,7 +186,7 @@ function PublishForm() {
       <ErrorBox error={error} />
       <button className="button" disabled={busy}>
         {busy ? t('Загружаем…', 'Uploading…') : t('Отправить на проверку', 'Submit for review')}
-        <ArrowUpRight size={16} />
+        <ArrowUpRight className="directional-icon" size={16} />
       </button>
     </form>
   );
@@ -205,6 +227,7 @@ export default function Models() {
             <div className="search-input">
               <Search size={18} />
               <input
+                dir="auto"
                 aria-label={t('Поиск моделей', 'Search models')}
                 placeholder={t(
                   'Деталь, органайзер, держатель…',
@@ -242,7 +265,7 @@ export default function Models() {
                     )}
                   </div>
                   <div className="model-info">
-                    <h3>{model.title}</h3>
+                    <h3 dir="auto">{model.title}</h3>
                     <small>{model.attribution}</small>
                     <p>{model.description}</p>
                     <div className="tags">
@@ -284,7 +307,7 @@ export default function Models() {
                             to={'/tools?preset=' + encodeURIComponent(JSON.stringify(model.preset))}
                           >
                             {t('Изменить размеры', 'Customize')}
-                            <ArrowUpRight size={14} />
+                            <ArrowUpRight className="directional-icon" size={14} />
                           </Link>
                         </>
                       ) : (
@@ -317,7 +340,7 @@ export default function Models() {
             >
               <Link className="button secondary" to="/tools">
                 {t('Открыть конструктор', 'Open the part builder')}
-                <ArrowUpRight size={15} />
+                <ArrowUpRight className="directional-icon" size={15} />
               </Link>
             </Empty>
           )}
@@ -333,7 +356,7 @@ export default function Models() {
             {remote.data?.has_more && (
               <button className="button secondary" onClick={() => setOffset((v) => v + 12)}>
                 {t('Дальше', 'Next page')}
-                <ArrowUpRight size={15} />
+                <ArrowUpRight className="directional-icon" size={15} />
               </button>
             )}
           </div>

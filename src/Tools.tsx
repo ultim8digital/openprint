@@ -1,3 +1,4 @@
+import { localeTag } from '../shared/locales';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Download, ArrowUpRight, Upload, Box, ShieldCheck, RotateCcw } from 'lucide-react';
@@ -14,7 +15,7 @@ import {
 import { partFile, downloadFile, readModel } from './model-files';
 import type { BufferGeometry } from 'three';
 export default function Tools() {
-  const { t } = useApp(),
+  const { t, lang } = useApp(),
     navigate = useNavigate(),
     [params] = useSearchParams(),
     [mode, setMode] = useState<'builder' | 'file'>('builder');
@@ -83,9 +84,15 @@ export default function Tools() {
               <label>
                 {t('Тип детали', 'Part type')}
                 <select value={spec.kind} onChange={(e) => update('kind', e.target.value)}>
-                  <option value="plate">{t('Пластина с отверстием', 'Drilled plate')}</option>
-                  <option value="tube">{t('Втулка', 'Spacer tube')}</option>
-                  <option value="block">{t('Блок', 'Solid block')}</option>
+                  <option dir="auto" value="plate">
+                    {t('Пластина с отверстием', 'Drilled plate')}
+                  </option>
+                  <option dir="auto" value="tube">
+                    {t('Втулка', 'Spacer tube')}
+                  </option>
+                  <option dir="auto" value="block">
+                    {t('Блок', 'Solid block')}
+                  </option>
                 </select>
               </label>
               <div className="form-grid">
@@ -94,6 +101,7 @@ export default function Tools() {
                     ? t('Диаметр, мм', 'Diameter, mm')
                     : t('Ширина, мм', 'Width, mm')}
                   <input
+                    dir="auto"
                     type="number"
                     min={4}
                     max={300}
@@ -106,6 +114,7 @@ export default function Tools() {
                   <label>
                     {t('Глубина, мм', 'Depth, mm')}
                     <input
+                      dir="auto"
                       type="number"
                       min={4}
                       max={300}
@@ -118,6 +127,7 @@ export default function Tools() {
                 <label>
                   {t('Высота, мм', 'Height, mm')}
                   <input
+                    dir="auto"
                     type="number"
                     min={1}
                     max={300}
@@ -130,6 +140,7 @@ export default function Tools() {
                   <label>
                     {t('Отверстие Ø, мм', 'Hole Ø, mm')}
                     <input
+                      dir="auto"
                       type="number"
                       min={spec.kind === 'tube' ? 1 : 0}
                       max={296}
@@ -159,7 +170,7 @@ export default function Tools() {
                   }}
                 >
                   {t('Использовать в проекте', 'Use in a project')}
-                  <ArrowUpRight size={15} />
+                  <ArrowUpRight className="directional-icon" size={15} />
                 </button>
               </div>
             </>
@@ -172,6 +183,7 @@ export default function Tools() {
                   {t('Открыть STL или OBJ', 'Open an STL or OBJ')}
                 </span>
                 <input
+                  dir="auto"
                   type="file"
                   accept=".stl,.obj"
                   disabled={busy}
@@ -222,16 +234,29 @@ export default function Tools() {
               <div>
                 <small>{t('ГАБАРИТЫ, ММ', 'DIMENSIONS, MM')}</small>
                 <strong>
-                  {[info.width, info.depth, info.height].map((n) => n.toFixed(1)).join(' × ')}
+                  {[info.width, info.depth, info.height]
+                    .map((n) =>
+                      n.toLocaleString(localeTag(lang), {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1,
+                      }),
+                    )
+                    .join(' × ')}
                 </strong>
               </div>
               <div>
                 <small>{t('ТРЕУГОЛЬНИКОВ', 'TRIANGLES')}</small>
-                <strong>{info.triangles.toLocaleString()}</strong>
+                <strong>{info.triangles.toLocaleString(localeTag(lang))}</strong>
               </div>
               <div>
                 <small>{t('ОБЪЁМ ПО СЕТКЕ, СМ³', 'MESH VOLUME, CM³')}</small>
-                <strong>{(info.volume / 1000).toFixed(2)}*</strong>
+                <strong>
+                  {(info.volume / 1000).toLocaleString(localeTag(lang), {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                  *
+                </strong>
               </div>
             </div>
           )}

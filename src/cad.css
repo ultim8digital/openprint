@@ -49,7 +49,7 @@
   align-items: center;
   max-width: 100%;
   min-height: 38px;
-  text-align: left;
+  text-align: start;
   padding: 8px 10px;
   background: #f8f9f4;
   border: 1px solid #dce3d7;
@@ -100,7 +100,7 @@
 }
 .cad-operation summary code {
   font-size: 10px;
-  margin-left: 10px;
+  margin-inline-start: 10px;
   color: #63735e;
 }
 .cad-operation-body,
@@ -122,7 +122,7 @@
   margin-top: 5px;
 }
 .cad-operation-actions .cad-remove {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 .cad-triple,
 .cad-points {
@@ -302,7 +302,7 @@
 }
 .cad-downloads .button {
   font-size: 12px;
-  text-align: left;
+  text-align: start;
   max-width: 100%;
   overflow-wrap: anywhere;
 }
@@ -382,7 +382,7 @@
   align-self: start;
 }
 .cad-file-list {
-  padding-left: 18px;
+  padding-inline-start: 18px;
 }
 .cad-file-list li {
   overflow-wrap: anywhere;
@@ -484,7 +484,7 @@
 }
 .cad-proposal-notes ul {
   margin: 8px 0 0;
-  padding-left: 19px;
+  padding-inline-start: 19px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -530,7 +530,7 @@
   overflow-wrap: anywhere;
 }
 .cad-proposal-parts summary > span {
-  margin-left: 8px;
+  margin-inline-start: 8px;
   color: #62745a;
   font-size: 10px;
 }
@@ -541,7 +541,7 @@
   overflow-wrap: anywhere;
 }
 .cad-proposal-parts ol {
-  padding-left: 18px;
+  padding-inline-start: 18px;
   margin: 12px 0 0;
   display: flex;
   flex-direction: column;

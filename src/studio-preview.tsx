@@ -1,10 +1,11 @@
+import { localeTag } from '../shared/locales';
 import { useEffect, useMemo } from 'react';
 import { geometryInfo, partGeometry, type PartSpec } from '../shared/parts';
 import { ErrorBox, errorText, useApp } from './core';
 import ModelViewer from './ModelViewer';
 
 export default function StudioPreview({ part }: { part: PartSpec }) {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const result = useMemo(() => {
     try {
       const geometry = partGeometry(part);
@@ -22,7 +23,12 @@ export default function StudioPreview({ part }: { part: PartSpec }) {
         {t('Габариты шаблона, мм: ', 'Template bounds, mm: ')}
         <strong>
           {[result.info.width, result.info.depth, result.info.height]
-            .map((value) => value.toFixed(1))
+            .map((value) =>
+              value.toLocaleString(localeTag(lang), {
+                minimumFractionDigits: 1,
+                maximumFractionDigits: 1,
+              }),
+            )
             .join(' × ')}
         </strong>
       </p>

@@ -1,3 +1,5 @@
+import type { Lang } from '../shared/locales.js';
+import { createTranslator } from './i18n.js';
 import { z } from 'zod';
 import { studioBriefSchema, type StudioBrief } from '../shared/studio.js';
 import { HttpError } from './security.js';
@@ -277,7 +279,7 @@ export async function requestStudioBrief(
     input: string;
     previous: StudioBrief;
     explicitText: string;
-    language: 'ru' | 'en';
+    language: Lang;
   },
 ): Promise<{ brief: StudioBrief; usage: AIUsage }> {
   const { value, usage } = await requestStructuredOutput(config, {
@@ -299,10 +301,11 @@ export async function requestStudioBrief(
       !explicitlySpecifiedPart(brief.part, options.previous.part, options.explicitText))
   ) {
     brief.part = null;
-    const question =
-      options.language === 'ru'
-        ? 'Уточните форму и все размеры детали в миллиметрах; модель ещё не построена.'
-        : 'Specify the shape and all dimensions in millimeters; no model has been built.';
+    const t = createTranslator(options.language);
+    const question = t(
+      'Уточните форму и все размеры детали в миллиметрах; модель ещё не построена.',
+      'Specify the shape and all dimensions in millimeters; no model has been built.',
+    );
     brief.questions = [...brief.questions.slice(0, 5), question];
   }
   return { brief, usage };

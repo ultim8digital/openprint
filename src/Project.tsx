@@ -1,3 +1,4 @@
+import { localeTag } from '../shared/locales';
 import JobCad from './JobCad';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
@@ -30,7 +31,14 @@ import {
 } from './core';
 import { ReportButton } from './Browse';
 import { minorUnits } from '../shared/validation';
-import type { JobDetail, Offer, Job, Message } from '../shared/types';
+import {
+  technologyLabel,
+  materialLabel,
+  type JobDetail,
+  type Offer,
+  type Job,
+  type Message,
+} from '../shared/types';
 
 function Conversation({
   id,
@@ -41,7 +49,7 @@ function Conversation({
   closed: boolean;
   counterparty: string;
 }) {
-  const { t, user, toast } = useApp(),
+  const { t, lang, user, toast } = useApp(),
     [messages, setMessages] = useState<Message[]>([]),
     [error, setError] = useState(''),
     [more, setMore] = useState(false),
@@ -180,7 +188,7 @@ function Conversation({
           <div key={m.id} className={'message' + (m.author_id === user?.id ? ' mine' : '')}>
             <small>
               {m.author_id === user?.id ? t('Вы', 'You') : m.author_name} ·{' '}
-              {new Date(m.created_at).toLocaleTimeString([], {
+              {new Date(m.created_at).toLocaleTimeString(localeTag(lang), {
                 hour: '2-digit',
                 minute: '2-digit',
               })}
@@ -219,6 +227,7 @@ function Conversation({
             {t('Сообщение', 'Message')}
           </label>
           <textarea
+            dir="auto"
             id={'message-' + id}
             rows={2}
             minLength={1}
@@ -389,6 +398,7 @@ function OfferForm({ job, offer, done }: { job: Job; offer?: Offer; done: () => 
         <label>
           {t('Цена за весь проект', 'Total project price')} · {job.currency}
           <input
+            dir="auto"
             inputMode="decimal"
             required
             value={price}
@@ -398,6 +408,7 @@ function OfferForm({ job, offer, done }: { job: Job; offer?: Offer; done: () => 
         <label>
           {t('Срок, дней после принятия', 'Lead time, days after acceptance')}
           <input
+            dir="auto"
             type="number"
             min={1}
             max={365}
@@ -410,6 +421,7 @@ function OfferForm({ job, offer, done }: { job: Job; offer?: Offer; done: () => 
       <label>
         {t('Что входит в предложение?', 'What does your offer include?')}
         <textarea
+          dir="auto"
           rows={4}
           minLength={10}
           maxLength={2000}
@@ -437,7 +449,7 @@ function OfferForm({ job, offer, done }: { job: Job; offer?: Offer; done: () => 
           : offer
             ? t('Отправить новую версию', 'Send a new revision')
             : t('Отправить предложение', 'Send your offer')}
-        <ArrowUpRight size={16} />
+        <ArrowUpRight className="directional-icon" size={16} />
       </button>
     </form>
   );
@@ -474,7 +486,10 @@ export default function Project() {
       <div className="page">
         <ErrorBox error={remote.error} retry={remote.reload} />
         <Link className="text-button" to="/projects">
-          ← {t('Все проекты', 'All projects')}
+          <span className="directional-icon" aria-hidden="true">
+            ←
+          </span>{' '}
+          {t('Все проекты', 'All projects')}
         </Link>
       </div>
     );
@@ -486,7 +501,10 @@ export default function Project() {
   return (
     <div className="page">
       <Link className="back-link" to="/projects">
-        ← {t('Биржа проектов', 'Project board')}
+        <span className="directional-icon" aria-hidden="true">
+          ←
+        </span>{' '}
+        {t('Биржа проектов', 'Project board')}
       </Link>
       <div className="project-title">
         <div>
@@ -496,7 +514,7 @@ export default function Project() {
               ? t('ЛИЧНЫЙ ЗАПРОС', 'DIRECT REQUEST')
               : t('ОТКРЫТАЯ ЗАДАЧА', 'OPEN BRIEF')}
           </span>
-          <h1>{job.title}</h1>
+          <h1 dir="auto">{job.title}</h1>
           <p className="location">
             {job.city} · {formatDate(job.created_at, lang)}
           </p>
@@ -516,12 +534,14 @@ export default function Project() {
         <div className="project-content">
           <section className="panel">
             <h2>{t('Задача', 'The brief')}</h2>
-            <p className="prose">{job.description}</p>
+            <p className="prose" dir="auto">
+              {job.description}
+            </p>
             <div className="tags" style={{ marginTop: 22 }}>
               {[job.technology, job.material]
                 .filter((s) => s !== 'Any')
                 .map((s) => (
-                  <span key={s}>{s}</span>
+                  <span key={s}>{materialLabel(technologyLabel(s, t), t)}</span>
                 ))}
             </div>
             {detail.file ? (
@@ -532,7 +552,13 @@ export default function Project() {
                 download
               >
                 <Download size={15} />
-                {detail.file.name} · {(detail.file.size / 1024).toFixed(0)} KB
+                {detail.file.name} ·{' '}
+                {t('{size} КБ', '{size} KB', {
+                  size: (detail.file.size / 1024).toLocaleString(localeTag(lang), {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }),
+                })}
               </a>
             ) : job.has_file ? (
               <p className="info-box">
@@ -578,7 +604,7 @@ export default function Project() {
                 {assigned && job.status === 'assigned' && (
                   <button className="button" disabled={busy} onClick={() => void action('deliver')}>
                     {t('Результат готов, передать заказчику', 'Mark delivery ready')}
-                    <ArrowRight size={15} />
+                    <ArrowRight className="directional-icon" size={15} />
                   </button>
                 )}
                 {owner && job.status === 'delivered' && (
@@ -634,7 +660,7 @@ export default function Project() {
                       {job.status === 'open' && o.status === 'active' && (
                         <button className="button small" onClick={() => setAccepting(o)}>
                           {t('Выбрать предложение', 'Review offer')}
-                          <ArrowUpRight size={14} />
+                          <ArrowUpRight className="directional-icon" size={14} />
                         </button>
                       )}
                     </div>
@@ -693,7 +719,7 @@ export default function Project() {
                     to="/workspace?tab=profile"
                   >
                     {t('Создать профиль', 'Create your maker profile')}
-                    <ArrowUpRight size={16} />
+                    <ArrowUpRight className="directional-icon" size={16} />
                   </Link>
                 </>
               ) : (
@@ -771,7 +797,7 @@ export default function Project() {
               </p>
               <Link className="button" to={`/login?next=/projects/${job.id}`}>
                 {t('Присоединиться к проекту', 'Join this project')}
-                <ArrowUpRight size={16} />
+                <ArrowUpRight className="directional-icon" size={16} />
               </Link>
             </div>
           )}
@@ -784,7 +810,7 @@ export default function Project() {
                   onChange={(e) => setParams({ thread: e.target.value })}
                 >
                   {detail.conversations.map((c) => (
-                    <option key={c.id} value={c.id}>
+                    <option dir="auto" key={c.id} value={c.id}>
                       {c.profile_name}
                     </option>
                   ))}
@@ -816,18 +842,27 @@ export default function Project() {
                     ? formatMoney(job.budget, job.currency, lang)
                     : t('По предложению', 'Open to quotes'),
                 ],
-                [t('Количество', 'Quantity'), job.quantity + ' ' + t('шт.', 'pcs')],
+                [
+                  t('Количество', 'Quantity'),
+                  t('{count} шт.', '{count} pcs', {
+                    count: job.quantity.toLocaleString(localeTag(lang)),
+                  }),
+                ],
                 [
                   t('Желаемая дата', 'Preferred date'),
                   job.deadline || t('Обсуждается', 'Flexible'),
                 ],
                 [
                   t('Технология', 'Technology'),
-                  job.technology === 'Any' ? t('Нужен совет', 'Advice welcome') : job.technology,
+                  job.technology === 'Any'
+                    ? t('Нужен совет', 'Advice welcome')
+                    : technologyLabel(job.technology, t),
                 ],
                 [
                   t('Материал', 'Material'),
-                  job.material === 'Any' ? t('Нужен совет', 'Advice welcome') : job.material,
+                  job.material === 'Any'
+                    ? t('Нужен совет', 'Advice welcome')
+                    : materialLabel(job.material, t),
                 ],
               ].map(([label, value]) => (
                 <div key={label}>
