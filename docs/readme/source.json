@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "sourceLocale": "en",
+  "protected": {
+    "LANGUAGE_INDEX": "docs/i18n/README.md",
+    "GITHUB_PAGES": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+    "OPEN_CATALOG": "docs/OPEN_CATALOG.md",
+    "LOCAL_URL": "`http://localhost:3000`",
+    "CATALOG_MODE": "`APP_MODE=catalog`",
+    "APP_URL": "`APP_URL`",
+    "SELF_HOSTING": "docs/SELF_HOSTING.md",
+    "COMPOSE_COMMAND": "`docker compose up --build -d`",
+    "CATALOG_IMPORT": "docs/CATALOG_IMPORT.md",
+    "COMMUNITY_MODE": "`APP_MODE=community`",
+    "NEOFAB_SETUP": "docs/NEOFAB_SETUP.md",
+    "DATA_PROVENANCE": "docs/DATA_PROVENANCE.md",
+    "PRIVACY": "PRIVACY.md",
+    "SECURITY": "SECURITY.md",
+    "VALIDATION": "docs/VALIDATION.md",
+    "PRODUCT": "docs/PRODUCT.md",
+    "LICENSE": "LICENSE",
+    "THIRD_PARTY_NOTICES": "THIRD_PARTY_NOTICES.md",
+    "ORIGINAL_SERVICE": "https://3d-online.app",
+    "CAD_NOTICE": "cad-worker/NOTICE.md",
+    "CONTRIBUTING": "CONTRIBUTING.md"
+  },
+  "relativeLinks": [
+    "LANGUAGE_INDEX",
+    "OPEN_CATALOG",
+    "SELF_HOSTING",
+    "CATALOG_IMPORT",
+    "NEOFAB_SETUP",
+    "DATA_PROVENANCE",
+    "PRIVACY",
+    "SECURITY",
+    "VALIDATION",
+    "PRODUCT",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES",
+    "CAD_NOTICE",
+    "CONTRIBUTING"
+  ],
+  "blocks": [
+    {
+      "id": "title",
+      "kind": "navigation",
+      "en": "# OpenPrint",
+      "ru": "# OpenPrint"
+    },
+    {
+      "id": "tagline",
+      "kind": "paragraph",
+      "en": "**An open directory of printing studios and workshops. No registration or moderators.**",
+      "ru": "**Открытый каталог студий печати и мастерских. Без регистрации и модераторов.**"
+    },
+    {
+      "id": "navigation",
+      "kind": "navigation",
+      "en": "Choose a language",
+      "ru": "Choose a language"
+    },
+    {
+      "id": "intro",
+      "kind": "paragraph",
+      "en": "Find a maker on the map, check their capabilities and contact them directly. If your workshop is missing, add its contacts and services: the listing appears immediately. Save the private management link to edit or delete your listing later. The default catalog has no accounts, email confirmation or approval queue.",
+      "ru": "Найдите мастерскую на карте, уточните её возможности и свяжитесь напрямую. Если вашей мастерской нет, добавьте контакты и услуги: карточка появится сразу. Сохраните личную ссылку управления, чтобы позднее исправить или удалить запись. В основном режиме каталога нет аккаунтов, подтверждения почты и очереди одобрения."
+    },
+    {
+      "id": "independence",
+      "kind": "paragraph",
+      "en": "Run OpenPrint with Node.js 24 and local SQLite. Vercel, Supabase, an email provider, paid AI and third-party login are not required. GitHub hosts the source and releases; a shared website accepting submissions needs a running API server. [GitHub Pages]({GITHUB_PAGES}) alone cannot run the Node.js API or persist visitor changes.",
+      "ru": "OpenPrint работает с Node.js 24 и локальной SQLite. Vercel, Supabase, почтовый сервис, платный ИИ и сторонний вход не требуются. GitHub хранит исходники и релизы; общему сайту с добавлением записей нужен работающий API-сервер. Одного [GitHub Pages]({GITHUB_PAGES}) недостаточно: он не выполняет Node.js API и не сохраняет изменения посетителей."
+    },
+    {
+      "id": "features_heading",
+      "kind": "heading",
+      "level": 2,
+      "en": "Catalog features",
+      "ru": "Возможности каталога"
+    },
+    {
+      "id": "feature_search",
+      "kind": "bullet",
+      "en": "Search by name, city and technology. The map includes matching locations independently of list pagination.",
+      "ru": "Поиск по названию, городу и технологии. Карта показывает подходящие точки независимо от страницы списка."
+    },
+    {
+      "id": "feature_publish",
+      "kind": "bullet",
+      "en": "Publish without an account. Choose a map point or enter coordinates; listings without coordinates remain searchable.",
+      "ru": "Публикация без аккаунта. Выберите точку на карте или введите координаты; записи без координат остаются доступны в поиске."
+    },
+    {
+      "id": "feature_management",
+      "kind": "bullet",
+      "en": "Edit or delete one listing with its private link. Version checks protect against conflicting edits in different tabs.",
+      "ru": "Изменение и удаление своей карточки по личной ссылке. Проверка версии защищает от конфликтующих правок в разных вкладках."
+    },
+    {
+      "id": "feature_duplicates",
+      "kind": "bullet",
+      "en": "Find existing studios before publishing. Exact name, city and address duplicates are rejected automatically.",
+      "ru": "Поиск существующих студий перед публикацией. Точные дубли названия, города и адреса отклоняются автоматически."
+    },
+    {
+      "id": "feature_import",
+      "kind": "bullet",
+      "en": "Import a catalog with source attribution. Operator imports cannot overwrite self-published listings.",
+      "ru": "Импорт каталога с указанием источника. Импорт оператора не перезаписывает самостоятельные публикации."
+    },
+    {
+      "id": "feature_map",
+      "kind": "bullet",
+      "en": "View OpenStreetMap tiles without an API key. Tiles load when a map is displayed, including the default landing page.",
+      "ru": "Карта OpenStreetMap без API-ключа. Тайлы загружаются при показе карты, в том числе на начальной странице."
+    },
+    {
+      "id": "feature_languages",
+      "kind": "bullet",
+      "en": "Choose the interface language from the language menu. Read the full README in your language through the language index above.",
+      "ru": "Выбор языка интерфейса в меню языков. Полные переводы README доступны в указателе языков выше."
+    },
+    {
+      "id": "publication_limits",
+      "kind": "paragraph",
+      "en": "Publication does not verify business ownership or service quality. Confirm equipment, capabilities and terms with the studio. Anyone holding the private management link can control that listing. Keep it private; there is no email recovery. Read the [self-publication guide]({OPEN_CATALOG}).",
+      "ru": "Публикация не подтверждает принадлежность бизнеса или качество услуг. Оборудование, возможности и условия уточняйте у студии. Любой обладатель личной ссылки может управлять этой записью. Храните ссылку приватно; восстановления через почту нет. Подробнее — в [инструкции самостоятельной публикации]({OPEN_CATALOG})."
+    },
+    {
+      "id": "run_heading",
+      "kind": "heading",
+      "level": 2,
+      "en": "Run your own instance",
+      "ru": "Запуск своего экземпляра"
+    },
+    {
+      "id": "run_intro",
+      "kind": "paragraph",
+      "en": "Install Node.js 24, clone this repository and run:",
+      "ru": "Установите Node.js 24, клонируйте репозиторий и выполните:"
+    },
+    {
+      "id": "run_commands",
+      "kind": "code",
+      "language": "sh",
+      "en": "npm ci\nnpm run build\ncp .env.example .env\nnpm start",
+      "ru": "npm ci\nnpm run build\ncp .env.example .env\nnpm start"
+    },
+    {
+      "id": "run_config",
+      "kind": "paragraph",
+      "en": "Open {LOCAL_URL}. The default {CATALOG_MODE} needs no administrator or user setup. Configure {APP_URL}, HTTPS and backups using the [self-hosting guide]({SELF_HOSTING}). Docker Compose is also available: {COMPOSE_COMMAND}.",
+      "ru": "Откройте {LOCAL_URL}. Режим по умолчанию {CATALOG_MODE} не требует создания администратора или пользователей. Настройте {APP_URL}, HTTPS и резервные копии по [инструкции установки]({SELF_HOSTING}). Также доступен Docker Compose: {COMPOSE_COMMAND}."
+    },
+    {
+      "id": "run_limits",
+      "kind": "paragraph",
+      "en": "The supported deployment is one application process with SQLite on a local disk. Automatic publication and request quotas limit abuse without a moderation queue. A shared office IP can share a publication quota. See [limits and management-link behavior]({OPEN_CATALOG}) before opening a public instance.",
+      "ru": "Поддерживается один процесс приложения с SQLite на локальном диске. Автоматические квоты публикаций и запросов ограничивают злоупотребления без очереди модерации. Общий IP офиса может разделять одну квоту публикаций. Перед публичным запуском изучите [ограничения и работу личных ссылок]({OPEN_CATALOG})."
+    },
+    {
+      "id": "run_import",
+      "kind": "paragraph",
+      "en": "Use the [catalog import CLI]({CATALOG_IMPORT}) for an existing dataset after checking its rights. Instance datasets, uploads and backups are not bundled in the repository or container images.",
+      "ru": "Существующую базу подключайте через [CLI импорта каталога]({CATALOG_IMPORT}) после проверки прав на данные. Базы отдельных установок, загруженные файлы и резервные копии не поставляются в репозитории и контейнерах."
+    },
+    {
+      "id": "community_heading",
+      "kind": "heading",
+      "level": 2,
+      "en": "Optional community and Neofab mode",
+      "ru": "Необязательный режим сообщества и Neofab"
+    },
+    {
+      "id": "community_mode",
+      "kind": "paragraph",
+      "en": "Set {COMMUNITY_MODE} explicitly to enable private projects, provider quotations, the model library and Neofab Studio. These workflows use their own accounts and permissions. Switching modes preserves stored data. Catalog mode does not expose private community history through its API or resume queued CAD work.",
+      "ru": "Явно задайте {COMMUNITY_MODE}, чтобы включить приватные проекты, предложения исполнителей, библиотеку моделей и Neofab Studio. В этих сценариях действуют отдельные аккаунты и права доступа. Переключение режимов сохраняет данные. Режим каталога не раскрывает приватную историю сообщества через API и не запускает накопленные CAD-задания."
+    },
+    {
+      "id": "community_cad",
+      "kind": "paragraph",
+      "en": "[Neofab Studio]({NEOFAB_SETUP}) supports versioned manufacturing briefs, bills of materials and bounded declarative CAD with STEP/STL exports. CAD and AI are optional. AI proposals require review and a separate application step; they do not automatically publish orders or build geometry. CAM, G-code and physical manufacturing validation are not implemented.",
+      "ru": "[Neofab Studio]({NEOFAB_SETUP}) поддерживает версии производственного ТЗ, спецификации состава и ограниченную декларативную CAD-геометрию с экспортом STEP/STL. CAD и ИИ необязательны. Предложения ИИ требуют проверки и отдельного применения; они не публикуют заказы и не строят геометрию автоматически. CAM, G-code и проверка физической пригодности изделий не реализованы."
+    },
+    {
+      "id": "data_heading",
+      "kind": "heading",
+      "level": 2,
+      "en": "Data rights and privacy",
+      "ru": "Права на данные и приватность"
+    },
+    {
+      "id": "data_rights",
+      "kind": "paragraph",
+      "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
+      "ru": "Лицензия MIT на программу не предоставляет прав на импортированные сведения об организациях. Одно указание источника не разрешает копирование данных Google Maps, 2ГИС, Яндекс Карт и других сервисов. До использования базы проверьте разрешения на хранение, публикацию и распространение. Подробнее — в [документе о происхождении данных и границах проверки]({DATA_PROVENANCE})."
+    },
+    {
+      "id": "data_privacy",
+      "kind": "paragraph",
+      "en": "Self-published contact details are public; management keys are private. Keep databases and backups out of publicly served directories, and provide a contact for corrections and removal requests. Read [privacy]({PRIVACY}) and [security]({SECURITY}) before deployment.",
+      "ru": "Контакты самостоятельных публикаций общедоступны, ключи управления приватны. Не размещайте базы и резервные копии в публично доступных папках; укажите контакт для исправлений и запросов на удаление. Перед запуском изучите [правила приватности]({PRIVACY}) и [безопасность]({SECURITY})."
+    },
+    {
+      "id": "development_heading",
+      "kind": "heading",
+      "level": 2,
+      "en": "Development and translation",
+      "ru": "Разработка и переводы"
+    },
+    {
+      "id": "development_commands",
+      "kind": "code",
+      "language": "sh",
+      "en": "npm run dev\nnpm run check\nnpx playwright install chromium\nnpm run test:e2e\nnpm run format:check",
+      "ru": "npm run dev\nnpm run check\nnpx playwright install chromium\nnpm run test:e2e\nnpm run format:check"
+    },
+    {
+      "id": "development_checks",
+      "kind": "paragraph",
+      "en": "GitHub Actions checks types, API and browser workflows, and the default and native CAD containers. Tests use fictional records. Exact evidence, coverage and remaining limits are recorded in [validation]({VALIDATION}) and [product scope]({PRODUCT}).",
+      "ru": "GitHub Actions проверяет типы, API, браузерные сценарии и контейнеры обычной версии и версии с нативным CAD. В тестах используются вымышленные записи. Точные результаты, покрытие и ограничения приведены в [документе проверок]({VALIDATION}) и [описании продукта]({PRODUCT})."
+    },
+    {
+      "id": "translation_maintenance",
+      "kind": "paragraph",
+      "en": "The English README is the reference for full translated editions. The [language index]({LANGUAGE_INDEX}) documents translation maintenance and review limits. Interface localization does not translate user-authored listings, project content or every external technical diagnostic.",
+      "ru": "Английский README служит исходником полных переводов. В [указателе языков]({LANGUAGE_INDEX}) описаны сопровождение переводов и границы их проверки. Локализация интерфейса не переводит пользовательские карточки, содержимое проектов и все внешние технические сообщения."
+    },
+    {
+      "id": "license_heading",
+      "kind": "heading",
+      "level": 2,
+      "en": "Licensing and contributions",
+      "ru": "Лицензии и участие"
+    },
+    {
+      "id": "license_code",
+      "kind": "paragraph",
+      "en": "The original source, UI, SVG illustrations, documentation and parametric generator are [MIT licensed]({LICENSE}). Dependencies retain their own licenses and notices. User models have a separate license chosen by their authors. Fictional demo profile and brief text, and three generated demo designs, are dedicated under CC0; the generator remains MIT. See [third-party notices]({THIRD_PARTY_NOTICES}).",
+      "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES})."
+    },
+    {
+      "id": "license_origin",
+      "kind": "paragraph",
+      "en": "This independent implementation develops the idea of [3d-online.app]({ORIGINAL_SERVICE}). Original production accounts, secrets, private Git history and user files are not included. The adapted MIT Neofab CAD compiler retains its [original license and provenance notice]({CAD_NOTICE}).",
+      "ru": "Эта независимая реализация развивает идею [3d-online.app]({ORIGINAL_SERVICE}). Аккаунты действующего сервиса, секреты, история приватного Git-репозитория и пользовательские файлы не включены. Адаптированное MIT-ядро Neofab CAD сохраняет [исходную лицензию и указание происхождения]({CAD_NOTICE})."
+    },
+    {
+      "id": "contributions",
+      "kind": "paragraph",
+      "en": "Contributions can include code, translation corrections, usability improvements, open parametric parts, installation checks and feedback from real workshops. Start with [CONTRIBUTING.md]({CONTRIBUTING}).",
+      "ru": "Участвовать можно кодом, исправлениями переводов, улучшениями сценариев, открытыми параметрическими деталями, проверкой установки и обратной связью от настоящих мастерских. Начните с [CONTRIBUTING.md]({CONTRIBUTING})."
+    }
+  ]
+}

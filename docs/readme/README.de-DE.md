@@ -1,0 +1,77 @@
+# OpenPrint
+
+**Ein offenes Verzeichnis von Druckereien und Werkstätten. Keine Registrierung oder Moderatoren erforderlich.**
+
+<details>
+<summary>Choose a language</summary>
+
+[English (US)](../../README.md) · [Español (España)](../../docs/readme/README.es-ES.md) · [العربية](../../docs/readme/README.ar-SA.md) · [Français (France)](../../docs/readme/README.fr-FR.md) · [हिन्दी](../../docs/readme/README.hi.md) · [ไทย](../../docs/readme/README.th.md) · [Русский](../../docs/readme/README.ru.md) · **[Deutsch](../../docs/readme/README.de-DE.md)** · [Italiano](../../docs/readme/README.it.md) · [Português (Brasil)](../../docs/readme/README.pt-BR.md) · [Nederlands](../../docs/readme/README.nl-NL.md) · [Svenska](../../docs/readme/README.sv.md) · [Dansk](../../docs/readme/README.da.md) · [Norsk bokmål](../../docs/readme/README.no.md) · [Türkçe](../../docs/readme/README.tr.md) · [Tiếng Việt](../../docs/readme/README.vi.md) · [日本語](../../docs/readme/README.ja.md) · [한국어](../../docs/readme/README.ko.md) · [简体中文](../../docs/readme/README.zh-Hans.md) · [繁體中文](../../docs/readme/README.zh-Hant.md) · [English (UK)](../../docs/readme/README.en-GB.md) · [English (Australia)](../../docs/readme/README.en-AU.md) · [English (Canada)](../../docs/readme/README.en-CA.md) · [Español (México)](../../docs/readme/README.es-MX.md) · [Français (Canada)](../../docs/readme/README.fr-CA.md) · [Português (Portugal)](../../docs/readme/README.pt-PT.md) · [Polski](../../docs/readme/README.pl.md) · [Українська](../../docs/readme/README.uk.md) · [Bahasa Indonesia](../../docs/readme/README.id.md) · [Čeština](../../docs/readme/README.cs.md) · [Slovenčina](../../docs/readme/README.sk.md) · [Magyar](../../docs/readme/README.hu.md) · [Română](../../docs/readme/README.ro.md) · [Hrvatski](../../docs/readme/README.hr.md) · [Ελληνικά](../../docs/readme/README.el.md) · [Suomi](../../docs/readme/README.fi.md) · [Slovenščina](../../docs/readme/README.sl-SI.md) · [Català](../../docs/readme/README.ca.md) · [עברית](../../docs/readme/README.he.md) · [Bahasa Melayu](../../docs/readme/README.ms.md) · [বাংলা](../../docs/readme/README.bn-BD.md) · [ગુજરાતી](../../docs/readme/README.gu-IN.md) · [ಕನ್ನಡ](../../docs/readme/README.kn-IN.md) · [മലയാളം](../../docs/readme/README.ml-IN.md) · [मराठी](../../docs/readme/README.mr-IN.md) · [ଓଡ଼ିଆ](../../docs/readme/README.or-IN.md) · [ਪੰਜਾਬੀ](../../docs/readme/README.pa-IN.md) · [தமிழ்](../../docs/readme/README.ta-IN.md) · [తెలుగు](../../docs/readme/README.te-IN.md) · [اردو](../../docs/readme/README.ur-PK.md)
+
+</details>
+
+Suchen Sie auf der Karte nach einem Anbieter, prüfen Sie dessen Fähigkeiten und kontaktieren Sie ihn direkt. Wenn Ihr Werkstatt nicht aufgeführt ist, fügen Sie die Kontaktdaten und Dienstleistungen hinzu: Der Eintrag wird sofort angezeigt. Speichern Sie den privaten Verwaltungslink, um Ihren Eintrag später zu bearbeiten oder zu löschen. Der Standardkatalog verfügt über keine Benutzerkonten, E-Mail-Bestätigung oder Genehmigungsfunktion.
+
+Führen Sie OpenPrint mit Node.js 24 und lokalem SQLite aus. Vercel, Supabase, ein E-Mail-Anbieter, kostenpflichtige KI und die Anmeldung über Drittanbieter sind nicht erforderlich. GitHub hostet den Quellcode und die Veröffentlichungen; eine gemeinsame Website, die Beiträge entgegennimmt, benötigt einen laufenden API-Server. [GitHub Seiten](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) allein können die Node.js API nicht ausführen oder Änderungen von Besuchern speichern.
+
+## Funktionen des Katalogs
+
+- Suche nach Name, Stadt und Technologie. Die Karte zeigt passende Standorte, unabhängig von der Seitenaufteilung der Liste.
+- Veröffentlichen Sie ohne ein Konto. Wählen Sie einen Punkt auf der Karte oder geben Sie Koordinaten ein; Einträge ohne Koordinaten bleiben durchsuchbar.
+- Bearbeiten oder löschen Sie einen Eintrag mit seinem privaten Link. Versionsprüfungen schützen vor widersprüchlichen Änderungen in verschiedenen Registerkarten.
+- Suchen Sie nach bereits vorhandenen Studios, bevor Sie neue hinzufügen. Exakte Namens-, Stadt- und Adressdopplungen werden automatisch abgelehnt.
+- Importieren Sie einen Katalog mit Angabe der Quelle. Vom Betreiber importierte Kataloge können keine selbst erstellten Einträge überschreiben.
+- Zeigen Sie OpenStreetMap Kacheln ohne API Schlüssel an. Kacheln werden geladen, wenn eine Karte angezeigt wird, einschließlich der Standard-Startseite.
+- Wählen Sie die gewünschte Sprache für die Benutzeroberfläche im Sprachmenü aus. Lesen Sie die vollständige README-Datei in Ihrer Sprache über den obenstehenden Sprachindex.
+
+Die Veröffentlichung bestätigt weder die Inhaberschaft des Unternehmens noch die Qualität der Dienstleistungen. Klären Sie Ausstattung, Fähigkeiten und Bedingungen direkt mit dem Studio. Jeder, der den privaten Verwaltungslink besitzt, kann diesen Eintrag verwalten. Halten Sie den Link geheim; der Zugriff kann nicht per E-Mail wiederhergestellt werden. Lesen Sie die [Anleitung zur Selbstveröffentlichung](../../docs/OPEN_CATALOG.md).
+
+## Starten Sie Ihre eigene Instanz
+
+Installieren Sie Node.js 24, klonen Sie dieses Repository und führen Sie Folgendes aus:
+
+```sh
+npm ci
+npm run build
+cp .env.example .env
+npm start
+```
+
+Open `http://localhost:3000`. Die Standardeinstellung `APP_MODE=catalog` erfordert keine Administrator- oder Benutzereinrichtung. Konfigurieren Sie `APP_URL`, HTTPS und Backups mithilfe der [Anleitung zur Selbstverwaltung](../../docs/SELF_HOSTING.md). Docker Compose ist ebenfalls verfügbar: `docker compose up --build -d`.
+
+Die unterstützte Bereitstellungsumgebung umfasst einen Anwendungsprozess mit SQLite auf einer lokalen Festplatte. Automatische Veröffentlichung und Anforderungsquoten begrenzen Missbrauch, ohne dass eine Moderationswarteschlange erforderlich ist. Eine gemeinsam genutzte Büro-IP-Adresse kann eine Veröffentlichungsquote nutzen. Weitere Informationen zu [Grenzwerten und dem Verhalten der Verwaltungsfunktion](../../docs/OPEN_CATALOG.md) finden Sie, bevor Sie eine öffentliche Instanz öffnen.
+
+Verwenden Sie die [Befehlszeilenschnittstelle zum Katalogimport](../../docs/CATALOG_IMPORT.md), um einen vorhandenen Datensatz zu importieren, nachdem Sie die Nutzungsrechte geprüft haben. Instanzdatensätze, Uploads und Backups werden nicht im Repository oder in den Container-Images zusammengefasst.
+
+## Optionaler Community- und Neofab-Modus
+
+Setzen Sie `APP_MODE=community` explizit auf den Wert, um private Projekte, Angebote von Anbietern, die Modellbibliothek und Neofab Studio zu aktivieren. Diese Arbeitsabläufe verwenden eigene Konten und Berechtigungen. Beim Wechsel der Modi werden gespeicherte Daten beibehalten. Im Katalogmodus werden keine privaten Community-Daten über API offengelegt oder ausstehende CAD Aufgaben fortgesetzt.
+
+[Neofab Studio](../../docs/NEOFAB_SETUP.md) unterstützt versionierte Fertigungsspezifikationen, Stücklisten und deklarative CAD-Geometrie mit begrenztem Funktionsumfang sowie STEP/STL-Exporte. CAD und KI sind optional. KI-Vorschläge müssen geprüft und in einem separaten Schritt angewendet werden; sie veröffentlichen keine Aufträge automatisch und erzeugen auch keine Geometrie automatisch. CAM, G-Code und die physische Überprüfung der Fertigungseignung sind nicht implementiert.
+
+## Datenrechte und Datenschutz
+
+Die MIT-Softwarelizenz gewährt keine Rechte an importierten Geschäftsdaten. Allein die Nennung der Quelle berechtigt nicht zur Kopie von Daten aus Google Maps, 2GIS, Yandex Maps oder anderen Quellen. Überprüfen Sie die Berechtigungen für Speicherung, Veröffentlichung und Weiterverbreitung, bevor Sie einen Datensatz verwenden. Weitere Informationen finden Sie unter [Datenherkunft und -überprüfung](../../docs/DATA_PROVENANCE.md).
+
+Selbstveröffentlichte Kontaktdaten sind öffentlich; Verwaltungsschlüssel sind privat. Datenbanken und Backups sollten nicht in öffentlich zugänglichen Verzeichnissen gespeichert werden. Stellen Sie eine Kontaktperson für Korrekturen und Anfragen zur Entfernung von Daten bereit. Lesen Sie vor der Inbetriebnahme die Informationen zum [Datenschutz](../../PRIVACY.md) und zur [Sicherheit](../../SECURITY.md).
+
+## Entwicklung und Übersetzung
+
+```sh
+npm run dev
+npm run check
+npx playwright install chromium
+npm run test:e2e
+npm run format:check
+```
+
+GitHub Aktionen prüfen Datentypen, API und Browser-Workflows sowie die Standard- und nativen CAD Container. Tests verwenden fiktive Datensätze. Genaue Ergebnisse, Abdeckung und verbleibende Grenzen werden in [Validierung](../../docs/VALIDATION.md) und [Produktumfang](../../docs/PRODUCT.md) dokumentiert.
+
+Die englische README-Datei dient als Referenz für die vollständigen übersetzten Versionen. Der [Sprachindex](../../docs/i18n/README.md) dokumentiert die Grenzen der Übersetzungsbearbeitung und -prüfung. Die Lokalisierung der Benutzeroberfläche übersetzt keine von Benutzern erstellten Einträge, Projektinhalte oder alle externen technischen Diagnosedaten.
+
+## Lizenzierung und Beiträge
+
+Der ursprüngliche Quellcode, die Benutzeroberfläche, die SVG Illustrationen, die Dokumentation und der parametrische Generator sind [unter MIT lizenziert](../../LICENSE). Abhängigkeiten behalten ihre eigenen Lizenzen und Hinweise bei. Benutzermodelle haben eine separate Lizenz, die von ihren Erstellern ausgewählt wurde. Ein fiktives Demoprofil und ein kurzer Text sowie drei generierte Demodesigns werden unter CC0 zur Verfügung gestellt; der Generator bleibt MIT. Siehe [Hinweise von Drittanbietern](../../THIRD_PARTY_NOTICES.md).
+
+Diese unabhängige Implementierung entwickelt die Idee von [3d-online.app](https://3d-online.app) weiter. Bestehende Produktionskonten, Zugangsdaten, die Historie des privaten Git-Repositorys und Benutzerdateien sind nicht enthalten. Der angepasste MIT Neofab CAD-Compiler behält seine [ursprüngliche Lizenz und die Angaben zum Ursprung](../../cad-worker/NOTICE.md) bei.
+
+Beiträge können Code, Korrekturen an Übersetzungen, Verbesserungen der Benutzerfreundlichkeit, offene parametrische Bauteile, Installationsprüfungen und Rückmeldungen von echten Werkstätten umfassen. Beginnen Sie mit [CONTRIBUTING.md](../../CONTRIBUTING.md).

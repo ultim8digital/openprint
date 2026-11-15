@@ -1,0 +1,77 @@
+# OpenPrint
+
+**제조 스튜디오 및 워크숍의 공개 디렉터리입니다. 등록이나 관리자는 없습니다.**
+
+<details>
+<summary>Choose a language</summary>
+
+[English (US)](../../README.md) · [Español (España)](../../docs/readme/README.es-ES.md) · [العربية](../../docs/readme/README.ar-SA.md) · [Français (France)](../../docs/readme/README.fr-FR.md) · [हिन्दी](../../docs/readme/README.hi.md) · [ไทย](../../docs/readme/README.th.md) · [Русский](../../docs/readme/README.ru.md) · [Deutsch](../../docs/readme/README.de-DE.md) · [Italiano](../../docs/readme/README.it.md) · [Português (Brasil)](../../docs/readme/README.pt-BR.md) · [Nederlands](../../docs/readme/README.nl-NL.md) · [Svenska](../../docs/readme/README.sv.md) · [Dansk](../../docs/readme/README.da.md) · [Norsk bokmål](../../docs/readme/README.no.md) · [Türkçe](../../docs/readme/README.tr.md) · [Tiếng Việt](../../docs/readme/README.vi.md) · [日本語](../../docs/readme/README.ja.md) · **[한국어](../../docs/readme/README.ko.md)** · [简体中文](../../docs/readme/README.zh-Hans.md) · [繁體中文](../../docs/readme/README.zh-Hant.md) · [English (UK)](../../docs/readme/README.en-GB.md) · [English (Australia)](../../docs/readme/README.en-AU.md) · [English (Canada)](../../docs/readme/README.en-CA.md) · [Español (México)](../../docs/readme/README.es-MX.md) · [Français (Canada)](../../docs/readme/README.fr-CA.md) · [Português (Portugal)](../../docs/readme/README.pt-PT.md) · [Polski](../../docs/readme/README.pl.md) · [Українська](../../docs/readme/README.uk.md) · [Bahasa Indonesia](../../docs/readme/README.id.md) · [Čeština](../../docs/readme/README.cs.md) · [Slovenčina](../../docs/readme/README.sk.md) · [Magyar](../../docs/readme/README.hu.md) · [Română](../../docs/readme/README.ro.md) · [Hrvatski](../../docs/readme/README.hr.md) · [Ελληνικά](../../docs/readme/README.el.md) · [Suomi](../../docs/readme/README.fi.md) · [Slovenščina](../../docs/readme/README.sl-SI.md) · [Català](../../docs/readme/README.ca.md) · [עברית](../../docs/readme/README.he.md) · [Bahasa Melayu](../../docs/readme/README.ms.md) · [বাংলা](../../docs/readme/README.bn-BD.md) · [ગુજરાતી](../../docs/readme/README.gu-IN.md) · [ಕನ್ನಡ](../../docs/readme/README.kn-IN.md) · [മലയാളം](../../docs/readme/README.ml-IN.md) · [मराठी](../../docs/readme/README.mr-IN.md) · [ଓଡ଼ିଆ](../../docs/readme/README.or-IN.md) · [ਪੰਜਾਬੀ](../../docs/readme/README.pa-IN.md) · [தமிழ்](../../docs/readme/README.ta-IN.md) · [తెలుగు](../../docs/readme/README.te-IN.md) · [اردو](../../docs/readme/README.ur-PK.md)
+
+</details>
+
+지도에서 제작자를 찾아, 해당 제작자의 역량을 확인하고 직접 연락하세요. 작업장이 목록에 없다면, 연락처와 제공 서비스를 추가하세요. 그러면 즉시 목록에 반영됩니다. 나중에 목록을 수정하거나 삭제할 수 있도록 개인 관리 링크를 저장하세요. 기본 카탈로그에는 계정, 이메일 확인 또는 승인 대기열이 없습니다.
+
+OpenPrint을 Node.js 24와 로컬 SQLite으로 실행합니다. Vercel, Supabase(이메일 제공업체), 유료 AI, 타사 로그인 기능은 필요하지 않습니다. GitHub은 소스 코드를 호스팅하고 배포하며, 콘텐츠 제출을 받는 공유 웹사이트에는 실행 중인 API 서버가 필요합니다. [GitHub 페이지](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)만으로는 Node.js API을 실행하거나 방문자의 변경 사항을 유지할 수 없습니다.
+
+## 카탈로그 기능
+
+- 이름, 도시, 기술로 검색합니다. 지도에는 목록 페이지 매김과 관계없이 일치하는 위치가 표시됩니다.
+- 계정 없이 게시합니다. 지도상의 지점을 선택하거나 좌표를 입력하세요. 좌표가 없는 게시물은 검색 가능합니다.
+- 개인 링크와 함께 목록 하나를 수정하거나 삭제합니다. 버전 확인 기능을 통해 서로 다른 탭에서 발생하는 충돌하는 편집을 방지합니다.
+- 게시하기 전에 기존 스튜디오를 찾아보세요. 정확히 일치하는 이름, 도시, 주소는 자동으로 거부됩니다.
+- 출처 정보가 포함된 카탈로그를 가져옵니다. 운영자가 가져오는 카탈로그는 자체 게시된 목록을 덮어쓸 수 없습니다.
+- OpenStreetMap개의 타일을 API 키 없이 볼 수 있습니다. 타일은 지도 표시 시 로드되며, 기본 시작 페이지도 포함됩니다.
+- 언어 메뉴에서 인터페이스 언어를 선택하세요. 위의 언어 색인을 통해 해당 언어로 작성된 전체 README 파일을 읽어보세요.
+
+게시물은 사업체의 소유권이나 서비스 품질을 확인하지 않습니다. 스튜디오에 장비, 기능 및 조건을 확인하십시오. 개인 관리 링크를 소지한 사람은 해당 게시물을 관리할 수 있습니다. 개인 정보로 유지하십시오. 이메일 복구는 불가능합니다. [자체 게시 가이드](../../docs/OPEN_CATALOG.md)를 읽어보십시오.
+
+## 자체 인스턴스를 실행하세요
+
+Node.js 24를 설치하고, 이 저장소를 복제한 후 다음 명령을 실행합니다.
+
+```sh
+npm ci
+npm run build
+cp .env.example .env
+npm start
+```
+
+Open `http://localhost:3000`. 기본 `APP_MODE=catalog` 설정에는 관리자 또는 사용자 설정이 필요하지 않습니다. [자체 호스팅 가이드](../../docs/SELF_HOSTING.md)를 사용하여 `APP_URL`, HTTPS 및 백업을 구성합니다. Docker Compose도 사용할 수 있습니다: `docker compose up --build -d`.
+
+지원되는 배포 방식은 로컬 디스크에 SQLite이 있는 하나의 애플리케이션 프로세스입니다. 자동 게시 및 요청 할당량은 관리 대기열 없이 악용을 제한합니다. 공유 오피스 IP는 게시 할당량을 공유할 수 있습니다. 공개 인스턴스를 열기 전에 [할당량 및 관리 동작](../../docs/OPEN_CATALOG.md)을 확인하세요.
+
+데이터 세트의 사용 권한을 확인한 후에는 [카탈로그 가져오기 CLI](../../docs/CATALOG_IMPORT.md)를 사용하여 기존 데이터 세트를 가져오세요. 인스턴스 데이터 세트, 업로드 및 백업은 저장소 또는 컨테이너 이미지에 포함되지 않습니다.
+
+## 선택 사항: 커뮤니티 및 Neofab 모드
+
+개인 프로젝트, 공급업체 견적, 모델 라이브러리 및 Neofab 스튜디오를 활성화하려면 `APP_MODE=community`을 명시적으로 설정합니다. 이러한 작업 흐름은 자체 계정과 권한을 사용합니다. 모드를 전환하면 저장된 데이터가 유지됩니다. 카탈로그 모드에서는 API을 통해 비공개 커뮤니티 기록을 노출하지 않으며, 대기 중인 CAD 작업을 재개하지 않습니다.
+
+[Neofab 스튜디오](../../docs/NEOFAB_SETUP.md)는 버전 관리되는 제조 지침, 자재 명세서, 그리고 STEP/STL 내보내기가 가능한 범위가 정해진 선언적 CAD을 지원합니다. CAD 및 AI는 선택 사항입니다. AI 제안은 검토와 별도의 신청 단계를 거쳐야 하며, 자동으로 주문을 게시하거나 형상을 생성하지 않습니다. CAM, G-코드, 물리적 제조 검증 기능은 구현되지 않았습니다.
+
+## 데이터 권리 및 개인 정보 보호
+
+MIT 소프트웨어 라이선스는 가져온 기업 정보에 대한 권한을 부여하지 않습니다. 출처를 명시하는 것만으로는 Google 지도, 2GIS, Yandex 지도 또는 기타 출처의 데이터를 복사할 권한이 주어지지 않습니다. 데이터 세트를 사용하기 전에 저장, 게시 및 재배포에 대한 권한을 확인하십시오. 자세한 내용은 [데이터 출처 및 검토 범위](../../docs/DATA_PROVENANCE.md)를 참조하십시오.
+
+직접 게시한 연락처 정보는 공개되며, 관리 키는 비공개입니다. 데이터베이스와 백업 파일을 공개적으로 접근 가능한 디렉터리에서 분리하고, 수정 및 삭제 요청을 위한 연락처를 제공하십시오. 배포하기 전에 [개인 정보 보호 정책](../../PRIVACY.md) 및 [보안 정책](../../SECURITY.md)을 읽어보십시오.
+
+## 개발 및 번역
+
+```sh
+npm run dev
+npm run check
+npx playwright install chromium
+npm run test:e2e
+npm run format:check
+```
+
+GitHub 액션은 유형, API 브라우저 워크플로우, 기본 및 네이티브 CAD 컨테이너를 확인합니다. 테스트는 가상의 레코드를 사용합니다. 정확한 증거, 적용 범위 및 잔여 제한은 [유효성 검사](../../docs/VALIDATION.md) 및 [제품 범위](../../docs/PRODUCT.md)에 기록됩니다.
+
+영어 README 파일은 전체 번역본의 참고 자료입니다. [언어 색인](../../docs/i18n/README.md)에는 번역 유지 관리 및 검토 범위가 명시되어 있습니다. 인터페이스 현지화는 사용자가 작성한 목록, 프로젝트 콘텐츠 또는 모든 외부 기술 진단 내용을 번역하지 않습니다.
+
+## 라이선스 및 기여 방법
+
+원래 소스, UI, SVG 일러스트레이션, 문서 및 파라미터 생성기는 [MIT 라이선스](../../LICENSE)를 따릅니다. 종속성은 자체 라이선스와 고지 사항을 유지합니다. 사용자 모델은 해당 제작자가 선택한 별도의 라이선스를 따릅니다. 가상의 데모 프로필과 간략한 텍스트, 그리고 세 가지 생성된 데모 디자인은 CC0에 따라 제공됩니다. 생성기는 MIT 상태를 유지합니다. [타사 고지 사항](../../THIRD_PARTY_NOTICES.md)을 참조하십시오.
+
+이 독립적인 구현은 [3d-online.app](https://3d-online.app)의 아이디어를 발전시켰습니다. 원래 제작 계정, 비밀 정보, 비공개 Git 기록 및 사용자 파일은 포함되지 않습니다. 수정된 MIT Neofab CAD 컴파일러는 [원래 라이선스 및 출처 정보](../../cad-worker/NOTICE.md)를 그대로 유지합니다.
+
+기여는 코드, 번역 수정, 사용성 개선, 오픈 소스 파라메트릭 부품, 설치 확인, 그리고 실제 작업장에서의 피드백을 포함할 수 있습니다. [CONTRIBUTING.md](../../CONTRIBUTING.md)부터 시작하세요.

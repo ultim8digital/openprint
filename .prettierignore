@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+.local
+.private-audit
+package-lock.json
+playwright-report
+test-results
+cad-worker/.venv
+cad-worker/out
+cad-worker/__pycache__
+cad-worker/.pytest_cache
+cad-worker/tests/__pycache__
+
+.pytest_cache/

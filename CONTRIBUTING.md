@@ -1,0 +1,47 @@
+# Contributing / Участие
+
+OpenPrint is for people who make things together. Useful contributions include code, translation, original reusable parts, clear printing notes, accessible interfaces and reports from actual workshops.
+
+## For makers and model authors
+
+Search the directory first. If your workshop is missing, use “Add a studio” in the application and save the private management link to update or delete the listing. The default catalog requires no account or moderator approval. Do not post the management key or private contacts in GitHub issues.
+
+In the optional community mode, registered participants can maintain provider profiles and share models. Publish only models you own or can redistribute under the chosen license. Add dimensions, intended use, limitations and attribution. Do not submit scraped company databases, customer drawings or purchased models without redistribution rights.
+
+For the repository, add original parametric designs with explicit licensing and geometry tests. Avoid embedding personal/private files in commits or screenshots. Demo content must remain clearly fictional.
+
+## For developers
+
+For interface and README translations, start with the [50-locale index and maintenance notes](docs/i18n/README.md). Preserve interpolation tokens, technical identifiers, units, numbers and link targets. Review meaning as well as grammar, especially private-link access, data rights and manufacturing limitations. Do not translate user records or upload real workshop databases as translation fixtures.
+
+Use Node.js 24 and the committed lockfile:
+
+```sh
+npm ci
+npm run demo
+npm run check
+npx playwright install chromium
+npm run test:e2e
+npm run format
+npm run format:check
+```
+
+Make a focused branch and pull request. Explain the concrete before/after behavior and relevant validation. A screen change should include desktop/mobile screenshots using fictional data. Schema changes need an incremental migration, preservation of accepted terms, backup/restore consideration and a meaningful regression test.
+
+Check permissions on the server, not just by hiding buttons. Preserve exact offer revisions, private-file access, thread membership, pagination/read cursors, money in integer minor units and customer confirmation. Never grant admin roles from user-editable metadata, the first registration, or an email match alone.
+
+Keep anonymous publication, private-key management, duplicate rejection and retry recovery usable without accounts or human approval. Treat catalog cards as public contact records, not verified identities or order-recipient accounts. Test catalog and explicit community modes separately; switching mode must preserve private history.
+
+Do not require a paid API for a core user path. Do not introduce tracking or third-party font calls. Map tiles may load when the directory map or location picker is visible; disclose provider changes and avoid tile calls on other screens. Run `node scripts/licenses.mjs` after relevant dependency updates and include updated notices.
+
+## For translators and designers
+
+The initial interface uses `t('Russian', 'English')` pairs. Translate both the empty/error/success paths and controls; user-authored content stays as written. Keep clear labels, keyboard access, visible focus, readable contrast, reduced-motion support and narrow-screen layouts. Automatic axe checks complement, not replace, manual accessibility work.
+
+## Reporting bugs
+
+Use the issue template with version, Node/OS, application mode, a minimal reproduction, expected/actual behavior and redacted logs. Say whether the issue is in local demo or a real instance. Never include private management links/keys, passwords, session cookies, recovery tokens, `.env`, a real database or customer attachments.
+
+Security findings should use private reporting as described in [SECURITY.md](SECURITY.md).
+
+By contributing code you agree to provide it under the repository’s MIT license, unless a clearly scoped file states another compatible license. Model/sample content needs its own explicit grant; a code contribution does not change participant-owned content licenses.

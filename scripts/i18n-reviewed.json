@@ -1,0 +1,1973 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "locale": "fr-FR",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "Toute personne disposant de ce lien peut modifier ou supprimer l’annonce. Conservez ce lien dans un endroit privé : l’accès ne peut pas être rétabli sans la clé. Ne publiez pas ce lien et ne l’envoyez pas à vos clients.",
+      "reason": "The feminine pronouns referred to the public listing instead of the private management link."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "احفظ رابطك الخاص بعد نشر الإدراج. يتيح لك تعديل الإدراج أو حذفه. احتفظ بالرابط بسرية: يمكن لأي شخص يمتلكه إدارة السجل. لا تتوفر استعادة الوصول عبر البريد الإلكتروني.",
+      "reason": "Clarifies that access cannot be recovered by email; the original translation described recovering the email itself."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Ces vérifications portent sur l’exhaustivité du cahier des charges et la géométrie du modèle. Elles ne certifient ni la résistance, ni la faisabilité de la fabrication, ni l’adéquation du matériau, ni la sécurité du produit. Le fabricant vérifie les conditions de fabrication.",
+      "reason": "Restores brief completeness and maker responsibility; the translation substituted general integrity and the user."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "تتحقق هذه الفحوصات من اكتمال المواصفات الفنية والشكل الهندسي للنموذج. وهي لا تُعد شهادةً على المتانة أو قابلية التصنيع أو ملاءمة المادة أو سلامة المنتج. يتولى المُصنِّع مراجعة متطلبات التصنيع.",
+      "reason": "Restores brief completeness and maker responsibility; the translation substituted basic design and designer."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_4e96d5c6",
+      "en": "I am authorized to publish these details and contacts on behalf of the organization, and agree to make them public.",
+      "ru": "У меня есть право публиковать эти сведения и контакты от имени организации. Я согласен на их открытое размещение.",
+      "text": "Estoy autorizado a publicar esta información y estos datos de contacto en nombre de la organización, y acepto que se hagan públicos.",
+      "reason": "Restores authorization for listing information as well as contact details."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Estas comprobaciones verifican que las especificaciones estén completas y revisan la geometría de la plantilla. No certifican la resistencia, la viabilidad de fabricación, la idoneidad del material ni la seguridad del producto. El fabricante revisa los aspectos de fabricación.",
+      "reason": "Restores brief completeness, which the translation replaced with general integrity."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_80ffbeed",
+      "en": "Geometry checks do not authorize manufacture.",
+      "ru": "Проверка геометрии не означает разрешения на изготовление.",
+      "text": "فحوصات الشكل الهندسي لا تمنح إذنًا بالتصنيع.",
+      "reason": "Preserves geometry rather than dimensions only, and the distinction between a check and authorization to manufacture."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "Speichern Sie nach der Veröffentlichung Ihres Eintrags den privaten Verwaltungslink. Damit können Sie den Eintrag bearbeiten oder löschen. Halten Sie den Link geheim: Jeder, der ihn besitzt, kann den Eintrag verwalten. Eine Wiederherstellung des Zugriffs per E-Mail ist nicht möglich.",
+      "reason": "The translation told users to save the private link after publishing that link; clarifies that the listing is published and the link stays private."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Diese Prüfungen betreffen die Vollständigkeit der technischen Aufgabenbeschreibung und die Geometrie der Vorlage. Sie bescheinigen weder die Festigkeit noch die Fertigbarkeit, Materialeignung oder Produktsicherheit. Der Hersteller prüft die Fertigung.",
+      "reason": "Brief was translated as short rather than the technical requirements document; restores the scope of the completeness check."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_0d62e175",
+      "en": "The key must contain 64 lowercase hexadecimal characters. Use the key from your saved private link.",
+      "ru": "Ключ должен содержать 64 строчных шестнадцатеричных символа. Используйте ключ из сохранённой личной ссылки.",
+      "text": "Der Schlüssel muss aus 64 hexadezimalen Zeichen bestehen; Buchstaben müssen kleingeschrieben sein. Verwenden Sie den Schlüssel aus Ihrem gespeicherten privaten Link.",
+      "reason": "Incidental finding: the translation required 64 lowercase letters, excluding the digits allowed in hexadecimal keys."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_e9f10ec2",
+      "en": "Retrieve the CAD attempt result",
+      "ru": "Получить результат CAD-попытки",
+      "text": "Ergebnis des CAD-Versuchs abrufen",
+      "reason": "Incidental finding: the translation introduced the invalid word CADten and lost the CAD-attempt meaning."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Aufgabenbeschreibung v",
+      "reason": "Incidental finding: Brief was translated as short rather than the project requirements document."
+    },
+    {
+      "locale": "ja",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "掲載後は、非公開の管理リンクを保存してください。このリンクで掲載情報を編集・削除できます。リンクを知っている人は誰でも掲載情報を管理できるため、他人に公開しないでください。メールによるアクセスの復旧はできません。",
+      "reason": "The translation inverted the reason for keeping the link private and introduced account recovery into the accountless catalog."
+    },
+    {
+      "locale": "ja",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "これらのチェックは、技術仕様書の記載内容がそろっているかどうかと、テンプレートの形状を確認するものです。強度、製造可能性、材料の適合性、製品の安全性を保証するものではありません。製造に関する確認は製造業者が行います。",
+      "reason": "Restores technical brief completeness instead of general completion, while preserving the manufacturing review boundary."
+    },
+    {
+      "locale": "ja",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAMデータや工作機械の制御コードは生成されません。",
+      "reason": "Machine code was translated as CPU machine language rather than control code for manufacturing equipment."
+    },
+    {
+      "locale": "ja",
+      "id": "m_d0e299cb",
+      "en": "The report checks geometry. Strength, fits, manufacturability and machine paths need separate review with the maker. This revision is for discussion and quotation.",
+      "ru": "Отчёт проверяет геометрию. Прочность, посадки, технологичность и траектории станка требуют отдельного согласования с исполнителем. Это версия для обсуждения и расчёта заказа.",
+      "text": "レポートでは形状を確認します。強度、はめあい、製造可能性、加工経路は、製造業者と別途確認する必要があります。この版は、検討と見積もりのためのものです。",
+      "reason": "Restores the engineering meaning of mechanical fits instead of general suitability."
+    },
+    {
+      "locale": "ja",
+      "id": "m_5c281f6c",
+      "en": "Build a custom-size part or inspect your own file. No account required; your model stays in this browser.",
+      "ru": "Создайте простую деталь по размерам или изучите свой файл. Эти инструменты работают без аккаунта, модель остаётся в браузере.",
+      "text": "カスタムサイズの部品を作成したり、ご自身のファイルを検査したりできます。アカウントは不要で、モデルはこのブラウザ内に留まります。",
+      "reason": "Avoids implying persistent browser storage when the source only promises browser-local handling."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_5c281f6c",
+      "en": "Build a custom-size part or inspect your own file. No account required; your model stays in this browser.",
+      "ru": "Создайте простую деталь по размерам или изучите свой файл. Эти инструменты работают без аккаунта, модель остаётся в браузере.",
+      "text": "صمِّم جزءًا بأبعاد مخصصة أو افحص ملفك الخاص. لا حاجة لإنشاء حساب؛ يبقى نموذجك داخل هذا المتصفح.",
+      "reason": "Avoids implying persistent browser storage when the source only promises browser-local handling."
+    },
+    {
+      "locale": "hi",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "ये जाँचें तकनीकी आवश्यकताओं के विवरण की पूर्णता और टेम्पलेट की ज्यामिति की जाँच करती हैं। ये मजबूती, निर्माण-योग्यता, सामग्री की उपयुक्तता या उत्पाद की सुरक्षा को प्रमाणित नहीं करती हैं। निर्माता निर्माण संबंधी आवश्यकताओं की समीक्षा करता है।",
+      "reason": "Translate brief as the technical requirements document, not the adjective short."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Essas verificações avaliam se a especificação técnica está completa e verificam a geometria do modelo. Elas não certificam a resistência, a viabilidade de fabricação, a adequação do material nem a segurança do produto. O fabricante revisa os aspectos de fabricação.",
+      "reason": "Restore technical brief completeness instead of basic integrity."
+    },
+    {
+      "locale": "sv",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Dessa kontroller granskar om den tekniska kravspecifikationen är fullständig och kontrollerar mallens geometri. De intygar inte hållfasthet, tillverkningsbarhet, materialets lämplighet eller produktsäkerhet. Tillverkaren granskar tillverkningen.",
+      "reason": "Translate brief as the technical requirements document, not a short assessment."
+    },
+    {
+      "locale": "da",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "Gem dit private link, når dit opslag er offentliggjort. Linket giver dig mulighed for at redigere eller slette opslaget. Hold linket privat: enhver, der har det, kan administrere opslaget. Adgangen kan ikke gendannes via e-mail.",
+      "reason": "The listing is published, not its private management link; clarify access recovery."
+    },
+    {
+      "locale": "da",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Disse kontroller vurderer, om den tekniske kravspecifikation er fuldstændig, og kontrollerer skabelonens geometri. De certificerer ikke styrke, fremstillingsegnethed, materialets egnethed eller produktsikkerhed. Producenten gennemgår fremstillingen.",
+      "reason": "Restore technical brief completeness rather than a quick design assessment."
+    },
+    {
+      "locale": "no",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "Lagre den private lenken etter at oppføringen er publisert. Med lenken kan du redigere eller slette oppføringen. Hold lenken privat: alle som har den, kan administrere oppføringen. Tilgangen kan ikke gjenopprettes via e-post.",
+      "reason": "The listing is published, not its private management link; clarify access recovery."
+    },
+    {
+      "locale": "no",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Disse kontrollene vurderer om den tekniske kravspesifikasjonen er fullstendig, og kontrollerer malens geometri. De bekrefter ikke styrke, produksjonsegnethet, materialets egnethet eller produktsikkerhet. Produsenten gjennomgår produksjonen.",
+      "reason": "Translate brief as the technical requirements document, not a short assessment."
+    },
+    {
+      "locale": "tr",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Bu kontroller, teknik gereksinim belgesinin eksiksizliğini ve şablon geometrisini değerlendirir. Dayanıklılığı, üretilebilirliği, malzemenin uygunluğunu veya ürün güvenliğini onaylamaz. Üretici, üretim koşullarını gözden geçirir.",
+      "reason": "Restore technical brief completeness rather than general integrity."
+    },
+    {
+      "locale": "vi",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Các kiểm tra này đánh giá tính đầy đủ của bản yêu cầu kỹ thuật và hình học của mẫu. Chúng không chứng nhận độ bền, khả năng chế tạo, sự phù hợp của vật liệu hay độ an toàn của sản phẩm. Nhà sản xuất xem xét các yêu cầu chế tạo.",
+      "reason": "Translate brief as the technical requirements document rather than a quick check; identify the maker."
+    },
+    {
+      "locale": "th",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "การตรวจสอบเหล่านี้ประเมินความครบถ้วนของข้อกำหนดทางเทคนิคและรูปทรงเรขาคณิตของแม่แบบ ไม่ได้เป็นการรับรองความแข็งแรง ความสามารถในการผลิต ความเหมาะสมของวัสดุ หรือความปลอดภัยของผลิตภัณฑ์ ผู้ผลิตเป็นผู้ตรวจสอบข้อกำหนดด้านการผลิต",
+      "reason": "Restore technical brief completeness rather than a brief correctness check."
+    },
+    {
+      "locale": "it",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "Chiunque disponga di questo link può modificare o eliminare l’inserzione. Conserva il link in un luogo privato: senza la chiave non è possibile recuperare l’accesso. Non pubblicare il link e non inviarlo ai clienti.",
+      "reason": "The private link must not be published; feminine pronouns incorrectly referred to the public listing."
+    },
+    {
+      "locale": "it",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Questi controlli verificano la completezza delle specifiche tecniche e la geometria del modello. Non certificano la resistenza, la fabbricabilità, l’idoneità del materiale o la sicurezza del prodotto. Il produttore verifica gli aspetti di fabbricazione.",
+      "reason": "Restore technical brief completeness rather than general completeness."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "Bewaar de privélink nadat uw vermelding is gepubliceerd. Met deze link kunt u de vermelding bewerken of verwijderen. Houd de link geheim: iedereen die de link heeft, kan de vermelding beheren. Toegang kan niet via e-mail worden hersteld.",
+      "reason": "The listing is published, not its private management link; clarify access recovery."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Deze controles beoordelen of de technische opdrachtomschrijving volledig is en controleren de geometrie van het sjabloon. Ze certificeren geen sterkte, maakbaarheid, geschiktheid van het materiaal of productveiligheid. De fabrikant beoordeelt de fabricage.",
+      "reason": "Restore technical brief completeness and material suitability instead of a short assessment and material type."
+    },
+    {
+      "locale": "ko",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "이 링크를 가진 사람은 누구나 등록 정보를 수정하거나 삭제할 수 있습니다. 링크를 비공개 장소에 보관하세요. 키가 없으면 접근 권한을 복구할 수 없습니다. 이 링크를 공개하거나 고객에게 보내지 마세요.",
+      "reason": "The link must not be published, rather than the public listing information."
+    },
+    {
+      "locale": "ko",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "등록 정보를 게시한 후 비공개 관리 링크를 저장하세요. 이 링크로 등록 정보를 수정하거나 삭제할 수 있습니다. 링크를 가진 사람은 누구나 해당 정보를 관리할 수 있으므로 링크를 다른 사람에게 공개하지 마세요. 이메일로 접근 권한을 복구할 수는 없습니다.",
+      "reason": "Keeping the link private does not enable access; anyone possessing it already has access. No account or privacy setting is implied."
+    },
+    {
+      "locale": "ko",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM 데이터나 공작기계 제어 코드는 생성되지 않습니다.",
+      "reason": "Machine code means manufacturing machine control code, not CPU machine language."
+    },
+    {
+      "locale": "ko",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "이 검사는 기술 요구사항 문서의 완전성과 템플릿 형상을 확인합니다. 강도, 제조 가능성, 재료 적합성 또는 제품 안전성을 인증하는 것은 아닙니다. 제조업체가 제조 관련 사항을 검토합니다.",
+      "reason": "Translate brief as the technical requirements document, not the adjective short."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "发布条目后，请保存您的私密管理链接。通过该链接可以编辑或删除条目。任何拥有该链接的人都能管理条目，因此请对该链接保密。无法通过电子邮件恢复访问权限。",
+      "reason": "Keep the link secret; do not imply an unavailable private-link setting. Clarify access recovery."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "不生成 CAM 数据或机床控制代码。",
+      "reason": "Machine code means manufacturing machine control code, not CPU machine language."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "这些检查评估技术需求说明是否完整以及模板的几何形状，并不认证强度、可制造性、材料适用性或产品安全性。制造商负责审核制造要求。",
+      "reason": "Translate brief as the technical requirements document, not the adjective short."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "發布條目後，請保存您的私密管理連結。透過該連結可以編輯或刪除條目。任何擁有該連結的人都能管理條目，因此請將該連結保密。無法透過電子郵件恢復存取權。",
+      "reason": "Keep the link secret; do not imply an unavailable private-link setting. Clarify access recovery."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "不會產生 CAM 資料或工具機控制程式碼。",
+      "reason": "Machine code means manufacturing machine control code, not CPU machine language."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "這些檢查評估技術需求說明是否完整以及範本的幾何形狀，並不認證強度、可製造性、材料適用性或產品安全性。製造商負責審查製造要求。",
+      "reason": "Translate brief as the technical requirements document, not the adjective short."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "ಈ ಲಿಂಕ್ ಹೊಂದಿರುವ ಯಾರಾದರೂ ಪಟ್ಟಿಯಲ್ಲಿರುವ ವಿವರಗಳನ್ನು ತಿದ್ದಬಹುದು ಅಥವಾ ಅಳಿಸಬಹುದು. ಲಿಂಕ್ ಅನ್ನು ಖಾಸಗಿಯಾಗಿ ಸುರಕ್ಷಿತ ಸ್ಥಳದಲ್ಲಿ ಉಳಿಸಿ: ಕೀಲಿಯಿಲ್ಲದೆ ಪ್ರವೇಶವನ್ನು ಮರುಪಡೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ. ಲಿಂಕ್ ಅನ್ನು ಸಾರ್ವಜನಿಕವಾಗಿ ಪ್ರಕಟಿಸಬೇಡಿ ಅಥವಾ ಗ್ರಾಹಕರಿಗೆ ಕಳುಹಿಸಬೇಡಿ.",
+      "reason": "Identify the private link as the object to save and not publish; access recovery is unavailable without its key."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "ಈ ಪರಿಶೀಲನೆಗಳು ತಾಂತ್ರಿಕ ಅವಶ್ಯಕತೆಗಳ ವಿವರಣೆಯ ಸಂಪೂರ್ಣತೆ ಮತ್ತು ಟೆಂಪ್ಲೇಟ್‌ನ ಜ್ಯಾಮಿತಿಯನ್ನು ಪರಿಶೀಲಿಸುತ್ತವೆ. ಅವು ಬಲ, ತಯಾರಿಸಬಹುದಾದ ಸಾಮರ್ಥ್ಯ, ವಸ್ತುವಿನ ಸೂಕ್ತತೆ ಅಥವಾ ಉತ್ಪನ್ನದ ಸುರಕ್ಷತೆಯನ್ನು ಪ್ರಮಾಣೀಕರಿಸುವುದಿಲ್ಲ. ತಯಾರಕರು ಉತ್ಪಾದನೆಗೆ ಸಂಬಂಧಿಸಿದ ಅಂಶಗಳನ್ನು ಪರಿಶೀಲಿಸುತ್ತಾರೆ.",
+      "reason": "Translate brief as the technical requirements document, not the adverb briefly."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "ഈ പരിശോധനകൾ സാങ്കേതിക ആവശ്യകതകളുടെ വിവരണം പൂർണ്ണമാണോ എന്നും ടെംപ്ലേറ്റിന്റെ ജ്യാമിതിയും പരിശോധിക്കുന്നു. അവ ബലം, നിർമ്മാണയോഗ്യത, വസ്തുവിന്റെ അനുയോജ്യത, ഉൽപ്പന്ന സുരക്ഷ എന്നിവ സാക്ഷ്യപ്പെടുത്തുന്നില്ല. നിർമ്മാതാവ് നിർമ്മാണവുമായി ബന്ധപ്പെട്ട കാര്യങ്ങൾ വിലയിരുത്തുന്നു.",
+      "reason": "Restore technical requirements completeness instead of simple completeness and retain the negative certification statement."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Estas comprobaciones verifican que las especificaciones técnicas estén completas y revisan la geometría de la plantilla. No certifican la resistencia, la viabilidad de fabricación, la idoneidad del material ni la seguridad del producto. El fabricante revisa los aspectos de fabricación.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Ces vérifications portent sur l’exhaustivité du cahier des charges et la géométrie du modèle. Elles ne certifient ni la résistance, ni la faisabilité de la fabrication, ni l’adéquation du matériau, ni la sécurité du produit. Le fabricant vérifie les conditions de fabrication.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead. Restores the maker, not the user, as responsible for manufacturing review."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Estas verificações avaliam se as especificações técnicas estão completas e verificam a geometria do modelo. Não certificam a resistência, a viabilidade de fabrico, a adequação do material nem a segurança do produto. O fabricante analisa o processo de fabrico.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "pl",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Te kontrole oceniają kompletność specyfikacji technicznej i geometrię szablonu. Nie potwierdzają wytrzymałości, możliwości produkcji, odpowiedniości materiału ani bezpieczeństwa produktu. Producent sprawdza proces produkcji.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "uk",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Ці перевірки оцінюють повноту технічного завдання та геометрію шаблону. Вони не підтверджують міцність, технологічність, придатність матеріалу чи безпечність виробу. Питання виготовлення перевіряє виконавець.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "id",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Pemeriksaan ini menilai kelengkapan spesifikasi teknis dan geometri templat. Pemeriksaan ini tidak memberikan sertifikasi atas kekuatan, kemampuan untuk diproduksi, kesesuaian material, atau keamanan produk. Pembuat meninjau proses manufaktur.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "cs",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Tyto kontroly ověřují úplnost technického zadání a geometrii šablony. Nepotvrzují pevnost, vyrobitelnost, vhodnost materiálu ani bezpečnost výrobku. Výrobu posuzuje výrobce.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "sk",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Tieto kontroly overujú úplnosť technického zadania a geometriu šablóny. Nepotvrdzujú pevnosť, vyrobiteľnosť, vhodnosť materiálu ani bezpečnosť výrobku. Výrobu posudzuje výrobca.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "hu",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Ezek az ellenőrzések a műszaki követelmények teljességét és a sablon geometriáját vizsgálják. Nem igazolják a szilárdságot, a gyárthatóságot, az anyag megfelelőségét vagy a termék biztonságát. A gyártási folyamatot a gyártó ellenőrzi.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "ro",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Aceste verificări evaluează caracterul complet al specificațiilor tehnice și geometria șablonului. Ele nu certifică rezistența, posibilitatea de fabricare, adecvarea materialului sau siguranța produsului. Producătorul verifică aspectele de fabricație.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "hr",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Ove provjere ocjenjuju potpunost tehničkih zahtjeva i geometriju predloška. Ne potvrđuju čvrstoću, mogućnost proizvodnje, prikladnost materijala ni sigurnost proizvoda. Proizvođač provjerava proizvodni proces.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "el",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Αυτοί οι έλεγχοι εξετάζουν την πληρότητα των τεχνικών προδιαγραφών και τη γεωμετρία του προτύπου. Δεν πιστοποιούν την αντοχή, την κατασκευασιμότητα, την καταλληλότητα του υλικού ή την ασφάλεια του προϊόντος. Ο κατασκευαστής ελέγχει τη διαδικασία κατασκευής.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "fi",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Nämä tarkistukset arvioivat teknisten vaatimusten kattavuutta ja mallipohjan geometriaa. Ne eivät vahvista lujuutta, valmistettavuutta, materiaalin soveltuvuutta tai tuotteen turvallisuutta. Valmistaja arvioi valmistusprosessin.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Ti pregledi preverjajo popolnost tehničnih zahtev in geometrijo predloge. Ne potrjujejo trdnosti, izdelovalnosti, ustreznosti materiala ali varnosti izdelka. Proizvajalec preveri proizvodni proces.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "ca",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Aquestes comprovacions avaluen si les especificacions tècniques són completes i revisen la geometria de la plantilla. No certifiquen la resistència, la viabilitat de fabricació, l’adequació del material ni la seguretat del producte. El fabricant revisa els aspectes de fabricació.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "he",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "בדיקות אלה בוחנות את שלמות המפרט הטכני ואת גיאומטריית התבנית. הן אינן מאשרות חוזק, יכולת ייצור, התאמת חומר או בטיחות המוצר. היצרן בוחן את תהליך הייצור.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "ms",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "Pemeriksaan ini menilai kelengkapan spesifikasi teknikal dan geometri templat. Ia tidak mengesahkan kekuatan, kebolehkilangan, kesesuaian bahan atau keselamatan produk. Pengeluar menyemak proses pembuatan.",
+      "reason": "Restores completeness of the technical requirements document; the translation described brief/basic/general completeness instead."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "No se generan datos CAM ni código de control para máquinas de fabricación.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Aucune donnée CAM ni aucun code de commande de machine de fabrication n’est généré.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Não são gerados dados CAM nem código de controlo para máquinas de fabrico.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "pl",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Nie są generowane dane CAM ani kod sterujący maszynami produkcyjnymi.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "uk",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Дані CAM та керувальний код для верстатів не створюються.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "id",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Data CAM maupun kode kendali untuk mesin produksi tidak dihasilkan.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "cs",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Nevytvářejí se data CAM ani řídicí kód pro výrobní stroje.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "sk",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Nevytvárajú sa dáta CAM ani riadiaci kód pre výrobné stroje.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "hu",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Nem készülnek CAM-adatok vagy a gyártógépek vezérlésére szolgáló kódok.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "ro",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Nu se generează date CAM sau cod de comandă pentru utilajele de fabricație.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "hr",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Ne generiraju se CAM podaci ni upravljački kod za proizvodne strojeve.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "el",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Δεν δημιουργούνται δεδομένα CAM ή κώδικας ελέγχου για μηχανήματα παραγωγής.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "fi",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM-tietoja tai valmistuskoneiden ohjauskoodia ei luoda.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Ne ustvarjajo se podatki CAM ali krmilna koda za proizvodne stroje.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "ca",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "No es generen dades CAM ni codi de control per a màquines de fabricació.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "he",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "לא נוצרים נתוני CAM או קוד בקרה למכונות ייצור.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "ms",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Data CAM atau kod kawalan untuk mesin pembuatan tidak dijana.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_4e96d5c6",
+      "en": "I am authorized to publish these details and contacts on behalf of the organization, and agree to make them public.",
+      "ru": "У меня есть право публиковать эти сведения и контакты от имени организации. Я согласен на их открытое размещение.",
+      "text": "Estoy autorizado a publicar esta información y estos datos de contacto en nombre de la organización, y acepto que se hagan públicos.",
+      "reason": "Restores authorization for listing information as well as contact details; the original narrowed consent to contact data."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "Toute personne disposant de ce lien peut modifier ou supprimer l’annonce. Conservez ce lien dans un endroit privé : l’accès ne peut pas être rétabli sans la clé. Ne publiez pas ce lien et ne l’envoyez pas à vos clients.",
+      "reason": "Feminine pronouns referred to the public listing rather than the private management link."
+    },
+    {
+      "locale": "ro",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "Oricine are acest link poate modifica sau șterge înregistrarea. Salvați linkul într-un loc privat: accesul nu poate fi recuperat fără cheie. Nu publicați linkul și nu îl trimiteți clienților.",
+      "reason": "Feminine pronouns referred to the public record rather than the private management link."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "Vsak, ki ima to povezavo, lahko uredi ali izbriše vnos. Povezavo shranite na zasebnem mestu: dostopa ni mogoče obnoviti brez ključa. Povezave ne objavljajte in je ne pošiljajte strankam.",
+      "reason": "Masculine pronouns referred to the public entry rather than the feminine private link."
+    },
+    {
+      "locale": "he",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "כל מי שיש לו קישור זה יכול לערוך או למחוק את הרשומה. שמרו את הקישור במקום פרטי: לא ניתן לשחזר את הגישה ללא המפתח. אל תפרסמו את הקישור ואל תשלחו אותו ללקוחות.",
+      "reason": "Makes both prohibitions explicit; the original coordinated do not publish with the positive imperative send."
+    },
+    {
+      "locale": "ca",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "Després de publicar l’anunci, guarda l’enllaç privat de gestió. Et permet editar o eliminar l’anunci. Mantén l’enllaç privat: qualsevol persona que el tingui pot gestionar l’entrada. No hi ha opció de recuperar l’accés per correu electrònic.",
+      "reason": "The original publicar-lo says to publish the private link; the listing is published while the management link stays private."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "এই পরীক্ষাগুলো প্রযুক্তিগত চাহিদাপত্রের পূর্ণতা এবং টেমপ্লেটের জ্যামিতি যাচাই করে। এগুলো শক্তি, উৎপাদনযোগ্যতা, উপাদানের উপযুক্ততা বা পণ্যের নিরাপত্তা নিশ্চিত করে না। প্রস্তুতকারক উৎপাদনের বিষয়গুলো পর্যালোচনা করেন।",
+      "reason": "Restores completeness of the technical requirements document instead of briefly checking generic completeness."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "কোনো CAM ডেটা বা উৎপাদনযন্ত্রের নিয়ন্ত্রণ কোড তৈরি করা হয় না।",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "তথ্য প্রকাশ করার পরে আপনার ব্যক্তিগত ব্যবস্থাপনা লিঙ্কটি সংরক্ষণ করুন। এই লিঙ্ক দিয়ে আপনার প্রকাশিত তথ্য সম্পাদনা বা মুছে ফেলতে পারবেন। লিঙ্কটি গোপন রাখুন: যার কাছে এটি থাকবে সে তথ্যটি পরিচালনা করতে পারবে। ইমেলের মাধ্যমে প্রবেশাধিকার পুনরুদ্ধার করার ব্যবস্থা নেই।",
+      "reason": "Clarifies access recovery by email rather than recovery of email itself; identifies the listing as what is published."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "આ તપાસો તકનીકી જરૂરિયાતોના દસ્તાવેજની સંપૂર્ણતા અને નમૂનાની ભૂમિતિનું મૂલ્યાંકન કરે છે. તે મજબૂતાઈ, ઉત્પાદનક્ષમતા, સામગ્રીની યોગ્યતા અથવા ઉત્પાદનની સલામતીને પ્રમાણિત કરતી નથી. ઉત્પાદક ઉત્પાદન પ્રક્રિયાની સમીક્ષા કરે છે.",
+      "reason": "Restores completeness of the technical requirements document instead of brief completeness."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM ડેટા અથવા ઉત્પાદન મશીનો માટેનો નિયંત્રણ કોડ બનાવવામાં આવતો નથી.",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "આ લિંક ધરાવનાર કોઈપણ વ્યક્તિ નોંધમાં ફેરફાર કરી શકે છે અથવા તેને કાઢી શકે છે. લિંકને ખાનગી જગ્યાએ સાચવો: કી વિના સંચાલનનો ઍક્સેસ પુનઃપ્રાપ્ત કરી શકાશે નહીં. લિંકને જાહેર કરશો નહીં અને ગ્રાહકોને મોકલશો નહીં.",
+      "reason": "Restores recovery of management access rather than recovery of the information/link and makes the secret link the explicit object of non-publication."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "નોંધ પ્રકાશિત કર્યા પછી તમારી ખાનગી સંચાલન લિંક સાચવો. આ લિંકથી તમે નોંધમાં ફેરફાર કરી શકો છો અથવા તેને કાઢી શકો છો. લિંકને ખાનગી રાખો: જેની પાસે તે હશે તે નોંધનું સંચાલન કરી શકે છે. ઇમેઇલ દ્વારા ઍક્સેસ પુનઃપ્રાપ્ત કરવાની સુવિધા નથી.",
+      "reason": "Clarifies that the listing is published and that email cannot restore access, not the record."
+    },
+    {
+      "locale": "hr",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "Svatko tko ima ovu poveznicu može urediti ili izbrisati unos. Spremite poveznicu na privatno mjesto: pristup se ne može vratiti bez ključa. Nemojte javno objaviti poveznicu niti je slati klijentima.",
+      "reason": "Reviewed worker-proposed replacement for structurally rejected mixed-script candidate; preserves secret-link handling and denial of access recovery without the key."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "لا يتم إنشاء بيانات CAM أو شيفرة تحكّم لآلات التصنيع.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "No se generan datos CAM ni código de control para máquinas de fabricación.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Aucune donnée CAM ni aucun code de commande de machine de fabrication n’est généré.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Es werden weder CAM-Daten noch Steuerprogramme für Fertigungsmaschinen erzeugt.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "hi",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM डेटा या निर्माण मशीनों को नियंत्रित करने वाला कोड उत्पन्न नहीं किया जाता है।",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "th",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "ไม่มีการสร้างข้อมูล CAM หรือโค้ดควบคุมเครื่องจักรสำหรับการผลิต",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "it",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Non vengono generati dati CAM né codice di controllo per macchine di produzione.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Não são gerados dados CAM nem código de controle para máquinas de fabricação.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Er worden geen CAM-gegevens of besturingscode voor productiemachines gegenereerd.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "sv",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Inga CAM-data eller styrkoder för tillverkningsmaskiner genereras.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "da",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Der genereres hverken CAM-data eller styringskode til produktionsmaskiner.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "no",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Det genereres verken CAM-data eller styringskode for produksjonsmaskiner.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "tr",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM verileri veya üretim makineleri için kontrol kodu oluşturulmaz.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "vi",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "Không tạo dữ liệu CAM hoặc mã điều khiển máy gia công.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM ದತ್ತಾಂಶ ಅಥವಾ ಉತ್ಪಾದನಾ ಯಂತ್ರಗಳನ್ನು ನಿಯಂತ್ರಿಸುವ ಕೋಡ್ ಅನ್ನು ರಚಿಸಲಾಗುವುದಿಲ್ಲ.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM ഡാറ്റയോ നിർമ്മാണ യന്ത്രങ്ങൾക്കുള്ള നിയന്ത്രണ കോഡോ സൃഷ്ടിക്കുന്നില്ല.",
+      "reason": "Clarifies manufacturing-machine control code as in the Russian source; the literal machine-code term can mean CPU instructions. This is a scope clarification, not an inverted negation."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Especificaciones técnicas v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Cahier des charges v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "uk",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Технічне завдання v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "id",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Spesifikasi teknis v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "sk",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Technické zadanie v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "fi",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Tekniset vaatimukset v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ca",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Especificacions tècniques v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "he",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "מפרט טכני v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ms",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Spesifikasi teknikal v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Especificações técnicas v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "pl",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Specyfikacja techniczna v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "cs",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Technické zadání v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "hu",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Műszaki követelmények v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ro",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Specificații tehnice v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "hr",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Tehnički zahtjevi v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "el",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Τεχνικές προδιαγραφές v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Tehnične zahteve v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "প্রযুক্তিগত চাহিদাপত্র v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "તકનીકી જરૂરિયાતો v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "المواصفات الفنية v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Especificaciones técnicas v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Cahier des charges v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ja",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "技術仕様書 v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "hi",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "तकनीकी आवश्यकताएँ v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "th",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "ข้อกำหนดทางเทคนิค v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "it",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Specifiche tecniche v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Especificações técnicas v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Technische specificatie v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "sv",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Teknisk kravspecifikation v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "da",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Teknisk kravspecifikation v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "no",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Teknisk kravspesifikasjon v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "tr",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Teknik gereksinimler v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "vi",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "Yêu cầu kỹ thuật v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ko",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "기술 요구사항 v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "技术需求说明 v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "技術需求說明 v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "ತಾಂತ್ರಿಕ ಅವಶ್ಯಕತೆಗಳು v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "സാങ്കേതിക ആവശ്യകതകൾ v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "तांत्रिक आवश्यकता v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତା v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "ਤਕਨੀਕੀ ਲੋੜਾਂ v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "தொழில்நுட்பத் தேவைகள் v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "సాంకేతిక అవసరాలు v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_fe785b1e",
+      "en": "Brief v",
+      "ru": "ТЗ v",
+      "text": "تکنیکی تقاضے v",
+      "reason": "Restores technical brief/specification rather than short version or summary, and retains the literal v version prefix."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "या तपासण्या तांत्रिक आवश्यकतांच्या विवरणाची पूर्णता आणि टेम्पलेटची भूमिती तपासतात. त्या मजबुती, निर्मितीयोग्यता, सामग्रीची उपयुक्तता किंवा उत्पादनाची सुरक्षितता प्रमाणित करत नाहीत. निर्माता उत्पादनाशी संबंधित बाबींचा आढावा घेतो.",
+      "reason": "Restores completeness of the technical requirements document rather than brief or short completeness; retains manufacturing review and certification limits."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "ଏହି ଯାଞ୍ଚଗୁଡ଼ିକ ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତା ବିବରଣୀର ପୂର୍ଣ୍ଣତା ଓ ନମୁନାର ଜ୍ୟାମିତିକୁ ଯାଞ୍ଚ କରେ। ଏଗୁଡ଼ିକ ଦୃଢ଼ତା, ଉତ୍ପାଦନଯୋଗ୍ୟତା, ସାମଗ୍ରୀର ଉପଯୁକ୍ତତା କିମ୍ବା ଉତ୍ପାଦର ସୁରକ୍ଷାକୁ ପ୍ରମାଣିତ କରେ ନାହିଁ। ନିର୍ମାତା ଉତ୍ପାଦନ ସମ୍ବନ୍ଧୀୟ ବିଷୟଗୁଡ଼ିକର ସମୀକ୍ଷା କରନ୍ତି।",
+      "reason": "Restores completeness of the technical requirements document rather than brief or short completeness; retains manufacturing review and certification limits."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "ਇਹ ਜਾਂਚਾਂ ਤਕਨੀਕੀ ਲੋੜਾਂ ਦੇ ਦਸਤਾਵੇਜ਼ ਦੀ ਪੂਰਨਤਾ ਅਤੇ ਟੈਂਪਲੇਟ ਦੀ ਜਿਓਮੈਟਰੀ ਦੀ ਜਾਂਚ ਕਰਦੀਆਂ ਹਨ। ਇਹ ਮਜ਼ਬੂਤੀ, ਨਿਰਮਾਣਯੋਗਤਾ, ਸਮੱਗਰੀ ਦੀ ਉਚਿਤਤਾ ਜਾਂ ਉਤਪਾਦ ਦੀ ਸੁਰੱਖਿਆ ਨੂੰ ਪ੍ਰਮਾਣਿਤ ਨਹੀਂ ਕਰਦੀਆਂ। ਨਿਰਮਾਤਾ ਉਤਪਾਦਨ ਨਾਲ ਸੰਬੰਧਿਤ ਪੱਖਾਂ ਦੀ ਸਮੀਖਿਆ ਕਰਦਾ ਹੈ।",
+      "reason": "Restores completeness of the technical requirements document rather than brief or short completeness; retains manufacturing review and certification limits."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "இந்தச் சோதனைகள் தொழில்நுட்பத் தேவைகள் ஆவணத்தின் முழுமையையும் வார்ப்புருவின் வடிவவியலையும் சரிபார்க்கின்றன. அவை வலிமை, உற்பத்தி செய்யக்கூடிய தன்மை, மூலப்பொருளின் பொருத்தம் அல்லது தயாரிப்பின் பாதுகாப்பைச் சான்றளிப்பதில்லை. உற்பத்தியாளர் உற்பத்தி தொடர்பான அம்சங்களை மதிப்பாய்வு செய்கிறார்.",
+      "reason": "Restores completeness of the technical requirements document rather than brief or short completeness; retains manufacturing review and certification limits."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "ఈ తనిఖీలు సాంకేతిక అవసరాల పత్రం యొక్క సంపూర్ణతను మరియు టెంప్లేట్ రేఖాగణితాన్ని పరిశీలిస్తాయి. అవి బలం, తయారీ సాధ్యత, పదార్థం యొక్క అనుకూలత లేదా ఉత్పత్తి భద్రతను ధృవీకరించవు. తయారీదారు తయారీ సంబంధిత అంశాలను సమీక్షిస్తారు.",
+      "reason": "Restores completeness of the technical requirements document rather than brief or short completeness; retains manufacturing review and certification limits."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_80fb7c80",
+      "en": "These checks cover brief completeness and template geometry. They do not certify strength, manufacturability, material suitability or product safety. The maker reviews manufacturing.",
+      "ru": "Эти проверки оценивают полноту ТЗ и геометрию шаблона. Они не подтверждают прочность, технологичность, пригодность материала или безопасность изделия. Производство согласует исполнитель.",
+      "text": "یہ جانچیں تکنیکی تقاضوں کی دستاویز کی تکمیل اور سانچے کی جیومیٹری کا جائزہ لیتی ہیں۔ یہ مضبوطی، قابلِ تیاری ہونے، مواد کی موزونیت یا مصنوعات کی حفاظت کی تصدیق نہیں کرتیں۔ تیار کنندہ تیاری سے متعلق امور کا جائزہ لیتا ہے۔",
+      "reason": "Restores completeness of the technical requirements document rather than brief or short completeness; retains manufacturing review and certification limits."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM डेटा किंवा उत्पादन यंत्रांसाठी नियंत्रण कोड तयार केला जात नाही.",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM ତଥ୍ୟ କିମ୍ବା ଉତ୍ପାଦନ ଯନ୍ତ୍ର ପାଇଁ ନିୟନ୍ତ୍ରଣ କୋଡ୍ ସୃଷ୍ଟି କରାଯାଏ ନାହିଁ।",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM ਡਾਟਾ ਜਾਂ ਉਤਪਾਦਨ ਮਸ਼ੀਨਾਂ ਲਈ ਨਿਯੰਤਰਣ ਕੋਡ ਨਹੀਂ ਬਣਾਇਆ ਜਾਂਦਾ।",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM தரவுகளோ உற்பத்தி இயந்திரங்களுக்கான கட்டுப்பாட்டுக் குறியீடோ உருவாக்கப்படுவதில்லை.",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM డేటా లేదా తయారీ యంత్రాల నియంత్రణ కోడ్ సృష్టించబడదు.",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_78164b30",
+      "en": "No CAM or machine code is generated.",
+      "ru": "CAM и управляющий код для станка не создаются.",
+      "text": "CAM ڈیٹا یا پیداواری مشینوں کے لیے کنٹرول کوڈ تیار نہیں کیا جاتا۔",
+      "reason": "Clarifies manufacturing-machine control code rather than CPU machine code, matching the Russian source."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "ही लिंक असलेली कोणतीही व्यक्ती नोंद संपादित किंवा हटवू शकते. लिंक खाजगी आणि सुरक्षित ठिकाणी जतन करा: की नसल्यास प्रवेश पुन्हा मिळवता येत नाही. लिंक सार्वजनिक करू नका किंवा ग्राहकांना पाठवू नका.",
+      "reason": "Identify the secret link as the object to save and not publish; unavailable recovery concerns access, not public information."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "नोंद प्रकाशित केल्यानंतर तुमची खाजगी व्यवस्थापन लिंक जतन करा. या लिंकद्वारे नोंद संपादित किंवा हटवता येते. लिंक खाजगी ठेवा: ती असलेली कोणतीही व्यक्ती नोंद व्यवस्थापित करू शकते. ईमेलद्वारे प्रवेश पुन्हा मिळवण्याची सोय नाही.",
+      "reason": "Clarifies publication of the listing and recovery of access, not recovery of public information."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "ଏହି ଲିଙ୍କ୍ ଥିବା ଯେକେହି ତାଲିକାଭୁକ୍ତ ତଥ୍ୟକୁ ସମ୍ପାଦନା କିମ୍ବା ବିଲୋପ କରିପାରିବେ। ଲିଙ୍କ୍‌ଟିକୁ ଗୋପନ ସ୍ଥାନରେ ସଞ୍ଚୟ କରନ୍ତୁ: କୀ ବିନା ପ୍ରବେଶାଧିକାର ଫେରାଇ ପାଇବା ସମ୍ଭବ ନୁହେଁ। ଲିଙ୍କ୍‌ଟିକୁ ସାର୍ବଜନୀନ କରନ୍ତୁ ନାହିଁ କିମ୍ବା ଗ୍ରାହକମାନଙ୍କୁ ପଠାନ୍ତୁ ନାହିଁ।",
+      "reason": "The link allows editing the listing, not editing the link itself. Prohibition covers all public sharing, not only social networks, and access recovery requires the key."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "ତାଲିକାଭୁକ୍ତ ତଥ୍ୟ ପ୍ରକାଶ କରିବା ପରେ ଆପଣଙ୍କର ଗୋପନ ପରିଚାଳନା ଲିଙ୍କ୍ ସଞ୍ଚୟ କରନ୍ତୁ। ଏହି ଲିଙ୍କ୍ ଦ୍ୱାରା ଆପଣ ତଥ୍ୟକୁ ସମ୍ପାଦନା କିମ୍ବା ବିଲୋପ କରିପାରିବେ। ଲିଙ୍କ୍‌ଟିକୁ ଗୋପନ ରଖନ୍ତୁ: ଏହା ଥିବା ଯେକେହି ତଥ୍ୟକୁ ପରିଚାଳନା କରିପାରିବେ। ଇମେଲ ମାଧ୍ୟମରେ ପ୍ରବେଶାଧିକାର ଫେରାଇ ପାଇବାର ବ୍ୟବସ୍ଥା ନାହିଁ।",
+      "reason": "Restores access recovery by email rather than recovery of email itself; the public listing is published, not the private management link."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "ਇਹ ਲਿੰਕ ਰੱਖਣ ਵਾਲਾ ਕੋਈ ਵੀ ਵਿਅਕਤੀ ਦਰਜ ਜਾਣਕਾਰੀ ਨੂੰ ਸੋਧ ਜਾਂ ਮਿਟਾ ਸਕਦਾ ਹੈ। ਲਿੰਕ ਨੂੰ ਕਿਸੇ ਨਿੱਜੀ ਥਾਂ ਉੱਤੇ ਸੰਭਾਲੋ: ਕੁੰਜੀ ਤੋਂ ਬਿਨਾਂ ਪਹੁੰਚ ਮੁੜ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ। ਲਿੰਕ ਨੂੰ ਜਨਤਕ ਨਾ ਕਰੋ ਅਤੇ ਗਾਹਕਾਂ ਨੂੰ ਨਾ ਭੇਜੋ।",
+      "reason": "The link allows editing the listing, not editing the link itself; keep the secret-link prohibition explicit."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_a576de7c",
+      "en": "Save your private link after publishing. It lets you edit or delete your listing. Keep it private: anyone with the link can manage the record. There is no email recovery.",
+      "ru": "После публикации сохраните личную ссылку. Она позволяет изменять и удалять только вашу карточку. Не публикуйте её: любой, у кого есть ссылка, сможет управлять записью. Восстановления через почту нет.",
+      "text": "ਦਰਜ ਜਾਣਕਾਰੀ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਨ ਤੋਂ ਬਾਅਦ ਆਪਣਾ ਨਿੱਜੀ ਪ੍ਰਬੰਧਨ ਲਿੰਕ ਸੰਭਾਲੋ। ਇਸ ਲਿੰਕ ਨਾਲ ਤੁਸੀਂ ਜਾਣਕਾਰੀ ਸੋਧ ਜਾਂ ਮਿਟਾ ਸਕਦੇ ਹੋ। ਲਿੰਕ ਨਿੱਜੀ ਰੱਖੋ: ਜਿਸ ਕੋਲ ਇਹ ਹੋਵੇ, ਉਹ ਜਾਣਕਾਰੀ ਦਾ ਪ੍ਰਬੰਧ ਕਰ ਸਕਦਾ ਹੈ। ਈਮੇਲ ਰਾਹੀਂ ਪਹੁੰਚ ਮੁੜ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਕੋਈ ਵਿਵਸਥਾ ਨਹੀਂ ਹੈ।",
+      "reason": "Restores access recovery by email rather than recovery of email itself."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_7a1f9f77",
+      "en": "The listing will disappear from the list and map. This key cannot restore it.",
+      "ru": "Запись исчезнет из списка и с карты. Восстановить её этим ключом будет нельзя.",
+      "text": "ਇਹ ਦਰਜ ਜਾਣਕਾਰੀ ਸੂਚੀ ਅਤੇ ਨਕਸ਼ੇ ਤੋਂ ਹਟ ਜਾਵੇਗੀ। ਇਸ ਕੁੰਜੀ ਨਾਲ ਇਸ ਨੂੰ ਮੁੜ ਬਹਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।",
+      "reason": "Removes an invented condition about the listing expiring; this is the immediate deletion consequence."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_4e96d5c6",
+      "en": "I am authorized to publish these details and contacts on behalf of the organization, and agree to make them public.",
+      "ru": "У меня есть право публиковать эти сведения и контакты от имени организации. Я согласен на их открытое размещение.",
+      "text": "நிறுவனத்தின் சார்பில் இந்த விவரங்களையும் தொடர்புத் தகவல்களையும் வெளியிட எனக்கு அதிகாரம் உள்ளது; அவற்றைப் பொதுவில் வெளியிட நான் சம்மதிக்கிறேன்.",
+      "reason": "Restores explicit agreement to public disclosure in addition to authorization to publish."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "இந்த இணைப்பைக் கொண்ட எவரும் பதிவைத் திருத்தலாம் அல்லது நீக்கலாம். இணைப்பைத் தனிப்பட்ட பாதுகாப்பான இடத்தில் சேமிக்கவும்: நிர்வாகச் சாவி இல்லாமல் அணுகலை மீட்டெடுக்க முடியாது. இணைப்பை வெளியிடவோ வாடிக்கையாளர்களுக்கு அனுப்பவோ வேண்டாம்.",
+      "reason": "The secret is a management key, not an account password; identify the link as the object not to publish."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_42be2f8a",
+      "en": "Anyone with this link can edit or delete the listing. Save it somewhere private: access cannot be recovered without the key. Do not publish it or send it to customers.",
+      "ru": "Любой, у кого есть эта ссылка, может изменить или удалить запись. Сохраните её у себя: восстановить доступ без ключа невозможно. Не публикуйте ссылку и не пересылайте её клиентам.",
+      "text": "ఈ లింక్ ఉన్న ఎవరైనా నమోదు చేసిన వివరాలను సవరించవచ్చు లేదా తొలగించవచ్చు. లింక్‌ను వ్యక్తిగతమైన సురక్షిత ప్రదేశంలో భద్రపరచండి: కీ లేకుండా యాక్సెస్‌ను తిరిగి పొందలేరు. లింక్‌ను బహిరంగంగా ప్రచురించవద్దు లేదా కస్టమర్‌లకు పంపవద్దు.",
+      "reason": "Clarifies the private link as the object to store and not publish, and recovery of management access rather than listing information."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_4e96d5c6",
+      "en": "I am authorized to publish these details and contacts on behalf of the organization, and agree to make them public.",
+      "ru": "У меня есть право публиковать эти сведения и контакты от имени организации. Я согласен на их открытое размещение.",
+      "text": "میں ادارے کی جانب سے یہ تفصیلات اور رابطے کی معلومات شائع کرنے کا مجاز ہوں، اور انہیں عوامی طور پر دستیاب کرنے پر رضامند ہوں۔",
+      "reason": "Expresses consent, not merely readiness, to public disclosure of listing details and contacts."
+    },
+    {
+      "en": ". Shared daily limits also apply.",
+      "id": "m_2973392c",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": ". Действуют также общие суточные лимиты.",
+      "text": "。共通の日次上限も適用されます。"
+    },
+    {
+      "en": "Choose either a parametric CAD model or a simple template.",
+      "id": "m_31a86259",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Выберите либо параметрическую модель CAD, либо простой шаблон.",
+      "text": "パラメトリックCADモデルか、シンプルなテンプレートを選択してください。"
+    },
+    {
+      "en": ". This limit is shared with the brief assistant; daily limits also apply.",
+      "id": "m_38b0df8a",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": ". Лимит общий с помощником ТЗ; также действуют суточные ограничения.",
+      "text": "。この上限は技術要件書アシスタントと共有されます。日次上限も適用されます。"
+    },
+    {
+      "en": "One requirement per line: dimensions, tolerances, loads, temperature, finish…",
+      "id": "m_43441c05",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Одно требование на строку: размеры, допуски, нагрузки, температура, поверхность…",
+      "text": "要件は一行につき一項目で入力してください：寸法、公差、荷重、温度、仕上げなど。"
+    },
+    {
+      "en": "Your daily AI request limit has been reached.",
+      "id": "m_58b64ff9",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Достигнут ваш суточный лимит запросов ИИ.",
+      "text": "あなたのAIリクエストの日次上限に達しました。"
+    },
+    {
+      "en": "Parts, purchased components and assemblies. Quantities are per finished product; leave blank if they still need clarification.",
+      "id": "m_792ab759",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Детали, покупные компоненты и сборочные узлы. Количество — на одно изделие; оставьте поле пустым, если его нужно уточнить.",
+      "text": "部品、購入部品、組立品。数量は完成品あたりの数です。確認が必要な場合は空欄にしてください。"
+    },
+    {
+      "en": "Zoom CAD out",
+      "id": "m_7ddc297e",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Уменьшить CAD-модель",
+      "text": "CADを縮小表示"
+    },
+    {
+      "en": "One item per line",
+      "id": "m_8c933809",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "По одному пункту на строку",
+      "text": "一行につき一項目"
+    },
+    {
+      "en": "The daily limit has been reached. Try again later.",
+      "id": "m_9cefbae1",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Достигнут суточный лимит. Повторите позже.",
+      "text": "日次上限に達しました。後でもう一度お試しください。"
+    },
+    {
+      "en": "One item per line.",
+      "id": "m_dd081b79",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "По одному пункту на строку.",
+      "text": "一行につき一項目。"
+    },
+    {
+      "en": "This server’s daily AI request limit has been reached.",
+      "id": "m_e88b8144",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Достигнут суточный лимит ИИ на этом сервере.",
+      "text": "このサーバーのAIリクエストの日次上限に達しました。"
+    },
+    {
+      "en": "Missing geometry, one per line",
+      "id": "m_ee5abe11",
+      "locale": "ja",
+      "reason": "Reviewed structural recovery: preserve CAD where required, express daily/per-line meaning without inserting Arabic numerals, and retain the exact original scope.",
+      "ru": "Недостающая геометрия, по одному на строку",
+      "text": "不足している形状を一行につき一項目で入力"
+    },
+    {
+      "en": "Parts, assemblies, spares, tooling, furniture and small batches. Each component can have its own material and process.",
+      "id": "m_93751819",
+      "locale": "bn-BD",
+      "reason": "Replace mixed-script corruption or a duplicated technical term while preserving the source meaning.",
+      "ru": "Детали, узлы, запасные части, оснастка, мебель и малые серии. Для каждой позиции можно указать свой материал и технологию.",
+      "text": "যন্ত্রাংশ, অ্যাসেম্বলি, খুচরা যন্ত্রাংশ, টুলিং, আসবাবপত্র ও ছোট ব্যাচ। প্রতিটি উপাদানের জন্য আলাদা উপকরণ ও উৎপাদন প্রক্রিয়া নির্দিষ্ট করা যেতে পারে।"
+    },
+    {
+      "en": "Check specified bounds",
+      "id": "m_ac187e18",
+      "locale": "bn-BD",
+      "reason": "Replace mixed-script corruption and identify geometric bounds as overall dimensions, consistent with the Russian source.",
+      "ru": "Проверить заданные габариты",
+      "text": "নির্দিষ্ট সামগ্রিক মাপ পরীক্ষা করুন"
+    },
+    {
+      "en": "OpenPrint helps people find each other and record agreements. Participants handle payment, shipping, manufacturing quality, and commercial disputes directly. This version does not include payments, escrow, or automatic model certification.",
+      "id": "m_901fc1f1",
+      "locale": "gu-IN",
+      "reason": "Replace mixed-script corruption or a duplicated technical term while preserving the source meaning.",
+      "ru": "Площадка помогает находить друг друга и сохранять договорённости. Оплата, доставка, качество изготовления и разрешение коммерческих споров остаются ответственностью участников. Платёжной системы, эскроу и автоматической проверки моделей здесь нет.",
+      "text": "OpenPrint લોકોને એકબીજાને શોધવામાં અને કરારોને નોંધવામાં મદદ કરે છે. સહભાગીઓ ચુકવણી, શિપિંગ, ઉત્પાદનની ગુણવત્તા અને વ્યાપારી વિવાદોનું સંચાલન સીધું કરે છે. આ સંસ્કરણમાં ચુકવણી, એસ્ક્રો અથવા સ્વચાલિત મોડેલ પ્રમાણનનો સમાવેશ થતો નથી."
+    },
+    {
+      "en": "A model is attached. The selected provider can access it after their offer is accepted.",
+      "id": "m_a1ca23c0",
+      "locale": "kn-IN",
+      "reason": "Replace mixed-script corruption or a duplicated technical term while preserving the source meaning.",
+      "ru": "К проекту приложен файл. Он откроется выбранному исполнителю после принятия предложения.",
+      "text": "ಮಾದರಿಯನ್ನು ಲಗತ್ತಿಸಲಾಗಿದೆ. ಆಯ್ಕೆ ಮಾಡಿದ ಸೇವಾ ಪೂರೈಕೆದಾರರ ಪ್ರಸ್ತಾವವನ್ನು ಅಂಗೀಕರಿಸಿದ ನಂತರ ಅವರು ಅದನ್ನು ನೋಡಬಹುದು."
+    },
+    {
+      "en": "Metal 3D printing",
+      "id": "m_5ba791ae",
+      "locale": "ro",
+      "reason": "Replace mixed-script corruption or a duplicated technical term while preserving the source meaning.",
+      "ru": "3D-печать металлом",
+      "text": "Imprimare 3D cu metal"
+    },
+    {
+      "en": "A starting point for talking with your maker",
+      "id": "m_c05d0f25",
+      "locale": "sl-SI",
+      "reason": "Replace mixed-script corruption or a duplicated technical term while preserving the source meaning.",
+      "ru": "Отправная точка для разговора с мастерской",
+      "text": "Izhodišče za pogovor z vašim izvajalcem"
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_0c3188f6",
+      "en": "Import changes the local draft. Review it and save separately. The format accepts geometry parameters, not executable code.",
+      "ru": "Импорт меняет локальный черновик. Проверьте его и сохраните отдельно. Формат принимает параметры геометрии, а не исполняемый код.",
+      "text": "ഇംപോർട്ട് ചെയ്യുമ്പോൾ ലോക്കൽ ഡ്രാഫ്റ്റിൽ മാറ്റങ്ങൾ വരും. അത് പരിശോധിച്ച് പ്രത്യേകം സേവ് ചെയ്യുക. ഈ ഫോർമാറ്റ് ജ്യാമിതി പാരാമീറ്ററുകൾ സ്വീകരിക്കുന്നു; പ്രവർത്തിപ്പിക്കാവുന്ന കോഡ് സ്വീകരിക്കുന്നില്ല.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_40954092",
+      "en": "The language could not be loaded. Check your connection and try again.",
+      "ru": "Не удалось загрузить язык. Проверьте соединение и повторите.",
+      "text": "ഭാഷ ലോഡ് ചെയ്യാനായില്ല. നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_47b65012",
+      "en": "The server did not respond. Check your connection and retry.",
+      "ru": "Не удалось получить ответ сервера. Проверьте соединение и повторите действие.",
+      "text": "സെർവർ പ്രതികരിച്ചില്ല. നിങ്ങളുടെ കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_4b94f1dd",
+      "en": "Your title, brief, city, requirements, and budget will appear on the public board. The file stays private until you select a provider.",
+      "ru": "Название, описание, город, требования и бюджет появятся в открытой ленте. Файл останется закрытым до выбора исполнителя.",
+      "text": "നിങ്ങളുടെ തലക്കെട്ട്, സാങ്കേതിക വിവരണം, നഗരം, ആവശ്യകതകൾ, ബജറ്റ് എന്നിവ പൊതുവായ പട്ടികയിൽ ദൃശ്യമാകും. ഒരു സേവനദാതാവിനെ തിരഞ്ഞെടുക്കുന്നതുവരെ ഫയൽ സ്വകാര്യമായി തുടരും.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope. Brief means technical requirements/documentation rather than a short version."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_5912997b",
+      "en": "The brief packet and template STL become available after confirming the revision.",
+      "ru": "Скачать пакет ТЗ и шаблон STL можно после подтверждения версии.",
+      "text": "പതിപ്പ് സ്ഥിരീകരിച്ച ശേഷം സാങ്കേതിക ആവശ്യകതകളുടെ പാക്കേജും ടെംപ്ലേറ്റിന്റെ STL ഫയലും ലഭ്യമാകും.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope. Brief means technical requirements/documentation rather than a short version."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_689c6888",
+      "en": "REPAIR",
+      "ru": "РЕМОНТ ДЕТАЛИ",
+      "text": "ഭാഗത്തിന്റെ അറ്റകുറ്റപ്പണി",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_736fba5f",
+      "en": "No map location",
+      "ru": "Без точки на карте",
+      "text": "ഭൂപടത്തിൽ സ്ഥാനം നൽകിയിട്ടില്ല",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_752f4a9e",
+      "en": "Bending",
+      "ru": "Гибка",
+      "text": "വളയ്ക്കൽ",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_870e3dc3",
+      "en": "For example, an enclosure for a weather station",
+      "ru": "Например, корпус для метеостанции",
+      "text": "ഉദാഹരണത്തിന്, കാലാവസ്ഥാ നിരീക്ഷണ സംവിധാനത്തിനുള്ള ഒരു പുറംകവചം",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_9dde9155",
+      "en": "Shared possibilities.",
+      "ru": "Общие возможности.",
+      "text": "പൊതുവായ സാധ്യതകൾ.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_a3e8b37d",
+      "en": "For example: break the product into components and ask about mounting and operating conditions.",
+      "ru": "Например: разбей изделие на компоненты и задай вопросы о креплении и условиях работы.",
+      "text": "ഉദാഹരണത്തിന്: ഉൽപ്പന്നത്തെ ഘടകങ്ങളായി തിരിച്ച്, ഘടിപ്പിക്കുന്ന രീതിയെക്കുറിച്ചും പ്രവർത്തന സാഹചര്യങ്ങളെക്കുറിച്ചും ചോദ്യങ്ങൾ ചോദിക്കുക.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_ce58f40c",
+      "en": "Right side",
+      "ru": "Правая боковина",
+      "text": "വലതുവശത്തെ പാനൽ",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope. Names the right side panel, matching the Russian furniture-component source."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_d862a026",
+      "en": "The page link is outdated. Start browsing again.",
+      "ru": "Ссылка на страницу устарела. Начните просмотр заново.",
+      "text": "പേജിലേക്കുള്ള ലിങ്ക് കാലഹരണപ്പെട്ടു. ബ്രൗസിംഗ് വീണ്ടും ആരംഭിക്കുക.",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_e36903cc",
+      "en": "Repair",
+      "ru": "Ремонт деталей",
+      "text": "ഭാഗങ്ങളുടെ അറ്റകുറ്റപ്പണി",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_e990f4c8",
+      "en": "Repair",
+      "ru": "Ремонт детали",
+      "text": "ഭാഗത്തിന്റെ അറ്റകുറ്റപ്പണി",
+      "reason": "Replaces rejected mixed Tamil/Telugu characters with Malayalam while preserving the source action and scope."
+    },
+    {
+      "en": "Direct request",
+      "id": "m_16f4aced",
+      "locale": "ur-PK",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Личный запрос",
+      "text": "براہ راست درخواست"
+    },
+    {
+      "en": "New message",
+      "id": "m_1e002e90",
+      "locale": "ur-PK",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Новое сообщение",
+      "text": "نیا پیغام"
+    },
+    {
+      "en": "Reported content",
+      "id": "m_4eda08ef",
+      "locale": "ur-PK",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Содержание, на которое пожаловались",
+      "text": "رپورٹ کیا گیا مواد"
+    },
+    {
+      "en": "Which material, process and acceptance criteria are required?",
+      "id": "m_85f918cb",
+      "locale": "ur-PK",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Какие материал, технология и критерии приёмки требуются?",
+      "text": "کون سا مواد، طریقۂ کار اور قبولیت کے معیارات درکار ہیں؟"
+    },
+    {
+      "en": "DIRECT REQUEST",
+      "id": "m_ee44bf0d",
+      "locale": "ur-PK",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "ЛИЧНЫЙ ЗАПРОС",
+      "text": "براہ راست درخواست"
+    },
+    {
+      "en": "Direct request for",
+      "id": "m_27d33fe8",
+      "locale": "mr-IN",
+      "reason": "Replace mixed-script output with a direct-request label. This prefix is rendered before the recipient name; a colon avoids an incorrect Marathi postposition order.",
+      "ru": "Личный запрос для",
+      "text": "थेट विनंती:"
+    },
+    {
+      "en": "The details",
+      "id": "m_0cf01fa6",
+      "locale": "pa-IN",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Детали",
+      "text": "ਵੇਰਵੇ"
+    },
+    {
+      "en": "Level of detail",
+      "id": "m_286ca35e",
+      "locale": "pa-IN",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Глубина разбора",
+      "text": "ਵੇਰਵੇ ਦਾ ਪੱਧਰ"
+    },
+    {
+      "en": "Details are published in an open directory. The listing’s ownership is not verified. Confirm contact details, available equipment, and terms directly with the studio.",
+      "id": "m_c4b7b050",
+      "locale": "pa-IN",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Сведения опубликованы в открытом каталоге. Принадлежность записи организации не проверяется. Контакты, наличие оборудования и условия работы уточняйте непосредственно у студии.",
+      "text": "ਵੇਰਵੇ ਇੱਕ ਖੁੱਲ੍ਹੀ ਡਾਇਰੈਕਟਰੀ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਂਦੇ ਹਨ। ਸੂਚੀ ਦੀ ਮਾਲਕੀ ਦੀ ਪੁਸ਼ਟੀ ਨਹੀਂ ਕੀਤੀ ਗਈ। ਸੰਪਰਕ ਵੇਰਵਿਆਂ, ਉਪਲਬਧ ਉਪਕਰਣਾਂ ਅਤੇ ਸ਼ਰਤਾਂ ਦੀ ਪੁਸ਼ਟੀ ਸਿੱਧੇ ਸਟੂਡੀਓ ਨਾਲ ਕਰੋ।"
+    },
+    {
+      "en": "Use report buttons for inappropriate content. Block unwanted contact in the conversation.",
+      "id": "m_91204f00",
+      "locale": "te-IN",
+      "reason": "Replace mixed-script words or wrong-language output with a source-bound translation, retaining the original action and scope.",
+      "ru": "Спорные материалы можно отправить модератору кнопкой жалобы. Нежелательное общение можно заблокировать в переписке.",
+      "text": "అనుచితమైన కంటెంట్ కోసం రిపోర్ట్ బటన్‌లను ఉపయోగించండి. సంభాషణలో అవాంఛిత సంప్రదింపులను బ్లాక్ చేయండి."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_040d636c",
+      "en": "No matching projects yet. Try different filters or share your own idea.",
+      "ru": "Таких проектов пока нет. Измените фильтры или опубликуйте свою идею.",
+      "text": "ଏପର୍ଯ୍ୟନ୍ତ ମେଳ ଖାଉଥିବା କୌଣସି ପ୍ରକଳ୍ପ ନାହିଁ। ଅନ୍ୟ ଫିଲ୍ଟର ବ୍ୟବହାର କରନ୍ତୁ କିମ୍ବା ନିଜ ଧାରଣା ପ୍ରକାଶ କରନ୍ତୁ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_0b26b17e",
+      "en": "Acceptance criteria",
+      "ru": "Критерии приёмки",
+      "text": "ଗ୍ରହଣର ମାନଦଣ୍ଡ",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_154c52fd",
+      "en": "A detailed review may use a more costly model. AI proposes a draft; dimensions, materials and requirements need review.",
+      "ru": "Подробный разбор может использовать более дорогую модель. ИИ предлагает черновик; размеры, материалы и требования нужно проверить.",
+      "text": "ବିସ୍ତୃତ ସମୀକ୍ଷା ପାଇଁ ଅଧିକ ଖର୍ଚ୍ଚ ହେଉଥିବା ମଡେଲ୍ ବ୍ୟବହାର ହୋଇପାରେ। AI ଏକ ଖସଡ଼ା ପ୍ରସ୍ତାବ ଦିଏ; ମାପ, ସାମଗ୍ରୀ ଏବଂ ଆବଶ୍ୟକତାଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରିବା ଦରକାର।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_205d1e05",
+      "en": "I allow the project language, original idea, saved brief, current CAD specification and this request to be sent to OpenAI. This call uses a paid API.",
+      "ru": "Разрешаю отправить язык проекта, исходную идею, сохранённое ТЗ, текущую спецификацию CAD и этот запрос в OpenAI. Это обращение использует платный API.",
+      "text": "ମୁଁ ପ୍ରକଳ୍ପର ଭାଷା, ମୂଳ ଧାରଣା, ସଞ୍ଚିତ ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତାପତ୍ର, ବର୍ତ୍ତମାନର CAD ବିବରଣୀ ଏବଂ ଏହି ଅନୁରୋଧ OpenAIକୁ ପଠାଇବାକୁ ଅନୁମତି ଦେଉଛି। ଏହି କଲ୍ ଏକ ଶୁଳ୍କଯୁକ୍ତ API ବ୍ୟବହାର କରେ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_3167cbd0",
+      "en": "AI could not fulfil this request.",
+      "ru": "ИИ не смог выполнить этот запрос.",
+      "text": "AI ଏହି ଅନୁରୋଧ ପୂରଣ କରିପାରିଲା ନାହିଁ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_4150d507",
+      "en": "For example: a small batch of outdoor sensor enclosures. A 60 × 40 mm board inside, wall mounting and a removable lid. I need 20 units. Location: Bristol. I need help choosing a material and process.",
+      "ru": "Например: нужна небольшая серия корпусов для уличного датчика. Внутри плата 60 × 40 мм, крепление на стену, съёмная крышка. Нужно 20 штук. Город — Казань. Материал и способ изготовления хочу подобрать.",
+      "text": "ଉଦାହରଣ: ବାହାରେ ବ୍ୟବହୃତ ସେନ୍ସର ପାଇଁ ଅଳ୍ପ ସଂଖ୍ୟକ ଆବରଣ। ଭିତରେ 60 × 40 mm ବୋର୍ଡ, କାନ୍ଥରେ ଲଗାଇବା ବ୍ୟବସ୍ଥା ଏବଂ ଖୋଲିହେବା ଢାଙ୍କୁଣି। ମୋତେ 20ଟି ଦରକାର। ସ୍ଥାନ: ବ୍ରିଷ୍ଟଲ୍। ସାମଗ୍ରୀ ଏବଂ ନିର୍ମାଣ ପ୍ରକ୍ରିୟା ବାଛିବାରେ ସାହାଯ୍ୟ ଦରକାର।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_41959afb",
+      "en": "The polar location is shown at the map edge; the original latitude is preserved.",
+      "ru": "Точка у полюса показана у края карты; исходная широта сохранена.",
+      "text": "ଧ୍ରୁବ ନିକଟର ସ୍ଥାନଟି ମାନଚିତ୍ରର ଧାରରେ ଦେଖାଯାଏ; ମୂଳ ଅକ୍ଷାଂଶ ଅପରିବର୍ତ୍ତିତ ରହେ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_41ed2112",
+      "en": "I’ve checked the brief and have rights to the attached materials.",
+      "ru": "Описание проверено. У меня есть права на приложенные материалы.",
+      "text": "ମୁଁ ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତାପତ୍ର ଯାଞ୍ଚ କରିଛି ଏବଂ ସଂଲଗ୍ନ ସାମଗ୍ରୀ ଉପରେ ମୋର ଅଧିକାର ଅଛି।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_538cf22a",
+      "en": "Panel joints and fastener holes still require design.",
+      "ru": "Соединения панелей и отверстия для крепежа требуют проектирования.",
+      "text": "ପ୍ୟାନେଲର ସଂଯୋଗ ଏବଂ ବନ୍ଧନୀ ପାଇଁ ଛିଦ୍ରଗୁଡ଼ିକର ଡିଜାଇନ୍ କରିବା ଏବେ ମଧ୍ୟ ଆବଶ୍ୟକ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_57a9490c",
+      "en": "Lead time after acceptance",
+      "ru": "Срок после принятия",
+      "text": "ଗ୍ରହଣ ପରେ ଲାଗିବା ସମୟ",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_62721fd2",
+      "en": "The brief",
+      "ru": "Задача",
+      "text": "ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତାପତ୍ର",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_63f6a658",
+      "en": "Acceptance",
+      "ru": "Приёмка",
+      "text": "ଗ୍ରହଣ",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_76f135f3",
+      "en": "Latitude",
+      "ru": "Широта",
+      "text": "ଅକ୍ଷାଂଶ",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_7d3ff7a0",
+      "en": "For example: cut panels, finish edges, assemble, check dimensions.",
+      "ru": "Например: раскрой панелей, обработка кромок, сборка, контроль размеров.",
+      "text": "ଉଦାହରଣ: ପ୍ୟାନେଲ କାଟିବା, ଧାରଗୁଡ଼ିକୁ ସଜାଇବା, ଅଂଶଗୁଡ଼ିକୁ ଯୋଡ଼ିବା ଏବଂ ମାପ ଯାଞ୍ଚ କରିବା।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_8c0e1d87",
+      "en": "Prepare the technical brief",
+      "ru": "Подготовьте техническое задание",
+      "text": "ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତାପତ୍ର ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_933e0141",
+      "en": "MESH VOLUME, CM³",
+      "ru": "ОБЪЁМ ПО СЕТКЕ, СМ³",
+      "text": "ମେଶ୍‌ର ଆୟତନ, CM³",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_97c50437",
+      "en": "Accepted",
+      "ru": "Принято",
+      "text": "ଗ୍ରହଣ କରାଯାଇଛି",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_9e3ffcc2",
+      "en": "First save and confirm the current brief in the review panel.",
+      "ru": "Сначала сохраните и подтвердите актуальную версию ТЗ в блоке проверки.",
+      "text": "ପ୍ରଥମେ ସମୀକ୍ଷା ପ୍ୟାନେଲରେ ବର୍ତ୍ତମାନର ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତାପତ୍ର ସଞ୍ଚୟ କରନ୍ତୁ ଏବଂ ନିଶ୍ଚିତ କରନ୍ତୁ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_b13b799d",
+      "en": "AI-assisted CAD proposal",
+      "ru": "Предложение CAD с помощью ИИ",
+      "text": "AI ସହାୟତାରେ CAD ପ୍ରସ୍ତାବ",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_d0c3a0a1",
+      "en": "The contacts and map location are no longer in the directory. The management key was removed from this session.",
+      "ru": "Контакты и точка больше не доступны в каталоге. Ключ управления очищен из этой сессии.",
+      "text": "ଯୋଗାଯୋଗ ତଥ୍ୟ ଏବଂ ମାନଚିତ୍ରର ସ୍ଥାନ ଆଉ ଡିରେକ୍ଟୋରିରେ ନାହିଁ। ଏହି ସେସନରୁ ପରିଚାଳନା ଚାବି ହଟାଇ ଦିଆଯାଇଛି।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_d1cdcd4b",
+      "en": "Geometry checks found issues — review the report.",
+      "ru": "Есть замечания к геометрии — изучите отчёт.",
+      "text": "ଜ୍ୟାମିତି ଯାଞ୍ଚରେ ସମସ୍ୟା ମିଳିଛି — ରିପୋର୍ଟ ଦେଖନ୍ତୁ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_d680cf61",
+      "en": "The main brief is enough for a simple part. Add components for an enclosure with inserts, furniture or an assembly.",
+      "ru": "Для простой детали достаточно основного ТЗ. Для корпуса со вставками, мебели или сборки добавьте отдельные позиции.",
+      "text": "ସରଳ ଅଂଶ ପାଇଁ ମୁଖ୍ୟ ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତାପତ୍ର ଯଥେଷ୍ଟ। ଭିତରେ ଅନ୍ୟ ଅଂଶ ବସାଯାଉଥିବା ଆବରଣ, ଆସବାବପତ୍ର କିମ୍ବା ଯୋଡ଼ାଯାଇଥିବା ଗଠନ ପାଇଁ ପୃଥକ ଉପାଦାନ ଯୋଡ଼ନ୍ତୁ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_d70c1570",
+      "en": "The project context changed. This proposal can be reviewed but cannot be applied to the current revision. Request a new proposal using the saved data.",
+      "ru": "Контекст проекта изменился. Это предложение можно просмотреть, но применять к текущей версии нельзя. Запросите новое предложение по сохранённым данным.",
+      "text": "ପ୍ରକଳ୍ପର ପ୍ରସଙ୍ଗ ବଦଳିଯାଇଛି। ଏହି ପ୍ରସ୍ତାବ ଦେଖାଯାଇପାରେ, କିନ୍ତୁ ବର୍ତ୍ତମାନର ସଂସ୍କରଣରେ ପ୍ରୟୋଗ କରାଯାଇପାରିବ ନାହିଁ। ସଞ୍ଚିତ ତଥ୍ୟ ବ୍ୟବହାର କରି ନୂତନ ପ୍ରସ୍ତାବ ମାଗନ୍ତୁ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_d974c8d3",
+      "en": "Enter both coordinates: latitude from −90 to 90 and longitude from −180 to 180. Or clear both fields.",
+      "ru": "Введите обе координаты: широта от −90 до 90, долгота от −180 до 180. Или очистите оба поля.",
+      "text": "ଉଭୟ ସ୍ଥାନାଙ୍କ ଦିଅନ୍ତୁ: ଅକ୍ଷାଂଶ −90ରୁ 90 ଏବଂ ଦ୍ରାଘିମା −180ରୁ 180। କିମ୍ବା ଉଭୟ ଘର ଖାଲି କରନ୍ତୁ।",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_d9c10246",
+      "en": "Confirm brief",
+      "ru": "Подтвердить ТЗ",
+      "text": "ପ୍ରାଯୁକ୍ତିକ ଆବଶ୍ୟକତାପତ୍ର ନିଶ୍ଚିତ କରନ୍ତୁ",
+      "reason": "Repairs mixed-script or altered technical text; retains the source permissions, workflow limits, quantities and technical brief meaning."
+    },
+    {
+      "en": "Retrieve the CAD attempt result",
+      "id": "m_e9f10ec2",
+      "locale": "es-MX",
+      "reason": "Repair a malformed CAD acronym introduced by the translation model; preserve the retrieval action.",
+      "ru": "Получить результат CAD-попытки",
+      "text": "Obtener el resultado del intento de CAD"
+    },
+    {
+      "en": "Retrieve the CAD attempt result",
+      "id": "m_e9f10ec2",
+      "locale": "nl-NL",
+      "reason": "Repair a malformed CAD acronym introduced by the translation model; preserve the retrieval action.",
+      "ru": "Получить результат CAD-попытки",
+      "text": "Haal het resultaat van de CAD-poging op"
+    }
+  ]
+}

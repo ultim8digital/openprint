@@ -1,0 +1,16 @@
+name: Community improvement / Улучшение
+description: A concrete improvement for customers, makers, authors or community operators.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Who needs this, and what problem does it solve?
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior
+      description: Explain a useful end-to-end scenario, including a path without paid cloud services.
+    validations:
+      required: true

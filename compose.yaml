@@ -1,0 +1,35 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    init: true
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      APP_MODE: ${APP_MODE:-catalog}
+      INSTANCE_NAME: ${INSTANCE_NAME:-OpenPrint}
+      OPERATOR_CONTACT: ${OPERATOR_CONTACT:-}
+      USER_STORAGE_MB: ${USER_STORAGE_MB:-200}
+      MAX_STORAGE_MB: ${MAX_STORAGE_MB:-1024}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-6-luna}
+      OPENAI_REVIEW_MODEL: ${OPENAI_REVIEW_MODEL:-gpt-6.1-sol}
+      OPENAI_CAD_MODEL: ${OPENAI_CAD_MODEL:-}
+      STUDIO_AI_MAX_PROJECT_CALLS: ${STUDIO_AI_MAX_PROJECT_CALLS:-3}
+      STUDIO_AI_MAX_USER_DAILY_CALLS: ${STUDIO_AI_MAX_USER_DAILY_CALLS:-10}
+      STUDIO_AI_MAX_DAILY_CALLS: ${STUDIO_AI_MAX_DAILY_CALLS:-50}
+      STUDIO_AI_MAX_OUTPUT_TOKENS: ${STUDIO_AI_MAX_OUTPUT_TOKENS:-3000}
+      STUDIO_AI_CAD_MAX_OUTPUT_TOKENS: ${STUDIO_AI_CAD_MAX_OUTPUT_TOKENS:-8000}
+    volumes:
+      - community-data:/app/data
+      - community-backups:/app/backups
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stop_grace_period: 15s
+volumes:
+  community-data:
+  community-backups:

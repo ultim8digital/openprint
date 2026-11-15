@@ -1,0 +1,53 @@
+{
+  "schema_version": "neofab-cad/1",
+  "name": "Three-panel shelf geometry study",
+  "units": "mm",
+  "material": "By component",
+  "process": "Assembly",
+  "description": "Three separate panels in a 500 × 250 × 300 mm envelope. This example demonstrates a furniture assembly, separate local-coordinate part exports and a bill of materials.",
+  "assumptions": [
+    "Nominal panel thickness is an example input, not a measured stock thickness.",
+    "Strength, stability, loads, stock variation and fastening require design review."
+  ],
+  "missing_geometry": ["Joinery and fastening features have not been designed."],
+  "operations": [],
+  "components": [
+    {
+      "id": "top",
+      "name": "Top panel",
+      "material": "Plywood, grade unspecified",
+      "process": "WOOD_CNC",
+      "quantity": 1,
+      "at": [0, 0, 282],
+      "rotation": [0, 0, 0],
+      "operations": [
+        { "type": "box", "id": "panel", "mode": "add", "size": [500, 250, 18], "at": [0, 0, 0] }
+      ]
+    },
+    {
+      "id": "left",
+      "name": "Left side",
+      "material": "Plywood, grade unspecified",
+      "process": "WOOD_CNC",
+      "quantity": 1,
+      "at": [0, 0, 0],
+      "rotation": [0, 0, 0],
+      "operations": [
+        { "type": "box", "id": "panel", "mode": "add", "size": [18, 250, 282], "at": [0, 0, 0] }
+      ]
+    },
+    {
+      "id": "right",
+      "name": "Right side",
+      "material": "Plywood, grade unspecified",
+      "process": "WOOD_CNC",
+      "quantity": 1,
+      "at": [482, 0, 0],
+      "rotation": [0, 0, 0],
+      "operations": [
+        { "type": "box", "id": "panel", "mode": "add", "size": [18, 250, 282], "at": [0, 0, 0] }
+      ]
+    }
+  ],
+  "requirements": { "expected_solids": 3, "bounds": [500, 250, 300], "tolerance": 0.01 }
+}

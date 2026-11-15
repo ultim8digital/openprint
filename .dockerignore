@@ -1,0 +1,15 @@
+.git
+node_modules
+dist
+build
+.local
+.env*
+.private-audit
+test-results
+playwright-report
+docs/images
+cad-worker/.venv
+cad-worker/out
+cad-worker/__pycache__
+cad-worker/.pytest_cache
+cad-worker/tests/__pycache__
