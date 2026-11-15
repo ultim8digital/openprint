@@ -206,6 +206,7 @@ async function fixture(options: CadOptions = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'neofab-cad-test-')),
     store = new Store(join(dir, 'openprint.sqlite'));
   const app = createApp({
+    mode: 'community',
     store,
     dataDir: dir,
     appUrl: 'http://test.local',
@@ -896,7 +897,7 @@ test('CAD restart marks interrupted work failed and SQLite backup preserves arti
   }
 });
 
-test('v2 Studio revisions and confirmations survive migration to CAD schema v5 and reopening', () => {
+test('v2 Studio revisions and confirmations survive migration to CAD schema v6 and reopening', () => {
   const dir = mkdtempSync(join(tmpdir(), 'neofab-cad-migration-')),
     path = join(dir, 'openprint.sqlite');
   try {
@@ -904,7 +905,7 @@ test('v2 Studio revisions and confirmations survive migration to CAD schema v5 a
       owner = randomUUID(),
       projectId = randomUUID();
     v2.db.exec(
-      'DROP TABLE catalog_studios; DROP TABLE studio_cad_proposals; DROP TRIGGER studio_ai_task_immutable; ALTER TABLE studio_ai_runs DROP COLUMN task; DROP TABLE studio_cad_grants; DROP TABLE studio_cad_handoffs; DROP TABLE studio_cad_artifacts; DROP TABLE studio_cad_builds; DROP TABLE studio_cad_revisions; DROP INDEX events_action_time; PRAGMA user_version=2;',
+      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE catalog_studios; DROP TABLE studio_cad_proposals; DROP TRIGGER studio_ai_task_immutable; ALTER TABLE studio_ai_runs DROP COLUMN task; DROP TABLE studio_cad_grants; DROP TABLE studio_cad_handoffs; DROP TABLE studio_cad_artifacts; DROP TABLE studio_cad_builds; DROP TABLE studio_cad_revisions; DROP INDEX events_action_time; PRAGMA user_version=2;',
     );
     v2.run(
       'INSERT INTO users(id,email,name,password_hash,created_at) VALUES(?,?,?,?,?)',
@@ -937,7 +938,7 @@ test('v2 Studio revisions and confirmations survive migration to CAD schema v5 a
     );
     v2.close();
     const migrated = new Store(path);
-    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 5);
+    assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 6);
     assert.equal(
       migrated.get<{ confirmed_hash: string }>(
         'SELECT confirmed_hash FROM studio_projects WHERE id=?',

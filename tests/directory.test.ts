@@ -51,6 +51,7 @@ async function fixture() {
   const dir = mkdtempSync(join(tmpdir(), 'openprint-directory-')),
     store = new Store(join(dir, 'openprint.sqlite'));
   const app = createApp({
+    mode: 'community',
     store,
     dataDir: dir,
     appUrl: 'http://test.local',
@@ -521,7 +522,7 @@ test('map reports truncation explicitly above 50000 points, including registered
   }
 });
 
-test('v4 community data migrates to v5 without modifying existing profiles or AI accounting', async () => {
+test('v4 community data migrates to v6 without modifying existing profiles or AI accounting', async () => {
   const f = await fixture();
   try {
     const member = f.member({ verified: 1 });
@@ -534,10 +535,12 @@ test('v4 community data migrates to v5 without modifying existing profiles or AI
       Date.now(),
     );
     const prior = f.store.all('SELECT * FROM profiles');
-    f.store.db.exec('DROP TABLE catalog_studios; PRAGMA user_version=4;');
+    f.store.db.exec(
+      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE catalog_studios; PRAGMA user_version=4;',
+    );
     const migrated = new Store(f.store.path);
     try {
-      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 5);
+      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 6);
       assert.deepEqual(migrated.all('SELECT * FROM profiles'), prior);
       assert.equal(migrated.get<{ n: number }>('SELECT count(*) n FROM catalog_studios')!.n, 0);
       assert.equal(

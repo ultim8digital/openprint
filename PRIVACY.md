@@ -2,6 +2,18 @@
 
 This document describes the application’s behavior. Each instance operator must identify their own contact, purposes, applicable obligations and backup-retention policy. It is not a legal determination for every jurisdiction.
 
+## Default open catalogue
+
+`APP_MODE=catalog` requires no user account, password or email. Visitors submit public workshop details and control one listing with a random 256-bit management key generated in the browser. The server stores only the SHA-256 key hash and an initial-request hash for idempotency, alongside public fields, version and timestamps. The key is excluded from public API responses and URL query strings. Keep the private management link secret: possession grants editing/deletion, and there is no email recovery.
+
+The editor removes a supplied fragment key from the address bar and uses a private request header. It may retain the key and an unfinished publication in session storage to survive navigation and uncertain network outcomes. The application does not log management keys or request bodies; reverse proxies should also exclude them from logs.
+
+Deleting a self-published listing removes its public fields. A minimal identity, key hash, original-request hash, version and timestamps remain as a tombstone so retrying an old request cannot republish it. Backups retain data until the operator expires them. Immediate publication does not verify business ownership, capability or contact accuracy.
+
+Successful anonymous publication quotas persist in SQLite using an HMAC of the client IP and an instance-specific random salt, without the raw IP. Entries older than the rolling 24-hour window are removed on the next publication attempt. Short-term request throttles additionally use bounded process memory. These records are for abuse limits, not advertising.
+
+Private community/CAD data already present in a database stays private when switching to catalogue mode: those API routes are disabled, account/demo identities are omitted from bootstrap and queued CAD work is not resumed. The account, file, AI and agreement sections below apply only to the separately enabled `APP_MODE=community`.
+
 ## Stored data
 
 An operator can import a separate studio catalogue containing organisation names, public descriptions, cities/regions/countries, coordinates, technologies/materials, websites, public business phones/addresses, source attribution and import dates. Import excludes email, opening hours, ratings/reviews and other unlisted fields. Catalogue entries are public directory records, not participant accounts, reviewed providers or order recipients. Operators update/remove them by replacing the corresponding source snapshot. These records are included in the local database backup; source files are not bundled in the public code repository.
@@ -24,7 +36,7 @@ No advertising analytics, cross-site cookies or external font services are bundl
 - A confirmed CAD package is separate from an ordinary uploaded attachment. The recipient of a direct request receives access when it is sent. For a public request, the owner can give a named participant in the discussion access for quotation and revoke it before assignment. The accepted provider retains access to the agreed package. Publishing a public brief does not publish CAD files.
 - Conversations are scoped to the customer and that provider. Reported message content is available to moderators in the corresponding report context.
 - An approved library file is intentionally downloadable by everyone under its recorded license and attribution.
-- Optional map tiles contact OpenStreetMap only after the user opens the map. The browser sends its ordinary network information and the instance origin; no private job file is sent to OSM. External provider websites open only when followed.
+- Map tiles contact OpenStreetMap whenever a map view is open; the default catalogue home opens that view. The browser sends its ordinary network information and the instance origin; no private key or job file is sent to OSM. External provider websites open only when followed.
 
 There is no end-to-end encryption: the operator controls the server, database and backups. Choose an operator you trust. HTTPS protects transport when the instance is correctly configured.
 

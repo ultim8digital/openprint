@@ -95,10 +95,13 @@ test('imported directory uses real API, maps all results beyond page 12, and kee
   await expect(page.getByText('Это дата переноса записи.', { exact: false })).toBeVisible();
   await page.goto('/studios?source=catalog&view=map&technology=CNC');
   await expect(count).toHaveText('Точек на карте: 1 · Всего результатов: 1 · Без координат: 0');
-  const reviewed = page.getByRole('checkbox', { name: 'Проверены модератором' });
-  await reviewed.click();
-  await expect(reviewed).toBeChecked();
-  await expect(count).toHaveText('Точек на карте: 0 · Всего результатов: 0 · Без координат: 0');
+  await expect(page.getByRole('checkbox', { name: 'Проверены модератором' })).toHaveCount(0);
+  await page.goto('/studios?source=catalog&view=map&technology=CNC&verified=1');
+  await expect(count).toHaveText('Точек на карте: 1 · Всего результатов: 1 · Без координат: 0');
+  await expect(page.getByRole('link', { name: 'Добавить студию', exact: true })).toHaveAttribute(
+    'href',
+    '/catalog/new',
+  );
   expect(errors).toEqual([]);
 });
 

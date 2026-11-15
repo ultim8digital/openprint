@@ -462,7 +462,11 @@ function CatalogCard({ studio }: { studio: CatalogStudio }) {
         <span className={`studio-avatar color-${studio.name.length % 4}`}>
           {initials(studio.name)}
         </span>
-        <span className="catalog-label">{t('Справочная запись', 'Directory listing')}</span>
+        <span className="catalog-label">
+          {studio.listing_type === 'self-published'
+            ? t('Самостоятельная публикация', 'Self-published')
+            : t('Справочная запись', 'Directory listing')}
+        </span>
       </div>
       <div>
         <span className="eyebrow">{t('КАТАЛОГ СТУДИЙ', 'STUDIO DIRECTORY')}</span>
@@ -492,7 +496,10 @@ function CatalogCard({ studio }: { studio: CatalogStudio }) {
         ) : null}
       </div>
       <p className="micro muted catalog-source">
-        {t('Источник', 'Source')}: {studio.source_name}
+        {t('Источник', 'Source')}:{' '}
+        {studio.listing_type === 'self-published'
+          ? t('Самостоятельная публикация', 'Self-published')
+          : studio.source_name}
       </p>
       <Link className="card-link" to={`/catalog/${studio.id}`}>
         {t('Контакты студии', 'Studio contacts')}
@@ -536,15 +543,18 @@ function useDirectoryRemote<T>(path: string | null) {
 }
 
 export function Directory() {
-  const { t } = useApp(),
+  const { t, mode } = useApp(),
     [params, setParams] = useSearchParams();
   const map = params.get('view') === 'map';
   const offset = Math.max(0, Number.parseInt(params.get('offset') || '0', 10) || 0);
   const filters = new URLSearchParams();
-  for (const key of ['source', 'q', 'city', 'technology', 'kind', 'verified']) {
+  for (const key of mode === 'catalog'
+    ? ['q', 'city', 'technology']
+    : ['source', 'q', 'city', 'technology', 'kind']) {
     const value = params.get(key);
     if (value) filters.set(key, value);
   }
+  if (mode === 'catalog') filters.set('source', 'catalog');
   const query = new URLSearchParams(filters);
   query.set('limit', '12');
   query.set('offset', String(offset));
@@ -556,6 +566,7 @@ export function Directory() {
     const next = new URLSearchParams(params);
     value ? next.set(key, value) : next.delete(key);
     next.delete('offset');
+    next.delete('verified');
     setParams(next);
   }
   function page(nextOffset: number) {
@@ -566,16 +577,16 @@ export function Directory() {
   return (
     <div className="page">
       <PageTitle
-        eyebrow={t('ЛЮДИ И ВОЗМОЖНОСТИ', 'PEOPLE & POSSIBILITIES')}
+        eyebrow={t('ОТКРЫТЫЙ КАТАЛОГ СТУДИЙ', 'OPEN STUDIO DIRECTORY')}
         title={t('Найдите свою мастерскую.', 'Find your kind of maker.')}
         description={t(
-          'Участники сообщества и каталог студий печати. Найдите возможности рядом с вами или в другом городе.',
-          'Community makers and a directory of print studios. Find capabilities near you or in another city.',
+          'Студии печати и производства рядом с вами. Свяжитесь напрямую или добавьте свою студию без регистрации. Код каталога открыт.',
+          'Print and manufacturing studios near you. Contact them directly or add your studio without signing up. The directory is open source.',
         )}
       >
-        <Link className="button" to="/workspace?tab=profile">
+        <Link className="button" to="/catalog/new">
           <Plus size={17} />
-          {t('Стать участником', 'Join as a maker')}
+          {t('Добавить студию', 'Add a studio')}
         </Link>
       </PageTitle>
       <div className="filter-panel">
@@ -590,24 +601,28 @@ export function Directory() {
           />
         </div>
         <div className="filter-row">
-          <select
-            aria-label={t('Источник записей', 'Listing source')}
-            value={params.get('source') || 'all'}
-            onChange={(event) => filter('source', event.target.value)}
-          >
-            <option value="all">{t('Участники и каталог', 'Members and directory')}</option>
-            <option value="member">{t('Участники OpenPrint', 'OpenPrint members')}</option>
-            <option value="catalog">{t('Каталог студий', 'Studio directory')}</option>
-          </select>
-          <select
-            aria-label={t('Тип участника', 'Maker type')}
-            value={params.get('kind') || ''}
-            onChange={(e) => filter('kind', e.target.value)}
-          >
-            <option value="">{t('Все специализации', 'All specialties')}</option>
-            <option value="studio">{t('Мастерские', 'Workshops')}</option>
-            <option value="engineer">{t('Инженеры', 'Engineers')}</option>
-          </select>
+          {mode === 'community' && (
+            <>
+              <select
+                aria-label={t('Источник записей', 'Listing source')}
+                value={params.get('source') || 'all'}
+                onChange={(event) => filter('source', event.target.value)}
+              >
+                <option value="all">{t('Участники и каталог', 'Members and directory')}</option>
+                <option value="member">{t('Участники OpenPrint', 'OpenPrint members')}</option>
+                <option value="catalog">{t('Каталог студий', 'Studio directory')}</option>
+              </select>
+              <select
+                aria-label={t('Тип участника', 'Maker type')}
+                value={params.get('kind') || ''}
+                onChange={(e) => filter('kind', e.target.value)}
+              >
+                <option value="">{t('Все специализации', 'All specialties')}</option>
+                <option value="studio">{t('Мастерские', 'Workshops')}</option>
+                <option value="engineer">{t('Инженеры', 'Engineers')}</option>
+              </select>
+            </>
+          )}
           <select
             aria-label={t('Технология', 'Technology')}
             value={params.get('technology') || ''}
@@ -625,15 +640,6 @@ export function Directory() {
               </option>
             ))}
           </select>
-          <label className="check-label">
-            <input
-              type="checkbox"
-              checked={params.get('verified') === '1'}
-              onChange={(e) => filter('verified', e.target.checked ? '1' : '')}
-            />
-            <ShieldCheck size={15} />
-            {t('Проверены модератором', 'Moderator reviewed')}
-          </label>
           <button
             className={'text-button map-toggle' + (map ? ' selected' : '')}
             aria-pressed={map}
@@ -657,10 +663,12 @@ export function Directory() {
             )}
           </p>
           <div className="map-legend" aria-label={t('Обозначения карты', 'Map legend')}>
-            <span>
-              <i className="map-key member" />
-              {t('Участники OpenPrint', 'OpenPrint members')}
-            </span>
+            {mode === 'community' && (
+              <span>
+                <i className="map-key member" />
+                {t('Участники OpenPrint', 'OpenPrint members')}
+              </span>
+            )}
             <span>
               <i className="map-key catalog" />
               {t('Справочные записи', 'Directory listings')}
@@ -712,18 +720,24 @@ export function Directory() {
           <span role="status">
             {remote.data ? (
               <>
-                {t('Найдено', 'Found')}: {remote.data.total} · {t('Участников', 'Members')}:{' '}
-                {remote.data.members} · {t('Из каталога', 'Directory')}: {remote.data.catalog}
+                {t('Найдено', 'Found')}: {remote.data.total}
+                {mode === 'community' && (
+                  <>
+                    {' '}
+                    · {t('Участников', 'Members')}: {remote.data.members} ·{' '}
+                    {t('Из каталога', 'Directory')}: {remote.data.catalog}
+                  </>
+                )}
               </>
             ) : (
-              t('Мастерские и независимые инженеры', 'Workshops and independent engineers')
+              t('Ищем студии…', 'Finding studios…')
             )}
           </span>
         </h2>
         <span className="micro">
           {t(
-            'Справочная запись не означает регистрацию в OpenPrint',
-            'A directory listing does not imply OpenPrint membership',
+            'Возможности и условия уточняйте напрямую у студии',
+            'Confirm capabilities and terms directly with the studio',
           )}
         </span>
       </div>
@@ -744,12 +758,12 @@ export function Directory() {
         <Empty
           title={t('Пока не нашли совпадений', 'No makers found yet')}
           description={t(
-            'Попробуйте другой город или технологию. Можно создать проект — участники сами предложат помощь.',
-            'Try another city or technology, or post a project so makers can offer to help.',
+            'Попробуйте другой город или технологию. Знаете студию? Добавьте её контакты с разрешения организации.',
+            'Try another city or technology. Know a studio? Add its contacts with the organization’s permission.',
           )}
         >
-          <Link className="button secondary" to="/projects/new">
-            {t('Создать проект', 'Create a project')}
+          <Link className="button secondary" to="/catalog/new">
+            {t('Добавить студию', 'Add a studio')}
           </Link>
         </Empty>
       )}
@@ -796,7 +810,11 @@ export function CatalogPage() {
         ← {t('Каталог студий', 'Studio directory')}
       </Link>
       <section className="panel profile-detail catalog-detail">
-        <span className="catalog-label">{t('Справочная запись', 'Directory listing')}</span>
+        <span className="catalog-label">
+          {studio.listing_type === 'self-published'
+            ? t('Самостоятельная публикация', 'Self-published')
+            : t('Справочная запись', 'Directory listing')}
+        </span>
         <h1>{studio.name}</h1>
         <p className="location">
           <MapPin size={15} />
@@ -805,8 +823,8 @@ export function CatalogPage() {
         {studio.address && <p className="prose">{studio.address}</p>}
         <div className="info-box">
           {t(
-            'Организация добавлена из каталога. Эта запись не является аккаунтом исполнителя в OpenPrint. Контакты, наличие оборудования и условия работы уточняйте непосредственно у студии.',
-            'This organization was imported from a directory. This listing is not an OpenPrint provider account. Confirm contact details, available equipment, and terms directly with the studio.',
+            'Сведения опубликованы в открытом каталоге. Принадлежность записи организации не проверяется. Контакты, наличие оборудования и условия работы уточняйте непосредственно у студии.',
+            'Details are published in an open directory. The listing’s ownership is not verified. Confirm contact details, available equipment, and terms directly with the studio.',
           )}
         </div>
         {studio.description && <p className="prose">{studio.description}</p>}
@@ -871,7 +889,9 @@ export function CatalogPage() {
         <div className="catalog-provenance">
           <p>
             <strong>{t('Источник', 'Source')}: </strong>
-            {studio.source_name}
+            {studio.listing_type === 'self-published'
+              ? t('Самостоятельная публикация', 'Self-published')
+              : studio.source_name}
           </p>
           {source && (
             <a className="text-button" href={source} target="_blank" rel="noreferrer">
@@ -879,17 +899,29 @@ export function CatalogPage() {
               <ExternalLink size={14} />
             </a>
           )}
-          <p className="micro muted">
-            {t('Импортировано', 'Imported')}:{' '}
-            {new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', { dateStyle: 'medium' })
-              .format(studio.imported_at)
-              .replace(/\.$/, '')}
-            .{' '}
-            {t(
-              'Это дата переноса записи. Она не подтверждает актуальность сведений об организации.',
-              'This is the import date. It does not confirm that the organization’s details are current.',
-            )}
-          </p>
+          {studio.listing_type === 'self-published' ? (
+            <>
+              <p className="micro muted">
+                {t('Опубликовано', 'Published')}: {formatDate(studio.imported_at, lang)} ·{' '}
+                {t('Обновлено', 'Updated')}: {formatDate(studio.updated_at, lang)}
+              </p>
+              <Link className="text-button" to={`/catalog/${studio.id}/edit`}>
+                {t('Управлять записью по ключу', 'Manage listing with a key')}
+              </Link>
+            </>
+          ) : (
+            <p className="micro muted">
+              {t('Импортировано', 'Imported')}:{' '}
+              {new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', { dateStyle: 'medium' })
+                .format(studio.imported_at)
+                .replace(/\.$/, '')}
+              .{' '}
+              {t(
+                'Это дата переноса записи. Она не подтверждает актуальность сведений об организации.',
+                'This is the import date. It does not confirm that the organization’s details are current.',
+              )}
+            </p>
+          )}
         </div>
       </section>
     </div>

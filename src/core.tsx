@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, type React
 import type { User, Profile } from '../shared/types';
 export type Lang = 'ru' | 'en';
 export type Bootstrap = {
+  mode: 'catalog' | 'community';
   user: User | null;
   profile: Profile | null;
   stats: { profiles: number; projects: number; models: number; completed: number };
@@ -77,6 +78,7 @@ export function useRemote<T>(path: string | null, key: unknown = '') {
   return { data, error, loading, reload };
 }
 const empty: Bootstrap = {
+  mode: 'catalog',
   user: null,
   profile: null,
   stats: { profiles: 0, projects: 0, models: 0, completed: 0 },
@@ -98,9 +100,13 @@ export const useApp = () => useContext(AppContext);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState(empty),
     [loading, setLoading] = useState(true),
-    [lang, setLang] = useState<Lang>(() =>
-      localStorage.getItem('openprint.language') === 'en' ? 'en' : 'ru',
-    ),
+    [lang, setLang] = useState<Lang>(() => {
+      try {
+        return localStorage.getItem('openprint.language') === 'en' ? 'en' : 'ru';
+      } catch {
+        return 'ru';
+      }
+    }),
     [message, setMessage] = useState('');
   const refresh = useCallback(async () => {
     setState(await api<Bootstrap>('/bootstrap'));
@@ -120,7 +126,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
   useEffect(() => {
     document.documentElement.lang = lang;
-    localStorage.setItem('openprint.language', lang);
+    try {
+      localStorage.setItem('openprint.language', lang);
+    } catch {
+      /* Private browsing can disable storage. */
+    }
   }, [lang]);
   useEffect(() => {
     if (!message) return;

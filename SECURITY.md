@@ -1,6 +1,6 @@
 # Security policy
 
-OpenPrint 0.3 is intended for a small self-hosted community. This repository includes security-relevant tests, but has not undergone an independent penetration test or public load assessment. Run a maintained release and test backups before public use.
+OpenPrint 0.5 defaults to a public, self-hosted workshop catalogue without accounts or a moderation queue. An explicit community mode retains private project/CAD workflows. This repository includes security-relevant tests, but has not undergone an independent penetration test or public load assessment. Run a maintained release and test backups before public use.
 
 ## Report privately
 
@@ -8,6 +8,11 @@ Use GitHub’s **Security → Report a vulnerability** for this repository when 
 
 ## Implemented boundaries
 
+- Default catalogue mode disables authentication, moderation, private collaboration and file APIs, omits account metadata from bootstrap and does not start the CAD queue. Switching modes does not remove private data.
+- Self-published records use random 256-bit browser-generated management keys stored only as SHA-256 hashes. The private URL fragment is cleared on entry and requests use a dedicated header, never a query string. Operator access logs must exclude that header and submission bodies.
+- Create replay is bound to the original normalized request; version checks protect updates/deletion. Deletion scrubs public fields while retaining a minimal tombstone against resurrection by request replay. No email-based recovery or business-ownership verification is implied.
+- Anonymous successful-publication quotas persist across restarts (5/IP and 200/instance per rolling day), with HMAC IP keys and bounded retention. Lifetime submission identities are capped at 50,000, including tombstones. Exact cross-source duplicate checks and insertion occur atomically. These limits are not a distributed anti-bot or DDoS service.
+- The account and project boundaries below apply to explicit `APP_MODE=community`.
 - Server-owned roles, no first-user admin, no role grants from profile metadata.
 - CLI-issued, hashed, expiring, single-use setup/recovery tokens. Administrator promotion occurs only at redemption together with password replacement and session revocation.
 - Scrypt password hashes and opaque random session tokens stored hashed in SQLite. HttpOnly/SameSite cookies; Secure under an HTTPS `APP_URL`.

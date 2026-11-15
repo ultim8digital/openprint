@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 — 2026-11-15
+
+- The default `APP_MODE=catalog` is an open workshop directory with no registration, account UI or moderation queue. Community/CAD workflows remain available only through explicit `APP_MODE=community`; switching preserves private history.
+- Studios can publish immediately, choose a map location and manage one record through a private random-key link. Version checks protect concurrent edits; deleted records cannot be resurrected by replaying an old submission.
+- SQLite schema 6 separates self-published listings from operator imports. Exact cross-source duplicates are rejected transactionally; public responses never expose management hashes.
+- Durable anonymous publication quotas, bounded inputs and same-origin writes operate without third-party identity or CAPTCHA services.
+- Guest publication, management and default-mode isolation have dedicated API and browser checks. See the validation record for exact evidence.
+
 ## 0.4.0 — 2026-11-15
 
 - Imported studio catalogues now appear alongside registered makers in directory search and on the map, with explicit source labels and separate contact paths.

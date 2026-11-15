@@ -1,17 +1,19 @@
 # Running your community / Запуск своего сообщества
 
-OpenPrint 0.4 supports **one application process on one computer with local disk storage**. There is no required Vercel, Supabase, SMTP, AI, or map API key. The optional local CAD process needs Python/CadQuery but no cloud account. A public repository can exist without any running deployment. A shared live community needs a running server and appropriate administration.
+OpenPrint 0.5 supports **one application process on one computer with local disk storage**. There is no required Vercel, Supabase, SMTP, AI, or map API key. The optional local CAD process needs Python/CadQuery but no cloud account. A public repository can exist without any running deployment. A shared live community needs a running server and appropriate administration.
 
-## 1. Local demo
+## 1. Default catalogue
 
 Install Node.js 24 LTS, clone this repository, then:
 
 ```sh
 npm ci
-npm run demo
+npm run dev
 ```
 
-UI: http://localhost:5173. API: http://127.0.0.1:3000. The demo bar switches fictional accounts. Data lives in `.local/demo`. Use only on your own computer, without a public proxy. Stop with Ctrl+C. To start over, stop the process and remove **only** `.local/demo` after checking that it is the demo directory.
+UI: http://localhost:5173. API: http://127.0.0.1:3000. The default catalogue uses `.local/data` and requires no accounts or administrator setup. Studios publish immediately and manage their own record with a private link; see [the public catalogue workflow](OPEN_CATALOG.md).
+
+For the optional old community demo, explicitly run `APP_MODE=community npm run demo`. Its fictional accounts/projects live in `.local/demo` and must stay on loopback. `npm run demo` without that override uses separate demo storage with the catalogue interface; it does not create new accounts in catalogue mode.
 
 ## 2. Real local instance
 
@@ -19,30 +21,32 @@ UI: http://localhost:5173. API: http://127.0.0.1:3000. The demo bar switches fic
 npm ci
 npm run build
 cp .env.example .env
-npm run admin -- operator@example.org
 npm start
 ```
 
-Open http://localhost:3000. The admin command prepares the account and prints a **single-use setup link, valid for 30 minutes**. Administrator privileges take effect when that link is redeemed. Open it privately and choose a password of at least 12 characters. Keep terminal output out of public logs. No email is sent. The first public registration is an ordinary member; it never acquires administrator rights.
+Open http://localhost:3000. With the default `APP_MODE=catalog`, registration, account recovery, moderation, private project and CAD endpoints are disabled. No administrator command is needed. The catalogue accepts immediate public submissions. Existing private community data is preserved when switching modes.
 
-`npm run dev` runs Vite and the API with a clean `.local/data` database. `npm run demo` explicitly uses its own `.local/demo` directory. A real instance refuses to use a database containing demo accounts. Either installation can use an operator-imported studio catalogue; those public records remain separate from accounts and orders. See [catalogue import and map](CATALOG_IMPORT.md).
+To enable the separate community/CAD workflows, set `APP_MODE=community` explicitly, restart and run `npm run admin -- operator@example.org` if administrator setup is needed. That command issues a private one-use setup link; the legacy account instructions below apply only to this mode.
+
+Either mode can import an existing studio catalogue. See [catalogue import](CATALOG_IMPORT.md). A real instance refuses a database containing fictional demo accounts. Use a separate data directory for real public operation.
 
 ### Configuration
 
 Node reads `.env` on start; existing process environment variables take precedence.
 
-| Name               | Default                 | Meaning                                                                                    |
-| ------------------ | ----------------------- | ------------------------------------------------------------------------------------------ |
-| `HOST`             | `127.0.0.1`             | Listener; use `0.0.0.0` only inside your protected server/container network                |
-| `PORT`             | `3000`                  | API + built frontend port                                                                  |
-| `APP_URL`          | `http://localhost:3000` | Exact public origin, including scheme and optional port; no path, query, or credentials    |
-| `DATA_DIR`         | `.local/data`           | Persistent local SQLite database and uploads; never publish this directory                 |
-| `INSTANCE_NAME`    | `OpenPrint`             | Instance name reported by the API; the shared product brand remains OpenPrint              |
-| `OPERATOR_CONTACT` | empty                   | Public HTTPS support page or `mailto:` address for recovery/moderation                     |
-| `USER_STORAGE_MB`  | `200`                   | Per-user upload quota                                                                      |
-| `MAX_STORAGE_MB`   | `1024`                  | Total registered upload quota, excluding DB, logs, backups and temporary request memory    |
-| `TRUST_PROXY`      | `0`                     | Set `1` only when exactly one trusted reverse proxy is the only way to reach the process   |
-| `CAD_PYTHON`       | empty                   | Optional absolute path to the trusted Python interpreter containing the pinned CAD runtime |
+| Name               | Default                 | Meaning                                                                                                      |
+| ------------------ | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `APP_MODE`         | `catalog`               | `catalog`: immediate public listings, no account/moderation API; `community`: optional private collaboration |
+| `HOST`             | `127.0.0.1`             | Listener; use `0.0.0.0` only inside your protected server/container network                                  |
+| `PORT`             | `3000`                  | API + built frontend port                                                                                    |
+| `APP_URL`          | `http://localhost:3000` | Exact public origin, including scheme and optional port; no path, query, or credentials                      |
+| `DATA_DIR`         | `.local/data`           | Persistent local SQLite database and uploads; never publish this directory                                   |
+| `INSTANCE_NAME`    | `OpenPrint`             | Instance name reported by the API; the shared product brand remains OpenPrint                                |
+| `OPERATOR_CONTACT` | empty                   | Public HTTPS support page or `mailto:` address for recovery/moderation                                       |
+| `USER_STORAGE_MB`  | `200`                   | Per-user upload quota                                                                                        |
+| `MAX_STORAGE_MB`   | `1024`                  | Total registered upload quota, excluding DB, logs, backups and temporary request memory                      |
+| `TRUST_PROXY`      | `0`                     | Set `1` only when exactly one trusted reverse proxy is the only way to reach the process                     |
+| `CAD_PYTHON`       | empty                   | Optional absolute path to the trusted Python interpreter containing the pinned CAD runtime                   |
 
 Do not set `DEMO_MODE` for a real instance. Demo mode requires a loopback listener, a loopback public origin, and no trusted proxy. Real instances reject a demo database.
 
@@ -67,7 +71,7 @@ CAD uses a 90-second CPU cap and 120-second wall deadline. Linux also applies a 
 3. Set `TRUST_PROXY=1` only for a single trusted hop that overwrites forwarded IP headers. Keep the default `0` otherwise. Origin validation must match the actual public URL; the app intentionally does not allow wildcard CORS.
 4. Configure the proxy for uploads of up to 20 MB. For nginx use an appropriate `client_max_body_size` above 20 MB (e.g. 21m); avoid buffering sensitive attachments in public locations.
 5. Run the process under your supervisor or Compose. Use HTTPS for public logins. Cookies are HttpOnly, SameSite=Lax, and become Secure when `APP_URL` is HTTPS.
-6. Create the administrator using the command above, define a moderation/recovery policy, and test registration, a direct brief, an offer, delivery confirmation, and a backup restore with synthetic accounts.
+6. Test guest publication, the saved management link, editing, deletion and backup restore using synthetic catalogue records. In optional community mode, also test administrator setup and private collaboration.
 7. Apply disk quotas to logs/backups as well as uploads, install OS updates, and establish a supported upgrade schedule. The application upload quota alone does not cap every source of disk usage.
 
 Never proxy a public origin to local demo mode. Never expose `.local`, uploads, the database, reset links, or backups as static files. There is no need to create a public storage bucket.
@@ -79,7 +83,6 @@ Requires Docker Engine and the Compose plugin. Start in the cloned repository:
 ```sh
 cp .env.example .env
 docker compose up --build -d
-docker compose exec app node build/scripts/admin.js operator@example.org
 ```
 
 The site is bound to **127.0.0.1:3000** on the host. The process runs as the unprivileged `node` user. Named volumes `community-data` and `community-backups` hold persistence. Configure `.env` with your exact public `APP_URL` and operator contact before placing your HTTPS proxy in front. The container listens on `0.0.0.0` **inside** its isolated network, not on all host interfaces.
@@ -94,7 +97,9 @@ docker compose -f compose.yaml -f compose.cad.yaml up --build -d
 
 It selects the `cad` target and sets `CAD_PYTHON` inside the container. It retains the same data volume and unprivileged application user, with a combined app/worker limit of 4 GiB, two CPUs and 256 processes/threads. The default image does not install Python. Use the same two `-f` arguments when administering this deployment. Stop and back up an existing installation before rebuilding/upgrading it; the override is not a data migration tool.
 
-## 5. Password recovery
+## 5. Optional community account recovery
+
+This section requires `APP_MODE=community`. The default catalogue uses per-listing private links; there are no user passwords or email recovery.
 
 Users change their own passwords in Settings with their current password. A successful change revokes other sessions and outstanding recovery links.
 
@@ -135,6 +140,6 @@ The backup is in the private `community-backups` volume. Export it to your own p
 
 ## 7. Updates
 
-Read the release notes, stop the old process, and take/verify a backup **using the old version before installing the update**. Then install the chosen release with `npm ci`, run `npm run check`, and start it. Database schema version is recorded with `PRAGMA user_version`. Version 0.4 migrates schemas 1–4 additively to schema 5, retaining existing projects, agreements, CAD and AI history and adding a separate studio catalogue. The app refuses databases with a newer schema than it understands. To roll back to an older application, restore its compatible pre-upgrade backup into a fresh data directory; do not edit `PRAGMA user_version` or reopen schema 5 with old code. Catalogue records are included in SQLite backups; no external catalogue service is needed after import.
+Read the release notes, stop the old process, and take/verify a backup **using the old version before installing the update**. Then install the chosen release with `npm ci`, run `npm run check`, and start it. Database schema version is recorded with `PRAGMA user_version`. Version 0.5 migrates schemas 1–5 additively to schema 6, retaining existing projects, agreements, CAD and AI history and adding a separate studio catalogue, self-published records and durable publication quotas. The app refuses databases with a newer schema than it understands. To roll back to an older application, restore its compatible pre-upgrade backup into a fresh data directory; do not edit `PRAGMA user_version` or reopen schema 6 with old code. Imported and self-published catalogue records, management-key hashes and quota state are included in SQLite backups; no external catalogue service is needed after import.
 
 Existing Supabase accounts, password hashes and historical orders require a separate migration. Public studio directory records can be connected through the [operator catalogue importer](CATALOG_IMPORT.md), which stores only its allowlisted fields. Keep source data and database snapshots outside the public repository.

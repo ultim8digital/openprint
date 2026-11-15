@@ -1,12 +1,14 @@
 # Neofab Studio: запуск, CAD и подключение ИИ
 
+С версии 0.5 включите `APP_MODE=community` для Studio; по умолчанию открыт каталог без аккаунтов.
+
 Studio — рабочее место для подготовки производственного проекта внутри OpenPrint. Оно открывается по `/studio` после входа. Общая архитектура CAD/CAM-платформы — в [NEOFAB_BLUEPRINT.md](NEOFAB_BLUEPRINT.md), коммерческая модель — в [NEOFAB_BUSINESS.md](NEOFAB_BUSINESS.md).
 
 ## Попробовать без ключей
 
 ```sh
 npm ci
-npm run demo
+APP_MODE=community npm run demo
 ```
 
 Откройте `http://localhost:5173`, выберите вымышленного заказчика в верхней полосе и нажмите «Создать с Neofab». Демо работает только локально. Для настоящего сообщества используйте [обычную установку](SELF_HOSTING.md).

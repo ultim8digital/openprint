@@ -52,8 +52,10 @@ import { CadService, type CadOptions } from './cad-runner.js';
 import { createCadRouter } from './cad.js';
 import { createCadAIRouter } from './cad-ai.js';
 import { createDirectoryRouter } from './directory.js';
+import { createDirectorySubmissionsRouter } from './directory-submissions.js';
 
 type Options = {
+  mode?: 'catalog' | 'community';
   store: Store;
   dataDir: string;
   appUrl: string;
@@ -75,6 +77,8 @@ const pageQuery = (value: unknown, max = 200) => {
 
 export function createApp(options: Options) {
   const { store, dataDir } = options;
+  const mode = options.mode ?? 'catalog';
+  const catalogOnly = mode === 'catalog';
   const app = express();
   const origin = new URL(options.appUrl).origin;
   const secure = new URL(origin).protocol === 'https:';
@@ -121,27 +125,55 @@ export function createApp(options: Options) {
   });
   app.use('/api', throttle('api', 240));
   app.use(express.json({ limit: '96kb' }));
-  app.use('/api', createDirectoryRouter(store));
-  const cad = new CadService(store, dataDir, options.cad);
-  app.locals.cad = cad;
-  app.use('/api', createCadRouter(cad));
-  app.use('/api', createCadAIRouter(cad, options.studioAI));
-  app.use(
-    '/api/studio',
-    createStudioRouter({
-      store,
-      dataDir,
-      ai: options.studioAI,
-      userLimit: options.userLimit,
-      totalLimit: options.totalLimit,
-    }),
-  );
+  if (catalogOnly)
+    app.use('/api', (req, _res, next) => {
+      if (['/health', '/bootstrap'].includes(req.path) || req.path.startsWith('/directory/')) {
+        next();
+      } else if (req.path === '/directory') next();
+      else
+        next(new HttpError(404, 'NOT_FOUND', 'This endpoint is not available / Раздел недоступен'));
+    });
+  app.use('/api', createDirectorySubmissionsRouter(store));
+  app.use('/api', createDirectoryRouter(store, { catalogOnly }));
+  const cad = catalogOnly ? null : new CadService(store, dataDir, options.cad);
+  // Catalog-only startup must not resume queued private CAD jobs.
+  app.locals.cad = cad ?? { stop: async () => {} };
+  if (cad) {
+    app.locals.cad = cad;
+    app.use('/api', createCadRouter(cad));
+    app.use('/api', createCadAIRouter(cad, options.studioAI));
+    app.use(
+      '/api/studio',
+      createStudioRouter({
+        store,
+        dataDir,
+        ai: options.studioAI,
+        userLimit: options.userLimit,
+        totalLimit: options.totalLimit,
+      }),
+    );
+  }
 
   app.get('/api/health', (_req, res) => {
     store.get('SELECT 1');
-    res.json({ status: 'ok', version: '0.4.0' });
+    res.json({ status: 'ok', version: '0.5.0', mode });
   });
   app.get('/api/bootstrap', (req, res) => {
+    if (catalogOnly) {
+      const contact = process.env.OPERATOR_CONTACT || '';
+      res.json({
+        mode,
+        user: null,
+        profile: null,
+        stats: { profiles: 0, projects: 0, models: 0, completed: 0 },
+        unread: 0,
+        demo: false,
+        demoUsers: [],
+        instance: process.env.INSTANCE_NAME || 'OpenPrint',
+        operatorContact: /^(https:\/\/|mailto:)[^\s<>"']+$/i.test(contact) ? contact : '',
+      });
+      return;
+    }
     const user = readUser(store, req);
     const profile = user ? ownProfile(store, user.id) : undefined;
     const stats = {
@@ -171,6 +203,7 @@ export function createApp(options: Options) {
         : [];
     const contact = process.env.OPERATOR_CONTACT || '';
     res.json({
+      mode,
       user,
       profile: profile ? profileObject(profile) : null,
       stats,
@@ -1024,7 +1057,7 @@ export function createApp(options: Options) {
         "SELECT id FROM studio_cad_builds WHERE owner_id=? AND status IN ('queued','running')",
         user.id,
       ))
-        cad.cancel(build.id);
+        cad?.cancel(build.id);
       store.run('DELETE FROM studio_projects WHERE owner_id=?', user.id);
       store.run('DELETE FROM sessions WHERE user_id=?', user.id);
       store.run('DELETE FROM reset_tokens WHERE user_id=?', user.id);

@@ -3110,3 +3110,146 @@ label small,
     flex-direction: column;
   }
 }
+
+/* Public studio submission and private-key management. */
+.catalog-editor .back-link {
+  color: var(--green);
+}
+.catalog-editor .panel,
+.catalog-secret {
+  margin-bottom: 24px;
+}
+.catalog-editor h2 {
+  margin: 0 0 14px;
+  font-weight: 500;
+}
+.catalog-editor p {
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.catalog-editor-form h2:not(:first-child) {
+  margin-top: 28px;
+}
+.catalog-form-fields {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.catalog-form-fields:disabled {
+  opacity: 0.7;
+}
+.catalog-editor label {
+  color: var(--ink);
+  font-size: 12px;
+}
+.catalog-editor input,
+.catalog-editor textarea {
+  min-width: 0;
+  width: 100%;
+}
+.catalog-editor textarea {
+  resize: vertical;
+}
+.catalog-editor .check-label {
+  align-items: flex-start;
+  line-height: 1.6;
+}
+.catalog-editor .check-label input {
+  width: 16px;
+  min-width: 16px;
+  margin-top: 3px;
+}
+.catalog-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+.catalog-rights {
+  margin: 28px 0 18px;
+}
+.catalog-secret {
+  border: 1px solid #b9c9ad;
+  background: #eff1e4;
+  border-radius: 12px;
+  padding: 24px;
+}
+.catalog-secret textarea {
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+.catalog-key-form {
+  display: grid;
+  gap: 16px;
+}
+.catalog-key-form .button {
+  justify-self: start;
+}
+.catalog-duplicates {
+  display: block;
+  margin-top: 20px;
+}
+.catalog-duplicates ul {
+  padding-left: 22px;
+}
+.catalog-duplicates li {
+  margin-bottom: 8px;
+}
+.catalog-duplicates a {
+  color: var(--green);
+  text-decoration: underline;
+}
+.catalog-conflict {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.catalog-location-map {
+  height: 330px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  z-index: 0;
+  background: #e6e8dc;
+}
+.catalog-location-pin {
+  background: var(--green);
+  color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 1px 5px #0006;
+}
+.catalog-location-pin span {
+  font-size: 10px;
+  line-height: 1;
+}
+.catalog-location-map .leaflet-control-attribution {
+  font-size: 10px;
+}
+.catalog-editor .error-box {
+  margin-bottom: 18px;
+}
+.catalog-editor .info-box {
+  display: block;
+}
+.catalog-delete .check-label {
+  margin: 18px 0;
+}
+@media (max-width: 600px) {
+  .catalog-editor-actions {
+    align-items: stretch;
+  }
+  .catalog-editor-actions .button {
+    justify-content: center;
+  }
+  .catalog-secret {
+    padding: 18px;
+  }
+  .catalog-location-map {
+    height: 280px;
+  }
+}
