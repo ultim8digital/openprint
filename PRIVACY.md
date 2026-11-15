@@ -8,6 +8,8 @@ The community’s local database stores account names, self-asserted email addre
 
 Neofab Studio stores private ideas, structured requirements, component lists, operations, acceptance criteria, revisions and confirmation hashes. Its AI usage ledger stores model names, attempt status, token counts, request hashes and timestamps. API keys stay in the server environment; they are never stored in project records or sent to the browser.
 
+Optional CAD stores versioned JSON specifications, queued/build status and diagnostic details, geometry reports, artifact hashes and the generated files themselves as private SQLite BLOBs. It also records the exact package attached to a job and named-provider access grants. The local compiler receives the specification and writes a private temporary directory; completed/failed work directories are removed. CAD compilation does not call an AI provider.
+
 When an operator configures OpenAI and a participant explicitly enables and requests AI assistance, that project's idea, current structured brief and the participant's instruction are sent to the OpenAI API. Account email, session secrets, other participants' projects and uploaded CAD files are not included. Requests use `store: false`; this does not promise that the provider has no other retention or abuse-monitoring obligations. Consult [OpenAI's current data controls](https://developers.openai.com/api/docs/guides/your-data) and the operator's terms. The manual Studio workflow sends no data to an AI provider.
 
 No advertising analytics, cross-site cookies or external font services are bundled. Rate limiting uses hashed IP keys in bounded process memory, not an advertising profile. Reverse proxies and hosts may retain their own access logs according to the operator’s configuration.
@@ -17,6 +19,7 @@ No advertising analytics, cross-site cookies or external font services are bundl
 - Provider profiles, approved library models and public project briefs are public. Closed public briefs remain accessible by URL even after leaving the open project board.
 - A direct request is visible only to its customer, targeted provider and necessary moderator/assigned access as implemented; the instance operator has technical server access.
 - A customer attachment is downloadable by its owner and chosen provider. No blanket moderator API exposes private project files. Library-submission files can be inspected by moderators for publication review.
+- A confirmed CAD package is separate from an ordinary uploaded attachment. The recipient of a direct request receives access when it is sent. For a public request, the owner can give a named participant in the discussion access for quotation and revoke it before assignment. The accepted provider retains access to the agreed package. Publishing a public brief does not publish CAD files.
 - Conversations are scoped to the customer and that provider. Reported message content is available to moderators in the corresponding report context.
 - An approved library file is intentionally downloadable by everyone under its recorded license and attribution.
 - Optional map tiles contact OpenStreetMap only after the user opens the map. The browser sends its ordinary network information and the instance origin; no private job file is sent to OSM. External provider websites open only when followed.
@@ -31,7 +34,9 @@ An HttpOnly cookie holds a random seven-day session token. The interface stores 
 
 Settings provides a JSON export of the signed-in user’s account/profile, own briefs, own offers, own messages, own models and file metadata. Download files separately using your existing permissions. The export does not include password hashes, session tokens or recovery secrets.
 
-The export also includes owned Studio projects, their revisions/confirmations and AI usage metadata. Closing an account removes the private Studio projects and revisions. Minimal AI attempt/token metadata remains against the anonymized account to preserve instance rate-limit accounting; it contains no raw prompt or response text. A brief already published to a manufacturing job follows that job's visibility and retained-agreement rules.
+The export also includes owned Studio projects, their revisions/confirmations, CAD specifications/build metadata/artifact manifests and AI usage metadata. Binary CAD files are downloaded separately through authorized artifact links. Closing an account removes its Studio projects, CAD revisions/builds/artifacts and associated CAD handoffs/grants. A late build cannot restore them. This also ends future server downloads of those CAD packages; participants may already possess copies.
+
+Minimal AI attempt/token metadata and CAD queued/access events remain against the anonymized account for operational history and instance limits. These retained CAD events contain identifiers/timestamps, not specifications or generated files. A brief already published to a manufacturing job follows that job's visibility and retained-agreement rules; accepted agreement text can remain even when its CAD files are removed.
 
 Password changes require the current password and revoke other sessions and outstanding recovery links. An operator can verify an identity request and issue a private single-use recovery link; no automatic recovery email is sent.
 

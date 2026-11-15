@@ -20,18 +20,23 @@ Visitors can discover providers, inspect STL/OBJ, construct/download simple part
 
 An empty community is not presented as an established network of suppliers. All demo data is prominently fictional; real installations start empty.
 
-## Deliberate limits of v0.1
+## Neofab Studio in v0.2
 
-The Neofab Studio preview extends this baseline with private versioned briefs, a flat component list, optional AI drafting and a confirmed handoff. It preserves the key-free path. See [setup](NEOFAB_SETUP.md) and the broader [CAD/CAM architecture](NEOFAB_BLUEPRINT.md); the limits below describe the original 0.1 community release.
+Neofab Studio adds private versioned briefs, components and operations, optional AI drafting, local declarative CAD and a confirmed handoff. CAD supports bounded parts and assemblies, STEP/STL and BOM exports, a geometry report, component preview, version history and named-provider quotation access. Functional parts, repairs, furniture and small batches can share this workflow; each manufacturing process still needs its own engineering preparation. See [setup](NEOFAB_SETUP.md), [CAD scope](CAD_ENGINE.md) and the broader [CAD/CAM architecture](NEOFAB_BLUEPRINT.md).
+
+The complete manual path has no required AI key. Installing the optional CAD runtime enables geometry without an AI service; leaving it disabled preserves briefs, collaboration and simple browser templates.
+
+## Deliberate limits of v0.2
 
 - One user manages one provider profile. Shared workshop staff and granular permissions are future work.
 - No payments, commission accounting, escrow, tax calculation, shipping integration or automatic dispute arbitration. Participants handle these directly.
 - No automatic identity/email verification, public ratings or invented reputation scores.
-- No AI generation or third-party model API dependency. Optional adapters could come later with rights/cost controls and a complete key-free path.
+- Optional AI drafts a brief only. Automatic AI-to-CAD generation, agent routing and monetary budgets are future work; a third-party model API is not required for the manual path.
 - No full validation of arbitrary CAD safety, printability or malware. Preview supports STL/OBJ; other supported formats are attachments.
-- Attachments are shared only after provider selection. An explicit per-provider pre-quote file-access grant would be a useful future extension for professional estimating.
+- Ordinary uploaded attachments are shared after provider selection. Confirmed CAD packages additionally support direct-recipient and explicit per-provider quotation access. Access to an already downloaded copy cannot be recalled.
+- CAD accepts up to 24 physical components and 300 bounded operations. Arbitrary STEP import into editable history, freeform modelling, FEA, CAM, G-code and machine-profile validation are not included. Geometry passing does not release manufacturing.
 - No offline tile cache or installable offline PWA. The app is a locally runnable self-hosted web service.
-- Published briefs are immutable in v0.1. Cancel and create a revised brief before assignment when scope changes. Post-agreement changes need their own future versioning workflow.
+- Published briefs and CAD handoffs are immutable. Cancel and create a revised brief before assignment when scope changes. Post-agreement changes need their own future versioning workflow.
 - Dashboard/moderator queries show bounded windows (up to 200 records; notifications 100; direct requests 100). Historical dashboard pagination is future work. Public directory/library and message histories already have explicit pagination.
 - No production Supabase migration, SSR/SEO parity, native mobile app, federation or horizontal scaling.
 
@@ -39,6 +44,6 @@ The Neofab Studio preview extends this baseline with private versioned briefs, a
 
 Start with evidence from a small real maker community: onboarding, completed collaborations, 200% zoom, screen readers, mobile devices, recovery/restore drills and clearer briefs. A scraped-listing count or demo account count is not evidence of demand or active supply.
 
-Bounded extensions: team membership, complete dashboard history, consent-based pre-quote file access, optional email outbox, configurable map providers, versioned request amendments, moderation appeals, source-model versions and licensed user-supplied data import.
+Bounded extensions: team membership, complete dashboard history, optional email outbox, configurable map providers, versioned request amendments, moderation appeals, reusable CAD templates, controlled AI design proposals and licensed user-supplied data import. Multi-provider routes and manufacturing adapters need their own versioned inputs, permissions and validation.
 
 Keep payments, AI and public-data adapters optional. Do not infer downstream model rights from a search result or a generic “commercial use” label.

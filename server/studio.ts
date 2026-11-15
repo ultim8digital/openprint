@@ -1,3 +1,4 @@
+import { cadChecks, cadSnapshot, latestCadRevision } from './cad-data.js';
 import { Router, type Request } from 'express';
 import { randomUUID } from 'node:crypto';
 import { mkdirSync, unlinkSync, writeFileSync } from 'node:fs';
@@ -32,7 +33,7 @@ import {
   validTemplate,
 } from './studio-geometry.js';
 
-type ProjectRow = {
+export type ProjectRow = {
   id: string;
   owner_id: string;
   idea: string;
@@ -117,10 +118,20 @@ const processes: StudioCapabilities['processes'] = [
   { id: 'UNSURE', ru: 'Подобрать технологию', en: 'Help choosing a process', status: 'brief' },
 ];
 
+function projectChecks(store: Store, row: ProjectRow) {
+  const checks = studioChecks(briefOf(row));
+  return latestCadRevision(store, row.id)?.spec
+    ? [...checks.filter((c) => c.code !== 'brief_only'), ...cadChecks(store, row.id, row.version)]
+    : checks;
+}
+function confirmationHash(store: Store, row: ProjectRow) {
+  const cad = cadSnapshot(store, row.id, row.version);
+  return digest(canonicalJSON(cad ? { brief: briefOf(row), cad } : briefOf(row)));
+}
 function briefOf(row: ProjectRow): StudioBrief {
   return JSON.parse(row.brief);
 }
-function projectObject(row: ProjectRow): StudioProject {
+export function projectObject(store: Store, row: ProjectRow): StudioProject {
   return {
     id: row.id,
     idea: row.idea,
@@ -133,10 +144,10 @@ function projectObject(row: ProjectRow): StudioProject {
     job_id: row.job_id,
     created_at: row.created_at,
     updated_at: row.updated_at,
-    checks: studioChecks(briefOf(row)),
+    checks: projectChecks(store, row),
   };
 }
-function owned(store: Store, projectId: string, owner: string) {
+export function owned(store: Store, projectId: string, owner: string) {
   const row = store.get<ProjectRow>(
     'SELECT * FROM studio_projects WHERE id=? AND owner_id=?',
     projectId,
@@ -145,7 +156,7 @@ function owned(store: Store, projectId: string, owner: string) {
   ensure(row, 404, 'NOT_FOUND', 'Studio project not found / Проект студии не найден');
   return row;
 }
-function editable(row: ProjectRow, version: number) {
+export function editable(row: ProjectRow, version: number) {
   ensure(
     !row.job_id,
     409,
@@ -159,7 +170,7 @@ function editable(row: ProjectRow, version: number) {
     'The brief changed. Reload before continuing / ТЗ изменилось. Обновите страницу',
   );
 }
-function confirmed(row: ProjectRow) {
+function confirmed(store: Store, row: ProjectRow) {
   ensure(
     row.confirmed_version === row.version && row.confirmed_hash && row.packet,
     409,
@@ -167,13 +178,13 @@ function confirmed(row: ProjectRow) {
     'Review and confirm this version first / Сначала проверьте и подтвердите эту версию',
   );
   ensure(
-    row.confirmed_hash === digest(canonicalJSON(briefOf(row))),
+    row.confirmed_hash === confirmationHash(store, row),
     409,
     'STUDIO_CHANGED',
     'Confirmed brief does not match / Подтверждённое ТЗ не совпадает',
   );
 }
-function assertHistoryCapacity(
+export function assertHistoryCapacity(
   store: Store,
   ownerId: string,
   projectId: string | null,
@@ -203,9 +214,21 @@ function assertHistoryCapacity(
     'Studio history quota reached (20 MiB per account, 200 MiB per instance) / Достигнут лимит истории студии (20 МиБ на аккаунт, 200 МиБ на сервер)',
   );
 }
-function revise(store: Store, row: ProjectRow, brief: StudioBrief, source: 'manual' | 'openai') {
+export function revise(
+  store: Store,
+  row: ProjectRow,
+  brief: StudioBrief,
+  source: 'manual' | 'openai',
+  force = false,
+) {
+  ensure(
+    !brief.part || !latestCadRevision(store, row.id)?.spec,
+    409,
+    'CAD_TEMPLATE_CONFLICT',
+    'Remove CAD before adding a simple template / Удалите CAD перед добавлением простого шаблона',
+  );
   const value = canonicalJSON(brief);
-  if (value === canonicalJSON(briefOf(row))) return row.version;
+  if (!force && value === canonicalJSON(briefOf(row))) return row.version;
   assertHistoryCapacity(store, row.owner_id, row.id, Buffer.byteLength(value));
   const version = row.version + 1,
     now = Date.now();
@@ -324,7 +347,11 @@ function matches(store: Store, row: ProjectRow) {
   };
 }
 function detail(store: Store, row: ProjectRow) {
-  return { project: projectObject(row), usage: usage(store, row.id), ...matches(store, row) };
+  return {
+    project: projectObject(store, row),
+    usage: usage(store, row.id),
+    ...matches(store, row),
+  };
 }
 function skeleton(idea: string, language: 'ru' | 'en'): StudioBrief {
   return {
@@ -393,15 +420,20 @@ function handoffDescription(row: ProjectRow, brief: StudioBrief) {
       'Требуется подтверждение исполнителем технологии, материала, допусков и подготовки оборудования. CAM и G-code отсутствуют.',
       'The provider must confirm process, material, tolerances and machine setup. CAM and G-code are not included.',
     ),
-    brief.part
+    JSON.parse(row.packet || '{}').cad
       ? heading(
-          'Приложена геометрия одного параметрического шаблона, без проверки в слайсере.',
-          'Attached geometry is one parametric template, without slicer verification.',
+          'Приложен версионный комплект CAD: STEP, STL, BOM и отчёт. Доступ выдаётся исполнителю отдельно; прямой адресат получает его сразу.',
+          'A versioned CAD package includes STEP, STL, BOM and a report. Access is granted separately; a direct recipient receives it immediately.',
         )
-      : heading(
-          'Готовой CAD-модели в пакете нет. Требуется согласовать исходные файлы или проектирование.',
-          'The packet contains no completed CAD model. Agree on source files or design work.',
-        ),
+      : brief.part
+        ? heading(
+            'Приложена геометрия одного параметрического шаблона, без проверки в слайсере.',
+            'Attached geometry is one parametric template, without slicer verification.',
+          )
+        : heading(
+            'Готовой CAD-модели в пакете нет. Требуется согласовать исходные файлы или проектирование.',
+            'The packet contains no completed CAD model. Agree on source files or design work.',
+          ),
   ];
   const value = lines.join('\n\n');
   ensure(
@@ -441,7 +473,10 @@ export function createStudioRouter(options: StudioOptions) {
       limit + 1,
       offset,
     );
-    res.json({ projects: rows.slice(0, limit).map(projectObject), has_more: rows.length > limit });
+    res.json({
+      projects: rows.slice(0, limit).map((row) => projectObject(store, row)),
+      has_more: rows.length > limit,
+    });
   });
   router.post('/projects', (req, res) => {
     const user = requireUser(store, req),
@@ -514,12 +549,12 @@ export function createStudioRouter(options: StudioOptions) {
         'The brief changed / ТЗ изменилось',
       );
       if (row.confirmed_version === row.version) {
-        confirmed(row);
+        confirmed(store, row);
         return;
       }
       editable(row, body.version);
       const brief = briefOf(row),
-        checks = studioChecks(brief);
+        checks = projectChecks(store, row);
       ensure(
         !checks.some((check) => check.level === 'required'),
         400,
@@ -527,7 +562,26 @@ export function createStudioRouter(options: StudioOptions) {
         'Specify quantity and location and resolve template checks before confirming the brief / До подтверждения ТЗ заполните количество и город и проверьте шаблон',
       );
       const model = templateSTL(brief),
-        packet = studioPacket(row.id, row.version, brief, model);
+        basePacket = studioPacket(row.id, row.version, brief, model),
+        cad = cadSnapshot(store, row.id, row.version),
+        packet = cad
+          ? {
+              ...basePacket,
+              schema_version: 'neofab-packet/2',
+              confirmed_hash: confirmationHash(store, row),
+              checks,
+              cad,
+              geometry_scope: 'declarative_cad',
+              manifest: [
+                ...basePacket.manifest,
+                ...cad.artifacts.map((a) => ({
+                  path: 'cad/' + a.name,
+                  bytes: a.size,
+                  sha256: a.sha256,
+                })),
+              ],
+            }
+          : basePacket;
       store.run(
         'INSERT INTO studio_confirmations(project_id,version,brief_hash,confirmed_at) VALUES(?,?,?,?)',
         row.id,
@@ -550,7 +604,7 @@ export function createStudioRouter(options: StudioOptions) {
   router.get('/projects/:id/packet', (req, res) => {
     const user = requireUser(store, req),
       row = owned(store, id(req), user.id);
-    confirmed(row);
+    confirmed(store, row);
     res
       .set('Content-Disposition', `attachment; filename="neofab-${row.id}-v${row.version}.json"`)
       .json(JSON.parse(row.packet!));
@@ -558,7 +612,7 @@ export function createStudioRouter(options: StudioOptions) {
   router.get('/projects/:id/model.stl', (req, res) => {
     const user = requireUser(store, req),
       row = owned(store, id(req), user.id);
-    confirmed(row);
+    confirmed(store, row);
     ensure(
       row.model_stl,
       404,
@@ -816,7 +870,7 @@ export function createStudioRouter(options: StudioOptions) {
           );
           return row.job_id;
         }
-        confirmed(row);
+        confirmed(store, row);
         const brief = briefOf(row),
           description = handoffDescription(row, brief),
           kind = brief.requestKind === 'manufacture' ? 'print' : 'design';
@@ -902,6 +956,23 @@ export function createStudioRouter(options: StudioOptions) {
           fileId,
           Date.now(),
         );
+        const cad = cadSnapshot(store, row.id, row.version);
+        if (cad) {
+          store.run(
+            'INSERT INTO studio_cad_handoffs(job_id,build_id,packet,created_at) VALUES(?,?,?,?)',
+            jobId,
+            cad.build_id,
+            row.packet!,
+            Date.now(),
+          );
+          if (target)
+            store.run(
+              'INSERT INTO studio_cad_grants(job_id,provider_id,created_at) VALUES(?,?,?)',
+              jobId,
+              target.user_id,
+              Date.now(),
+            );
+        }
         store.run(
           'UPDATE studio_projects SET job_id=?,file_id=?,updated_at=? WHERE id=? AND job_id IS NULL',
           jobId,
@@ -916,7 +987,7 @@ export function createStudioRouter(options: StudioOptions) {
         return jobId;
       });
       createdPath = undefined; // The transaction committed; response errors must not remove a published artifact.
-      res.json({ job_id: jobId, project: projectObject(owned(store, projectId, user.id)) });
+      res.json({ job_id: jobId, project: projectObject(store, owned(store, projectId, user.id)) });
     } catch (error) {
       if (createdPath) {
         try {

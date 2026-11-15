@@ -1,0 +1,24 @@
+{
+  "schema_version": "neofab-cad/1",
+  "name": "Mounting plate geometry study",
+  "units": "mm",
+  "material": "Not selected",
+  "process": "Not selected",
+  "description": "A 60 × 40 × 6 mm plate with a central 8 mm through hole. This is a numerical geometry example, not an approved manufacturing design.",
+  "assumptions": ["Loads, material, tolerances and manufacturing process remain to be specified."],
+  "missing_geometry": [],
+  "operations": [
+    { "type": "box", "id": "plate", "mode": "add", "size": [60, 40, 6], "at": [0, 0, 0] },
+    {
+      "type": "cylinder",
+      "id": "hole",
+      "mode": "cut",
+      "radius": 4,
+      "height": 8,
+      "axis": "z",
+      "at": [30, 20, -1]
+    }
+  ],
+  "components": [],
+  "requirements": { "expected_solids": 1, "bounds": [60, 40, 6], "tolerance": 0.01 }
+}

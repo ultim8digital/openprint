@@ -1,3 +1,4 @@
+import JobCad from './JobCad';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import {
@@ -543,6 +544,14 @@ export default function Project() {
               </p>
             ) : null}
           </section>
+          {user && (
+            <JobCad
+              key={`${job.id}:${user.id}`}
+              jobId={job.id}
+              owner={owner}
+              revision={`${detail.conversations.length}:${job.accepted_offer_id || ''}:${job.status}`}
+            />
+          )}
           {job.accepted_terms && (
             <section className="panel agreement">
               <span className="eyebrow">

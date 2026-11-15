@@ -1,0 +1,552 @@
+{
+  "$defs": {
+    "Box": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "box",
+          "title": "Type",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "mode": {
+          "enum": ["add", "cut"],
+          "title": "Mode",
+          "type": "string"
+        },
+        "size": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 2000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 2000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 2000,
+              "type": "number"
+            }
+          ],
+          "title": "Size",
+          "type": "array"
+        },
+        "at": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        }
+      },
+      "required": ["type", "id", "mode", "size", "at"],
+      "title": "Box",
+      "type": "object"
+    },
+    "Chamfer": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "chamfer",
+          "title": "Type",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "length": {
+          "exclusiveMinimum": 0,
+          "maximum": 2000,
+          "title": "Length",
+          "type": "number"
+        },
+        "selector": {
+          "enum": ["|X", "|Y", "|Z", ">Z", "<Z", "all"],
+          "title": "Selector",
+          "type": "string"
+        }
+      },
+      "required": ["type", "id", "length", "selector"],
+      "title": "Chamfer",
+      "type": "object"
+    },
+    "Component": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "material": {
+          "maxLength": 160,
+          "title": "Material",
+          "type": "string"
+        },
+        "process": {
+          "maxLength": 160,
+          "title": "Process",
+          "type": "string"
+        },
+        "operations": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "box": "#/$defs/Box",
+                "chamfer": "#/$defs/Chamfer",
+                "cylinder": "#/$defs/Cylinder",
+                "extrude": "#/$defs/Extrude",
+                "fillet": "#/$defs/Fillet"
+              },
+              "propertyName": "type"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/Box"
+              },
+              {
+                "$ref": "#/$defs/Cylinder"
+              },
+              {
+                "$ref": "#/$defs/Extrude"
+              },
+              {
+                "$ref": "#/$defs/Fillet"
+              },
+              {
+                "$ref": "#/$defs/Chamfer"
+              }
+            ]
+          },
+          "maxItems": 60,
+          "minItems": 1,
+          "title": "Operations",
+          "type": "array"
+        },
+        "at": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        },
+        "rotation": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            }
+          ],
+          "title": "Rotation",
+          "type": "array"
+        },
+        "quantity": {
+          "maximum": 1,
+          "minimum": 1,
+          "title": "Quantity",
+          "type": "integer"
+        }
+      },
+      "required": ["id", "name", "material", "process", "operations", "at", "rotation", "quantity"],
+      "title": "Component",
+      "type": "object"
+    },
+    "Cylinder": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "cylinder",
+          "title": "Type",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "mode": {
+          "enum": ["add", "cut"],
+          "title": "Mode",
+          "type": "string"
+        },
+        "radius": {
+          "exclusiveMinimum": 0,
+          "maximum": 2000,
+          "title": "Radius",
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "maximum": 2000,
+          "title": "Height",
+          "type": "number"
+        },
+        "axis": {
+          "enum": ["x", "y", "z"],
+          "title": "Axis",
+          "type": "string"
+        },
+        "at": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        }
+      },
+      "required": ["type", "id", "mode", "radius", "height", "axis", "at"],
+      "title": "Cylinder",
+      "type": "object"
+    },
+    "Extrude": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "extrude",
+          "title": "Type",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "mode": {
+          "enum": ["add", "cut"],
+          "title": "Mode",
+          "type": "string"
+        },
+        "points": {
+          "items": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "maximum": 2000,
+                "minimum": -2000,
+                "type": "number"
+              },
+              {
+                "maximum": 2000,
+                "minimum": -2000,
+                "type": "number"
+              }
+            ],
+            "type": "array"
+          },
+          "maxItems": 100,
+          "minItems": 3,
+          "title": "Points",
+          "type": "array"
+        },
+        "plane": {
+          "enum": ["XY", "XZ", "YZ"],
+          "title": "Plane",
+          "type": "string"
+        },
+        "distance": {
+          "exclusiveMinimum": 0,
+          "maximum": 2000,
+          "title": "Distance",
+          "type": "number"
+        },
+        "at": {
+          "maxItems": 3,
+          "minItems": 3,
+          "prefixItems": [
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            },
+            {
+              "maximum": 2000,
+              "minimum": -2000,
+              "type": "number"
+            }
+          ],
+          "title": "At",
+          "type": "array"
+        }
+      },
+      "required": ["type", "id", "mode", "points", "plane", "distance", "at"],
+      "title": "Extrude",
+      "type": "object"
+    },
+    "Fillet": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "fillet",
+          "title": "Type",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,39}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "radius": {
+          "exclusiveMinimum": 0,
+          "maximum": 2000,
+          "title": "Radius",
+          "type": "number"
+        },
+        "selector": {
+          "enum": ["|X", "|Y", "|Z", ">Z", "<Z", "all"],
+          "title": "Selector",
+          "type": "string"
+        }
+      },
+      "required": ["type", "id", "radius", "selector"],
+      "title": "Fillet",
+      "type": "object"
+    },
+    "Requirements": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_solids": {
+          "maximum": 24,
+          "minimum": 1,
+          "title": "Expected Solids",
+          "type": "integer"
+        },
+        "bounds": {
+          "anyOf": [
+            {
+              "maxItems": 3,
+              "minItems": 3,
+              "prefixItems": [
+                {
+                  "exclusiveMinimum": 0,
+                  "maximum": 2000,
+                  "type": "number"
+                },
+                {
+                  "exclusiveMinimum": 0,
+                  "maximum": 2000,
+                  "type": "number"
+                },
+                {
+                  "exclusiveMinimum": 0,
+                  "maximum": 2000,
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bounds"
+        },
+        "tolerance": {
+          "exclusiveMinimum": 0,
+          "maximum": 10,
+          "title": "Tolerance",
+          "type": "number"
+        }
+      },
+      "required": ["expected_solids", "bounds", "tolerance"],
+      "title": "Requirements",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "neofab-cad/1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "units": {
+      "const": "mm",
+      "title": "Units",
+      "type": "string"
+    },
+    "material": {
+      "maxLength": 160,
+      "title": "Material",
+      "type": "string"
+    },
+    "process": {
+      "maxLength": 160,
+      "title": "Process",
+      "type": "string"
+    },
+    "description": {
+      "maxLength": 4000,
+      "title": "Description",
+      "type": "string"
+    },
+    "assumptions": {
+      "items": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "maxItems": 30,
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "missing_geometry": {
+      "items": {
+        "maxLength": 500,
+        "type": "string"
+      },
+      "maxItems": 30,
+      "title": "Missing Geometry",
+      "type": "array"
+    },
+    "operations": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "box": "#/$defs/Box",
+            "chamfer": "#/$defs/Chamfer",
+            "cylinder": "#/$defs/Cylinder",
+            "extrude": "#/$defs/Extrude",
+            "fillet": "#/$defs/Fillet"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/Box"
+          },
+          {
+            "$ref": "#/$defs/Cylinder"
+          },
+          {
+            "$ref": "#/$defs/Extrude"
+          },
+          {
+            "$ref": "#/$defs/Fillet"
+          },
+          {
+            "$ref": "#/$defs/Chamfer"
+          }
+        ]
+      },
+      "maxItems": 60,
+      "title": "Operations",
+      "type": "array"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/Component"
+      },
+      "maxItems": 24,
+      "title": "Components",
+      "type": "array"
+    },
+    "requirements": {
+      "$ref": "#/$defs/Requirements"
+    }
+  },
+  "required": [
+    "schema_version",
+    "name",
+    "units",
+    "material",
+    "process",
+    "description",
+    "assumptions",
+    "missing_geometry",
+    "operations",
+    "components",
+    "requirements"
+  ],
+  "title": "Spec",
+  "type": "object"
+}

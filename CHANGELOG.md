@@ -1,13 +1,21 @@
 # Changelog
 
-## Unreleased — Neofab Studio preview
+## 0.2.0 — 2026-11-15
+
+Neofab Studio connects a versioned manufacturing brief to a local CAD package and a named provider. The community workflow remains usable without CAD or an AI key.
 
 - Private versioned manufacturing briefs, components/BOM, operations, open questions, assumptions and acceptance criteria for broad CAD/CAM projects.
 - Russian/English Studio UI, manual workflow without keys, confirmation of exact revisions, maker matching and idempotent request publication.
-- Deterministic single-part FDM template STL and a confirmed packet with geometry manifest; general CAD/CAM requests remain design briefs.
+- Optional local CadQuery engine for bounded declarative parts and assemblies: boxes, cylinders, extrusions, fillets and chamfers; assembly/per-part STEP and STL, BOM, JSON specification, mesh, report and ZIP package.
+- Editable CAD components/operations, assembly preview, component isolation and exploded view. Simple FDM templates remain available without Python.
+- Durable single-worker CAD queue, cancellation, timeout/restart recovery, revision-bound results, persistent daily usage and reserved output quotas. No generated executable source is run.
+- Confirmed packets bind exact brief/specification/artifact hashes. Direct recipients receive the package on publication; owners can grant named conversation participants quotation access and revoke it before assignment.
+- SQLite schema v3 migration, private CAD BLOB storage, account export/closure and hash-verified database backup manifest v2.
 - Optional server-side Responses API with separate clarification/review models, explicit text-sharing consent, strict output validation, bounded calls and tokens, persistent usage and request deduplication.
-- Expanded technology/material vocabulary, SQLite schema v2 migration, private Studio data export and account cleanup.
-- Universal Neofab architecture, business hypotheses and operator setup guide. Live AI calls, CAD worker integration, machine code, payments and physical production remain unvalidated or unimplemented as documented.
+- Expanded technology/material vocabulary, manual design/manufacturing intent, and explicit preservation of unresolved questions, assumptions and unknown component quantities.
+- Optional Python setup and CAD Docker Compose override; MIT compiler extraction with retained provenance and license.
+- Local validation: 38 Node tests, seven browser flows including CAD editing and a native CadQuery assembly workflow, production build and separate native-kernel checks. See [VALIDATION.md](docs/VALIDATION.md) for current CI status and exact evidence boundaries.
+- CAM/G-code, FEA, automatic AI-to-CAD generation, model-routing cascades, payments and multi-provider work orders are not implemented. No live paid OpenAI call or physical manufacturing result is claimed.
 
 ## 0.1.0 — 2026-11-13
 

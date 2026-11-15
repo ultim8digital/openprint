@@ -88,8 +88,9 @@ const cleanup = setInterval(() => {
 }, 3600000);
 cleanup.unref();
 for (const signal of ['SIGTERM', 'SIGINT'] as const)
-  process.on(signal, () => {
+  process.on(signal, async () => {
     clearInterval(cleanup);
+    await app.locals.cad.stop();
     server.close(() => {
       store.close();
       release();

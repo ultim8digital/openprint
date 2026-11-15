@@ -40,9 +40,9 @@ export class Store {
     const version = Number(
       this.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0,
     );
-    if (version > 2)
+    if (version > 3)
       throw new Error('Database is newer than this OpenPrint version. Upgrade the application.');
-    if (version === 2) return;
+    if (version === 3) return;
     if (version === 0)
       this.transaction(() =>
         this.db.exec(`
@@ -163,8 +163,9 @@ export class Store {
       PRAGMA user_version=1;
     `),
       );
-    this.transaction(() =>
-      this.db.exec(`
+    if (version < 2)
+      this.transaction(() =>
+        this.db.exec(`
       CREATE TABLE studio_projects (
         id TEXT PRIMARY KEY, owner_id TEXT NOT NULL REFERENCES users(id), idea TEXT NOT NULL,
         language TEXT NOT NULL CHECK(language IN ('ru','en')),
@@ -214,6 +215,58 @@ export class Store {
       CREATE TRIGGER studio_published_immutable BEFORE UPDATE OF brief,version,confirmed_version,confirmed_hash,packet,model_stl,job_id,file_id ON studio_projects WHEN OLD.job_id IS NOT NULL
         BEGIN SELECT RAISE(ABORT, 'Published studio projects are immutable'); END;
       PRAGMA user_version=2;
+    `),
+      );
+    this.transaction(() =>
+      this.db.exec(`
+      CREATE INDEX events_action_time ON events(action,created_at);
+      CREATE TABLE studio_cad_revisions (
+        id TEXT PRIMARY KEY, project_id TEXT NOT NULL REFERENCES studio_projects(id) ON DELETE CASCADE,
+        number INTEGER NOT NULL CHECK(number>0), project_version INTEGER NOT NULL,
+        spec TEXT CHECK(spec IS NULL OR json_valid(spec)), sha256 TEXT,
+        created_at INTEGER NOT NULL, UNIQUE(project_id,number), UNIQUE(project_id,project_version),
+        CHECK((spec IS NULL AND sha256 IS NULL) OR (spec IS NOT NULL AND sha256 IS NOT NULL))
+      ) STRICT;
+      CREATE TRIGGER studio_cad_revision_immutable BEFORE UPDATE ON studio_cad_revisions
+        BEGIN SELECT RAISE(ABORT, 'CAD revisions are immutable'); END;
+      CREATE TABLE studio_cad_builds (
+        id TEXT PRIMARY KEY, owner_id TEXT NOT NULL REFERENCES users(id),
+        project_id TEXT NOT NULL REFERENCES studio_projects(id) ON DELETE CASCADE,
+        revision_id TEXT NOT NULL REFERENCES studio_cad_revisions(id) ON DELETE CASCADE,
+        project_version INTEGER NOT NULL, request_id TEXT NOT NULL,
+        status TEXT NOT NULL CHECK(status IN ('queued','running','succeeded','failed')),
+        error_code TEXT, error_detail TEXT CHECK(error_detail IS NULL OR length(error_detail)<=800), report TEXT CHECK(report IS NULL OR json_valid(report)),
+        created_at INTEGER NOT NULL, finished_at INTEGER,
+        UNIQUE(owner_id,project_id,request_id)
+      ) STRICT;
+      CREATE INDEX studio_cad_build_queue ON studio_cad_builds(status,created_at);
+      CREATE INDEX studio_cad_build_owner ON studio_cad_builds(owner_id,created_at);
+      CREATE INDEX studio_cad_build_project ON studio_cad_builds(project_id,project_version);
+      CREATE TRIGGER studio_cad_build_identity_immutable BEFORE UPDATE OF owner_id,project_id,revision_id,project_version,request_id,created_at ON studio_cad_builds
+        BEGIN SELECT RAISE(ABORT, 'CAD build identity is immutable'); END;
+      CREATE TRIGGER studio_cad_build_result_immutable BEFORE UPDATE ON studio_cad_builds WHEN OLD.status='succeeded'
+        BEGIN SELECT RAISE(ABORT, 'Successful CAD builds are immutable'); END;
+      CREATE TABLE studio_cad_artifacts (
+        build_id TEXT NOT NULL REFERENCES studio_cad_builds(id) ON DELETE CASCADE,
+        name TEXT NOT NULL, size INTEGER NOT NULL CHECK(size>0), sha256 TEXT NOT NULL,
+        content BLOB NOT NULL, PRIMARY KEY(build_id,name), CHECK(length(content)=size)
+      ) STRICT;
+      CREATE TRIGGER studio_cad_artifact_immutable BEFORE UPDATE ON studio_cad_artifacts
+        BEGIN SELECT RAISE(ABORT, 'CAD artifacts are immutable'); END;
+      CREATE TABLE studio_cad_handoffs (
+        job_id TEXT PRIMARY KEY REFERENCES jobs(id) ON DELETE CASCADE,
+        build_id TEXT NOT NULL REFERENCES studio_cad_builds(id) ON DELETE CASCADE,
+        packet TEXT NOT NULL CHECK(json_valid(packet)), created_at INTEGER NOT NULL
+      ) STRICT;
+      CREATE INDEX studio_cad_handoff_build ON studio_cad_handoffs(build_id);
+      CREATE TRIGGER studio_cad_handoff_immutable BEFORE UPDATE ON studio_cad_handoffs
+        BEGIN SELECT RAISE(ABORT, 'CAD handoffs are immutable'); END;
+      CREATE TABLE studio_cad_grants (
+        job_id TEXT NOT NULL REFERENCES studio_cad_handoffs(job_id) ON DELETE CASCADE,
+        provider_id TEXT NOT NULL REFERENCES users(id), created_at INTEGER NOT NULL,
+        PRIMARY KEY(job_id,provider_id)
+      ) STRICT;
+      PRAGMA user_version=3;
     `),
     );
   }
