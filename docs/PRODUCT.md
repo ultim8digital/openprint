@@ -20,18 +20,18 @@ Visitors can discover providers, inspect STL/OBJ, construct/download simple part
 
 An empty community is not presented as an established network of suppliers. All demo data is prominently fictional; real installations start empty.
 
-## Neofab Studio in v0.2
+## Neofab Studio in v0.3
 
 Neofab Studio adds private versioned briefs, components and operations, optional AI drafting, local declarative CAD and a confirmed handoff. CAD supports bounded parts and assemblies, STEP/STL and BOM exports, a geometry report, component preview, version history and named-provider quotation access. Functional parts, repairs, furniture and small batches can share this workflow; each manufacturing process still needs its own engineering preparation. See [setup](NEOFAB_SETUP.md), [CAD scope](CAD_ENGINE.md) and the broader [CAD/CAM architecture](NEOFAB_BLUEPRINT.md).
 
 The complete manual path has no required AI key. Installing the optional CAD runtime enables geometry without an AI service; leaving it disabled preserves briefs, collaboration and simple browser templates.
 
-## Deliberate limits of v0.2
+## Deliberate limits of v0.3
 
 - One user manages one provider profile. Shared workshop staff and granular permissions are future work.
 - No payments, commission accounting, escrow, tax calculation, shipping integration or automatic dispute arbitration. Participants handle these directly.
 - No automatic identity/email verification, public ratings or invented reputation scores.
-- Optional AI drafts a brief only. Automatic AI-to-CAD generation, agent routing and monetary budgets are future work; a third-party model API is not required for the manual path.
+- Optional AI drafts briefs and bounded declarative CAD proposals. Models are selected by task on the server; reviewed CAD proposals are applied and built separately. Autonomous agent delegation and monetary budgets are future work; a third-party model API is not required for the manual path.
 - No full validation of arbitrary CAD safety, printability or malware. Preview supports STL/OBJ; other supported formats are attachments.
 - Ordinary uploaded attachments are shared after provider selection. Confirmed CAD packages additionally support direct-recipient and explicit per-provider quotation access. Access to an already downloaded copy cannot be recalled.
 - CAD accepts up to 24 physical components and 300 bounded operations. Arbitrary STEP import into editable history, freeform modelling, FEA, CAM, G-code and machine-profile validation are not included. Geometry passing does not release manufacturing.
@@ -44,6 +44,6 @@ The complete manual path has no required AI key. Installing the optional CAD run
 
 Start with evidence from a small real maker community: onboarding, completed collaborations, 200% zoom, screen readers, mobile devices, recovery/restore drills and clearer briefs. A scraped-listing count or demo account count is not evidence of demand or active supply.
 
-Bounded extensions: team membership, complete dashboard history, optional email outbox, configurable map providers, versioned request amendments, moderation appeals, reusable CAD templates, controlled AI design proposals and licensed user-supplied data import. Multi-provider routes and manufacturing adapters need their own versioned inputs, permissions and validation.
+Bounded extensions: team membership, complete dashboard history, optional email outbox, configurable map providers, versioned request amendments, moderation appeals, reusable CAD templates, model-quality evaluations and licensed user-supplied data import. Multi-provider routes and manufacturing adapters need their own versioned inputs, permissions and validation.
 
 Keep payments, AI and public-data adapters optional. Do not infer downstream model rights from a search result or a generic “commercial use” label.

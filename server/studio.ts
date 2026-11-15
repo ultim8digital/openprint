@@ -1,4 +1,10 @@
 import { cadChecks, cadSnapshot, latestCadRevision } from './cad-data.js';
+import {
+  reserveAIRequest,
+  studioUsage as usage,
+  assertAIReplayFinished,
+  type AIRunRow as RunRow,
+} from './ai-ledger.js';
 import { Router, type Request } from 'express';
 import { randomUUID } from 'node:crypto';
 import { mkdirSync, unlinkSync, writeFileSync } from 'node:fs';
@@ -11,7 +17,6 @@ import {
   type StudioCapabilities,
   type StudioMatch,
   type StudioProject,
-  type StudioUsage,
 } from '../shared/studio.js';
 import { currencies } from '../shared/types.js';
 import { Store } from './database.js';
@@ -49,23 +54,6 @@ export type ProjectRow = {
   model_stl: Uint8Array | null;
   created_at: number;
   updated_at: number;
-};
-type RunRow = {
-  id: string;
-  owner_id: string;
-  project_id: string | null;
-  request_id: string;
-  request_hash: string;
-  input_version: number;
-  model: string;
-  quality: 'standard' | 'review';
-  status: 'running' | 'complete' | 'failed' | 'stale';
-  input_tokens: number;
-  output_tokens: number;
-  result_version: number | null;
-  error_code: string | null;
-  created_at: number;
-  finished_at: number | null;
 };
 type StudioOptions = {
   store: Store;
@@ -252,22 +240,6 @@ export function revise(
   );
   return version;
 }
-function usage(store: Store, projectId: string): StudioUsage {
-  const totals = store.get<{ calls: number; input: number; output: number }>(
-    'SELECT count(*) AS calls,COALESCE(sum(input_tokens),0) AS input,COALESCE(sum(output_tokens),0) AS output FROM studio_ai_runs WHERE project_id=?',
-    projectId,
-  )!;
-  return {
-    projectCalls: totals.calls,
-    inputTokens: totals.input,
-    outputTokens: totals.output,
-    runs: store.all(
-      'SELECT id,model,status,created_at,input_tokens,output_tokens FROM studio_ai_runs WHERE project_id=? ORDER BY created_at DESC,id DESC LIMIT 20',
-      projectId,
-    ) as StudioUsage['runs'],
-  };
-}
-
 /** A bounded discovery aid, using only published profile declarations; no price/availability guesses. */
 function matches(store: Store, row: ProjectRow) {
   const brief = briefOf(row),
@@ -455,10 +427,12 @@ export function createStudioRouter(options: StudioOptions) {
         configured: !!ai.apiKey,
         model: ai.model,
         reviewModel: ai.reviewModel,
+        cadModel: ai.cadModel,
         maxCallsPerProject: ai.maxCallsPerProject,
         maxCallsPerUserDay: ai.maxCallsPerUserDay,
         maxCallsPerInstanceDay: ai.maxCallsPerInstanceDay,
         maxOutputTokens: ai.maxOutputTokens,
+        cadMaxOutputTokens: ai.cadMaxOutputTokens,
       },
       processes,
     } satisfies StudioCapabilities);
@@ -638,105 +612,31 @@ export function createStudioRouter(options: StudioOptions) {
   router.post('/projects/:id/assist', async (req, res) => {
     const user = requireUser(store, req),
       body = assistSchema.parse(req.body),
-      projectId = id(req),
-      now = Date.now();
+      projectId = id(req);
     const requestHash = digest(canonicalJSON(body));
     const reservation = store.transaction(() => {
       const row = owned(store, projectId, user.id);
-      // Expired/unknown outcomes still consume a call. The same request ID can never rerun.
-      store.run(
-        `UPDATE studio_ai_runs SET status='failed',error_code='AI_INTERRUPTED',finished_at=? WHERE status='running' AND created_at<?`,
-        now,
-        now - ai.timeoutMs - 60000,
-      );
-      const prior = store.get<RunRow>(
-        'SELECT * FROM studio_ai_runs WHERE owner_id=? AND project_id=? AND request_id=?',
-        user.id,
+      const result = reserveAIRequest(store, ai, {
+        ownerId: user.id,
         projectId,
-        body.requestId,
-      );
-      if (prior) {
-        ensure(
-          prior.request_hash === requestHash,
-          409,
-          'AI_REQUEST_CHANGED',
-          'This request ID was used for different input / Этот идентификатор уже использован для другого запроса',
-        );
-        return { row, run: prior, replay: true, input: '' };
-      }
-      editable(row, body.version);
-      if (!ai.apiKey) throw new StudioAIError('AI_DISABLED');
-      const input = studioAIInput(row.idea, briefOf(row), row.language, body.message);
-      assertHistoryCapacity(store, user.id, row.id, 0);
-      const count = (where: string, ...params: (string | number)[]) =>
-        store.get<{ n: number }>(
-          `SELECT count(*) AS n FROM studio_ai_runs WHERE ${where}`,
-          ...params,
-        )!.n;
-      ensure(
-        count('project_id=?', row.id) < ai.maxCallsPerProject,
-        429,
-        'AI_PROJECT_LIMIT',
-        'Project AI call limit reached / Достигнут лимит ИИ для проекта',
-      );
-      ensure(
-        count('owner_id=? AND created_at>?', user.id, now - 86400000) < ai.maxCallsPerUserDay,
-        429,
-        'AI_USER_LIMIT',
-        'Your 24-hour AI call limit is reached / Достигнут ваш лимит ИИ за 24 часа',
-      );
-      ensure(
-        count('created_at>?', now - 86400000) < ai.maxCallsPerInstanceDay,
-        429,
-        'AI_INSTANCE_LIMIT',
-        'Community AI call limit reached for 24 hours / Достигнут лимит ИИ сообщества за 24 часа',
-      );
-      ensure(
-        count("owner_id=? AND status='running'", user.id) === 0,
-        409,
-        'AI_RUNNING',
-        'One AI request is already running for your account / Один запрос ИИ для вашего аккаунта уже выполняется',
-      );
-      ensure(
-        count("status='running'") < 2,
-        429,
-        'AI_BUSY',
-        'Two AI requests are already running. Try later / Уже выполняются два запроса ИИ. Повторите позже',
-      );
-      const runId = randomUUID(),
-        model = body.quality === 'review' ? ai.reviewModel : ai.model;
-      store.run(
-        `INSERT INTO studio_ai_runs(id,owner_id,project_id,request_id,request_hash,input_version,model,quality,status,created_at) VALUES(?,?,?,?,?,?,?,?,'running',?)`,
-        runId,
-        user.id,
-        row.id,
-        body.requestId,
+        requestId: body.requestId,
         requestHash,
-        row.version,
-        model,
-        body.quality,
-        now,
-      );
-      return {
-        row,
-        run: store.get<RunRow>('SELECT * FROM studio_ai_runs WHERE id=?', runId)!,
-        replay: false,
-        input,
-      };
+        inputVersion: body.version,
+        task: 'brief',
+        model: body.quality === 'review' ? ai.reviewModel : ai.model,
+        quality: body.quality,
+        prepare: () => {
+          editable(row, body.version);
+          const input = studioAIInput(row.idea, briefOf(row), row.language, body.message);
+          assertHistoryCapacity(store, user.id, row.id, 0);
+          return input;
+        },
+      });
+      return { row, ...result };
     });
     if (reservation.replay) {
       const run = reservation.run;
-      if (run.status === 'failed')
-        throw new StudioAIError(run.error_code || 'AI_PROVIDER', {
-          inputTokens: run.input_tokens,
-          outputTokens: run.output_tokens,
-        });
-      ensure(
-        run.status !== 'running',
-        409,
-        'AI_RUNNING',
-        'This request is already running / Этот запрос уже выполняется',
-      );
+      assertAIReplayFinished(run);
       ensure(
         run.status !== 'stale',
         409,

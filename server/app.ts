@@ -50,6 +50,7 @@ import { createStudioRouter } from './studio.js';
 import type { StudioAIConfig } from './studio-ai.js';
 import { CadService, type CadOptions } from './cad-runner.js';
 import { createCadRouter } from './cad.js';
+import { createCadAIRouter } from './cad-ai.js';
 
 type Options = {
   store: Store;
@@ -122,6 +123,7 @@ export function createApp(options: Options) {
   const cad = new CadService(store, dataDir, options.cad);
   app.locals.cad = cad;
   app.use('/api', createCadRouter(cad));
+  app.use('/api', createCadAIRouter(cad, options.studioAI));
   app.use(
     '/api/studio',
     createStudioRouter({
@@ -135,7 +137,7 @@ export function createApp(options: Options) {
 
   app.get('/api/health', (_req, res) => {
     store.get('SELECT 1');
-    res.json({ status: 'ok', version: '0.2.0' });
+    res.json({ status: 'ok', version: '0.3.0' });
   });
   app.get('/api/bootstrap', (req, res) => {
     const user = readUser(store, req);
@@ -906,11 +908,15 @@ export function createApp(options: Options) {
         user.id,
       ),
       studio_ai_usage: store.all(
-        'SELECT id,project_id,model,quality,status,input_tokens,output_tokens,error_code,created_at,finished_at FROM studio_ai_runs WHERE owner_id=?',
+        'SELECT id,project_id,model,quality,task,status,input_tokens,output_tokens,error_code,created_at,finished_at FROM studio_ai_runs WHERE owner_id=?',
         user.id,
       ),
       cad_revisions: store.all(
         'SELECT r.* FROM studio_cad_revisions r JOIN studio_projects p ON p.id=r.project_id WHERE p.owner_id=?',
+        user.id,
+      ),
+      cad_proposals: store.all(
+        'SELECT c.* FROM studio_cad_proposals c JOIN studio_projects p ON p.id=c.project_id WHERE p.owner_id=?',
         user.id,
       ),
       cad_builds: store.all('SELECT * FROM studio_cad_builds WHERE owner_id=?', user.id),

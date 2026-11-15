@@ -33,16 +33,19 @@ import {
   type CadSpec,
   type CadState,
 } from '../shared/cad';
-import type { StudioProject } from '../shared/studio';
+import type { StudioProject, StudioUsage } from '../shared/studio';
 import { api, post, ErrorBox, errorText, Loading, useApp, formatDate } from './core';
 import './cad.css';
 
 const Preview = lazy(() => import('./cad-preview'));
+const CadAssistant = lazy(() => import('./CadAssistant'));
 type Props = {
   project: StudioProject;
   blocked: boolean;
   onProjectChanged: (project: StudioProject) => void;
   onDirtyChange: (dirty: boolean) => void;
+  usage?: StudioUsage;
+  onUsageChanged?: (usage: StudioUsage) => void;
 };
 const clone = <T,>(value: T): T => structuredClone(value);
 const asLines = (value: string) =>
@@ -472,13 +475,21 @@ function OperationEditor({
   );
 }
 
-export default function CadStudio({ project, blocked, onProjectChanged, onDirtyChange }: Props) {
+export default function CadStudio({
+  project,
+  blocked,
+  onProjectChanged,
+  onDirtyChange,
+  usage,
+  onUsageChanged,
+}: Props) {
   const { t, lang, toast } = useApp();
   const [state, setState] = useState<CadState | null>(null);
   const [spec, setSpec] = useState<CadSpec | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState('');
+  const [assistantApplying, setAssistantApplying] = useState(false);
   const [selectedPart, setSelectedPart] = useState('body');
   const [sample, setSample] = useState<'plate' | 'shelf'>('plate');
   const [operationType, setOperationType] = useState<CadOperation['type']>('box');
@@ -495,7 +506,7 @@ export default function CadStudio({ project, blocked, onProjectChanged, onDirtyC
   const dirtyRef = useRef(dirty);
   dirtyRef.current = dirty;
   const path = `/studio/projects/${project.id}/cad`;
-  const editable = !project.job_id && !busy && !blocked;
+  const editable = !project.job_id && !busy && !blocked && !assistantApplying;
   const needsTemplateRemoval = !!project.brief.part;
   const locked = !editable;
   const syncSpec = (next: CadSpec | null) => {
@@ -744,6 +755,24 @@ export default function CadStudio({ project, blocked, onProjectChanged, onDirtyC
                   )}
                 </p>
               )}
+              <Suspense fallback={<Loading />}>
+                <CadAssistant
+                  project={project}
+                  blocked={blocked || dirty || !!busy}
+                  templateAttached={needsTemplateRemoval}
+                  usage={usage}
+                  onUsageChanged={onUsageChanged}
+                  onApplyingChange={setAssistantApplying}
+                  onApplied={(result) => {
+                    setState(result.cad);
+                    syncSpec(result.cad.revision?.spec ?? null);
+                    setSelectedPart('body');
+                    setSelectedBuild('');
+                    request.current = null;
+                    projectChanged.current(result.project);
+                  }}
+                />
+              </Suspense>
               {!project.job_id && (
                 <div className="cad-example-row">
                   <label>

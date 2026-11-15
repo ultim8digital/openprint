@@ -40,9 +40,9 @@ export class Store {
     const version = Number(
       this.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0,
     );
-    if (version > 3)
+    if (version > 4)
       throw new Error('Database is newer than this OpenPrint version. Upgrade the application.');
-    if (version === 3) return;
+    if (version === 4) return;
     if (version === 0)
       this.transaction(() =>
         this.db.exec(`
@@ -217,8 +217,9 @@ export class Store {
       PRAGMA user_version=2;
     `),
       );
-    this.transaction(() =>
-      this.db.exec(`
+    if (version < 3)
+      this.transaction(() =>
+        this.db.exec(`
       CREATE INDEX events_action_time ON events(action,created_at);
       CREATE TABLE studio_cad_revisions (
         id TEXT PRIMARY KEY, project_id TEXT NOT NULL REFERENCES studio_projects(id) ON DELETE CASCADE,
@@ -267,6 +268,35 @@ export class Store {
         PRIMARY KEY(job_id,provider_id)
       ) STRICT;
       PRAGMA user_version=3;
+    `),
+      );
+    this.transaction(() =>
+      this.db.exec(`
+      ALTER TABLE studio_ai_runs ADD COLUMN task TEXT NOT NULL DEFAULT 'brief' CHECK(task IN ('brief','cad'));
+      CREATE TRIGGER studio_ai_task_immutable BEFORE UPDATE OF task ON studio_ai_runs
+        BEGIN SELECT RAISE(ABORT, 'AI task identity is immutable'); END;
+      CREATE TABLE studio_cad_proposals (
+        id TEXT PRIMARY KEY, run_id TEXT NOT NULL UNIQUE REFERENCES studio_ai_runs(id),
+        project_id TEXT NOT NULL REFERENCES studio_projects(id) ON DELETE CASCADE,
+        input_version INTEGER NOT NULL CHECK(input_version>0), model TEXT NOT NULL,
+        base_cad_revision_id TEXT, base_confirmed_version INTEGER, base_confirmed_hash TEXT,
+        summary TEXT NOT NULL CHECK(length(summary) BETWEEN 1 AND 2000),
+        questions TEXT NOT NULL CHECK(json_valid(questions)),
+        spec TEXT CHECK(spec IS NULL OR json_valid(spec)),
+        created_at INTEGER NOT NULL,
+        applied_version INTEGER CHECK(applied_version IS NULL OR applied_version>=input_version),
+        applied_revision_id TEXT,
+        CHECK((applied_version IS NULL AND applied_revision_id IS NULL) OR
+          (applied_version IS NOT NULL AND applied_revision_id IS NOT NULL AND spec IS NOT NULL))
+      ) STRICT;
+      CREATE INDEX studio_cad_proposal_project ON studio_cad_proposals(project_id,created_at DESC);
+      CREATE TRIGGER studio_cad_proposal_identity_immutable BEFORE UPDATE OF
+        id,run_id,project_id,input_version,model,base_cad_revision_id,base_confirmed_version,base_confirmed_hash,summary,questions,spec,created_at
+        ON studio_cad_proposals BEGIN SELECT RAISE(ABORT, 'CAD proposals are immutable'); END;
+      CREATE TRIGGER studio_cad_proposal_application_immutable BEFORE UPDATE OF applied_version,applied_revision_id
+        ON studio_cad_proposals WHEN OLD.applied_version IS NOT NULL
+        BEGIN SELECT RAISE(ABORT, 'CAD proposal application is immutable'); END;
+      PRAGMA user_version=4;
     `),
     );
   }

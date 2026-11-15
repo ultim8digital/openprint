@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0 — 2026-11-15
+
+- Optional AI CAD proposals with summary, questions, a bounded declarative specification and separate reviewed application to the original project revision. Applying a proposal does not compile, confirm or publish it.
+- Task-based server model routing: brief clarification, detailed review and CAD; shared idempotent request ledger, attempt quotas and concurrency limits. CAD output has its own token limit.
+- SQLite schema v4 stores private proposals and task metadata, with immutable source state, stale-result protection, account export and deletion.
+- Proposal review and usage controls in RU/EN, preserving manual CAD without an API key. Model quality and account availability still require live evaluation; no paid API call is claimed by the automated fixtures.
+
 ## 0.2.0 — 2026-11-15
 
 Neofab Studio connects a versioned manufacturing brief to a local CAD package and a named provider. The community workflow remains usable without CAD or an AI key.

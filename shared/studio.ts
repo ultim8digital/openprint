@@ -101,10 +101,12 @@ export type StudioCapabilities = {
     configured: boolean;
     model: string;
     reviewModel: string;
+    cadModel: string;
     maxCallsPerProject: number;
     maxCallsPerUserDay: number;
     maxCallsPerInstanceDay: number;
     maxOutputTokens: number;
+    cadMaxOutputTokens: number;
   };
   processes: { id: string; ru: string; en: string; status: 'template' | 'brief' }[];
 };
@@ -115,6 +117,7 @@ export type StudioUsage = {
   runs: {
     id: string;
     model: string;
+    task: 'brief' | 'cad';
     status: string;
     created_at: number;
     input_tokens: number;

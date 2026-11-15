@@ -1,6 +1,6 @@
 # Security policy
 
-OpenPrint 0.2 is intended for a small self-hosted community. This repository includes security-relevant tests, but has not undergone an independent penetration test or public load assessment. Run a maintained release and test backups before public use.
+OpenPrint 0.3 is intended for a small self-hosted community. This repository includes security-relevant tests, but has not undergone an independent penetration test or public load assessment. Run a maintained release and test backups before public use.
 
 ## Report privately
 
@@ -22,6 +22,7 @@ Use GitHub’s **Security → Report a vulnerability** for this repository when 
 - A direct request grants its named recipient the confirmed CAD package. Public requests require an owner-issued quotation grant or accepted-provider access; owners can revoke a quotation grant before assignment. Ordinary upload permissions remain separate.
 - Optional OpenAI requests use a fixed server-side endpoint, bounded inputs/outputs, persistent attempt reservations, per-project/user/instance limits and idempotency keys. No model-generated program is executed. Schema-valid output remains an unconfirmed proposal.
 - AI assistance cannot publish a brief, accept an offer or command equipment. These transitions require explicit application actions and server checks. Matching uses declared maker capabilities; it does not certify a machine or a material.
+- CAD AI results are private proposals tied to the original brief/CAD/confirmation state. Applying a reviewed proposal is a separate version-checked action; it does not start the native compiler. A schema-valid proposal can still contain incorrect dimensions or engineering assumptions. Prompt instructions and human review are not a deterministic proof of semantic correctness.
 
 ## Operator responsibilities and limits
 

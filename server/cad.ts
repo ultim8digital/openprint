@@ -2,7 +2,7 @@ import { Router, type Request, type Response } from 'express';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import type { Store } from './database.js';
-import { cadSpecSchema, type CadState } from '../shared/cad.js';
+import { cadSpecSchema, type CadState, type CadSpec } from '../shared/cad.js';
 import { requireUser, ensure, event, digest } from './security.js';
 import { assignedTo, blocked, visibleJob } from './domain.js';
 import { owned, editable, revise, projectObject, type ProjectRow } from './studio.js';
@@ -19,7 +19,7 @@ const id = (req: Request, name = 'id') => z.string().uuid().parse(req.params[nam
 const versionSchema = z.object({ version: z.number().int().positive() }).strict();
 const buildSchema = versionSchema.extend({ requestId: z.string().uuid() }).strict();
 const saveSchema = versionSchema.extend({ spec: cadSpecSchema }).strict();
-function state(service: CadService, projectId: string): CadState {
+export function cadState(service: CadService, projectId: string): CadState {
   return {
     capabilities: service.capabilities,
     revision: cadRevision(latestCadRevision(service.store, projectId)),
@@ -30,6 +30,53 @@ function state(service: CadService, projectId: string): CadState {
       )
       .map((row) => cadBuild(service.store, row)),
   };
+}
+
+/** Caller holds the transaction and has checked ownership and expected project version. */
+export function saveCadRevision(
+  store: Store,
+  project: ProjectRow,
+  value: CadSpec | null,
+  source: 'manual' | 'openai' = 'manual',
+) {
+  const current = latestCadRevision(store, project.id);
+  const spec = value ? canonicalJSON(cadSpecSchema.parse(value)) : null;
+  if ((current?.spec ?? null) === spec) return project.version;
+  ensure(
+    !spec || !JSON.parse(project.brief).part,
+    409,
+    'CAD_TEMPLATE_CONFLICT',
+    'Remove and save the simple template before attaching CAD / Сначала удалите и сохраните простой шаблон',
+  );
+  const ownBytes = store.get<{ n: number }>(
+    'SELECT COALESCE(sum(length(CAST(r.spec AS BLOB))),0) n FROM studio_cad_revisions r JOIN studio_projects p ON p.id=r.project_id WHERE p.owner_id=?',
+    project.owner_id,
+  )!.n;
+  const totalBytes = store.get<{ n: number }>(
+    'SELECT COALESCE(sum(length(CAST(spec AS BLOB))),0) n FROM studio_cad_revisions',
+  )!.n;
+  const added = spec ? Buffer.byteLength(spec) : 0;
+  ensure(
+    added <= 90000 &&
+      ownBytes + added <= 20 * 1024 * 1024 &&
+      totalBytes + added <= 200 * 1024 * 1024,
+    413,
+    'CAD_SPEC_LIMIT',
+    'CAD specification quota reached / Достигнут лимит спецификаций CAD',
+  );
+  const version = revise(store, project, JSON.parse(project.brief), source, true);
+  store.run(
+    'INSERT INTO studio_cad_revisions(id,project_id,number,project_version,spec,sha256,created_at) VALUES(?,?,?,?,?,?,?)',
+    randomUUID(),
+    project.id,
+    (current?.number ?? 0) + 1,
+    version,
+    spec,
+    spec ? digest(spec) : null,
+    Date.now(),
+  );
+  event(store, project.owner_id, value ? 'cad.saved' : 'cad.detached', project.id, String(version));
+  return version;
 }
 function ownedBuild(store: Store, projectId: string, buildId: string) {
   const row = store.get<CadBuildRow>(
@@ -83,7 +130,7 @@ export function createCadRouter(service: CadService) {
   router.get('/studio/projects/:id/cad', (req, res) => {
     const user = requireUser(store, req),
       project = owned(store, id(req), user.id);
-    res.json(state(service, project.id));
+    res.json(cadState(service, project.id));
   });
   const save = (req: Request, res: Response, detach: boolean) => {
     const user = requireUser(store, req),
@@ -92,47 +139,11 @@ export function createCadRouter(service: CadService) {
     store.transaction(() => {
       const project = owned(store, projectId, user.id);
       editable(project, body.version);
-      const current = latestCadRevision(store, projectId);
-      const spec = 'spec' in body ? canonicalJSON(body.spec) : null;
-      if ((current?.spec ?? null) === spec) return;
-      ensure(
-        !spec || !JSON.parse(project.brief).part,
-        409,
-        'CAD_TEMPLATE_CONFLICT',
-        'Remove and save the simple template before attaching CAD / Сначала удалите и сохраните простой шаблон',
-      );
-      const ownBytes = store.get<{ n: number }>(
-        'SELECT COALESCE(sum(length(CAST(r.spec AS BLOB))),0) n FROM studio_cad_revisions r JOIN studio_projects p ON p.id=r.project_id WHERE p.owner_id=?',
-        user.id,
-      )!.n;
-      const totalBytes = store.get<{ n: number }>(
-        'SELECT COALESCE(sum(length(CAST(spec AS BLOB))),0) n FROM studio_cad_revisions',
-      )!.n;
-      const added = spec ? Buffer.byteLength(spec) : 0;
-      ensure(
-        added <= 90000 &&
-          ownBytes + added <= 20 * 1024 * 1024 &&
-          totalBytes + added <= 200 * 1024 * 1024,
-        413,
-        'CAD_SPEC_LIMIT',
-        'CAD specification quota reached / Достигнут лимит спецификаций CAD',
-      );
-      const version = revise(store, project, JSON.parse(project.brief), 'manual', true);
-      store.run(
-        'INSERT INTO studio_cad_revisions(id,project_id,number,project_version,spec,sha256,created_at) VALUES(?,?,?,?,?,?,?)',
-        randomUUID(),
-        projectId,
-        (current?.number ?? 0) + 1,
-        version,
-        spec,
-        spec ? digest(spec) : null,
-        Date.now(),
-      );
-      event(store, user.id, detach ? 'cad.detached' : 'cad.saved', projectId, String(version));
+      saveCadRevision(store, project, 'spec' in body ? cadSpecSchema.parse(body.spec) : null);
     });
     res.json({
       project: projectObject(store, owned(store, projectId, user.id)),
-      cad: state(service, projectId),
+      cad: cadState(service, projectId),
     });
   };
   router.put('/studio/projects/:id/cad', (req, res) => save(req, res, false));
