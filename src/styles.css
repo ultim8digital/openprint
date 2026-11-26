@@ -3351,3 +3351,12 @@ code,
     gap: 8px;
   }
 }
+
+.network-page > .search-input,
+.network-page > .community-map,
+.network-page .tags {
+  margin-block: 1rem;
+}
+.network-page article {
+  overflow-wrap: anywhere;
+}

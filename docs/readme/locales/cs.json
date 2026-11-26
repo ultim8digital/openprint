@@ -27,6 +27,7 @@
   "run_import": "Použijte nástroj [příkazového řádku pro import katalogu]({CATALOG_IMPORT}) pro existující datovou sadu poté, co zkontrolujete její práva. Datové sady instancí, nahrávání a zálohy nejsou součástí repozitáře ani kontejnerových obrazů.",
   "run_intro": "Nainstalujte Node.js 24, naklonujte toto úložiště a spusťte:",
   "run_limits": "Podporované nasazení zahrnuje jeden proces aplikace s SQLite na lokálním disku. Automatické publikování a limity pro počet požadavků omezují zneužívání bez nutnosti moderace. Sdílená kancelářská IP adresa může sdílet limit pro publikování. Před spuštěním veřejné instance si přečtěte informace o [limitech a chování při správě]({OPEN_CATALOG}).",
-  "tagline": "**Otevřený seznam tiskáren a dílen. Není nutná registrace ani moderátoři.**",
-  "translation_maintenance": "Anglický soubor README slouží jako referenční dokument pro kompletní přeložené verze. [Index jazyků]({LANGUAGE_INDEX}) obsahuje informace o údržbě překladů a limitech pro jejich kontrolu. Lokalizace uživatelského rozhraní nepřekládá uživatelsky vytvořené záznamy, obsah projektů ani veškeré externí technické diagnostické údaje."
+  "tagline": "**Navrhněte součástku a objednejte si ji v dílně zapojené do otevřené sítě.**",
+  "translation_maintenance": "Anglický soubor README slouží jako referenční dokument pro kompletní přeložené verze. [Index jazyků]({LANGUAGE_INDEX}) obsahuje informace o údržbě překladů a limitech pro jejich kontrolu. Lokalizace uživatelského rozhraní nepřekládá uživatelsky vytvořené záznamy, obsah projektů ani veškeré externí technické diagnostické údaje.",
+  "workshop_network": "[Síť dílen]({WORKSHOP_NETWORK}). Vaše objednávka a soubor budou uloženy na uzlu vybrané dílny."
 }

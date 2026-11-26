@@ -27,6 +27,7 @@
   "run_import": "Utilitzeu l’[eina de línia de comandos per importar el catàleg]({CATALOG_IMPORT}) per a un conjunt de dades existent després de comprovar-ne els drets. Els conjunts de dades d’instància, les càrregues i les còpies de seguretat no s’inclouen al repositori ni a les imatges del contenidor.",
   "run_intro": "Instal·leu Node.js 24, cloneu aquest repositori i executeu:",
   "run_limits": "La configuració admesa és un sol procés d'aplicació amb SQLite en un disc local. La publicació automàtica i les quotes de sol·licitud limiten l'ús indegut sense necessitat d'una cua de moderació. Una adreça IP d'oficina compartida pot compartir una quota de publicació. Consulteu [els límits i el comportament de l'enllaç de gestió]({OPEN_CATALOG}) abans d'obrir una instància pública.",
-  "tagline": "**Un directori obert d’estudis i tallers d’impressió. No cal registrar-se ni hi ha moderadors.**",
-  "translation_maintenance": "El fitxer README en anglès és la referència per a les versions traduïdes completes. L'[índex d'idiomes]({LANGUAGE_INDEX}) documenta els límits del manteniment i la revisió de la traducció. La localització de la interfície no tradueix les llistes creades pels usuaris, el contingut del projecte ni tots els elements tècnics externs."
+  "tagline": "**Dissenya una peça i encarrega-la a un taller de la xarxa oberta.**",
+  "translation_maintenance": "El fitxer README en anglès és la referència per a les versions traduïdes completes. L'[índex d'idiomes]({LANGUAGE_INDEX}) documenta els límits del manteniment i la revisió de la traducció. La localització de la interfície no tradueix les llistes creades pels usuaris, el contingut del projecte ni tots els elements tècnics externs.",
+  "workshop_network": "[Xarxa de tallers]({WORKSHOP_NETWORK}). La comanda i el fitxer es desaran al node del taller que triïs."
 }

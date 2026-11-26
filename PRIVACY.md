@@ -14,6 +14,10 @@ Successful anonymous publication quotas persist in SQLite using an HMAC of the c
 
 Private community/CAD data already present in a database stays private when switching to catalogue mode: those API routes are disabled, account/demo identities are omitted from bootstrap and queued CAD work is not resumed. The account, file, AI and agreement sections below apply only to the separately enabled `APP_MODE=community`.
 
+## Workshop network
+
+When a maker enables network listing, peer nodes can read their public maker name, profile ID, city, technologies and optional coordinates. The operator configures peer origins. OpenPrint holds remote profiles in memory for 30 seconds. Opening the network map contacts configured nodes from the server. A chosen workshop sees the customer's browser when they open its node. Customer sign-in, project files and negotiations are local to the chosen community. Browser-to-browser file handoff requires selecting the workshop and opening the offered file in the receiving tab. The file is submitted to the workshop server when the customer publishes the request. [Network and ordering guide](docs/WORKSHOP_NETWORK.md)
+
 ## Stored data
 
 An operator can import a separate studio catalogue containing organisation names, public descriptions, cities/regions/countries, coordinates, technologies/materials, websites, public business phones/addresses, source attribution and import dates. Import excludes email, opening hours, ratings/reviews and other unlisted fields. Catalogue entries are public directory records, not participant accounts, reviewed providers or order recipients. Operators update/remove them by replacing the corresponding source snapshot. These records are included in the local database backup; source files are not bundled in the public code repository.
@@ -36,7 +40,7 @@ No advertising analytics, cross-site cookies or external font services are bundl
 - A confirmed CAD package is separate from an ordinary uploaded attachment. The recipient of a direct request receives access when it is sent. For a public request, the owner can give a named participant in the discussion access for quotation and revoke it before assignment. The accepted provider retains access to the agreed package. Publishing a public brief does not publish CAD files.
 - Conversations are scoped to the customer and that provider. Reported message content is available to moderators in the corresponding report context.
 - An approved library file is intentionally downloadable by everyone under its recorded license and attribution.
-- Map tiles contact OpenStreetMap whenever a map view is open; the default catalogue home opens that view. The browser sends its ordinary network information and the instance origin; no private key or job file is sent to OSM. External provider websites open only when followed.
+- With the default map setting, tiles contact OpenStreetMap whenever a map view is open; the default catalogue home opens that view. Set `MAP_TILES=off` to disable tile requests. The browser sends its ordinary network information and the instance origin; no private key or job file is sent to OSM. External provider websites open only when followed.
 
 There is no end-to-end encryption: the operator controls the server, database and backups. Choose an operator you trust. HTTPS protects transport when the instance is correctly configured.
 

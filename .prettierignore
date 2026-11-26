@@ -13,3 +13,6 @@ cad-worker/.pytest_cache
 cad-worker/tests/__pycache__
 
 .pytest_cache/
+
+# Pinned upstream cartography, retained byte-for-byte for provenance.
+public/maps/land-110m.geojson

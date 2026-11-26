@@ -27,6 +27,7 @@
   "run_import": "Utilice la [herramienta de línea de comandos para importar el catálogo]({CATALOG_IMPORT}) para un conjunto de datos existente después de verificar sus derechos. Los conjuntos de datos de instancias, las cargas y las copias de seguridad no se incluyen en el repositorio ni en las imágenes de contenedor.",
   "run_intro": "Instale Node.js 24, clone este repositorio y ejecute:",
   "run_limits": "La implementación compatible consiste en un único proceso de aplicación con SQLite en un disco local. La publicación automática y las cuotas de solicitudes limitan el uso indebido sin necesidad de una cola de moderación. Una dirección IP de oficina compartida puede compartir una cuota de publicación. Consulte [límites y comportamiento del enlace de gestión]({OPEN_CATALOG}) antes de abrir una instancia pública.",
-  "tagline": "**Un directorio abierto de estudios y talleres de impresión. No se requiere registro ni hay moderadores.**",
-  "translation_maintenance": "El archivo README en inglés es la referencia para las versiones traducidas completas. El [índice de idiomas]({LANGUAGE_INDEX}) documenta los límites de mantenimiento y revisión de la traducción. La localización de la interfaz no traduce las listas creadas por los usuarios, el contenido del proyecto ni todos los diagnósticos técnicos externos."
+  "tagline": "**Diseña una pieza y encárgala a un taller de la red abierta.**",
+  "translation_maintenance": "El archivo README en inglés es la referencia para las versiones traducidas completas. El [índice de idiomas]({LANGUAGE_INDEX}) documenta los límites de mantenimiento y revisión de la traducción. La localización de la interfaz no traduce las listas creadas por los usuarios, el contenido del proyecto ni todos los diagnósticos técnicos externos.",
+  "workshop_network": "[Red de talleres]({WORKSHOP_NETWORK}). El pedido y el archivo se guardarán en el nodo del taller que elijas."
 }

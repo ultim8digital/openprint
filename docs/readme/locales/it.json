@@ -27,6 +27,7 @@
   "run_import": "Utilizza l’[interfaccia a riga di comando per l’importazione del catalogo]({CATALOG_IMPORT}) per un set di dati esistente, dopo averne verificato i diritti. I set di dati di istanza, i file caricati e i backup non sono inclusi nel repository o nelle immagini del container.",
   "run_intro": "Installa Node.js 24, clona questo repository ed esegui:",
   "run_limits": "La configurazione supportata prevede un singolo processo applicativo con SQLite su un disco locale. La pubblicazione automatica e le quote di richieste limitano gli abusi senza la necessità di una coda di moderazione. Un indirizzo IP di ufficio condiviso può condividere una quota di pubblicazione. Consultare [limiti e comportamento del collegamento di gestione]({OPEN_CATALOG}) prima di aprire un’istanza pubblica.",
-  "tagline": "**Un elenco aperto di studi e laboratori di stampa. Non è richiesta la registrazione né è prevista la presenza di moderatori.**",
-  "translation_maintenance": "Il file README in inglese è il riferimento per le versioni tradotte complete. L’[indice delle lingue]({LANGUAGE_INDEX}) documenta i limiti relativi alla manutenzione e alla revisione delle traduzioni. La localizzazione dell’interfaccia non traduce gli elenchi creati dagli utenti, i contenuti dei progetti o ogni elemento tecnico diagnostico esterno."
+  "tagline": "**Progetta un pezzo e ordinalo a un laboratorio della rete aperta.**",
+  "translation_maintenance": "Il file README in inglese è il riferimento per le versioni tradotte complete. L’[indice delle lingue]({LANGUAGE_INDEX}) documenta i limiti relativi alla manutenzione e alla revisione delle traduzioni. La localizzazione dell’interfaccia non traduce gli elenchi creati dagli utenti, i contenuti dei progetti o ogni elemento tecnico diagnostico esterno.",
+  "workshop_network": "[Rete di laboratori]({WORKSHOP_NETWORK}). L’ordine e il file saranno salvati sul nodo del laboratorio scelto."
 }

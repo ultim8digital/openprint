@@ -74,6 +74,7 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
           lat: String(form.get('lat')).trim() ? Number(form.get('lat')) : null,
           lng: String(form.get('lng')).trim() ? Number(form.get('lng')) : null,
           remote: form.get('remote') === 'on',
+          network_listed: form.get('network_listed') === 'on',
         },
         'PUT',
       );
@@ -202,6 +203,13 @@ function ProfileForm({ profile, done }: { profile: Profile | null; done: () => v
       <label className="check-label">
         <input dir="auto" name="remote" type="checkbox" defaultChecked={profile?.remote} />
         {t('Работаю удалённо / отправляю заказы', 'Remote work / shipping available')}
+      </label>
+      <label className="check-label">
+        <input name="network_listed" type="checkbox" defaultChecked={profile?.network_listed} />
+        {t(
+          'Показывать мою мастерскую на других узлах OpenPrint',
+          'List my workshop on other OpenPrint nodes',
+        )}
       </label>
       <details>
         <summary className="small muted">

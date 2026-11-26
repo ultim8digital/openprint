@@ -1,6 +1,6 @@
 # OpenPrint
 
-**An open directory of printing studios and workshops. No registration or moderators.**
+**Design a part and order it from a workshop on the open network.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Run OpenPrint with Node.js 24 and local SQLite. Vercel, Supabase, an email provi
 
 ## Catalog features
 
+- [Workshop network](../../docs/WORKSHOP_NETWORK.md). Your order and file will be stored on the chosen workshop’s node.
 - Search by name, city and technology. The map includes matching locations independently of list pagination.
 - Publish without an account. Choose a map point or enter coordinates; listings without coordinates remain searchable.
 - Edit or delete one listing with its private link. Version checks protect against conflicting edits in different tabs.

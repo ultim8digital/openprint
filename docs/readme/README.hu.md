@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Nyílt adatbázis nyomdákról és műhelyekről. Nincs regisztráció vagy moderátor.**
+**Tervezzen egy alkatrészt, és rendelje meg a nyílt hálózat egyik műhelyétől.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Futtassa a OpenPrint-et a Node.js 24-gyel és a helyi SQLite-mal. A Vercel, a Su
 
 ## A katalógus funkciói
 
+- [Műhelyhálózat](../../docs/WORKSHOP_NETWORK.md). A rendelését és a fájlját a kiválasztott műhely csomópontja tárolja.
 - Kereshet név, város vagy technológia alapján. A térképen a listában megjelenő találatokhoz tartozó helyszínek szerepelnek, függetlenül a lapozástól.
 - Tegye közzé anélkül, hogy regisztrálnia kellene. Válasszon ki egy pontot a térképen, vagy adja meg a koordinátákat; a koordináták nélküli bejegyzések továbbra is kereshetők lesznek.
 - Szerkesztheti vagy törölheti az egyik bejegyzést, beleértve a hozzá tartozó privát linket is. A verzióellenőrzés megvédi a bejegyzést az eltérő böngészőablakokban végzett, egymással ütköző szerkesztésektől.

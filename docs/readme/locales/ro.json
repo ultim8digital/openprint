@@ -27,6 +27,7 @@
   "run_import": "Utilizați interfața în linie de comandă [pentru importul catalogului]({CATALOG_IMPORT}) pentru un set de date existent, după ce ați verificat drepturile aferente. Seturile de date de instanță, încărcările și copiile de rezervă nu sunt incluse în depozit sau în imaginile container.",
   "run_intro": "Instalați Node.js 24, clonați acest depozit și executați:",
   "run_limits": "Implementarea acceptată presupune un singur proces de aplicație cu SQLite pe un disc local. Publicarea automată și cotele de cereri limitează abuzurile, fără a fi necesară o coadă de moderare. O adresă IP partajată pentru birou poate partaja o cotă de publicare. Consultați [limitele și comportamentul legăturii de gestionare]({OPEN_CATALOG}) înainte de a deschide o instanță publică.",
-  "tagline": "**Un director open-source cu studiouri și ateliere de imprimare. Nu este necesară înregistrarea și nu există moderatori.**",
-  "translation_maintenance": "Fișierul README în limba engleză reprezintă referința pentru toate versiunile traduse. [Indexul de limbi]({LANGUAGE_INDEX}) documentează limitele privind întreținerea și revizuirea traducerilor. Localizarea interfeței nu traduce listările create de utilizatori, conținutul proiectelor sau fiecare element tehnic extern de diagnosticare."
+  "tagline": "**Proiectează o piesă și comand-o de la un atelier din rețeaua deschisă.**",
+  "translation_maintenance": "Fișierul README în limba engleză reprezintă referința pentru toate versiunile traduse. [Indexul de limbi]({LANGUAGE_INDEX}) documentează limitele privind întreținerea și revizuirea traducerilor. Localizarea interfeței nu traduce listările create de utilizatori, conținutul proiectelor sau fiecare element tehnic extern de diagnosticare.",
+  "workshop_network": "[Rețea de ateliere]({WORKSHOP_NETWORK}). Comanda și fișierul vor fi stocate pe nodul atelierului ales."
 }

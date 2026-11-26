@@ -27,6 +27,7 @@
   "run_import": "Bruk [katalogimportkommandoen]({CATALOG_IMPORT}) for et eksisterende datasett etter å ha sjekket rettighetene. Datasettinstanser, opplastinger og sikkerhetskopier er ikke inkludert i depotet eller containerbildene.",
   "run_intro": "Installer Node.js 24, klon dette depotet og kjør:",
   "run_limits": "Den støttede distribusjonsmetoden er én applikasjonsprosess med SQLite på en lokal disk. Automatisk publisering og forespørselskvoter begrenser misbruk uten en modereringskø. En delt kontor-IP-adresse kan dele en publiseringskvote. Se [grenser og oppførsel knyttet til administrasjonslenken]({OPEN_CATALOG}) før du åpner en offentlig instans.",
-  "tagline": "**En åpen oversikt over trykkerier og verksteder. Ingen registrering eller moderatorer er nødvendig.**",
-  "translation_maintenance": "Den engelske README-filen er referansen for fullstendige oversatte versjoner. [Språkindeksen]({LANGUAGE_INDEX}) dokumenterer vedlikehold og retningslinjer for oversettelser. Lokalisering av brukergrensesnittet oversetter ikke brukergenererte oppføringer, prosjektinnhold eller all ekstern teknisk dokumentasjon."
+  "tagline": "**Design en del og bestill den fra et verksted i det åpne nettverket.**",
+  "translation_maintenance": "Den engelske README-filen er referansen for fullstendige oversatte versjoner. [Språkindeksen]({LANGUAGE_INDEX}) dokumenterer vedlikehold og retningslinjer for oversettelser. Lokalisering av brukergrensesnittet oversetter ikke brukergenererte oppføringer, prosjektinnhold eller all ekstern teknisk dokumentasjon.",
+  "workshop_network": "[Verkstednettverk]({WORKSHOP_NETWORK}). Bestillingen og filen din lagres på noden til verkstedet du velger."
 }

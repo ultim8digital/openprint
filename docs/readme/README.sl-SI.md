@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Odeven imenik tiskarskih studiev in delavnic. Brez registracije ali moderatorjev.**
+**Oblikujte del in ga naročite pri delavnici v odprtem omrežju.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Zaženite OpenPrint s Node.js 24 in lokalno SQLite. Vercel, Supabase, ponudnik e
 
 ## Funkcije kataloga
 
+- [Omrežje delavnic](../../docs/WORKSHOP_NETWORK.md). Vaše naročilo in datoteka bosta shranjena v vozlišču izbrane delavnice.
 - Iščite po imenu, mestu in tehnologiji. Na zemljevidu so prikazane ustrezne lokacije, ne glede na to, na kateri strani seznama se nahajajo.
 - Objavite brez ustvarjanja uporabniškega računa. Izberite točko na zemljevidu ali vnesite koordinate; objave brez koordinat ostanejo dostopne za iskanje.
 - Uredite ali izbrišite eno objavo, skupaj z njenim zasebnim povezavo. Preverjanje različic preprečuje nasprotujoče si spremembe v različnih zavihkih.

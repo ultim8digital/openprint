@@ -67,6 +67,8 @@ const app = createApp({
   dataDir,
   appUrl,
   mode,
+  networkPeers: process.env.OPENPRINT_PEERS,
+  mapTiles: process.env.MAP_TILES !== 'off',
   demo,
   development: process.env.NODE_ENV === 'development',
   trustProxy: process.env.TRUST_PROXY === '1',

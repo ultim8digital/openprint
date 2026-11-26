@@ -27,6 +27,7 @@
   "run_import": "Použite rozhranie príkazového riadka [import katalógu]({CATALOG_IMPORT}) pre existujúcu databázu po overení jej práv. Databázy inštancií, nahrávania a zálohy nie sú súčasťou repozitára alebo obrazov kontajnerov.",
   "run_intro": "Nainštalujte Node.js 24, skopírujte tento repozitár a spustite:",
   "run_limits": "Podporovaná konfigurácia zahŕňa jeden proces aplikácie s SQLite na lokálnom disku. Automatické publikovanie a kvóty pre požiadavky obmedzujú zneužívanie bez potreby moderátorskej fronty. Zdieľaná kancelárska IP adresa môže zdieľať kvótu pre publikovanie. Pred spustením verejnej inštancie si prečítajte [informácie o limitoch a správaní]({OPEN_CATALOG}).",
-  "tagline": "**Otvorený zoznam tlačiarenských štúdií a dielní. Nie je potrebná registrácia ani moderátori.**",
-  "translation_maintenance": "Anglický súbor README slúži ako referenčný materiál pre kompletné preložené verzie. Dokument [zoznam jazykov]({LANGUAGE_INDEX}) popisuje údržbu prekladov a rozsahy ich kontroly. Lokalizácia používateľského rozhrania neprekladá používateľom vytvorené záznamy, obsah projektov ani všetky externé technické správy."
+  "tagline": "**Navrhnite súčiastku a objednajte si ju v dielni zapojenej do otvorenej siete.**",
+  "translation_maintenance": "Anglický súbor README slúži ako referenčný materiál pre kompletné preložené verzie. Dokument [zoznam jazykov]({LANGUAGE_INDEX}) popisuje údržbu prekladov a rozsahy ich kontroly. Lokalizácia používateľského rozhrania neprekladá používateľom vytvorené záznamy, obsah projektov ani všetky externé technické správy.",
+  "workshop_network": "[Sieť dielní]({WORKSHOP_NETWORK}). Vaša objednávka a súbor sa uložia na uzle vybranej dielne."
 }

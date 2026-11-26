@@ -555,7 +555,7 @@ function useDirectoryRemote<T>(path: string | null) {
 }
 
 export function Directory() {
-  const { t, mode } = useApp(),
+  const { t, mode, mapTiles } = useApp(),
     [params, setParams] = useSearchParams();
   const map = params.get('view') === 'map';
   const offset = Math.max(0, Number.parseInt(params.get('offset') || '0', 10) || 0);
@@ -596,6 +596,9 @@ export function Directory() {
           'Print and manufacturing studios near you. Contact them directly or add your studio without signing up. The directory is open source.',
         )}
       >
+        <Link className="button secondary" to="/network">
+          <MapPin size={17} /> {t('Сеть мастерских', 'Workshop network')}
+        </Link>
         <Link className="button" to="/catalog/new">
           <Plus size={17} />
           {t('Добавить студию', 'Add a studio')}
@@ -684,10 +687,11 @@ export function Directory() {
       {map && (
         <section className="map-section" aria-label={t('Студии на карте', 'Studios on the map')}>
           <p className="micro muted">
-            {t(
-              'Точки всех результатов выбранных фильтров, независимо от страницы списка. Фон OpenStreetMap загружается при открытии карты.',
-              'All locations matching your filters, across every list page. OpenStreetMap tiles load when you open the map.',
-            )}
+            {mapTiles &&
+              t(
+                'Точки всех результатов выбранных фильтров, независимо от страницы списка. Фон OpenStreetMap загружается при открытии карты.',
+                'All locations matching your filters, across every list page. OpenStreetMap tiles load when you open the map.',
+              )}
           </p>
           <div className="map-legend" aria-label={t('Обозначения карты', 'Map legend')}>
             {mode === 'community' && (
@@ -1022,6 +1026,11 @@ export function ProfilePage() {
             >
               {t('Обсудить проект', 'Discuss a project')}
               <ArrowUpRight className="directional-icon" size={17} />
+            </Link>
+          )}
+          {p.user_id !== user?.id && (
+            <Link className="button secondary" to={'/tools?target=' + encodeURIComponent(p.id)}>
+              {t('В 3D-мастерскую', 'Open 3D tools')}
             </Link>
           )}
           {p.website && (

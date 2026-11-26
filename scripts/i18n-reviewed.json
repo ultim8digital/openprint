@@ -1968,6 +1968,2166 @@
       "reason": "Repair a malformed CAD acronym introduced by the translation model; preserve the retrieval action.",
       "ru": "Получить результат CAD-попытки",
       "text": "Haal het resultaat van de CAD-poging op"
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "شبكة الورش",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "عرض ورشتي على عُقد OpenPrint الأخرى",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "لربط الورش، أضف عناوين العُقد إلى OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "المقياس، %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "سيُحفظ طلبك وملفك على عُقدة الورشة التي تختارها.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "نزّل الملف وافتحه على عُقدة الورشة.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "কর্মশালার নেটওয়ার্ক",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "অন্য OpenPrint নোডে আমার কর্মশালা দেখান",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "কর্মশালাগুলি যুক্ত করতে OPENPRINT_PEERS-এ নোডের ঠিকানা যোগ করুন।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "স্কেল, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "আপনার অর্ডার ও ফাইল নির্বাচিত কর্মশালার নোডে সংরক্ষিত হবে।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ফাইলটি ডাউনলোড করে কর্মশালার নোডে খুলুন।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ca",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Xarxa de tallers",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ca",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Mostra el meu taller en altres nodes d’OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ca",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Per connectar tallers, afegeix les adreces dels nodes a OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ca",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Escala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ca",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "La comanda i el fitxer es desaran al node del taller que triïs.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ca",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Baixa el fitxer i obre’l al node del taller.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "cs",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Síť dílen",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "cs",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Zobrazit mou dílnu na dalších uzlech OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "cs",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Pro propojení dílen přidejte adresy uzlů do OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "cs",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Měřítko, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "cs",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Vaše objednávka a soubor budou uloženy na uzlu vybrané dílny.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "cs",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Stáhněte soubor a otevřete jej na uzlu dílny.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "da",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Værkstedsnetværk",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "da",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Vis mit værksted på andre OpenPrint-noder",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "da",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Tilføj nodeadresser i OPENPRINT_PEERS for at forbinde værksteder.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "da",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Skalering, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "da",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Din bestilling og fil gemmes på det valgte værksteds node.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "da",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Hent filen, og åbn den på værkstedets node.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Werkstattnetzwerk",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Meine Werkstatt auf anderen OpenPrint-Knoten anzeigen",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Um Werkstätten zu verbinden, fügen Sie die Knotenadressen zu OPENPRINT_PEERS hinzu.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Skalierung, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Ihr Auftrag und Ihre Datei werden auf dem Knoten der gewählten Werkstatt gespeichert.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "de-DE",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Laden Sie die Datei herunter und öffnen Sie sie auf dem Knoten der Werkstatt.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "el",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Δίκτυο εργαστηρίων",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "el",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Εμφάνιση του εργαστηρίου μου σε άλλους κόμβους OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "el",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Για να συνδέσετε εργαστήρια, προσθέστε τις διευθύνσεις των κόμβων στο OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "el",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Κλίμακα, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "el",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Η παραγγελία και το αρχείο σας θα αποθηκευτούν στον κόμβο του εργαστηρίου που επιλέξατε.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "el",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Κατεβάστε το αρχείο και ανοίξτε το στον κόμβο του εργαστηρίου.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Red de talleres",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Mostrar mi taller en otros nodos de OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Para conectar talleres, añade las direcciones de los nodos a OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Escala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "El pedido y el archivo se guardarán en el nodo del taller que elijas.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-ES",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Descarga el archivo y ábrelo en el nodo del taller.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Red de talleres",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Mostrar mi taller en otros nodos de OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Para conectar talleres, añade las direcciones de los nodos a OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Escala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "El pedido y el archivo se guardarán en el nodo del taller que elijas.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-MX",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Descarga el archivo y ábrelo en el nodo del taller.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fi",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Verstasverkosto",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fi",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Näytä verstaani muissa OpenPrint-solmuissa",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fi",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Yhdistä verstaat lisäämällä solmujen osoitteet asetukseen OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fi",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Mittakaava, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fi",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Tilauksesi ja tiedostosi tallennetaan valitsemasi verstaan solmuun.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fi",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Lataa tiedosto ja avaa se verstaan solmussa.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Réseau d’ateliers",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Afficher mon atelier sur d’autres nœuds OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Pour relier des ateliers, ajoutez les adresses des nœuds à OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Échelle, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Votre commande et votre fichier seront enregistrés sur le nœud de l’atelier choisi.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Téléchargez le fichier et ouvrez-le sur le nœud de l’atelier.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Réseau d’ateliers",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Afficher mon atelier sur d’autres nœuds OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Pour relier des ateliers, ajoutez les adresses des nœuds à OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Échelle, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Votre commande et votre fichier seront enregistrés sur le nœud de l’atelier choisi.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Téléchargez le fichier et ouvrez-le sur le nœud de l’atelier.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "વર્કશોપ નેટવર્ક",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "મારી વર્કશોપ અન્ય OpenPrint નોડ પર બતાવો",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "વર્કશોપ જોડવા માટે OPENPRINT_PEERS માં નોડનાં સરનામાં ઉમેરો.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "સ્કેલ, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "તમારો ઓર્ડર અને ફાઇલ પસંદ કરેલી વર્કશોપના નોડ પર સંગ્રહિત થશે.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ફાઇલ ડાઉનલોડ કરો અને તેને વર્કશોપના નોડ પર ખોલો.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "he",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "רשת סדנאות",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "he",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "הצגת הסדנה שלי בצמתים אחרים של OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "he",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "כדי לחבר סדנאות, יש להוסיף את כתובות הצמתים להגדרה OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "he",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "קנה מידה, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "he",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "ההזמנה והקובץ שלך יישמרו בצומת של הסדנה שבחרת.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "he",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "יש להוריד את הקובץ ולפתוח אותו בצומת של הסדנה.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hi",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "कार्यशाला नेटवर्क",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hi",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "मेरी कार्यशाला दूसरे OpenPrint नोड पर दिखाएँ",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hi",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "कार्यशालाओं को जोड़ने के लिए नोड के पते OPENPRINT_PEERS में जोड़ें।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hi",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "स्केल, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hi",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "आपका ऑर्डर और फ़ाइल चुनी गई कार्यशाला के नोड पर सहेजे जाएँगे।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hi",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "फ़ाइल डाउनलोड करें और उसे कार्यशाला के नोड पर खोलें।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hr",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Mreža radionica",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hr",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Prikaži moju radionicu na drugim čvorovima sustava OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hr",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Za povezivanje radionica dodajte adrese čvorova u OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hr",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Mjerilo, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hr",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Vaša narudžba i datoteka bit će pohranjene na čvoru odabrane radionice.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hr",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Preuzmite datoteku i otvorite je na čvoru radionice.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hu",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Műhelyhálózat",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hu",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "A műhelyem megjelenítése más OpenPrint-csomópontokon",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hu",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "A műhelyek összekapcsolásához adja hozzá a csomópontok címeit az OPENPRINT_PEERS beállításhoz.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hu",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Méretarány, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hu",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "A rendelését és a fájlját a kiválasztott műhely csomópontja tárolja.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hu",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Töltse le a fájlt, és nyissa meg a műhely csomópontján.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "id",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Jaringan bengkel",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "id",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Tampilkan bengkel saya di simpul OpenPrint lain",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "id",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Untuk menghubungkan bengkel, tambahkan alamat simpul ke OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "id",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Skala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "id",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Pesanan dan berkas Anda akan disimpan di simpul bengkel yang dipilih.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "id",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Unduh berkas lalu buka di simpul bengkel.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "it",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Rete di laboratori",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "it",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Mostra il mio laboratorio su altri nodi OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "it",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Per collegare i laboratori, aggiungi gli indirizzi dei nodi a OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "it",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Scala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "it",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "L’ordine e il file saranno salvati sul nodo del laboratorio scelto.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "it",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Scarica il file e aprilo sul nodo del laboratorio.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ja",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "工房ネットワーク",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ja",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "他の OpenPrint ノードにも自分の工房を掲載する",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ja",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "工房を接続するには、OPENPRINT_PEERS にノードのアドレスを追加してください。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ja",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "倍率（%）",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ja",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "注文とファイルは選択した工房のノードに保存されます。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ja",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ファイルをダウンロードし、工房のノードで開いてください。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "ಕಾರ್ಯಾಗಾರಗಳ ಜಾಲ",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "ನನ್ನ ಕಾರ್ಯಾಗಾರವನ್ನು ಇತರ OpenPrint ನೋಡ್‌ಗಳಲ್ಲಿ ತೋರಿಸಿ",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "ಕಾರ್ಯಾಗಾರಗಳನ್ನು ಸಂಪರ್ಕಿಸಲು OPENPRINT_PEERS ಗೆ ನೋಡ್ ವಿಳಾಸಗಳನ್ನು ಸೇರಿಸಿ.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "ಪ್ರಮಾಣ, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "ನಿಮ್ಮ ಆರ್ಡರ್ ಮತ್ತು ಫೈಲ್ ಆಯ್ಕೆ ಮಾಡಿದ ಕಾರ್ಯಾಗಾರದ ನೋಡ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗುತ್ತವೆ.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ಫೈಲ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಕಾರ್ಯಾಗಾರದ ನೋಡ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ko",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "공방 네트워크",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ko",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "다른 OpenPrint 노드에 내 공방 표시",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ko",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "공방을 연결하려면 OPENPRINT_PEERS에 노드 주소를 추가하세요.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ko",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "배율, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ko",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "주문과 파일은 선택한 공방의 노드에 저장됩니다.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ko",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "파일을 다운로드한 다음 공방의 노드에서 여세요.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "വർക്ക്‌ഷോപ്പ് ശൃംഖല",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "മറ്റ് OpenPrint നോഡുകളിൽ എന്റെ വർക്ക്‌ഷോപ്പ് കാണിക്കുക",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "വർക്ക്‌ഷോപ്പുകൾ ബന്ധിപ്പിക്കാൻ നോഡ് വിലാസങ്ങൾ OPENPRINT_PEERS എന്ന ക്രമീകരണത്തിൽ ചേർക്കുക.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "സ്കെയിൽ, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "നിങ്ങളുടെ ഓർഡറും ഫയലും തിരഞ്ഞെടുത്ത വർക്ക്‌ഷോപ്പിന്റെ നോഡിൽ സൂക്ഷിക്കും.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ഫയൽ ഡൗൺലോഡ് ചെയ്ത് വർക്ക്‌ഷോപ്പിന്റെ നോഡിൽ തുറക്കുക.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "कार्यशाळांचे जाळे",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "माझी कार्यशाळा इतर OpenPrint नोडवर दाखवा",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "कार्यशाळा जोडण्यासाठी नोडचे पत्ते OPENPRINT_PEERS मध्ये जोडा.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "प्रमाण, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "तुमची ऑर्डर आणि फाइल निवडलेल्या कार्यशाळेच्या नोडवर साठवल्या जातील.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "फाइल डाउनलोड करा आणि कार्यशाळेच्या नोडवर उघडा.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ms",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Rangkaian bengkel",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ms",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Paparkan bengkel saya pada nod OpenPrint lain",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ms",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Untuk menghubungkan bengkel, tambahkan alamat nod pada OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ms",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Skala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ms",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Pesanan dan fail anda akan disimpan pada nod bengkel yang dipilih.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ms",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Muat turun fail dan buka pada nod bengkel.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Werkplaatsennetwerk",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Mijn werkplaats op andere OpenPrint-knooppunten tonen",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Voeg de knooppuntadressen toe aan OPENPRINT_PEERS om werkplaatsen te verbinden.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Schaal, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Je bestelling en bestand worden opgeslagen op het knooppunt van de gekozen werkplaats.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Download het bestand en open het op het knooppunt van de werkplaats.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "no",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Verkstednettverk",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "no",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Vis verkstedet mitt på andre OpenPrint-noder",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "no",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Legg til nodeadresser i OPENPRINT_PEERS for å koble sammen verksteder.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "no",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Skalering, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "no",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Bestillingen og filen din lagres på noden til verkstedet du velger.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "no",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Last ned filen og åpne den på verkstedets node.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "କର୍ମଶାଳା ନେଟୱର୍କ",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "ମୋ କର୍ମଶାଳାକୁ ଅନ୍ୟ OpenPrint ନୋଡ୍‌ରେ ଦେଖାନ୍ତୁ",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "କର୍ମଶାଳାଗୁଡ଼ିକୁ ସଂଯୋଗ କରିବାକୁ OPENPRINT_PEERS ରେ ନୋଡ୍ ଠିକଣା ଯୋଡ଼ନ୍ତୁ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "ସ୍କେଲ୍, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "ଆପଣଙ୍କ ଅର୍ଡର ଓ ଫାଇଲ୍ ମନୋନୀତ କର୍ମଶାଳାର ନୋଡ୍‌ରେ ସଂରକ୍ଷିତ ହେବ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "or-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ଫାଇଲ୍ ଡାଉନଲୋଡ୍ କରି କର୍ମଶାଳାର ନୋଡ୍‌ରେ ଖୋଲନ୍ତୁ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "ਵਰਕਸ਼ਾਪ ਨੈੱਟਵਰਕ",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "ਮੇਰੀ ਵਰਕਸ਼ਾਪ ਹੋਰ OpenPrint ਨੋਡਾਂ ਉੱਤੇ ਦਿਖਾਓ",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "ਵਰਕਸ਼ਾਪਾਂ ਜੋੜਨ ਲਈ ਨੋਡਾਂ ਦੇ ਪਤੇ OPENPRINT_PEERS ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "ਸਕੇਲ, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "ਤੁਹਾਡਾ ਆਰਡਰ ਅਤੇ ਫਾਈਲ ਚੁਣੀ ਹੋਈ ਵਰਕਸ਼ਾਪ ਦੇ ਨੋਡ ਉੱਤੇ ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਜਾਣਗੇ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ਫਾਈਲ ਡਾਊਨਲੋਡ ਕਰੋ ਅਤੇ ਵਰਕਸ਼ਾਪ ਦੇ ਨੋਡ ਉੱਤੇ ਖੋਲ੍ਹੋ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pl",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Sieć warsztatów",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pl",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Pokaż mój warsztat w innych węzłach OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pl",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Aby połączyć warsztaty, dodaj adresy węzłów do OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pl",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Skala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pl",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Twoje zamówienie i plik zostaną zapisane w węźle wybranego warsztatu.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pl",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Pobierz plik i otwórz go w węźle warsztatu.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Rede de oficinas",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Mostrar minha oficina em outros nós do OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Para conectar oficinas, adicione os endereços dos nós a OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Escala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Seu pedido e seu arquivo serão armazenados no nó da oficina escolhida.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Baixe o arquivo e abra-o no nó da oficina.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Rede de oficinas",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Mostrar a minha oficina noutros nós OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Para ligar oficinas, adicione os endereços dos nós a OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Escala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "A sua encomenda e o ficheiro serão guardados no nó da oficina escolhida.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Descarregue o ficheiro e abra-o no nó da oficina.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ro",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Rețea de ateliere",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ro",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Afișează atelierul meu pe alte noduri OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ro",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Pentru a conecta ateliere, adaugă adresele nodurilor în OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ro",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Scară, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ro",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Comanda și fișierul vor fi stocate pe nodul atelierului ales.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ro",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Descarcă fișierul și deschide-l pe nodul atelierului.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sk",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Sieť dielní",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sk",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Zobraziť moju dielňu na ďalších uzloch OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sk",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Ak chcete prepojiť dielne, pridajte adresy uzlov do OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sk",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Mierka, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sk",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Vaša objednávka a súbor sa uložia na uzle vybranej dielne.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sk",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Stiahnite súbor a otvorte ho na uzle dielne.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Omrežje delavnic",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Prikaži mojo delavnico na drugih vozliščih OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Za povezavo delavnic dodajte naslove vozlišč v OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Merilo, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Vaše naročilo in datoteka bosta shranjena v vozlišču izbrane delavnice.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Prenesite datoteko in jo odprite v vozlišču delavnice.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sv",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Verkstadsnätverk",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sv",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Visa min verkstad på andra OpenPrint-noder",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sv",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Lägg till nodadresser i OPENPRINT_PEERS för att ansluta verkstäder.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sv",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Skala, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sv",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Din beställning och fil sparas på den valda verkstadens nod.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sv",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Ladda ned filen och öppna den på verkstadens nod.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "பட்டறை வலையமைப்பு",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "எனது பட்டறையை மற்ற OpenPrint முனைகளில் காட்டு",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "பட்டறைகளை இணைக்க முனை முகவரிகளை OPENPRINT_PEERS இல் சேர்க்கவும்.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "அளவுகோல், %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "உங்கள் ஆர்டரும் கோப்பும் தேர்ந்தெடுத்த பட்டறையின் முனையில் சேமிக்கப்படும்.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "கோப்பைப் பதிவிறக்கிப் பட்டறையின் முனையில் திறக்கவும்.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "వర్క్‌షాప్‌ల నెట్‌వర్క్",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "నా వర్క్‌షాప్‌ను ఇతర OpenPrint నోడ్‌లలో చూపించు",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "వర్క్‌షాప్‌లను అనుసంధానించడానికి నోడ్ చిరునామాలను OPENPRINT_PEERS లో చేర్చండి.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "స్కేలు, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "మీ ఆర్డర్ మరియు ఫైల్ ఎంచుకున్న వర్క్‌షాప్ నోడ్‌లో నిల్వ అవుతాయి.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "te-IN",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ఫైల్‌ను డౌన్‌లోడ్ చేసి వర్క్‌షాప్ నోడ్‌లో తెరవండి.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "th",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "เครือข่ายเวิร์กช็อป",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "th",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "แสดงเวิร์กช็อปของฉันบนโหนด OpenPrint อื่น",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "th",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "หากต้องการเชื่อมต่อเวิร์กช็อป ให้เพิ่มที่อยู่โหนดใน OPENPRINT_PEERS",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "th",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "มาตราส่วน (%)",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "th",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "คำสั่งซื้อและไฟล์ของคุณจะถูกเก็บไว้บนโหนดของเวิร์กช็อปที่เลือก",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "th",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "ดาวน์โหลดไฟล์แล้วเปิดบนโหนดของเวิร์กช็อป",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "tr",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Atölye ağı",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "tr",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Atölyemi diğer OpenPrint düğümlerinde göster",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "tr",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Atölyeleri bağlamak için düğüm adreslerini OPENPRINT_PEERS ayarına ekleyin.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "tr",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Ölçek, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "tr",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Siparişiniz ve dosyanız seçtiğiniz atölyenin düğümünde saklanır.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "tr",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Dosyayı indirin ve atölyenin düğümünde açın.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "uk",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Мережа майстерень",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "uk",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Показувати мою майстерню на інших вузлах OpenPrint",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "uk",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Щоб підключити майстерні, додайте адреси вузлів до OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "uk",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Масштаб, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "uk",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Ваше замовлення та файл зберігатимуться на вузлі обраної майстерні.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "uk",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Завантажте файл і відкрийте його на вузлі майстерні.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "ورکشاپس کا نیٹ ورک",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "میری ورکشاپ دوسرے OpenPrint نوڈز پر دکھائیں",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "ورکشاپس کو جوڑنے کے لیے نوڈز کے پتے OPENPRINT_PEERS میں شامل کریں۔",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "پیمانہ، %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "آپ کا آرڈر اور فائل منتخب ورکشاپ کے نوڈ پر محفوظ ہوں گے۔",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "فائل ڈاؤن لوڈ کریں اور اسے ورکشاپ کے نوڈ پر کھولیں۔",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "vi",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "Mạng lưới xưởng",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "vi",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "Hiển thị xưởng của tôi trên các nút OpenPrint khác",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "vi",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "Để kết nối các xưởng, hãy thêm địa chỉ nút vào OPENPRINT_PEERS.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "vi",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "Tỷ lệ, %",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "vi",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "Đơn hàng và tệp của bạn sẽ được lưu trên nút của xưởng bạn chọn.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "vi",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "Tải tệp xuống rồi mở trên nút của xưởng.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "工坊网络",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "在其他 OpenPrint 节点上显示我的工坊",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "要连接工坊，请将节点地址添加到 OPENPRINT_PEERS。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "缩放比例（%）",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "您的订单和文件将保存在所选工坊的节点上。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "请下载文件并在工坊节点上打开。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_cfd34548",
+      "en": "Workshop network",
+      "ru": "Сеть мастерских",
+      "text": "工坊網路",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_0b3dadd5",
+      "en": "List my workshop on other OpenPrint nodes",
+      "ru": "Показывать мою мастерскую на других узлах OpenPrint",
+      "text": "在其他 OpenPrint 節點上顯示我的工坊",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_189da125",
+      "en": "To connect workshops, add node addresses to OPENPRINT_PEERS.",
+      "ru": "Для подключения мастерских укажите адреса узлов в OPENPRINT_PEERS.",
+      "text": "若要連接工坊，請將節點位址加入 OPENPRINT_PEERS。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_2c73bed1",
+      "en": "Scale, %",
+      "ru": "Масштаб, %",
+      "text": "縮放比例（%）",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_ce53f0ab",
+      "en": "Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "您的訂單和檔案將儲存在所選工坊的節點上。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "m_12edd298",
+      "en": "Download the file and open it on the workshop’s node.",
+      "ru": "Скачайте файл и откройте его на узле мастерской.",
+      "text": "請下載檔案並在工坊節點上開啟。",
+      "reason": "AI-assisted translation of the workshop network feature."
     }
   ]
 }

@@ -24,6 +24,7 @@ import {
 import { useApp, post, errorText, Loading, ErrorBox, useRemote, initials } from './core';
 import type { Notification } from '../shared/types';
 import { Home, Directory, CatalogPage, ProfilePage, Projects } from './Browse';
+const WorkshopNetwork = lazy(() => import('./WorkshopNetwork'));
 const Auth = lazy(() => import('./Auth'));
 const NewProject = lazy(() => import('./NewProject'));
 const Project = lazy(() => import('./Project'));
@@ -51,6 +52,7 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
 }
 const names = (t: ReturnType<typeof useApp>['t']): Record<string, string> => ({
   '/': t('Обзор сообщества', 'Community overview'),
+  '/network': t('Сеть мастерских', 'Workshop network'),
   '/studios': t('Мастерские и инженеры', 'Workshops & engineers'),
   '/projects': t('Биржа проектов', 'Project board'),
   '/models': t('Библиотека моделей', 'Model library'),
@@ -347,6 +349,7 @@ export default function App() {
                   }
                 />
                 <Route path="/" element={<Home />} />
+                <Route path="/network" element={<WorkshopNetwork />} />
                 <Route path="/studios" element={<Directory />} />
                 <Route path="/studios/:id" element={<ProfilePage />} />
                 <Route path="/catalog/new" element={<CatalogEditor key="new" />} />

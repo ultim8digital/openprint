@@ -27,6 +27,7 @@
   "run_import": "Använd [kommandoradsverktyget för katalogimport]({CATALOG_IMPORT}) för en befintlig datamängd efter att du har kontrollerat dess användningsrättigheter. Instansdatamängder, uppladdningar och säkerhetskopior inkluderas inte i arkivet eller containeravbildningarna.",
   "run_intro": "Installera Node.js 24, klona det här arkivet och kör:",
   "run_limits": "Den stödda driftsättningen innebär en applikationsprocess med SQLite på en lokal disk. Automatisk publicering och begränsningar för antalet förfrågningar minskar risken för missbruk utan att det behövs en kö för granskning. En delad IP-adress för kontoret kan användas för att dela en publiceringskvot. Se [gränser och hur hanteringen fungerar]({OPEN_CATALOG}) innan du öppnar en publik instans.",
-  "tagline": "**En öppen katalog över tryckerier och verkstäder. Ingen registrering eller moderatorer krävs.**",
-  "translation_maintenance": "Den engelska README-filen är referensen för de fullständiga översatta versionerna. I [språkindexet]({LANGUAGE_INDEX}) finns dokumentation om underhåll och granskning av översättningar. Lokaliseringsarbetet av användargränssnittet översätter inte användargenererade listor, projektinnehåll eller all extern teknisk diagnostik."
+  "tagline": "**Utforma en del och beställ den från en verkstad i det öppna nätverket.**",
+  "translation_maintenance": "Den engelska README-filen är referensen för de fullständiga översatta versionerna. I [språkindexet]({LANGUAGE_INDEX}) finns dokumentation om underhåll och granskning av översättningar. Lokaliseringsarbetet av användargränssnittet översätter inte användargenererade listor, projektinnehåll eller all extern teknisk diagnostik.",
+  "workshop_network": "[Verkstadsnätverk]({WORKSHOP_NETWORK}). Din beställning och fil sparas på den valda verkstadens nod."
 }

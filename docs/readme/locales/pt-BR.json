@@ -27,6 +27,7 @@
   "run_import": "Use a [interface de linha de comando para importação de catálogo]({CATALOG_IMPORT}) para um conjunto de dados existente, após verificar seus direitos de uso. Conjuntos de dados de instâncias, uploads e backups não são incluídos no repositório ou nas imagens de contêiner.",
   "run_intro": "Instale o Node.js 24, clone este repositório e execute:",
   "run_limits": "A configuração de implantação suportada é um único processo de aplicativo com SQLite em um disco local. A publicação automática e as cotas de solicitações limitam o uso indevido, sem a necessidade de uma fila de moderação. Um endereço IP de escritório compartilhado pode compartilhar uma cota de publicação. Consulte [limites e comportamento do link de gerenciamento]({OPEN_CATALOG}) antes de abrir uma instância pública.",
-  "tagline": "**Um diretório aberto de estúdios e oficinas de impressão. Não é necessário registro, e não há moderadores.**",
-  "translation_maintenance": "O arquivo README em inglês é a referência para as versões traduzidas completas. O [índice de idiomas]({LANGUAGE_INDEX}) documenta os limites de manutenção e revisão da tradução. A localização da interface não traduz as listagens criadas pelos usuários, o conteúdo do projeto ou todos os diagnósticos técnicos externos."
+  "tagline": "**Projete uma peça e encomende-a a uma oficina da rede aberta.**",
+  "translation_maintenance": "O arquivo README em inglês é a referência para as versões traduzidas completas. O [índice de idiomas]({LANGUAGE_INDEX}) documenta os limites de manutenção e revisão da tradução. A localização da interface não traduz as listagens criadas pelos usuários, o conteúdo do projeto ou todos os diagnósticos técnicos externos.",
+  "workshop_network": "[Rede de oficinas]({WORKSHOP_NETWORK}). Seu pedido e seu arquivo serão armazenados no nó da oficina escolhida."
 }

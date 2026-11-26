@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Otvoreni popis tiskarskih studija i radionica. Nije potrebna registracija, niti postoje moderatori.**
+**Osmislite dio i naručite ga u radionici u otvorenoj mreži.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Pokrenite OpenPrint s Node.js 24 i lokalnim SQLite. Vercel, Supabase, pružatelj
 
 ## Značajke kataloga
 
+- [Mreža radionica](../../docs/WORKSHOP_NETWORK.md). Vaša narudžba i datoteka bit će pohranjene na čvoru odabrane radionice.
 - Pretražujte po nazivu, gradu i tehnologiji. Na karti su prikazane odgovarajuće lokacije, neovisno o podjeli na stranice u popisu.
 - Objavite bez potrebe za računom. Odaberite točku na karti ili unesite koordinate; unosi bez koordinata ostaju pretraživi.
 - Uredite ili izbrišite 1 unos zajedno s njegovom privatnom poveznicom. Provjera verzija štiti od sukobljenih izmjena u različitim karticama.

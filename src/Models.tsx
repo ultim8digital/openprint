@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Plus, Download, ArrowUpRight, Search, ShieldCheck, Check } from 'lucide-react';
 import { useApp, useRemote, post, upload, Loading, ErrorBox, Empty, errorText } from './core';
 import { PageTitle, ReportButton } from './Browse';
+import { stageFile } from './model-handoff';
 import { PartArt } from './art';
 import type { PartSpec } from '../shared/parts';
 type SharedModel = {
@@ -193,7 +194,9 @@ function PublishForm() {
 }
 export default function Models() {
   const { t, user, toast } = useApp(),
+    navigate = useNavigate(),
     [params, setParams] = useSearchParams(),
+    target = params.get('target'),
     [offset, setOffset] = useState(0),
     remote = useRemote<{ models: SharedModel[]; has_more: boolean }>(
       `/models?q=${encodeURIComponent(params.get('q') || '')}&limit=12&offset=${offset}`,
@@ -211,7 +214,12 @@ export default function Models() {
       >
         <button
           className="button"
-          onClick={() => setParams(params.get('publish') ? {} : { publish: '1' })}
+          onClick={() =>
+            setParams({
+              ...(target ? { target } : {}),
+              ...(params.get('publish') ? {} : { publish: '1' }),
+            })
+          }
         >
           <Plus size={16} />
           {params.get('publish')
@@ -235,7 +243,10 @@ export default function Models() {
                 )}
                 value={params.get('q') || ''}
                 onChange={(e) => {
-                  setParams(e.target.value ? { q: e.target.value } : {});
+                  setParams({
+                    ...(target ? { target } : {}),
+                    ...(e.target.value ? { q: e.target.value } : {}),
+                  });
                   setOffset(0);
                 }}
               />
@@ -304,21 +315,64 @@ export default function Models() {
                           </button>
                           <Link
                             className="text-button"
-                            to={'/tools?preset=' + encodeURIComponent(JSON.stringify(model.preset))}
+                            to={
+                              '/tools?' +
+                              new URLSearchParams({
+                                preset: JSON.stringify(model.preset),
+                                ...(target ? { target } : {}),
+                              })
+                            }
                           >
                             {t('Изменить размеры', 'Customize')}
                             <ArrowUpRight className="directional-icon" size={14} />
                           </Link>
                         </>
                       ) : (
-                        <a
-                          className="button small secondary"
-                          href={'/api/files/' + model.file_id}
-                          download
-                        >
-                          <Download size={14} />
-                          {t('Скачать файл', 'Download file')}
-                        </a>
+                        <>
+                          {model.file_id && /\.(stl|obj)$/i.test(model.file_name) && (
+                            <button
+                              className="text-button"
+                              disabled={!!downloading}
+                              onClick={async () => {
+                                setDownloading(model.id);
+                                try {
+                                  const response = await fetch(
+                                    '/api/files/' + encodeURIComponent(model.file_id!),
+                                  );
+                                  if (!response.ok)
+                                    throw new Error(
+                                      t(
+                                        'Не удалось получить ответ сервера. Проверьте соединение и повторите действие.',
+                                        'The server did not respond. Check your connection and retry.',
+                                      ),
+                                    );
+                                  const file = new File([await response.blob()], model.file_name);
+                                  navigate(
+                                    '/tools?' +
+                                      new URLSearchParams({
+                                        attachment: stageFile(file),
+                                        ...(target ? { target } : {}),
+                                      }),
+                                  );
+                                } catch (err) {
+                                  toast(errorText(err));
+                                } finally {
+                                  setDownloading('');
+                                }
+                              }}
+                            >
+                              {t('Изменить размеры', 'Customize')}
+                            </button>
+                          )}
+                          <a
+                            className="button small secondary"
+                            href={'/api/files/' + model.file_id}
+                            download
+                          >
+                            <Download size={14} />
+                            {t('Скачать файл', 'Download file')}
+                          </a>
+                        </>
                       )}
                     </div>
                     {user && (

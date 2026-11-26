@@ -522,7 +522,7 @@ test('map reports truncation explicitly above 50000 points, including registered
   }
 });
 
-test('v4 community data migrates to v7 without modifying existing profiles or AI accounting', async () => {
+test('v4 community data migrates to v8 without modifying existing profiles or AI accounting', async () => {
   const f = await fixture();
   try {
     const member = f.member({ verified: 1 });
@@ -536,11 +536,11 @@ test('v4 community data migrates to v7 without modifying existing profiles or AI
     );
     const prior = f.store.all('SELECT * FROM profiles');
     f.store.db.exec(
-      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE catalog_studios; PRAGMA user_version=4;',
+      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE catalog_studios; DROP TABLE project_request_receipts; DROP INDEX profiles_network; ALTER TABLE profiles DROP COLUMN network_listed; PRAGMA user_version=4;',
     );
     const migrated = new Store(f.store.path);
     try {
-      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 7);
+      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 8);
       assert.deepEqual(migrated.all('SELECT * FROM profiles'), prior);
       assert.equal(migrated.get<{ n: number }>('SELECT count(*) n FROM catalog_studios')!.n, 0);
       assert.equal(

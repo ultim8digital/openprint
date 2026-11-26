@@ -27,6 +27,7 @@
   "run_import": "Käytä [luettelon tuontityökalua]({CATALOG_IMPORT}) olemassa olevan tietojoukon kanssa sen käyttöoikeudet tarkistettuasi. Esimerkkitietojoukot, lataukset ja varmuuskopiot eivät sisälly arkistoon tai konttikuviin.",
   "run_intro": "Asenna Node.js 24, kloonaa tämä arkisto ja suorita:",
   "run_limits": "Tuettu käyttöönotto on yksi sovellusprosessi, jossa on SQLite paikallisella kiintolevyllä. Automaattinen julkaisutoiminto ja pyyntökiintiöt rajoittavat väärinkäyttöä ilman erillistä valvontajonoa. Jaettu toimiston IP-osoite voi jakaa julkaisukiintiön. Katso [kiintiöiden ja hallintalinkin toiminta]({OPEN_CATALOG}) ennen julkisen instanssin avaamista.",
-  "tagline": "**Avoin hakemisto painotaloista ja -pajoista. Ei rekisteröintiä tai moderaattoreita.**",
-  "translation_maintenance": "Englanninkielinen README-tiedosto on ensisijainen lähde, jota käytetään täydellisten käännettyjen versioiden luomiseen. [Kieliluettelo]({LANGUAGE_INDEX}) sisältää tietoa käännösten ylläpidosta ja tarkistusprosesseista. Käyttöliittymän lokalisointi ei käännä käyttäjien luomia listauksia, projektin sisältöä tai kaikkia ulkoisia teknisiä vianmääritystietoja."
+  "tagline": "**Suunnittele osa ja tilaa se avoimen verkoston verstaalta.**",
+  "translation_maintenance": "Englanninkielinen README-tiedosto on ensisijainen lähde, jota käytetään täydellisten käännettyjen versioiden luomiseen. [Kieliluettelo]({LANGUAGE_INDEX}) sisältää tietoa käännösten ylläpidosta ja tarkistusprosesseista. Käyttöliittymän lokalisointi ei käännä käyttäjien luomia listauksia, projektin sisältöä tai kaikkia ulkoisia teknisiä vianmääritystietoja.",
+  "workshop_network": "[Verstasverkosto]({WORKSHOP_NETWORK}). Tilauksesi ja tiedostosi tallennetaan valitsemasi verstaan solmuun."
 }

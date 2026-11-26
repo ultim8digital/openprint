@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Un director open-source cu studiouri și ateliere de imprimare. Nu este necesară înregistrarea și nu există moderatori.**
+**Proiectează o piesă și comand-o de la un atelier din rețeaua deschisă.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Rulează OpenPrint cu Node.js 24 și cu SQLite local. Vercel, Supabase, un furni
 
 ## Funcționalitățile catalogului
 
+- [Rețea de ateliere](../../docs/WORKSHOP_NETWORK.md). Comanda și fișierul vor fi stocate pe nodul atelierului ales.
 - Caută după nume, oraș și tehnologie. Harta include locațiile corespunzătoare, indiferent de paginarea listei.
 - Publicați fără a crea un cont. Alegeți un punct de pe hartă sau introduceți coordonatele; listările fără coordonate pot fi căutate în continuare.
 - Editați sau ștergeți o înregistrare, împreună cu link-ul său privat. Verificările de versiune protejează împotriva modificărilor conflictuale în file diferite.

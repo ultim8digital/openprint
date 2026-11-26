@@ -62,6 +62,7 @@ export type Profile = {
   lat: number | null;
   lng: number | null;
   verified: boolean;
+  network_listed: boolean;
   remote: boolean;
   demo: boolean;
 };

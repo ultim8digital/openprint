@@ -27,6 +27,7 @@
   "run_import": "Użyj narzędzia [interfejsu wiersza poleceń do importu katalogu]({CATALOG_IMPORT}) dla istniejącego zbioru danych po sprawdzeniu praw do niego. Zbiory danych instancji, pliki przesłane i kopie zapasowe nie są zawarte w repozytorium ani obrazach kontenerów.",
   "run_intro": "Zainstaluj Node.js 24, sklonuj to repozytorium i uruchom:",
   "run_limits": "Obsługiwana konfiguracja to jeden proces aplikacji z SQLite na lokalnym dysku. Automatyczna publikacja i limity zapytań ograniczają nadużycia bez konieczności stosowania kolejki moderacji. Wspólny adres IP biura może korzystać ze wspólnego limitu publikacji. Przed uruchomieniem publicznej instancji zapoznaj się z informacjami dotyczącymi [limitów i zasad zarządzania]({OPEN_CATALOG}).",
-  "tagline": "**Otwarty katalog drukarni i warsztatów. Brak konieczności rejestracji i moderatorów.**",
-  "translation_maintenance": "Angielska wersja pliku README jest wzorcem dla pełnych, przetłumaczonych wersji. W [indeksie języków]({LANGUAGE_INDEX}) znajdują się informacje dotyczące zasad utrzymania i zakresu weryfikacji tłumaczeń. Lokalizacja interfejsu nie obejmuje tłumaczenia treści dodawanych przez użytkowników, treści projektów ani wszystkich zewnętrznych danych diagnostycznych."
+  "tagline": "**Zaprojektuj część i zamów ją w warsztacie należącym do otwartej sieci.**",
+  "translation_maintenance": "Angielska wersja pliku README jest wzorcem dla pełnych, przetłumaczonych wersji. W [indeksie języków]({LANGUAGE_INDEX}) znajdują się informacje dotyczące zasad utrzymania i zakresu weryfikacji tłumaczeń. Lokalizacja interfejsu nie obejmuje tłumaczenia treści dodawanych przez użytkowników, treści projektów ani wszystkich zewnętrznych danych diagnostycznych.",
+  "workshop_network": "[Sieć warsztatów]({WORKSHOP_NETWORK}). Twoje zamówienie i plik zostaną zapisane w węźle wybranego warsztatu."
 }

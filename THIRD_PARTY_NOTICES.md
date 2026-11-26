@@ -6,6 +6,10 @@ Client dependencies retain their notices in [public/third-party-licenses.txt](pu
 
 The built-in SQLite implementation is provided by Node.js. Its upstream license and third-party notices are part of the Node.js distribution; SQLite itself is public-domain software. Development tools retain their respective upstream licenses and are not part of the application license grant.
 
+## Offline map
+
+OpenPrint distributes the unmodified 1:110m land polygons in `public/maps/land-110m.geojson`. Natural Earth provides these coastlines in the public domain. The source file has SHA-256 `9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9`. [Upstream file](https://github.com/nvkelso/natural-earth-vector/blob/693f11422f4e08d2da4566b854dda53eb7c39fb3/geojson/ne_110m_land.geojson) · [Natural Earth terms](https://www.naturalearthdata.com/about/terms-of-use/)
+
 ## Demo content
 
 All sample people, names, businesses, profiles, and briefs in `server/demo.ts` are fictional. No scraped directory or real customer records are included. Any resemblance to a real business is incidental. Coordinates are approximate city centers and do not identify workshop premises.

@@ -27,6 +27,7 @@
   "run_import": "Koristite [CLI za uvoz kataloga]({CATALOG_IMPORT}) za postojeći skup podataka nakon što provjerite njegova prava. Primjerci skupova podataka, učitavanja i sigurnosne kopije nisu uključeni u repozitorij ili slike kontejnera.",
   "run_intro": "Instalirajte Node.js 24, klonirajte ovo spremište i pokrenite:",
   "run_limits": "Podržana konfiguracija uključuje jedan proces aplikacije s SQLite na lokalnom disku. Automatska publikacija i ograničenja broja zahtjeva smanjuju mogućnost zlouporabe bez potrebe za sustavom za moderiranje. Zajednička IP adresa ureda može dijeliti kvotu za publikaciju. Prije otvaranja javne instance pogledajte [ograničenja i ponašanje povezano s upravljanjem]({OPEN_CATALOG}).",
-  "tagline": "**Otvoreni popis tiskarskih studija i radionica. Nije potrebna registracija, niti postoje moderatori.**",
-  "translation_maintenance": "Engleski dokument README služi kao izvor za potpune prevedene verzije. U [popisu jezika]({LANGUAGE_INDEX}) opisano je održavanje prijevoda i opseg provjere. Lokalizacija sučelja ne prevodi korisničke kartice, sadržaj projekata ni sve vanjske tehničke poruke."
+  "tagline": "**Osmislite dio i naručite ga u radionici u otvorenoj mreži.**",
+  "translation_maintenance": "Engleski dokument README služi kao izvor za potpune prevedene verzije. U [popisu jezika]({LANGUAGE_INDEX}) opisano je održavanje prijevoda i opseg provjere. Lokalizacija sučelja ne prevodi korisničke kartice, sadržaj projekata ni sve vanjske tehničke poruke.",
+  "workshop_network": "[Mreža radionica]({WORKSHOP_NETWORK}). Vaša narudžba i datoteka bit će pohranjene na čvoru odabrane radionice."
 }

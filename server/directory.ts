@@ -230,6 +230,7 @@ type DirectoryRow = CatalogRow & {
   source: 'member' | 'catalog';
   user_id: string;
   kind: Profile['kind'];
+  network_listed: number;
   remote: number;
   verified: number;
   demo: number;
@@ -250,6 +251,7 @@ function memberObject(row: DirectoryRow): Profile {
     lng: row.lng,
     verified: !!row.verified,
     remote: !!row.remote,
+    network_listed: !!row.network_listed,
     demo: !!row.demo,
   };
 }
@@ -269,17 +271,17 @@ function directoryFilter(query: unknown, catalogOnly = false) {
   const q = querySchema.parse(query);
   const cte = `WITH directory AS (
     SELECT 'member' source,p.id,p.name,p.city,p.description,p.technologies,p.materials,p.website,p.lat,p.lng,
-      p.user_id,p.kind,p.remote,p.verified,p.demo,p.created_at,
+      p.user_id,p.kind,p.network_listed,p.remote,p.verified,p.demo,p.created_at,
       '' region,'' country,'' phone,'' address,'' source_name,'' source_url,0 imported_at,
       'imported' listing_type,0 version,p.created_at updated_at
       FROM profiles p JOIN users u ON u.id=p.user_id WHERE p.published=1 AND u.suspended=0 ${catalogOnly ? 'AND 1=0' : ''}
     UNION ALL
     SELECT 'catalog',c.id,c.name,c.city,c.description,c.technologies,c.materials,c.website,c.lat,c.lng,
-      '', 'studio',0,0,0,c.imported_at,c.region,c.country,c.phone,c.address,c.source_name,c.source_url,c.imported_at,
+      '', 'studio',0,0,0,0,c.imported_at,c.region,c.country,c.phone,c.address,c.source_name,c.source_url,c.imported_at,
       'imported',0,c.imported_at FROM catalog_studios c
     UNION ALL
     SELECT 'catalog',s.id,s.name,s.city,s.description,s.technologies,s.materials,s.website,s.lat,s.lng,
-      '', 'studio',0,0,0,s.created_at,s.region,s.country,s.phone,s.address,
+      '', 'studio',0,0,0,0,s.created_at,s.region,s.country,s.phone,s.address,
       'Self-published / Добавлено самостоятельно','',s.created_at,'self-published',s.version,s.updated_at
       FROM directory_submissions s WHERE s.deleted_at IS NULL
   ), filtered AS (SELECT * FROM directory WHERE

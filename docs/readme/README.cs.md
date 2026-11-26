@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Otevřený seznam tiskáren a dílen. Není nutná registrace ani moderátoři.**
+**Navrhněte součástku a objednejte si ji v dílně zapojené do otevřené sítě.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Spusťte OpenPrint s Node.js 24 a lokálně SQLite. Vercel, Supabase, poskytovat
 
 ## Funkce katalogu
 
+- [Síť dílen](../../docs/WORKSHOP_NETWORK.md). Vaše objednávka a soubor budou uloženy na uzlu vybrané dílny.
 - Vyhledávejte podle názvu, města a technologie. Na mapě se zobrazují odpovídající lokality, a to nezávisle na stránkování seznamu.
 - Publikujte bez nutnosti vytvořit si účet. Vyberte bod na mapě nebo zadejte souřadnice; záznamy bez souřadnic zůstanou vyhledatelné.
 - Upravte nebo smažte jednu položku spolu s jejím privátním odkazem. Kontrola verzí chrání před konfliktními úpravami v různých záložkách.

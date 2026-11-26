@@ -27,6 +27,7 @@
   "run_import": "Gebruik de [catalogusimport-opdrachtregelinterface]({CATALOG_IMPORT}) voor een bestaande dataset nadat u de bijbehorende rechten hebt gecontroleerd. Voorbeelddatasets, uploads en back-ups worden niet opgenomen in de repository of containerimages.",
   "run_intro": "Installeer Node.js 24, kloon deze repository en voer uit:",
   "run_limits": "De ondersteunde implementatie omvat één applicatieproces met SQLite op een lokale schijf. Automatische publicatie en quotums voor verzoeken beperken misbruik zonder dat een moderatiewachtrij nodig is. Een gedeeld kantoor-IP-adres kan een publicatiequotum delen. Raadpleeg [limieten en het gedrag van de beheerlink]({OPEN_CATALOG}) voordat u een openbare instantie opent.",
-  "tagline": "**Een open directory met drukkerijen en werkplaatsen. Geen registratie of moderatoren vereist.**",
-  "translation_maintenance": "De Engelse README-tekst is de referentie voor de volledige vertaalde versies. De [taalindex]({LANGUAGE_INDEX}) beschrijft de procedures voor het onderhouden en beoordelen van de vertalingen. De lokalisatie van de gebruikersinterface omvat niet de vertaling van door gebruikers aangemaakte vermeldingen, projectinhoud of alle externe technische diagnostische gegevens."
+  "tagline": "**Ontwerp een onderdeel en bestel het bij een werkplaats in het open netwerk.**",
+  "translation_maintenance": "De Engelse README-tekst is de referentie voor de volledige vertaalde versies. De [taalindex]({LANGUAGE_INDEX}) beschrijft de procedures voor het onderhouden en beoordelen van de vertalingen. De lokalisatie van de gebruikersinterface omvat niet de vertaling van door gebruikers aangemaakte vermeldingen, projectinhoud of alle externe technische diagnostische gegevens.",
+  "workshop_network": "[Werkplaatsennetwerk]({WORKSHOP_NETWORK}). Je bestelling en bestand worden opgeslagen op het knooppunt van de gekozen werkplaats."
 }

@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Avoin hakemisto painotaloista ja -pajoista. Ei rekisteröintiä tai moderaattoreita.**
+**Suunnittele osa ja tilaa se avoimen verkoston verstaalta.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Suorita OpenPrint käyttämällä Node.js 24:ää ja paikallista SQLite:a. Verce
 
 ## Luettelon ominaisuudet
 
+- [Verstasverkosto](../../docs/WORKSHOP_NETWORK.md). Tilauksesi ja tiedostosi tallennetaan valitsemasi verstaan solmuun.
 - Hae nimen, kaupungin ja teknologian perusteella. Kartalla näkyvät kaikki hakuehtoja vastaavat kohteet riippumatta listan sivutuksesta.
 - Julkaise ilman käyttäjätiliä. Valitse karttapiste tai syötä koordinaatit; koordinaatit sisältämättömät ilmoitukset ovat edelleen haettavissa.
 - Muokkaa tai poista yksi ilmoitus sen yksityisellä linkillä. Versioiden tarkistus estää ristiriitaiset muutokset eri välilehdissä.
