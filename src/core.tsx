@@ -23,6 +23,7 @@ export type Bootstrap = {
   demoUsers: Pick<User, 'id' | 'name' | 'email'>[];
   instance: string;
   operatorContact: string;
+  mapTiles: boolean;
 };
 export class ApiError extends Error {
   constructor(
@@ -100,6 +101,7 @@ const empty: Bootstrap = {
   demoUsers: [],
   instance: 'OpenPrint',
   operatorContact: '',
+  mapTiles: true,
 };
 type Context = Bootstrap & {
   lang: Lang;

@@ -179,14 +179,14 @@ test('v6 language migration preserves parent and immutable child history without
           .replace(/language IN \([^)]*\)/, "language IN ('ru','en')"),
       );
       legacy.exec(
-        'INSERT INTO legacy_projects SELECT * FROM studio_projects; DROP TABLE studio_projects; ALTER TABLE legacy_projects RENAME TO studio_projects; PRAGMA user_version=6; COMMIT',
+        'INSERT INTO legacy_projects SELECT * FROM studio_projects; DROP TABLE studio_projects; ALTER TABLE legacy_projects RENAME TO studio_projects; DROP TABLE project_request_receipts; DROP INDEX profiles_network; ALTER TABLE profiles DROP COLUMN network_listed; PRAGMA user_version=6; COMMIT',
       );
       assert.throws(() => legacy.prepare("UPDATE studio_projects SET language='ja'").run());
     } finally {
       legacy.close();
     }
     store = new Store(path);
-    assert.equal(store.get<{ user_version: number }>('PRAGMA user_version')?.user_version, 7);
+    assert.equal(store.get<{ user_version: number }>('PRAGMA user_version')?.user_version, 8);
     assert.equal(
       store.get<{ language: string }>("SELECT language FROM studio_projects WHERE id='project'")
         ?.language,

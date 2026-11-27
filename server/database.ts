@@ -41,9 +41,9 @@ export class Store {
     const version = Number(
       this.get<{ user_version: number }>('PRAGMA user_version')?.user_version ?? 0,
     );
-    if (version > 7)
+    if (version > 8)
       throw new Error('Database is newer than this OpenPrint version. Upgrade the application.');
-    if (version === 7) return;
+    if (version === 8) return;
     if (version === 0)
       this.transaction(() =>
         this.db.exec(`
@@ -359,10 +359,11 @@ export class Store {
       );
     // SQLite requires rebuilding a table to widen its CHECK constraint. Disable foreign keys
     // outside the transaction so dropping the old parent cannot cascade into immutable history.
-    this.db.exec('PRAGMA foreign_keys=OFF');
-    try {
-      this.transaction(() => {
-        this.db.exec(`
+    if (version < 7) {
+      this.db.exec('PRAGMA foreign_keys=OFF');
+      try {
+        this.transaction(() => {
+          this.db.exec(`
           CREATE TABLE studio_projects_localized (
             id TEXT PRIMARY KEY, owner_id TEXT NOT NULL REFERENCES users(id), idea TEXT NOT NULL,
             language TEXT NOT NULL CHECK(language IN (${localeCodes.map((code) => `'${code}'`).join(',')})),
@@ -381,12 +382,24 @@ export class Store {
           CREATE TRIGGER studio_published_immutable BEFORE UPDATE OF brief,version,confirmed_version,confirmed_hash,packet,model_stl,job_id,file_id ON studio_projects WHEN OLD.job_id IS NOT NULL
             BEGIN SELECT RAISE(ABORT, 'Published studio projects are immutable'); END;
         `);
-        if (this.all('PRAGMA foreign_key_check').length)
-          throw new Error('Locale migration failed foreign-key validation');
-        this.db.exec('PRAGMA user_version=7');
-      });
-    } finally {
-      this.db.exec('PRAGMA foreign_keys=ON');
+          if (this.all('PRAGMA foreign_key_check').length)
+            throw new Error('Locale migration failed foreign-key validation');
+          this.db.exec('PRAGMA user_version=7');
+        });
+      } finally {
+        this.db.exec('PRAGMA foreign_keys=ON');
+      }
     }
+    this.transaction(() =>
+      this.db.exec(`
+      ALTER TABLE profiles ADD COLUMN network_listed INTEGER NOT NULL DEFAULT 0 CHECK(network_listed IN (0,1));
+      CREATE INDEX profiles_network ON profiles(id) WHERE network_listed=1 AND published=1 AND demo=0;
+      CREATE TABLE project_request_receipts (
+        owner_id TEXT NOT NULL REFERENCES users(id), request_key TEXT NOT NULL, payload_hash TEXT NOT NULL,
+        job_id TEXT NOT NULL UNIQUE REFERENCES jobs(id), PRIMARY KEY(owner_id,request_key)
+      ) STRICT;
+      PRAGMA user_version=8;
+    `),
+    );
   }
 }

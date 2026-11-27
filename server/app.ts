@@ -51,10 +51,13 @@ import type { StudioAIConfig } from './studio-ai.js';
 import { CadService, type CadOptions } from './cad-runner.js';
 import { createCadRouter } from './cad.js';
 import { createCadAIRouter } from './cad-ai.js';
+import { createNetworkRouter } from './network.js';
 import { createDirectoryRouter } from './directory.js';
 import { createDirectorySubmissionsRouter } from './directory-submissions.js';
 
 type Options = {
+  networkPeers?: string;
+  mapTiles?: boolean;
   mode?: 'catalog' | 'community';
   store: Store;
   dataDir: string;
@@ -133,6 +136,10 @@ export function createApp(options: Options) {
       else
         next(new HttpError(404, 'NOT_FOUND', 'This endpoint is not available / Раздел недоступен'));
     });
+  app.use(
+    '/api/directory',
+    createNetworkRouter(store, origin, options.networkPeers || '', !catalogOnly && !options.demo),
+  );
   app.use('/api', createDirectorySubmissionsRouter(store));
   app.use('/api', createDirectoryRouter(store, { catalogOnly }));
   const cad = catalogOnly ? null : new CadService(store, dataDir, options.cad);
@@ -163,6 +170,7 @@ export function createApp(options: Options) {
       const contact = process.env.OPERATOR_CONTACT || '';
       res.json({
         mode,
+        mapTiles: options.mapTiles !== false,
         user: null,
         profile: null,
         stats: { profiles: 0, projects: 0, models: 0, completed: 0 },
@@ -204,6 +212,7 @@ export function createApp(options: Options) {
     const contact = process.env.OPERATOR_CONTACT || '';
     res.json({
       mode,
+      mapTiles: options.mapTiles !== false,
       user,
       profile: profile ? profileObject(profile) : null,
       stats,
@@ -357,8 +366,8 @@ export function createApp(options: Options) {
       'Contact the moderator to restore this profile / Обратитесь к модератору для восстановления профиля',
     );
     store.run(
-      `INSERT INTO profiles(id,user_id,name,kind,city,description,technologies,materials,website,lat,lng,remote,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)
-      ON CONFLICT(user_id) DO UPDATE SET name=excluded.name,kind=excluded.kind,city=excluded.city,description=excluded.description,technologies=excluded.technologies,materials=excluded.materials,website=excluded.website,lat=excluded.lat,lng=excluded.lng,remote=excluded.remote,verified=0`,
+      `INSERT INTO profiles(id,user_id,name,kind,city,description,technologies,materials,website,lat,lng,remote,network_listed,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      ON CONFLICT(user_id) DO UPDATE SET name=excluded.name,kind=excluded.kind,city=excluded.city,description=excluded.description,technologies=excluded.technologies,materials=excluded.materials,website=excluded.website,lat=excluded.lat,lng=excluded.lng,remote=excluded.remote,network_listed=excluded.network_listed,verified=0`,
       profileId,
       user.id,
       body.name,
@@ -371,6 +380,7 @@ export function createApp(options: Options) {
       body.lat,
       body.lng,
       body.remote ? 1 : 0,
+      Number(body.network_listed ?? existing?.network_listed ?? 0),
       Date.now(),
     );
     event(store, user.id, 'profile.updated', profileId);
@@ -405,16 +415,40 @@ export function createApp(options: Options) {
   app.post('/api/projects', (req, res) => {
     const user = requireUser(store, req),
       body = jobInput.parse(req.body),
-      jobId = randomUUID();
-    store.transaction(() => {
-      assertDaily(store, user.id, 'job.created', 20);
-      if (body.file_id)
-        ensure(
-          store.get('SELECT 1 FROM files WHERE id=? AND owner_id=?', body.file_id, user.id),
-          400,
-          'FILE_INVALID',
-          'Choose your own file / Выберите свой файл',
+      requestKey = z.string().uuid().optional().parse(req.get('Idempotency-Key'));
+    const result = store.transaction(() => {
+      const file = body.file_id
+        ? store.get<{ name: string; sha256: string }>(
+            'SELECT name,sha256 FROM files WHERE id=? AND owner_id=?',
+            body.file_id,
+            user.id,
+          )
+        : null;
+      ensure(
+        !body.file_id || file,
+        400,
+        'FILE_INVALID',
+        'Choose your own file / Выберите свой файл',
+      );
+      const payloadHash = requestKey ? digest(JSON.stringify({ ...body, file_id: file })) : '';
+      if (requestKey) {
+        const receipt = store.get<{ payload_hash: string; job_id: string }>(
+          'SELECT payload_hash,job_id FROM project_request_receipts WHERE owner_id=? AND request_key=?',
+          user.id,
+          requestKey,
         );
+        if (receipt) {
+          ensure(
+            receipt.payload_hash === payloadHash,
+            409,
+            'REQUEST_ID_REUSED',
+            'This draft was already submitted with different details / Этот черновик уже отправлен с другими данными',
+          );
+          return { id: receipt.job_id, created: false };
+        }
+      }
+      const jobId = randomUUID();
+      assertDaily(store, user.id, 'job.created', 20);
       if (body.target_profile_id) {
         const target = store.get<{ user_id: string }>(
           'SELECT p.user_id FROM profiles p JOIN users u ON u.id=p.user_id WHERE p.id=? AND p.published=1 AND u.suspended=0',
@@ -454,8 +488,17 @@ export function createApp(options: Options) {
         notify(store, target.user_id, `job.direct|${body.title}`, `/projects/${jobId}`);
       }
       event(store, user.id, 'job.created', jobId);
+      if (requestKey)
+        store.run(
+          'INSERT INTO project_request_receipts(owner_id,request_key,payload_hash,job_id) VALUES(?,?,?,?)',
+          user.id,
+          requestKey,
+          payloadHash,
+          jobId,
+        );
+      return { id: jobId, created: true };
     });
-    res.status(201).json({ id: jobId });
+    res.status(result.created ? 201 : 200).json({ id: result.id });
   });
   app.get('/api/projects/:id', (req, res) => {
     const user = readUser(store, req),

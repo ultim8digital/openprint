@@ -27,6 +27,7 @@
   "run_import": "Use the [catalog import CLI]({CATALOG_IMPORT}) for an existing dataset after checking its rights. Instance datasets, uploads and backups are not bundled in the repository or container images.",
   "run_intro": "Install Node.js 24, clone this repository and run:",
   "run_limits": "The supported deployment is one application process with SQLite on a local disk. Automatic publication and request quotas limit abuse without a moderation queue. A shared office IP can share a publication quota. See [limits and management-link behavior]({OPEN_CATALOG}) before opening a public instance.",
-  "tagline": "**An open directory of printing studios and workshops. No registration or moderators.**",
-  "translation_maintenance": "The English README is the reference for full translated editions. The [language index]({LANGUAGE_INDEX}) documents translation maintenance and review limits. Interface localization does not translate user-authored listings, project content or every external technical diagnostic."
+  "tagline": "**Design a part and order it from a workshop on the open network.**",
+  "translation_maintenance": "The English README is the reference for full translated editions. The [language index]({LANGUAGE_INDEX}) documents translation maintenance and review limits. Interface localization does not translate user-authored listings, project content or every external technical diagnostic.",
+  "workshop_network": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node."
 }

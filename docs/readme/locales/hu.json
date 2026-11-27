@@ -27,6 +27,7 @@
   "run_import": "A meglévő adatkészlet jogainak ellenőrzése után használja a [katalógus-importálási parancssori felületet]({CATALOG_IMPORT}). A példányadatkészletek, feltöltések és biztonsági másolatok nem tartoznak a tárolóba vagy a tárolóképekbe.",
   "run_intro": "Telepítse a Node.js verzió 24-ét, klónozza ezt a tárat, és futtassa a következő parancsot:",
   "run_limits": "A támogatott telepítési mód egy alkalmazásfolyamat, amely a SQLite-en található egy helyi lemezen. Az automatikus közzététel és a kérésekre vonatkozó kvóták korlátozzák a visszaéléseket, anélkül, hogy moderálási sorra lenne szükség. Egy megosztott irodai IP-cím megoszthatja a közzétételi kvótát. A nyilvános példány megnyitása előtt tekintse meg a [korlátokat és a kezelési link viselkedését]({OPEN_CATALOG}).",
-  "tagline": "**Nyílt adatbázis nyomdákról és műhelyekről. Nincs regisztráció vagy moderátor.**",
-  "translation_maintenance": "Az angol README a teljes fordított változatok referenciája. A [nyelvi index]({LANGUAGE_INDEX}) a fordítások karbantartásával és felülvizsgálatával kapcsolatos korlátokat dokumentálja. A felület lokalizálása nem fordítja a felhasználók által létrehozott listákat, a projekt tartalmát vagy minden külső, technikai jellegű információt."
+  "tagline": "**Tervezzen egy alkatrészt, és rendelje meg a nyílt hálózat egyik műhelyétől.**",
+  "translation_maintenance": "Az angol README a teljes fordított változatok referenciája. A [nyelvi index]({LANGUAGE_INDEX}) a fordítások karbantartásával és felülvizsgálatával kapcsolatos korlátokat dokumentálja. A felület lokalizálása nem fordítja a felhasználók által létrehozott listákat, a projekt tartalmát vagy minden külső, technikai jellegű információt.",
+  "workshop_network": "[Műhelyhálózat]({WORKSHOP_NETWORK}). A rendelését és a fájlját a kiválasztott műhely csomópontja tárolja."
 }

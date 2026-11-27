@@ -1,10 +1,12 @@
 import LanguageSelector from './LanguageSelector';
 import { lazy, Suspense, useEffect } from 'react';
 import { Link, NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { Layers3, MapPin, Plus, BookOpen, Code2, ArrowUpRight } from 'lucide-react';
+import { Layers3, Box, MapPin, Plus, BookOpen, Code2, ArrowUpRight } from 'lucide-react';
 import { Directory, CatalogPage, PageTitle } from './Browse';
 import { Loading, useApp } from './core';
 
+const Tools = lazy(() => import('./Tools'));
+const WorkshopNetwork = lazy(() => import('./WorkshopNetwork'));
 const CatalogEditor = lazy(() => import('./CatalogEditor'));
 
 function CatalogAbout() {
@@ -76,21 +78,26 @@ export default function CatalogApp() {
   const { t } = useApp();
   const location = useLocation();
   const title =
-    location.pathname === '/catalog/new'
-      ? t('Добавить студию', 'Add a studio')
-      : location.pathname.endsWith('/edit')
-        ? t('Управление карточкой', 'Manage listing')
-        : location.pathname === '/about'
-          ? t('Как это работает', 'How it works')
-          : location.pathname.startsWith('/catalog/')
-            ? t('Карточка студии', 'Studio listing')
-            : t('Каталог мастерских', 'Workshop directory');
+    location.pathname === '/tools'
+      ? t('3D-инструменты', '3D tools')
+      : location.pathname === '/network'
+        ? t('Сеть мастерских', 'Workshop network')
+        : location.pathname === '/catalog/new'
+          ? t('Добавить студию', 'Add a studio')
+          : location.pathname.endsWith('/edit')
+            ? t('Управление карточкой', 'Manage listing')
+            : location.pathname === '/about'
+              ? t('Как это работает', 'How it works')
+              : location.pathname.startsWith('/catalog/')
+                ? t('Карточка студии', 'Studio listing')
+                : t('Каталог мастерских', 'Workshop directory');
   useEffect(() => {
     document.title = `${title} · OpenPrint`;
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname, title]);
   const nav = [
     { to: '/studios', label: t('Каталог и карта', 'Directory & map'), icon: MapPin },
+    { to: '/tools', label: t('3D-инструменты', '3D tools'), icon: Box },
     { to: '/catalog/new', label: t('Добавить студию', 'Add a studio'), icon: Plus },
     { to: '/about', label: t('Как это работает', 'How it works'), icon: BookOpen },
   ];
@@ -153,6 +160,8 @@ export default function CatalogApp() {
             <Suspense fallback={<Loading />}>
               <Routes>
                 <Route path="/" element={<Navigate to="/studios?view=map" replace />} />
+                <Route path="/tools" element={<Tools />} />
+                <Route path="/network" element={<WorkshopNetwork />} />
                 <Route path="/studios" element={<Directory />} />
                 <Route path="/catalog/new" element={<CatalogEditor key="new" />} />
                 <Route

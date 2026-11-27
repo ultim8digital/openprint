@@ -27,6 +27,7 @@
   "run_import": "Haklarını kontrol ettikten sonra, mevcut bir veri kümesi için [katalog içe aktarma komut satırı arayüzünü]({CATALOG_IMPORT}) kullanın. Örnek veri kümeleri, yüklemeler ve yedeklemeler, depoya veya kapsayıcı görüntülerine dahil edilmez.",
   "run_intro": "Node.js 24'ü yükleyin, bu depoyu klonlayın ve şunu çalıştırın:",
   "run_limits": "Desteklenen dağıtım, yerel bir diskte SQLite ile birlikte çalışan tek bir uygulama işlemidir. Otomatik yayınlama ve istek kotaları, bir denetim kuyruğu olmadan kötüye kullanımı sınırlar. Paylaşımlı bir ofis IP adresi, bir yayınlama kotasını paylaşabilir. Genel bir örnek açmadan önce [sınırlar ve yönetim bağlantısı davranışı]({OPEN_CATALOG}) bölümüne bakın.",
-  "tagline": "**Baskı stüdyoları ve atölyelerden oluşan açık bir dizin. Kayıt veya moderatör gerektirmez.**",
-  "translation_maintenance": "İngilizce README dosyası, tam çevrilmiş sürümler için referans niteliğindedir. [Dil dizini]({LANGUAGE_INDEX}), çeviri bakımını ve gözden geçirme sınırlarını belgelemektedir. Arayüzün yerelleştirilmesi, kullanıcılar tarafından oluşturulan listeleri, proje içeriğini veya her türlü harici teknik teşhis verisini çevirmez."
+  "tagline": "**Bir parça tasarlayın ve açık ağdaki bir atölyeden sipariş edin.**",
+  "translation_maintenance": "İngilizce README dosyası, tam çevrilmiş sürümler için referans niteliğindedir. [Dil dizini]({LANGUAGE_INDEX}), çeviri bakımını ve gözden geçirme sınırlarını belgelemektedir. Arayüzün yerelleştirilmesi, kullanıcılar tarafından oluşturulan listeleri, proje içeriğini veya her türlü harici teknik teşhis verisini çevirmez.",
+  "workshop_network": "[Atölye ağı]({WORKSHOP_NETWORK}). Siparişiniz ve dosyanız seçtiğiniz atölyenin düğümünde saklanır."
 }

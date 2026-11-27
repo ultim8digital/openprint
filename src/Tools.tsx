@@ -1,8 +1,8 @@
 import { localeTag } from '../shared/locales';
-import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Download, ArrowUpRight, Upload, Box, ShieldCheck, RotateCcw } from 'lucide-react';
-import { useApp, ErrorBox, errorText } from './core';
+import { useApp, useRemote, Loading, ErrorBox, errorText } from './core';
 import { PageTitle } from './Browse';
 import ModelViewer from './ModelViewer';
 import {
@@ -12,36 +12,92 @@ import {
   partSchema,
   type PartSpec,
 } from '../shared/parts';
-import { partFile, downloadFile, readModel } from './model-files';
+import { partFile, geometryFile, downloadFile, readModel } from './model-files';
 import type { BufferGeometry } from 'three';
+import type { Profile } from '../shared/types';
+import { stageFile, stagedFile, offerModel, receiveModel, listenForModel } from './model-handoff';
+import type { Maker } from './WorkshopNetwork';
+const WorkshopNetwork = lazy(() => import('./WorkshopNetwork'));
+
 export default function Tools() {
-  const { t, lang } = useApp(),
+  const { t, lang, mode: appMode } = useApp(),
     navigate = useNavigate(),
     [params] = useSearchParams(),
-    [mode, setMode] = useState<'builder' | 'file'>('builder');
-  const [spec, setSpec] = useState<PartSpec>(() => {
-      try {
-        const preset = params.get('preset');
-        return preset ? partSchema.parse(JSON.parse(preset)) : defaultPart;
-      } catch {
-        return defaultPart;
-      }
-    }),
+    [fragment] = useState(() => new URLSearchParams(location.hash.slice(1))),
+    [mode, setMode] = useState<'builder' | 'file'>(
+      params.get('mode') === 'file' || fragment.has('transfer') || params.has('attachment')
+        ? 'file'
+        : 'builder',
+    );
+  const [sender, setSender] = useState<Window | null>(null);
+  useEffect(() => {
+    if (fragment.has('transfer')) return listenForModel(fragment, (source) => setSender(source));
+  }, [fragment]);
+  const target = params.get('target');
+  const profile = useRemote<{ profile: Profile }>(
+    target && appMode === 'community' ? '/profiles/' + encodeURIComponent(target) : null,
+  );
+  const [choosing, setChoosing] = useState(false);
+  const [fallback, setFallback] = useState<{ url: string; file: File } | null>(null);
+  const fileRequest = useRef(0);
+  useEffect(
+    () => () => {
+      fileRequest.current++;
+    },
+    [],
+  );
+  const stopTransfer = useRef<(() => void) | null>(null);
+  const chooser = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (choosing) chooser.current?.scrollIntoView({ block: 'start' });
+  }, [choosing]);
+  useEffect(() => () => stopTransfer.current?.(), []);
+  const [initial] = useState(() => {
+    const preset = fragment.get('part') ?? params.get('preset');
+    if (preset === null) return { spec: defaultPart, invalid: false };
+    try {
+      return { spec: partSchema.parse(JSON.parse(preset)), invalid: false };
+    } catch {
+      return { spec: defaultPart, invalid: true };
+    }
+  });
+  const [invalidPreset, setInvalidPreset] = useState(initial.invalid);
+  const [spec, setSpec] = useState<PartSpec>(initial.spec),
     [fileGeometry, setFileGeometry] = useState<BufferGeometry | null>(null),
-    [filename, setFilename] = useState(''),
+    [file, setFile] = useState<File | null>(null),
+    [scale, setScale] = useState(100),
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false);
   const result = useMemo(() => {
+    if (invalidPreset)
+      return {
+        geometry: null,
+        error: t(
+          'Ссылка недействительна или срок её действия истёк.',
+          'The link is invalid or has expired.',
+        ),
+      };
     try {
       const geometry = partGeometry(spec);
-      return { geometry, info: geometryInfo(geometry), error: '' };
+      return { geometry, error: '' };
     } catch (error) {
-      return { geometry: null, info: null, error: errorText(error) };
+      return { geometry: null, error: errorText(error) };
     }
-  }, [spec]);
+  }, [spec, invalidPreset, t]);
   useEffect(() => () => result.geometry?.dispose(), [result.geometry]);
   useEffect(() => () => fileGeometry?.dispose(), [fileGeometry]);
-  const current = mode === 'file' ? fileGeometry : result.geometry,
+  const scaled = useMemo(() => {
+    if (!fileGeometry || scale <= 0 || scale > 1000) return null;
+    if (scale === 100) return fileGeometry;
+    return fileGeometry.clone().scale(scale / 100, scale / 100, scale / 100);
+  }, [fileGeometry, scale]);
+  useEffect(
+    () => () => {
+      if (scaled !== fileGeometry) scaled?.dispose();
+    },
+    [scaled, fileGeometry],
+  );
+  const current = mode === 'file' ? scaled : result.geometry,
     info = useMemo(() => {
       try {
         return current ? geometryInfo(current) : null;
@@ -49,7 +105,86 @@ export default function Tools() {
         return null;
       }
     }, [current]);
+  async function loadFile(input: File | Promise<File>) {
+    const generation = ++fileRequest.current;
+    setBusy(true);
+    setError('');
+    setFile(null);
+    setFileGeometry(null);
+    try {
+      const chosen = await input;
+      const geometry = await readModel(chosen);
+      if (generation !== fileRequest.current) {
+        geometry.dispose();
+        return;
+      }
+      setFile(chosen);
+      setFileGeometry(geometry);
+      setScale(100);
+    } catch (err) {
+      if (generation === fileRequest.current) setError(errorText(err));
+    } finally {
+      if (generation === fileRequest.current) setBusy(false);
+    }
+  }
+  useEffect(() => {
+    const libraryFile = stagedFile(params.get('attachment'));
+    if (libraryFile) void loadFile(libraryFile);
+  }, [params]);
+  function modelFile() {
+    if (mode === 'builder') return partFile(spec);
+    if (!file || !scaled) throw new Error('Select a model / Выберите модель');
+    return scale === 100
+      ? file
+      : geometryFile(scaled, file.name.replace(/\.[^.]+$/, '') + '-' + scale + 'pct.stl');
+  }
+  function attach(recipient: string | null) {
+    try {
+      if (mode === 'builder' && !recipient) {
+        sessionStorage.setItem('openprint.part.v1', JSON.stringify(spec));
+        navigate('/projects/new?from=tools');
+        return;
+      }
+      const model = modelFile();
+      if (model.size > 20 * 1024 * 1024)
+        throw new Error(t('Файл должен быть не больше 20 МБ', 'File must be 20 MB or smaller'));
+      const query = new URLSearchParams({ from: 'model', attachment: stageFile(model) });
+      if (recipient) query.set('target', recipient);
+      navigate('/projects/new?' + query);
+    } catch (err) {
+      setError(errorText(err));
+    }
+  }
+  function chooseMaker(maker: Maker) {
+    if (busy || !info) return;
+    setFallback(null);
+    if (maker.origin === location.origin && appMode === 'community') {
+      attach(maker.id);
+      return;
+    }
+    const url = new URL('/tools', maker.origin);
+    url.searchParams.set('target', maker.id);
+    if (mode === 'builder') {
+      url.hash = new URLSearchParams({ part: JSON.stringify(partSchema.parse(spec)) }).toString();
+      window.location.assign(url.href);
+      return;
+    }
+    try {
+      const model = modelFile();
+      if (model.size > 20 * 1024 * 1024)
+        throw new Error(t('Файл должен быть не больше 20 МБ', 'File must be 20 MB or smaller'));
+      stopTransfer.current?.();
+      url.searchParams.set('mode', 'file');
+      const manualURL = url.href;
+      const expired = () => setFallback({ url: manualURL, file: model });
+      stopTransfer.current = offerModel(url, model, expired);
+      if (!stopTransfer.current) expired();
+    } catch (err) {
+      setError(errorText(err));
+    }
+  }
   function update(field: keyof PartSpec, value: string) {
+    setInvalidPreset(false);
     setSpec((p) => ({
       ...p,
       [field]: field === 'kind' ? value : Number(value),
@@ -161,17 +296,6 @@ export default function Tools() {
                   <Download size={15} />
                   {t('Скачать STL', 'Download STL')}
                 </button>
-                <button
-                  className="button secondary"
-                  disabled={!result.geometry}
-                  onClick={() => {
-                    sessionStorage.setItem('openprint.part.v1', JSON.stringify(spec));
-                    navigate('/projects/new?from=tools');
-                  }}
-                >
-                  {t('Использовать в проекте', 'Use in a project')}
-                  <ArrowUpRight className="directional-icon" size={15} />
-                </button>
               </div>
             </>
           ) : (
@@ -187,30 +311,116 @@ export default function Tools() {
                   type="file"
                   accept=".stl,.obj"
                   disabled={busy}
-                  onChange={async (e) => {
-                    const file = e.target.files?.[0];
-                    if (!file) return;
-                    setBusy(true);
-                    setError('');
-                    try {
-                      const geometry = await readModel(file);
-                      setFileGeometry(geometry);
-                      setFilename(file.name);
-                    } catch (error) {
-                      setError(errorText(error));
-                    } finally {
-                      setBusy(false);
-                    }
+                  onChange={(e) => {
+                    const chosen = e.target.files?.[0];
+                    if (chosen) void loadFile(chosen);
                   }}
                 />
                 <small>
                   {t('До 20 МБ · без отправки на сервер', 'Up to 20 MB · not sent to the server')}
                 </small>
               </label>
-              {filename && <p className="small muted">{filename}</p>}
-              <ErrorBox error={error} />
+              {fragment.has('transfer') && !file && (
+                <button
+                  className="button secondary"
+                  disabled={busy || !sender}
+                  onClick={() =>
+                    void loadFile(Promise.resolve().then(() => receiveModel(fragment, sender!)))
+                  }
+                >
+                  {t('Открыть STL или OBJ', 'Open an STL or OBJ')} ·{' '}
+                  <bdi>{fragment.get('source')}</bdi>
+                </button>
+              )}
+              {file && (
+                <>
+                  <p dir="auto" className="small muted">
+                    {file.name}
+                  </p>
+                  <label>
+                    {t('Масштаб, %', 'Scale, %')}
+                    <input
+                      type="number"
+                      min="0.01"
+                      max="1000"
+                      step="any"
+                      value={scale || ''}
+                      onChange={(e) => setScale(Number(e.target.value))}
+                    />
+                  </label>
+                  <button
+                    className="button"
+                    disabled={!scaled || !info}
+                    onClick={() => {
+                      if (scaled)
+                        downloadFile(
+                          geometryFile(
+                            scaled,
+                            file.name.replace(/\.[^.]+$/, '') + '-' + scale + 'pct.stl',
+                          ),
+                        );
+                    }}
+                  >
+                    <Download size={15} />
+                    {t('Скачать STL', 'Download STL')}
+                  </button>
+                </>
+              )}
             </>
           )}
+          <div className="stack">
+            {target && appMode === 'community' && (
+              <p>
+                {t('Личный запрос для', 'Direct request for')}{' '}
+                <strong dir="auto">{profile.data?.profile.name || '…'}</strong> ·{' '}
+                <bdi>{location.host}</bdi>
+              </p>
+            )}
+            {appMode === 'community' && (
+              <button
+                className="button secondary"
+                disabled={
+                  busy ||
+                  !info ||
+                  (!!target &&
+                    (profile.loading || profile.data?.profile.id !== target || !!profile.error))
+                }
+                onClick={() => attach(target)}
+              >
+                {target
+                  ? t('Личный запрос', 'Direct request')
+                  : t('Использовать в проекте', 'Use in a project')}{' '}
+                <ArrowUpRight size={15} />
+              </button>
+            )}
+            {!target && (
+              <button
+                className="button secondary"
+                disabled={!choosing && (busy || !info)}
+                aria-expanded={choosing}
+                onClick={() => setChoosing(!choosing)}
+              >
+                {t('Выберите исполнителя', 'Choose a maker')}
+              </button>
+            )}
+            {appMode === 'community' && (
+              <Link
+                className="text-button"
+                to={'/models' + (target ? '?target=' + encodeURIComponent(target) : '')}
+              >
+                {t('Библиотека моделей', 'Model library')}
+              </Link>
+            )}
+            {target && appMode === 'catalog' && (
+              <Link className="text-button" to="/network">
+                {t(
+                  'Выберите доступного исполнителя для личного запроса.',
+                  'Choose an available provider for the direct request.',
+                )}
+              </Link>
+            )}
+            <ErrorBox error={error || profile.error} />
+          </div>
           <div className="info-box">
             <ShieldCheck size={15} />{' '}
             {t(
@@ -268,6 +478,27 @@ export default function Tools() {
           </p>
         </div>
       </div>
+      {choosing && (
+        <div ref={chooser}>
+          {fallback && (
+            <p className="info-box" role="status">
+              {t(
+                'Скачайте файл и откройте его на узле мастерской.',
+                'Download the file and open it on the workshop’s node.',
+              )}
+              <button className="text-button" onClick={() => downloadFile(fallback.file)}>
+                {t('Скачать файл', 'Download file')}
+              </button>
+              <a href={fallback.url} rel="noreferrer">
+                {new URL(fallback.url).host}
+              </a>
+            </p>
+          )}
+          <Suspense fallback={<Loading />}>
+            <WorkshopNetwork choose={chooseMaker} />
+          </Suspense>
+        </div>
+      )}
       <section className="section">
         <div className="section-heading">
           <h2>{t('Как выбрать материал?', 'Which material fits your idea?')}</h2>

@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Un répertoire ouvert des ateliers d’impression et des studios. Pas d’inscription ni de modérateurs.**
+**Concevez une pièce et commandez-la auprès d’un atelier du réseau ouvert.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Exécutez OpenPrint avec Node.js 24 et SQLite local. Vercel, Supabase, un fourni
 
 ## Fonctionnalités du catalogue
 
+- [Réseau d’ateliers](../../docs/WORKSHOP_NETWORK.md). Votre commande et votre fichier seront enregistrés sur le nœud de l’atelier choisi.
 - Recherchez par nom, ville et technologie. La carte affiche les lieux correspondants, indépendamment de la pagination de la liste.
 - Publiez sans créer de compte. Choisissez un point sur la carte ou entrez des coordonnées ; les annonces sans coordonnées restent consultables.
 - Modifiez ou supprimez une annonce, ainsi que son lien privé. Les vérifications de version protègent contre les modifications conflictuelles dans différents onglets.

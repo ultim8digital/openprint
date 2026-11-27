@@ -30,7 +30,7 @@ No account, subscription, model API key, moderator action or third-party CAPTCHA
 - Exact duplicates use Unicode-normalized name, city and address across imported and active self-published records. Separate branch addresses are allowed. Spelling variations and fraudulent ownership claims are not resolved automatically.
 - Imported records can be contacted directly but cannot be claimed or edited using a self-publication key. Import replacement changes only its named source and rejects a batch overlapping an active self-published card.
 - Self-publication stores public business details, not account email addresses, ratings, reviews or a moderation queue. Publishing requires an explicit rights acknowledgement; this is not an independent legal or identity check.
-- The operator still controls the server and data. There is no federation, shared cross-instance directory, offline tile cache or automatic recovery of a lost management key.
+- The operator controls the server and local catalog. A separate [workshop network](WORKSHOP_NETWORK.md) combines consenting maker profiles from connected community nodes and opens direct orders on the selected node. The catalog also includes browser-based 3D tools.
 
 ## Optional community and Neofab Studio
 

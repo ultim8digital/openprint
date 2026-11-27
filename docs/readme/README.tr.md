@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Baskı stüdyoları ve atölyelerden oluşan açık bir dizin. Kayıt veya moderatör gerektirmez.**
+**Bir parça tasarlayın ve açık ağdaki bir atölyeden sipariş edin.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ OpenPrint'i Node.js 24 ve yerel SQLite ile çalıştırın. Vercel, Supabase (bi
 
 ## Katalog özellikleri
 
+- [Atölye ağı](../../docs/WORKSHOP_NETWORK.md). Siparişiniz ve dosyanız seçtiğiniz atölyenin düğümünde saklanır.
 - Ada göre, şehre göre ve teknolojiye göre arama yapın. Harita, liste sayfalama özelliğinden bağımsız olarak eşleşen konumları içerir.
 - Hesap oluşturmadan yayınlayın. Bir harita noktası seçin veya koordinatları girin; koordinatsız listeler aranabilir kalır.
 - Özel bağlantısıyla birlikte bir listeyi düzenleyin veya silin. Sürüm kontrolleri, farklı sekmelerde yapılan çakışan düzenlemelere karşı koruma sağlar.

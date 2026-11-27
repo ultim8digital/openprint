@@ -39,6 +39,7 @@ export const profileInput = z
     lat: z.number().min(-85).max(85).nullable().default(null),
     lng: z.number().min(-180).max(180).nullable().default(null),
     remote: z.boolean().default(false),
+    network_listed: z.boolean().optional(),
   })
   .refine((v) => (v.lat === null) === (v.lng === null), 'Provide both coordinates');
 export const jobInput = z

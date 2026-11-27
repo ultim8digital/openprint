@@ -6,18 +6,24 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { partGeometry, geometryInfo, type PartSpec } from '../shared/parts';
 
 export function partFile(spec: PartSpec) {
-  const geometry = partGeometry(spec),
-    material = new MeshBasicMaterial(),
-    mesh = new Mesh(geometry, material);
+  const geometry = partGeometry(spec);
   try {
-    const result = new STLExporter().parse(mesh, { binary: true });
-    return new File(
-      [result.buffer as ArrayBuffer],
-      `openprint-${spec.kind}-${spec.width}x${spec.depth}x${spec.height}.stl`,
-      { type: 'application/octet-stream' },
+    const depth = spec.kind === 'tube' ? spec.width : spec.depth;
+    return geometryFile(
+      geometry,
+      `openprint-${spec.kind}-${spec.width}x${depth}x${spec.height}.stl`,
     );
   } finally {
     geometry.dispose();
+  }
+}
+
+export function geometryFile(geometry: BufferGeometry, name: string) {
+  const material = new MeshBasicMaterial();
+  try {
+    const result = new STLExporter().parse(new Mesh(geometry, material), { binary: true });
+    return new File([result.buffer as ArrayBuffer], name, { type: 'application/octet-stream' });
+  } finally {
     material.dispose();
   }
 }

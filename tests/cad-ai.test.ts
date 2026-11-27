@@ -702,7 +702,7 @@ test('proposal apply observes existing CAD/history capacity instead of bypassing
   }
 });
 
-test('v3 CAD history migrates to v7 and existing AI usage defaults to brief', async () => {
+test('v3 CAD history migrates to v8 and existing AI usage defaults to brief', async () => {
   const f = await fixture();
   try {
     const p = await create(f.owner),
@@ -727,11 +727,11 @@ test('v3 CAD history migrates to v7 and existing AI usage defaults to brief', as
       Date.now(),
     );
     f.store.db.exec(
-      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE catalog_studios; DROP TABLE studio_cad_proposals; DROP TRIGGER studio_ai_task_immutable; ALTER TABLE studio_ai_runs DROP COLUMN task; PRAGMA user_version=3;',
+      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE catalog_studios; DROP TABLE studio_cad_proposals; DROP TRIGGER studio_ai_task_immutable; ALTER TABLE studio_ai_runs DROP COLUMN task; DROP TABLE project_request_receipts; DROP INDEX profiles_network; ALTER TABLE profiles DROP COLUMN network_listed; PRAGMA user_version=3;',
     );
     const migrated = new Store(f.store.path);
     try {
-      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 7);
+      assert.equal(migrated.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 8);
       assert.equal(
         migrated.get<{ task: string }>('SELECT task FROM studio_ai_runs')!.task,
         'brief',

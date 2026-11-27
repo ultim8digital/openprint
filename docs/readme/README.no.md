@@ -1,6 +1,6 @@
 # OpenPrint
 
-**En åpen oversikt over trykkerier og verksteder. Ingen registrering eller moderatorer er nødvendig.**
+**Design en del og bestill den fra et verksted i det åpne nettverket.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Kjør OpenPrint med Node.js 24 og lokal SQLite. Vercel, Supabase, en e-postlever
 
 ## Katalogfunksjoner
 
+- [Verkstednettverk](../../docs/WORKSHOP_NETWORK.md). Bestillingen og filen din lagres på noden til verkstedet du velger.
 - Søk etter navn, by og teknologi. Kartet viser relevante steder uavhengig av sideinndelingen i listen.
 - Publiser uten å opprette en konto. Velg et punkt på kartet eller skriv inn koordinater; oppføringer uten koordinater kan fortsatt søkes frem.
 - Rediger eller slett én oppføring sammen med dens private lenke. Versjonskontroller beskytter mot motstridende endringer i forskjellige faner.

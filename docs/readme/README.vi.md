@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Một danh bạ mở về các xưởng in và cơ sở sản xuất. Không cần đăng ký hoặc người quản lý.**
+**Thiết kế một chi tiết và đặt xưởng trong mạng lưới mở gia công.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Chạy OpenPrint với Node.js 24 và SQLite cục bộ. Vercel, Supabase, một
 
 ## Các tính năng của danh mục
 
+- [Mạng lưới xưởng](../../docs/WORKSHOP_NETWORK.md). Đơn hàng và tệp của bạn sẽ được lưu trên nút của xưởng bạn chọn.
 - Tìm kiếm theo tên, thành phố và công nghệ. Bản đồ hiển thị các địa điểm phù hợp, không phụ thuộc vào phân trang của danh sách.
 - Đăng tải mà không cần tài khoản. Chọn một điểm trên bản đồ hoặc nhập tọa độ; các mục không có tọa độ vẫn có thể tìm kiếm được.
 - Chỉnh sửa hoặc xóa một mục danh sách cùng với liên kết riêng của mục đó. Kiểm tra phiên bản giúp ngăn chặn các chỉnh sửa xung đột trong các tab khác nhau.

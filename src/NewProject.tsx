@@ -1,8 +1,9 @@
 import { localeTag } from '../shared/locales';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, Paperclip, ShieldCheck, Upload, X } from 'lucide-react';
-import { useApp, useRemote, post, upload, ErrorBox, errorText, formatMoney } from './core';
+import { useApp, useRemote, api, upload, ErrorBox, errorText, formatMoney } from './core';
+import { stagedFile, discardFile } from './model-handoff';
 import { PageTitle } from './Browse';
 import {
   technologies,
@@ -30,11 +31,13 @@ export default function NewProject() {
   const { t, user, lang, refresh } = useApp(),
     navigate = useNavigate(),
     [params] = useSearchParams(),
-    key = `openprint.draft.v1.${user!.id}`;
+    attachment = params.get('from') === 'model' ? params.get('attachment') : null,
+    key = `openprint.draft.v1.${user!.id}` + (attachment ? '.' + attachment : '');
   const [step, setStep] = useState(0),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(''),
-    [file, setFile] = useState<File | null>(null);
+    [file, setFile] = useState<File | null>(() => stagedFile(attachment));
+  const uploaded = useRef<{ file: File; id: string } | null>(null);
   const [draft, setDraft] = useState<Draft>(() => {
     const initial: Draft = {
       title: '',
@@ -51,7 +54,9 @@ export default function NewProject() {
     };
     try {
       const stored = JSON.parse(sessionStorage.getItem(key) || 'null');
-      return stored && typeof stored.title === 'string' && !params.get('target')
+      return stored &&
+        typeof stored.title === 'string' &&
+        (!params.get('target') || (attachment && stored.target === initial.target))
         ? { ...initial, ...stored }
         : initial;
     } catch {
@@ -101,6 +106,15 @@ export default function NewProject() {
   async function next(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError('');
+    if (step > 0 && attachment && !file) {
+      setError(
+        t(
+          'Черновик сохраняется в этой вкладке. Файл нужно выбрать заново после обновления страницы.',
+          'Your brief is saved in this tab. Re-select an attached file after reloading.',
+        ),
+      );
+      return;
+    }
     if (step < 2) {
       if (step === 1) {
         try {
@@ -120,12 +134,23 @@ export default function NewProject() {
     setBusy(true);
     try {
       const body = input();
-      if (file) body.file_id = (await upload(file)).file.id;
-      const result = await post<{ id: string }>('/projects', body);
-      sessionStorage.removeItem(key);
-      sessionStorage.removeItem('openprint.part.v1');
-      await refresh();
-      navigate('/projects/' + result.id);
+      if (file) {
+        if (uploaded.current?.file !== file)
+          uploaded.current = { file, id: (await upload(file)).file.id };
+        body.file_id = uploaded.current.id;
+      }
+      const result = await api<{ id: string }>('/projects', {
+        method: 'POST',
+        headers: attachment ? { 'Idempotency-Key': attachment } : {},
+        body: JSON.stringify(body),
+      });
+      discardFile(attachment);
+      try {
+        sessionStorage.removeItem(key);
+        sessionStorage.removeItem('openprint.part.v1');
+      } catch {}
+      navigate('/projects/' + result.id, { replace: true });
+      void refresh().catch(() => {});
     } catch (error) {
       setError(errorText(error));
     } finally {
@@ -308,7 +333,9 @@ export default function NewProject() {
             <div className="upload-box">
               <Upload size={25} />
               <label>
-                {t('Файл модели · необязательно', 'Model file · optional')}
+                {attachment
+                  ? t('Файл', 'File')
+                  : t('Файл модели · необязательно', 'Model file · optional')}
                 <input
                   dir="auto"
                   type="file"
@@ -393,9 +420,11 @@ export default function NewProject() {
                 <strong>{target.data?.profile.name || '…'}</strong>.{' '}
                 {t('Его не будет в общей ленте.', 'It won’t appear on the public board.')}
                 <br />
-                <button type="button" className="text-button" onClick={() => set('target', null)}>
-                  {t('Отправить в общую ленту', 'Post on the public board instead')}
-                </button>
+                {!attachment && (
+                  <button type="button" className="text-button" onClick={() => set('target', null)}>
+                    {t('Отправить в общую ленту', 'Post on the public board instead')}
+                  </button>
+                )}
               </div>
             ) : (
               <div className="info-box">

@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Um diretório aberto de estúdios e oficinas de impressão. Não é necessário registro, e não há moderadores.**
+**Projete uma peça e encomende-a a uma oficina da rede aberta.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Execute OpenPrint com Node.js 24 e SQLite local. Vercel, Supabase, um provedor d
 
 ## Recursos do catálogo
 
+- [Rede de oficinas](../../docs/WORKSHOP_NETWORK.md). Seu pedido e seu arquivo serão armazenados no nó da oficina escolhida.
 - Pesquise por nome, cidade e tecnologia. O mapa inclui os locais correspondentes, independentemente da paginação da lista.
 - Publique sem criar uma conta. Escolha um ponto no mapa ou insira coordenadas; os anúncios sem coordenadas continuarão a ser pesquisáveis.
 - Edite ou exclua um anúncio, incluindo seu link privado. A verificação de versão protege contra edições conflitantes em diferentes guias.

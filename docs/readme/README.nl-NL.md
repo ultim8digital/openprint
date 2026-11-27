@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Een open directory met drukkerijen en werkplaatsen. Geen registratie of moderatoren vereist.**
+**Ontwerp een onderdeel en bestel het bij een werkplaats in het open netwerk.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Voer OpenPrint uit met Node.js 24 en een lokale SQLite. Vercel, Supabase, een e-
 
 ## Functies van de catalogus
 
+- [Werkplaatsennetwerk](../../docs/WORKSHOP_NETWORK.md). Je bestelling en bestand worden opgeslagen op het knooppunt van de gekozen werkplaats.
 - Zoek op naam, stad en technologie. De kaart toont de bijbehorende locaties, onafhankelijk van de paginering van de lijst.
 - Publiceer zonder een account aan te maken. Kies een punt op de kaart of voer coördinaten in; vermeldingen zonder coördinaten blijven doorzoekbaar.
 - Bewerk of verwijder één vermelding, inclusief de bijbehorende persoonlijke link. Versiecontroles voorkomen conflicten bij gelijktijdige bewerkingen in verschillende tabbladen.

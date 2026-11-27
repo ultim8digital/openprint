@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Un directori obert d’estudis i tallers d’impressió. No cal registrar-se ni hi ha moderadors.**
+**Dissenya una peça i encarrega-la a un taller de la xarxa oberta.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Executa OpenPrint amb Node.js 24 i SQLite local. Vercel, Supabase, un proveïdor
 
 ## Funcionalitats del catàleg
 
+- [Xarxa de tallers](../../docs/WORKSHOP_NETWORK.md). La comanda i el fitxer es desaran al node del taller que triïs.
 - Cerqueu per nom, ciutat i tecnologia. El mapa inclou les ubicacions que coincideixen, independentment de la paginació de la llista.
 - Publica sense crear un compte. Selecciona un punt al mapa o introdueix les coordenades; els anuncis sense coordenades continuaran sent accessibles a través de la cerca.
 - Editeu o suprimiu un element de la llista juntament amb el seu enllaç privat. Les comprovacions de versió protegeixen contra edicions conflictives en diferents pestanyes.

@@ -22,7 +22,8 @@
     "THIRD_PARTY_NOTICES": "THIRD_PARTY_NOTICES.md",
     "ORIGINAL_SERVICE": "https://3d-online.app",
     "CAD_NOTICE": "cad-worker/NOTICE.md",
-    "CONTRIBUTING": "CONTRIBUTING.md"
+    "CONTRIBUTING": "CONTRIBUTING.md",
+    "WORKSHOP_NETWORK": "docs/WORKSHOP_NETWORK.md"
   },
   "relativeLinks": [
     "LANGUAGE_INDEX",
@@ -38,7 +39,8 @@
     "LICENSE",
     "THIRD_PARTY_NOTICES",
     "CAD_NOTICE",
-    "CONTRIBUTING"
+    "CONTRIBUTING",
+    "WORKSHOP_NETWORK"
   ],
   "blocks": [
     {
@@ -50,8 +52,8 @@
     {
       "id": "tagline",
       "kind": "paragraph",
-      "en": "**An open directory of printing studios and workshops. No registration or moderators.**",
-      "ru": "**Открытый каталог студий печати и мастерских. Без регистрации и модераторов.**"
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**"
     },
     {
       "id": "navigation",
@@ -77,6 +79,12 @@
       "level": 2,
       "en": "Catalog features",
       "ru": "Возможности каталога"
+    },
+    {
+      "id": "workshop_network",
+      "kind": "bullet",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской."
     },
     {
       "id": "feature_search",

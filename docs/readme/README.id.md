@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Direktori terbuka berisi daftar studio dan bengkel percetakan. Tidak diperlukan pendaftaran atau moderator.**
+**Rancang sebuah komponen dan pesan pembuatannya dari bengkel di jaringan terbuka.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Jalankan OpenPrint dengan Node.js 24 dan SQLite lokal. Vercel, Supabase, penyedi
 
 ## Fitur katalog
 
+- [Jaringan bengkel](../../docs/WORKSHOP_NETWORK.md). Pesanan dan berkas Anda akan disimpan di simpul bengkel yang dipilih.
 - Cari berdasarkan nama, kota, dan teknologi. Peta mencakup lokasi yang sesuai, terlepas dari penomoran halaman daftar.
 - Terbitkan tanpa membuat akun. Pilih titik di peta atau masukkan koordinat; daftar tanpa koordinat tetap dapat dicari.
 - Edit atau hapus satu daftar beserta tautan pribadinya. Pemeriksaan versi melindungi dari perubahan yang saling bertentangan di tab yang berbeda.

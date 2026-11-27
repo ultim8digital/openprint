@@ -242,14 +242,6 @@
       "text": "{LOCAL_URL} ತೆರೆಯಿರಿ. ಪೂರ್ವನಿಯೋಜಿತ {CATALOG_MODE}ಗೆ ನಿರ್ವಾಹಕ ಅಥವಾ ಬಳಕೆದಾರರನ್ನು ಹೊಂದಿಸುವ ಅಗತ್ಯವಿಲ್ಲ. [ಸ್ವಯಂ ಹೋಸ್ಟಿಂಗ್ ಮಾರ್ಗದರ್ಶಿ]({SELF_HOSTING}) ಬಳಸಿ {APP_URL}, HTTPS ಮತ್ತು ಬ್ಯಾಕಪ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ. Docker Compose ಕೂಡ ಲಭ್ಯವಿದೆ: {COMPOSE_COMMAND}."
     },
     {
-      "en": "**An open directory of printing studios and workshops. No registration or moderators.**",
-      "id": "tagline",
-      "locale": "kn-IN",
-      "reason": "Restore exact protected link targets and Markdown, replace mixed-script text, and retain the documented data-rights and private-access boundaries.",
-      "ru": "**Открытый каталог студий печати и мастерских. Без регистрации и модераторов.**",
-      "text": "**ಮುದ್ರಣ ಸ್ಟುಡಿಯೋಗಳು ಮತ್ತು ಕಾರ್ಯಾಗಾರಗಳ ಮುಕ್ತ ಡೈರೆಕ್ಟರಿ. ನೋಂದಣಿ ಅಥವಾ ಮಾಡರೇಟರ್‌ಗಳಿಲ್ಲ.**"
-    },
-    {
       "en": "The MIT software license does not grant rights to imported business records. Attribution alone does not authorize copying data from Google Maps, 2GIS, Yandex Maps or other sources. Verify permissions for storage, publication and redistribution before using a dataset. See [data provenance and review boundaries]({DATA_PROVENANCE}).",
       "id": "data_rights",
       "locale": "mr-IN",
@@ -352,6 +344,726 @@
       "ru": "Авторский код, интерфейс, SVG-иллюстрации, документация и параметрический генератор распространяются под [MIT]({LICENSE}). Зависимости сохраняют собственные лицензии и уведомления. У пользовательских моделей отдельная лицензия, выбранная авторами. Тексты вымышленных демопрофилей и ТЗ, а также три сгенерированные демомодели предоставлены под CC0; генератор остаётся под MIT. Подробнее — в [уведомлениях о сторонних правах]({THIRD_PARTY_NOTICES}).",
       "text": "اصل سورس کوڈ، صارف انٹرفیس، SVG تصاویر، دستاویزات اور پیرامیٹرک جنریٹر [MIT لائسنس]({LICENSE}) کے تحت فراہم کیے گئے ہیں۔ انحصاری اجزاء اپنے لائسنس اور نوٹس برقرار رکھتے ہیں۔ صارف کے ماڈلز کے لیے ان کے مصنفین کا منتخب کردہ الگ لائسنس ہوتا ہے۔ فرضی ڈیمو پروفائلز اور ڈیمو تکنیکی تقاضوں کے متون، نیز تین تیار کردہ ڈیمو ڈیزائن CC0 کے تحت وقف کیے گئے ہیں؛ جنریٹر MIT کے تحت رہتا ہے۔ [تھرڈ پارٹی نوٹس]({THIRD_PARTY_NOTICES}) دیکھیں۔",
       "reason": "Restore exact protected license terms and Markdown links; clarify demo technical-requirements text rather than a short summary; preserve separate licenses for user models and dependencies."
+    },
+    {
+      "locale": "ar-SA",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[شبكة الورش]({WORKSHOP_NETWORK}). سيُحفظ طلبك وملفك على عُقدة الورشة التي تختارها.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "bn-BD",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[কর্মশালার নেটওয়ার্ক]({WORKSHOP_NETWORK}). আপনার অর্ডার ও ফাইল নির্বাচিত কর্মশালার নোডে সংরক্ষিত হবে।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ca",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Xarxa de tallers]({WORKSHOP_NETWORK}). La comanda i el fitxer es desaran al node del taller que triïs.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "cs",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Síť dílen]({WORKSHOP_NETWORK}). Vaše objednávka a soubor budou uloženy na uzlu vybrané dílny.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "da",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Værkstedsnetværk]({WORKSHOP_NETWORK}). Din bestilling og fil gemmes på det valgte værksteds node.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "de-DE",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Werkstattnetzwerk]({WORKSHOP_NETWORK}). Ihr Auftrag und Ihre Datei werden auf dem Knoten der gewählten Werkstatt gespeichert.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "el",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Δίκτυο εργαστηρίων]({WORKSHOP_NETWORK}). Η παραγγελία και το αρχείο σας θα αποθηκευτούν στον κόμβο του εργαστηρίου που επιλέξατε.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-ES",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Red de talleres]({WORKSHOP_NETWORK}). El pedido y el archivo se guardarán en el nodo del taller que elijas.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "es-MX",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Red de talleres]({WORKSHOP_NETWORK}). El pedido y el archivo se guardarán en el nodo del taller que elijas.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fi",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Verstasverkosto]({WORKSHOP_NETWORK}). Tilauksesi ja tiedostosi tallennetaan valitsemasi verstaan solmuun.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-CA",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Réseau d’ateliers]({WORKSHOP_NETWORK}). Votre commande et votre fichier seront enregistrés sur le nœud de l’atelier choisi.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "fr-FR",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Réseau d’ateliers]({WORKSHOP_NETWORK}). Votre commande et votre fichier seront enregistrés sur le nœud de l’atelier choisi.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "gu-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[વર્કશોપ નેટવર્ક]({WORKSHOP_NETWORK}). તમારો ઓર્ડર અને ફાઇલ પસંદ કરેલી વર્કશોપના નોડ પર સંગ્રહિત થશે.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "he",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[רשת סדנאות]({WORKSHOP_NETWORK}). ההזמנה והקובץ שלך יישמרו בצומת של הסדנה שבחרת.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hi",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[कार्यशाला नेटवर्क]({WORKSHOP_NETWORK}). आपका ऑर्डर और फ़ाइल चुनी गई कार्यशाला के नोड पर सहेजे जाएँगे।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hr",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Mreža radionica]({WORKSHOP_NETWORK}). Vaša narudžba i datoteka bit će pohranjene na čvoru odabrane radionice.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "hu",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Műhelyhálózat]({WORKSHOP_NETWORK}). A rendelését és a fájlját a kiválasztott műhely csomópontja tárolja.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "id",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Jaringan bengkel]({WORKSHOP_NETWORK}). Pesanan dan berkas Anda akan disimpan di simpul bengkel yang dipilih.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "it",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Rete di laboratori]({WORKSHOP_NETWORK}). L’ordine e il file saranno salvati sul nodo del laboratorio scelto.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ja",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[工房ネットワーク]({WORKSHOP_NETWORK}). 注文とファイルは選択した工房のノードに保存されます。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "kn-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[ಕಾರ್ಯಾಗಾರಗಳ ಜಾಲ]({WORKSHOP_NETWORK}). ನಿಮ್ಮ ಆರ್ಡರ್ ಮತ್ತು ಫೈಲ್ ಆಯ್ಕೆ ಮಾಡಿದ ಕಾರ್ಯಾಗಾರದ ನೋಡ್‌ನಲ್ಲಿ ಸಂಗ್ರಹವಾಗುತ್ತವೆ.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ko",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[공방 네트워크]({WORKSHOP_NETWORK}). 주문과 파일은 선택한 공방의 노드에 저장됩니다.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ml-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[വർക്ക്‌ഷോപ്പ് ശൃംഖല]({WORKSHOP_NETWORK}). നിങ്ങളുടെ ഓർഡറും ഫയലും തിരഞ്ഞെടുത്ത വർക്ക്‌ഷോപ്പിന്റെ നോഡിൽ സൂക്ഷിക്കും.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "mr-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[कार्यशाळांचे जाळे]({WORKSHOP_NETWORK}). तुमची ऑर्डर आणि फाइल निवडलेल्या कार्यशाळेच्या नोडवर साठवल्या जातील.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ms",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Rangkaian bengkel]({WORKSHOP_NETWORK}). Pesanan dan fail anda akan disimpan pada nod bengkel yang dipilih.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "nl-NL",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Werkplaatsennetwerk]({WORKSHOP_NETWORK}). Je bestelling en bestand worden opgeslagen op het knooppunt van de gekozen werkplaats.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "no",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Verkstednettverk]({WORKSHOP_NETWORK}). Bestillingen og filen din lagres på noden til verkstedet du velger.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "or-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[କର୍ମଶାଳା ନେଟୱର୍କ]({WORKSHOP_NETWORK}). ଆପଣଙ୍କ ଅର୍ଡର ଓ ଫାଇଲ୍ ମନୋନୀତ କର୍ମଶାଳାର ନୋଡ୍‌ରେ ସଂରକ୍ଷିତ ହେବ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pa-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[ਵਰਕਸ਼ਾਪ ਨੈੱਟਵਰਕ]({WORKSHOP_NETWORK}). ਤੁਹਾਡਾ ਆਰਡਰ ਅਤੇ ਫਾਈਲ ਚੁਣੀ ਹੋਈ ਵਰਕਸ਼ਾਪ ਦੇ ਨੋਡ ਉੱਤੇ ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਜਾਣਗੇ।",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pl",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Sieć warsztatów]({WORKSHOP_NETWORK}). Twoje zamówienie i plik zostaną zapisane w węźle wybranego warsztatu.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-BR",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Rede de oficinas]({WORKSHOP_NETWORK}). Seu pedido e seu arquivo serão armazenados no nó da oficina escolhida.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "pt-PT",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Rede de oficinas]({WORKSHOP_NETWORK}). A sua encomenda e o ficheiro serão guardados no nó da oficina escolhida.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ro",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Rețea de ateliere]({WORKSHOP_NETWORK}). Comanda și fișierul vor fi stocate pe nodul atelierului ales.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sk",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Sieť dielní]({WORKSHOP_NETWORK}). Vaša objednávka a súbor sa uložia na uzle vybranej dielne.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sl-SI",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Omrežje delavnic]({WORKSHOP_NETWORK}). Vaše naročilo in datoteka bosta shranjena v vozlišču izbrane delavnice.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "sv",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Verkstadsnätverk]({WORKSHOP_NETWORK}). Din beställning och fil sparas på den valda verkstadens nod.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ta-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[பட்டறை வலையமைப்பு]({WORKSHOP_NETWORK}). உங்கள் ஆர்டரும் கோப்பும் தேர்ந்தெடுத்த பட்டறையின் முனையில் சேமிக்கப்படும்.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "te-IN",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[వర్క్‌షాప్‌ల నెట్‌వర్క్]({WORKSHOP_NETWORK}). మీ ఆర్డర్ మరియు ఫైల్ ఎంచుకున్న వర్క్‌షాప్ నోడ్‌లో నిల్వ అవుతాయి.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "th",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[เครือข่ายเวิร์กช็อป]({WORKSHOP_NETWORK}). คำสั่งซื้อและไฟล์ของคุณจะถูกเก็บไว้บนโหนดของเวิร์กช็อปที่เลือก",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "tr",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Atölye ağı]({WORKSHOP_NETWORK}). Siparişiniz ve dosyanız seçtiğiniz atölyenin düğümünde saklanır.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "uk",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Мережа майстерень]({WORKSHOP_NETWORK}). Ваше замовлення та файл зберігатимуться на вузлі обраної майстерні.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "ur-PK",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[ورکشاپس کا نیٹ ورک]({WORKSHOP_NETWORK}). آپ کا آرڈر اور فائل منتخب ورکشاپ کے نوڈ پر محفوظ ہوں گے۔",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "vi",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[Mạng lưới xưởng]({WORKSHOP_NETWORK}). Đơn hàng và tệp của bạn sẽ được lưu trên nút của xưởng bạn chọn.",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hans",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[工坊网络]({WORKSHOP_NETWORK}). 您的订单和文件将保存在所选工坊的节点上。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "locale": "zh-Hant",
+      "id": "workshop_network",
+      "en": "[Workshop network]({WORKSHOP_NETWORK}). Your order and file will be stored on the chosen workshop’s node.",
+      "ru": "[Сеть мастерских]({WORKSHOP_NETWORK}). Заказ и файл будут храниться на узле выбранной мастерской.",
+      "text": "[工坊網路]({WORKSHOP_NETWORK}). 您的訂單和檔案將儲存在所選工坊的節點上。",
+      "reason": "AI-assisted translation of the workshop network feature."
+    },
+    {
+      "id": "tagline",
+      "locale": "de-DE",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Entwerfen Sie ein Teil und bestellen Sie es bei einer Werkstatt im offenen Netzwerk.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "es-ES",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Diseña una pieza y encárgala a un taller de la red abierta.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "es-MX",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Diseña una pieza y encárgala a un taller de la red abierta.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "fr-FR",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Concevez une pièce et commandez-la auprès d’un atelier du réseau ouvert.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "fr-CA",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Concevez une pièce et commandez-la auprès d’un atelier du réseau ouvert.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "it",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Progetta un pezzo e ordinalo a un laboratorio della rete aperta.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "pt-BR",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Projete uma peça e encomende-a a uma oficina da rede aberta.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "pt-PT",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Desenhe uma peça e encomende-a a uma oficina da rede aberta.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "nl-NL",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Ontwerp een onderdeel en bestel het bij een werkplaats in het open netwerk.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "sv",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Utforma en del och beställ den från en verkstad i det öppna nätverket.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "da",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Design en del, og bestil den hos et værksted i det åbne netværk.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "no",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Design en del og bestill den fra et verksted i det åpne nettverket.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "fi",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Suunnittele osa ja tilaa se avoimen verkoston verstaalta.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "pl",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Zaprojektuj część i zamów ją w warsztacie należącym do otwartej sieci.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "cs",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Navrhněte součástku a objednejte si ji v dílně zapojené do otevřené sítě.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "sk",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Navrhnite súčiastku a objednajte si ju v dielni zapojenej do otvorenej siete.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "sl-SI",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Oblikujte del in ga naročite pri delavnici v odprtem omrežju.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "hr",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Osmislite dio i naručite ga u radionici u otvorenoj mreži.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "hu",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Tervezzen egy alkatrészt, és rendelje meg a nyílt hálózat egyik műhelyétől.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ro",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Proiectează o piesă și comand-o de la un atelier din rețeaua deschisă.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ca",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Dissenya una peça i encarrega-la a un taller de la xarxa oberta.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "uk",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Спроєктуйте деталь і замовте її виготовлення в майстерні відкритої мережі.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "el",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Σχεδιάστε ένα εξάρτημα και παραγγείλτε το από ένα εργαστήριο του ανοικτού δικτύου.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "tr",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Bir parça tasarlayın ve açık ağdaki bir atölyeden sipariş edin.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "he",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**אפשר לתכנן חלק ולהזמין אותו מסדנה ברשת הפתוחה.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ar-SA",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**صمّم قطعة واطلب تصنيعها من إحدى ورش الشبكة المفتوحة.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ja",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**部品を設計し、オープンなネットワークに参加する工房に製作を依頼できます。**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ko",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**부품을 설계하고 개방형 네트워크의 공방에 제작을 의뢰하세요.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "zh-Hans",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**设计零件，并向开放网络中的工坊下单制作。**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "zh-Hant",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**設計零件，並向開放網路中的工坊下單製作。**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "th",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ออกแบบชิ้นส่วนแล้วสั่งผลิตกับเวิร์กช็อปในเครือข่ายเปิด**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "vi",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Thiết kế một chi tiết và đặt xưởng trong mạng lưới mở gia công.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "id",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Rancang sebuah komponen dan pesan pembuatannya dari bengkel di jaringan terbuka.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ms",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**Reka bentuk komponen dan tempah daripada bengkel dalam rangkaian terbuka.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "hi",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**अपना पुर्ज़ा डिज़ाइन करें और खुले नेटवर्क की किसी कार्यशाला को इसे बनाने का ऑर्डर दें।**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "bn-BD",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**একটি যন্ত্রাংশের নকশা করুন এবং উন্মুক্ত নেটওয়ার্কের কোনো কর্মশালাকে সেটি তৈরির অর্ডার দিন।**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "gu-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**કોઈ ભાગની ડિઝાઇન બનાવો અને ખુલ્લા નેટવર્કની વર્કશોપને તે બનાવવાનો ઓર્ડર આપો.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "kn-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ಒಂದು ಭಾಗವನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಿ ಮತ್ತು ಅದನ್ನು ತಯಾರಿಸಲು ಮುಕ್ತ ಜಾಲದಲ್ಲಿರುವ ಕಾರ್ಯಾಗಾರಕ್ಕೆ ಆರ್ಡರ್ ನೀಡಿ.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ml-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ഒരു ഭാഗം രൂപകൽപ്പന ചെയ്ത് തുറന്ന ശൃംഖലയിലെ ഒരു വർക്ക്‌ഷോപ്പിൽ അത് നിർമ്മിക്കാൻ ഓർഡർ നൽകുക.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "mr-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**एखाद्या भागाची रचना करा आणि तो बनवण्यासाठी खुल्या जाळ्यातील कार्यशाळेला ऑर्डर द्या.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "or-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ଏକ ଯନ୍ତ୍ରାଂଶର ଡିଜାଇନ୍ କରନ୍ତୁ ଏବଂ ଏହାକୁ ତିଆରି କରିବା ପାଇଁ ଖୋଲା ନେଟୱର୍କର ଏକ କର୍ମଶାଳାକୁ ଅର୍ଡର ଦିଅନ୍ତୁ।**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "pa-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ਕਿਸੇ ਪੁਰਜ਼ੇ ਦਾ ਡਿਜ਼ਾਈਨ ਬਣਾਓ ਅਤੇ ਖੁੱਲ੍ਹੇ ਨੈੱਟਵਰਕ ਦੀ ਕਿਸੇ ਵਰਕਸ਼ਾਪ ਨੂੰ ਇਸ ਨੂੰ ਬਣਾਉਣ ਦਾ ਆਰਡਰ ਦਿਓ।**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ta-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ஓர் உதிரிபாகத்தை வடிவமைத்து, அதைத் தயாரிக்கத் திறந்த வலையமைப்பில் உள்ள பட்டறையில் ஆர்டர் செய்யுங்கள்.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "te-IN",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ఒక భాగాన్ని రూపొందించి, దాన్ని తయారు చేయడానికి ఓపెన్ నెట్‌వర్క్‌లోని వర్క్‌షాప్‌కు ఆర్డర్ ఇవ్వండి.**",
+      "reason": "AI-assisted translation of the workshop network introduction."
+    },
+    {
+      "id": "tagline",
+      "locale": "ur-PK",
+      "en": "**Design a part and order it from a workshop on the open network.**",
+      "ru": "**Спроектируйте деталь и закажите её изготовление в мастерской открытой сети.**",
+      "text": "**ایک پرزہ ڈیزائن کریں اور اسے بنانے کا آرڈر کھلے نیٹ ورک کی کسی ورکشاپ کو دیں۔**",
+      "reason": "AI-assisted translation of the workshop network introduction."
     }
   ]
 }

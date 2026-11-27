@@ -6,12 +6,13 @@ import type { Job, Profile, User, Offer, AcceptedTerms } from '../shared/types.j
 
 export type ProfileRow = Omit<
   Profile,
-  'technologies' | 'materials' | 'verified' | 'remote' | 'demo'
+  'technologies' | 'materials' | 'verified' | 'remote' | 'demo' | 'network_listed'
 > & {
   technologies: string;
   materials: string;
   verified: number;
   remote: number;
+  network_listed: number;
   demo: number;
   published: number;
 };
@@ -31,6 +32,7 @@ export function profileObject(row: ProfileRow): Profile {
     materials: JSON.parse(row.materials),
     verified: !!row.verified,
     remote: !!row.remote,
+    network_listed: !!row.network_listed,
     demo: !!row.demo,
   };
 }

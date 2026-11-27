@@ -27,6 +27,7 @@
   "run_import": "Uporabite [orodje za uvoz kataloga iz ukazne vrstice]({CATALOG_IMPORT}) za obstoječo zbirko podatkov, potem ko preverite njene pravice. Zbirke podatkov, naloženi podatki in varnostne kopije niso združeni v repozitoriju ali v slikah vsebnika.",
   "run_intro": "Namestite Node.js 24, klonirajte to repozitorij in zaženite:",
   "run_limits": "Podprta konfiguracija vključuje en sam proces aplikacije z SQLite na lokalnem disku. Samodejna objava in omejitve glede števila zahtev omejujejo zlorabe brez potrebe po čakalni vrsti za moderiranje. Deljena IP-naslova lahko uporablja skupna kvota za objave. Pred odprtjem javne različice si oglejte [omejitve in vedenje povezave za upravljanje]({OPEN_CATALOG}).",
-  "tagline": "**Odeven imenik tiskarskih studiev in delavnic. Brez registracije ali moderatorjev.**",
-  "translation_maintenance": "Angleška datoteka README je osnova za vse prevedene različice. [Kazalo jezikov]({LANGUAGE_INDEX}) vsebuje dokumentacijo o vzdrževanju in omejitvah pregleda prevodov. Lokalizacija uporabniškega vmesnika ne prevede seznamov, ki jih ustvarijo uporabniki, vsebine projektov ali vseh zunanjih tehničnih diagnostičnih podatkov."
+  "tagline": "**Oblikujte del in ga naročite pri delavnici v odprtem omrežju.**",
+  "translation_maintenance": "Angleška datoteka README je osnova za vse prevedene različice. [Kazalo jezikov]({LANGUAGE_INDEX}) vsebuje dokumentacijo o vzdrževanju in omejitvah pregleda prevodov. Lokalizacija uporabniškega vmesnika ne prevede seznamov, ki jih ustvarijo uporabniki, vsebine projektov ali vseh zunanjih tehničnih diagnostičnih podatkov.",
+  "workshop_network": "[Omrežje delavnic]({WORKSHOP_NETWORK}). Vaše naročilo in datoteka bosta shranjena v vozlišču izbrane delavnice."
 }

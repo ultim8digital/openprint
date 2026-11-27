@@ -27,6 +27,7 @@
   "run_import": "Sử dụng [giao diện dòng lệnh nhập danh mục]({CATALOG_IMPORT}) cho một tập dữ liệu hiện có sau khi kiểm tra quyền của nó. Các tập dữ liệu phiên bản, tệp đã tải lên và bản sao lưu không được bao gồm trong kho lưu trữ hoặc hình ảnh vùng chứa.",
   "run_intro": "Cài đặt Node.js 24, sao chép kho lưu trữ này và chạy:",
   "run_limits": "Phương thức triển khai được hỗ trợ là một quy trình ứng dụng với SQLite trên ổ đĩa cục bộ. Việc xuất bản tự động và giới hạn số lượng yêu cầu giúp hạn chế lạm dụng mà không cần hàng đợi kiểm duyệt. Một địa chỉ IP văn phòng dùng chung có thể chia sẻ giới hạn số lượng xuất bản. Xem [giới hạn và hành vi liên kết quản lý]({OPEN_CATALOG}) trước khi mở một phiên bản công khai.",
-  "tagline": "**Một danh bạ mở về các xưởng in và cơ sở sản xuất. Không cần đăng ký hoặc người quản lý.**",
-  "translation_maintenance": "Tài liệu README bằng tiếng Anh là tài liệu tham khảo cho các phiên bản dịch đầy đủ. [Mục lục ngôn ngữ]({LANGUAGE_INDEX}) cung cấp thông tin về quy trình bảo trì và giới hạn đánh giá bản dịch. Quá trình bản địa hóa giao diện không dịch các danh sách do người dùng tạo, nội dung dự án hoặc tất cả các tài liệu kỹ thuật bên ngoài."
+  "tagline": "**Thiết kế một chi tiết và đặt xưởng trong mạng lưới mở gia công.**",
+  "translation_maintenance": "Tài liệu README bằng tiếng Anh là tài liệu tham khảo cho các phiên bản dịch đầy đủ. [Mục lục ngôn ngữ]({LANGUAGE_INDEX}) cung cấp thông tin về quy trình bảo trì và giới hạn đánh giá bản dịch. Quá trình bản địa hóa giao diện không dịch các danh sách do người dùng tạo, nội dung dự án hoặc tất cả các tài liệu kỹ thuật bên ngoài.",
+  "workshop_network": "[Mạng lưới xưởng]({WORKSHOP_NETWORK}). Đơn hàng và tệp của bạn sẽ được lưu trên nút của xưởng bạn chọn."
 }

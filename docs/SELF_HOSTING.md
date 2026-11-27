@@ -1,6 +1,6 @@
 # Running your community / Запуск своего сообщества
 
-OpenPrint 0.5 supports **one application process on one computer with local disk storage**. There is no required Vercel, Supabase, SMTP, AI, or map API key. The optional local CAD process needs Python/CadQuery but no cloud account. A public repository can exist without any running deployment. A shared live community needs a running server and appropriate administration.
+Each OpenPrint node runs **one application process with its own SQLite database on local storage**. There is no required Vercel, Supabase, SMTP, AI, or map API key. The optional local CAD process needs Python/CadQuery but no cloud account. A public repository can exist without any running deployment. A shared live community needs a running server and appropriate administration.
 
 ## 1. Default catalogue
 
@@ -30,6 +30,10 @@ To enable the separate community/CAD workflows, set `APP_MODE=community` explici
 
 Either mode can import an existing studio catalogue. See [catalogue import](CATALOG_IMPORT.md). A real instance refuses a database containing fictional demo accounts. Use a separate data directory for real public operation.
 
+### Independent workshop nodes
+
+A catalog or community instance can discover makers on other instances through `OPENPRINT_PEERS`. For orders, a maker uses a community instance and opts in from their profile. The [workshop network guide](WORKSHOP_NETWORK.md) includes a two-node local setup and the customer-to-maker workflow.
+
 ### Configuration
 
 Node reads `.env` on start; existing process environment variables take precedence.
@@ -41,6 +45,8 @@ Node reads `.env` on start; existing process environment variables take preceden
 | `PORT`             | `3000`                  | API + built frontend port                                                                                    |
 | `APP_URL`          | `http://localhost:3000` | Exact public origin, including scheme and optional port; no path, query, or credentials                      |
 | `DATA_DIR`         | `.local/data`           | Persistent local SQLite database and uploads; never publish this directory                                   |
+| `OPENPRINT_PEERS`  | empty                   | Comma-separated origins of peer workshop nodes                                                               |
+| `MAP_TILES`        | `osm`                   | Set `off` to display markers and lists without external tile requests                                        |
 | `INSTANCE_NAME`    | `OpenPrint`             | Instance name reported by the API; the shared product brand remains OpenPrint                                |
 | `OPERATOR_CONTACT` | empty                   | Public HTTPS support page or `mailto:` address for recovery/moderation                                       |
 | `USER_STORAGE_MB`  | `200`                   | Per-user upload quota                                                                                        |
@@ -140,6 +146,6 @@ The backup is in the private `community-backups` volume. Export it to your own p
 
 ## 7. Updates
 
-Read the release notes, stop the old process, and take/verify a backup **using the old version before installing the update**. Then install the chosen release with `npm ci`, run `npm run check`, and start it. Database schema version is recorded with `PRAGMA user_version`. Version 0.6 migrates schemas 1–6 to schema 7. Earlier migrations add the separate studio catalogue, self-published records and durable publication quotas; schema 7 widens the project language constraint to all 50 locales while retaining project rows and their child history in a checked transaction. The app refuses databases with a newer schema than it understands. To roll back to an older application, restore its compatible pre-upgrade backup into a fresh data directory; do not edit `PRAGMA user_version` or reopen schema 7 with old code. Imported and self-published catalogue records, management-key hashes and quota state are included in SQLite backups; no external catalogue service is needed after import.
+Read the release notes, stop the old process, and take/verify a backup **using the old version before installing the update**. Then install the chosen release with `npm ci`, run `npm run check`, and start it. Database schema version is recorded with `PRAGMA user_version`. The network update migrates schemas 1–7 to schema 8. Existing profiles start with network listing switched off. Earlier migrations add the separate studio catalogue, self-published records and durable publication quotas; schema 7 widens the project language constraint to all 50 locales while retaining project rows and their child history in a checked transaction. The app refuses databases with a newer schema than it understands. To roll back to an older application, restore its compatible pre-upgrade backup into a fresh data directory; do not edit `PRAGMA user_version` or reopen schema 8 with old code. Imported and self-published catalogue records, management-key hashes and quota state are included in SQLite backups; no external catalogue service is needed after import.
 
 Existing Supabase accounts, password hashes and historical orders require a separate migration. Public studio directory records can be connected through the [operator catalogue importer](CATALOG_IMPORT.md), which stores only its allowlisted fields. Keep source data and database snapshots outside the public repository.

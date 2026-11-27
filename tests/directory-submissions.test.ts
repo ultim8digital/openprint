@@ -523,10 +523,10 @@ test('schema 5 upgrades additively to 6 and default catalog mode excludes every 
       tables.map(({ name }) => [name, JSON.stringify(f.store.all(`SELECT * FROM "${name}"`))]),
     );
     f.store.db.exec(
-      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; PRAGMA user_version=5;',
+      'DROP TABLE directory_create_usage; DROP TABLE directory_submissions; DROP TABLE project_request_receipts; DROP INDEX profiles_network; ALTER TABLE profiles DROP COLUMN network_listed; PRAGMA user_version=5;',
     );
     await f.restart();
-    assert.equal(f.store.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 7);
+    assert.equal(f.store.get<{ user_version: number }>('PRAGMA user_version')!.user_version, 8);
     for (const [table, records] of previous)
       assert.equal(JSON.stringify(f.store.all(`SELECT * FROM "${table}"`)), records, table);
     assert.deepEqual(f.store.all('PRAGMA foreign_key_check'), []);

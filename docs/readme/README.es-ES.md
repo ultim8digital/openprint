@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Un directorio abierto de estudios y talleres de impresión. No requiere registro ni moderadores.**
+**Diseña una pieza y encárgala a un taller de la red abierta.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Ejecute OpenPrint con Node.js 24 y SQLite local. Vercel, Supabase, un proveedor 
 
 ## Características del catálogo
 
+- [Red de talleres](../../docs/WORKSHOP_NETWORK.md). El pedido y el archivo se guardarán en el nodo del taller que elijas.
 - Busque por nombre, ciudad y tecnología. El mapa incluye las ubicaciones que coinciden con la búsqueda, independientemente de la paginación de la lista.
 - Publica sin necesidad de una cuenta. Elige un punto en el mapa o introduce las coordenadas; los anuncios sin coordenadas seguirán siendo buscables.
 - Edite o elimine una entrada junto con su enlace privado. Las comprobaciones de versión protegen contra ediciones conflictivas en diferentes pestañas.

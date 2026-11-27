@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Un elenco aperto di studi e laboratori di stampa. Non è richiesta la registrazione né è prevista la presenza di moderatori.**
+**Progetta un pezzo e ordinalo a un laboratorio della rete aperta.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Esegui OpenPrint con Node.js 24 e SQLite locale. Vercel, Supabase, un fornitore 
 
 ## Funzionalità del catalogo
 
+- [Rete di laboratori](../../docs/WORKSHOP_NETWORK.md). L’ordine e il file saranno salvati sul nodo del laboratorio scelto.
 - Cerca per nome, città e tecnologia. La mappa include le posizioni corrispondenti, indipendentemente dalla paginazione dell’elenco.
 - Pubblica senza creare un account. Scegli un punto sulla mappa o inserisci le coordinate; le inserzioni senza coordinate rimangono comunque ricercabili.
 - Modifica o elimina una scheda con il relativo link privato. I controlli di versione proteggono da modifiche contrastanti in schede diverse.

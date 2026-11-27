@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Ein offenes Verzeichnis von Druckereien und Werkstätten. Keine Registrierung oder Moderatoren erforderlich.**
+**Entwerfen Sie ein Teil und bestellen Sie es bei einer Werkstatt im offenen Netzwerk.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Führen Sie OpenPrint mit Node.js 24 und lokalem SQLite aus. Vercel, Supabase, e
 
 ## Funktionen des Katalogs
 
+- [Werkstattnetzwerk](../../docs/WORKSHOP_NETWORK.md). Ihr Auftrag und Ihre Datei werden auf dem Knoten der gewählten Werkstatt gespeichert.
 - Suche nach Name, Stadt und Technologie. Die Karte zeigt passende Standorte, unabhängig von der Seitenaufteilung der Liste.
 - Veröffentlichen Sie ohne ein Konto. Wählen Sie einen Punkt auf der Karte oder geben Sie Koordinaten ein; Einträge ohne Koordinaten bleiben durchsuchbar.
 - Bearbeiten oder löschen Sie einen Eintrag mit seinem privaten Link. Versionsprüfungen schützen vor widersprüchlichen Änderungen in verschiedenen Registerkarten.

@@ -27,6 +27,7 @@
   "run_import": "Gunakan [antara muka baris perintah import katalog]({CATALOG_IMPORT}) untuk set data yang sedia ada selepas menyemak haknya. Set data contoh, muat naik dan sandaran tidak disertakan dalam repositori atau imej bekas.",
   "run_intro": "Pasang Node.js 24, klon repositori ini dan jalankan:",
   "run_limits": "Penyebaran yang disokong ialah satu proses aplikasi dengan SQLite pada cakera setempat. Penerbitan automatik dan kuota permintaan mengehadkan penyalahgunaan tanpa keperluan untuk barisan penyederhanaan. IP pejabat yang dikongsi boleh berkongsi kuota penerbitan. Lihat [had dan tingkah laku pautan pengurusan]({OPEN_CATALOG}) sebelum membuka contoh awam.",
-  "tagline": "**Direktori terbuka studio dan bengkel percetakan. Tiada pendaftaran atau penyelia.**",
-  "translation_maintenance": "Dokumen README dalam bahasa Inggeris ialah rujukan untuk semua edisi terjemahan. [Indeks bahasa]({LANGUAGE_INDEX}) mendokumentasikan had penyelenggaraan dan semakan terjemahan. Penyesuaian antara muka tidak menerjemahkan senarai yang dibuat oleh pengguna, kandungan projek atau setiap diagnostik teknikal luaran."
+  "tagline": "**Reka bentuk komponen dan tempah daripada bengkel dalam rangkaian terbuka.**",
+  "translation_maintenance": "Dokumen README dalam bahasa Inggeris ialah rujukan untuk semua edisi terjemahan. [Indeks bahasa]({LANGUAGE_INDEX}) mendokumentasikan had penyelenggaraan dan semakan terjemahan. Penyesuaian antara muka tidak menerjemahkan senarai yang dibuat oleh pengguna, kandungan projek atau setiap diagnostik teknikal luaran.",
+  "workshop_network": "[Rangkaian bengkel]({WORKSHOP_NETWORK}). Pesanan dan fail anda akan disimpan pada nod bengkel yang dipilih."
 }

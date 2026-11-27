@@ -1,6 +1,6 @@
 # OpenPrint
 
-**Otwarty katalog drukarni i warsztatów. Brak konieczności rejestracji i moderatorów.**
+**Zaprojektuj część i zamów ją w warsztacie należącym do otwartej sieci.**
 
 <details>
 <summary>Choose a language</summary>
@@ -15,6 +15,7 @@ Uruchom OpenPrint z Node.js w wersji 24 oraz lokalną bazą danych SQLite. Verce
 
 ## Funkcje katalogu
 
+- [Sieć warsztatów](../../docs/WORKSHOP_NETWORK.md). Twoje zamówienie i plik zostaną zapisane w węźle wybranego warsztatu.
 - Wyszukuj według nazwy, miasta i technologii. Na mapie wyświetlane są pasujące lokalizacje, niezależnie od numeracji stron w liście.
 - Opublikuj bez zakładania konta. Wybierz punkt na mapie lub wprowadź współrzędne; wpisy bez współrzędnych pozostają dostępne w wynikach wyszukiwania.
 - Edytuj lub usuń jedną pozycję wraz z jej prywatnym linkiem. Sprawdzanie wersji chroni przed konfliktowymi zmianami w różnych zakładkach.

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
+import { addMapBackground } from './map-background';
 import 'leaflet/dist/leaflet.css';
 import type { DirectoryMapPoint } from '../shared/directory';
 import { useApp } from './core';
@@ -8,10 +9,12 @@ export default function CommunityMap({
   points,
   datasetKey,
   loading,
+  onSelect,
 }: {
   points: DirectoryMapPoint[];
   datasetKey: string;
   loading: boolean;
+  onSelect?: (point: DirectoryMapPoint) => void;
 }) {
   const container = useRef<HTMLDivElement>(null),
     instance = useRef<L.Map | null>(null),
@@ -19,7 +22,7 @@ export default function CommunityMap({
     renderer = useRef<L.Canvas | null>(null),
     fitted = useRef<string | null>(null),
     [tileError, setTileError] = useState(false),
-    { t, lang } = useApp();
+    { t, lang, mapTiles } = useApp();
   useEffect(() => {
     if (!container.current) return;
     const map = L.map(container.current, {
@@ -29,21 +32,16 @@ export default function CommunityMap({
     instance.current = map;
     renderer.current = L.canvas({ padding: 0.5 });
     markers.current = L.layerGroup().addTo(map);
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 18,
-    });
-    tiles.on('tileerror', () => setTileError(true));
-    tiles.addTo(map);
+    const removeBackground = addMapBackground(map, mapTiles, () => setTileError(true));
     return () => {
+      removeBackground();
       map.remove();
       instance.current = null;
       markers.current = null;
       renderer.current = null;
       fitted.current = null;
     };
-  }, []);
+  }, [mapTiles]);
   useEffect(() => {
     const map = instance.current;
     const layer = markers.current;
@@ -73,9 +71,14 @@ export default function CommunityMap({
         })
           .bindPopup(() => {
             const content = document.createElement('div');
-            const link = document.createElement('a');
-            link.href =
-              (p.source === 'member' ? '/studios/' : '/catalog/') + encodeURIComponent(p.id);
+            const link = document.createElement(onSelect ? 'button' : 'a');
+            if (link instanceof HTMLAnchorElement)
+              link.href =
+                (p.source === 'member' ? '/studios/' : '/catalog/') + encodeURIComponent(p.id);
+            else {
+              link.className = 'text-button';
+              link.addEventListener('click', () => onSelect?.(p));
+            }
             link.textContent = p.name + (p.city ? ' · ' + p.city : '');
             const label = document.createElement('p');
             label.textContent =
@@ -93,7 +96,7 @@ export default function CommunityMap({
       if (coordinates.length)
         map.fitBounds(L.latLngBounds(coordinates), {
           padding: [40, 40],
-          maxZoom: 11,
+          maxZoom: mapTiles ? 11 : 4,
           animate: false,
         });
       fitted.current = datasetKey;
@@ -102,7 +105,7 @@ export default function CommunityMap({
     const zoomOut = container.current?.querySelector('.leaflet-control-zoom-out');
     zoomIn?.setAttribute('aria-label', t('Приблизить карту', 'Zoom in'));
     zoomOut?.setAttribute('aria-label', t('Отдалить карту', 'Zoom out'));
-  }, [points, datasetKey, loading, lang, t]);
+  }, [points, datasetKey, loading, lang, t, onSelect, mapTiles]);
   return (
     <>
       {tileError && (

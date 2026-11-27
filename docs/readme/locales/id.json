@@ -27,6 +27,7 @@
   "run_import": "Gunakan [antarmuka baris perintah impor katalog]({CATALOG_IMPORT}) untuk kumpulan data yang sudah ada setelah memeriksa hak aksesnya. Kumpulan data instans, unggahan, dan cadangan tidak termasuk dalam repositori atau citra kontainer.",
   "run_intro": "Instal Node.js 24, klon repositori ini, dan jalankan:",
   "run_limits": "Penerapan yang didukung adalah satu proses aplikasi dengan SQLite pada disk lokal. Publikasi otomatis dan kuota permintaan membatasi penyalahgunaan tanpa antrean moderasi. IP kantor bersama dapat berbagi kuota publikasi. Lihat [batasan dan perilaku tautan manajemen]({OPEN_CATALOG}) sebelum membuka instans publik.",
-  "tagline": "**Direktori terbuka berisi daftar studio dan bengkel percetakan. Tidak diperlukan pendaftaran atau moderator.**",
-  "translation_maintenance": "Berkas README dalam bahasa Inggris adalah referensi untuk edisi terjemahan lengkap. [Indeks bahasa]({LANGUAGE_INDEX}) mendokumentasikan batasan pemeliharaan dan peninjauan terjemahan. Lokalisasi antarmuka tidak menerjemahkan daftar yang dibuat pengguna, konten proyek, atau setiap diagnostik teknis eksternal."
+  "tagline": "**Rancang sebuah komponen dan pesan pembuatannya dari bengkel di jaringan terbuka.**",
+  "translation_maintenance": "Berkas README dalam bahasa Inggris adalah referensi untuk edisi terjemahan lengkap. [Indeks bahasa]({LANGUAGE_INDEX}) mendokumentasikan batasan pemeliharaan dan peninjauan terjemahan. Lokalisasi antarmuka tidak menerjemahkan daftar yang dibuat pengguna, konten proyek, atau setiap diagnostik teknis eksternal.",
+  "workshop_network": "[Jaringan bengkel]({WORKSHOP_NETWORK}). Pesanan dan berkas Anda akan disimpan di simpul bengkel yang dipilih."
 }

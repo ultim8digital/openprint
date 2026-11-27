@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
+import { addMapBackground } from './map-background';
 import 'leaflet/dist/leaflet.css';
 import { useApp } from './core';
 
@@ -12,7 +13,7 @@ type Props = {
 const projected = (lat: number) => Math.max(-85.05112878, Math.min(85.05112878, lat));
 
 export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: Props) {
-  const { t } = useApp();
+  const { t, mapTiles } = useApp();
   const element = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const marker = useRef<L.Marker | null>(null);
@@ -22,11 +23,7 @@ export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: 
     if (!element.current) return;
     const instance = L.map(element.current, { scrollWheelZoom: false }).setView([25, 20], 2);
     map.current = instance;
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a>',
-      maxZoom: 19,
-    }).addTo(instance);
+    const removeBackground = addMapBackground(instance, mapTiles);
     instance.on('click', (event: L.LeafletMouseEvent) => {
       if (!latest.current.disabled) {
         const location = event.latlng.wrap();
@@ -34,11 +31,12 @@ export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: 
       }
     });
     return () => {
+      removeBackground();
       instance.remove();
       map.current = null;
       marker.current = null;
     };
-  }, []);
+  }, [mapTiles]);
   useEffect(() => {
     const instance = map.current;
     if (!instance) return;
@@ -70,8 +68,8 @@ export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: 
     } else marker.current.setLatLng(position);
     if (disabled) marker.current.dragging?.disable();
     else marker.current.dragging?.enable();
-    instance.setView(position, Math.max(instance.getZoom(), 8), { animate: false });
-  }, [lat, lng, disabled]);
+    instance.setView(position, Math.max(instance.getZoom(), mapTiles ? 8 : 4), { animate: false });
+  }, [lat, lng, disabled, mapTiles]);
   useEffect(() => {
     element.current
       ?.querySelector('.leaflet-control-zoom-in')
@@ -89,12 +87,14 @@ export default function CatalogLocationPicker({ lat, lng, disabled, onChange }: 
   }, [t, lat, lng]);
   return (
     <div>
-      <p className="micro muted">
-        {t(
-          'Нажмите на карту или переместите точку. Координаты также можно ввести вручную. Фон загружается из OpenStreetMap.',
-          'Click the map or drag the marker. You can also enter coordinates manually. Map tiles load from OpenStreetMap.',
-        )}
-      </p>
+      {mapTiles && (
+        <p className="micro muted">
+          {t(
+            'Нажмите на карту или переместите точку. Координаты также можно ввести вручную. Фон загружается из OpenStreetMap.',
+            'Click the map or drag the marker. You can also enter coordinates manually. Map tiles load from OpenStreetMap.',
+          )}
+        </p>
+      )}
       <div
         ref={element}
         className="catalog-location-map"
